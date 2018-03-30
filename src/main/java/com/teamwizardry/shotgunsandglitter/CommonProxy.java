@@ -10,6 +10,7 @@ public class CommonProxy {
 
 		ModItems.init();
 		ModEntities.init();
+		new ModTab();
 	}
 
 	public void init(FMLInitializationEvent event) {

@@ -51,12 +51,13 @@ public class EffectFirework extends Effect {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderTrail(@Nonnull World world, @Nonnull Vec3d position) {
-		ParticleBuilder glitter = new ParticleBuilder(1000);
+		ParticleBuilder glitter = new ParticleBuilder(50);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 0.3f));
 
 		RandUtilSeed seed = new RandUtilSeed(glitter.hashCode());
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 1, 0, (i, build) -> {
+			build.setLifetime(RandUtil.nextInt(30, 50));
 			build.setColor(new Color(seed.nextInt(100, 255), seed.nextInt(100, 255), seed.nextInt(100, 255), 255));
 			build.setScale((float) RandUtil.nextDouble(0.3, 0.5));
 			build.addMotion(new Vec3d(

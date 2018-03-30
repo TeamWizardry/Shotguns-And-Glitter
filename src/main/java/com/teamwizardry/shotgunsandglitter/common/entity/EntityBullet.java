@@ -58,8 +58,7 @@ public class EntityBullet extends EntityMod {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (world.isRemote) return;
-		if (isDead) return;
+		if (world.isRemote || isDead) return;
 
 		if (ticksExisted > 1000) world.removeEntity(this);
 
@@ -68,6 +67,10 @@ public class EntityBullet extends EntityMod {
 		motionZ = getLook(0).z * 0.35;
 
 		move(MoverType.SELF, motionX, motionY, motionZ);
+
+		if (collided) {
+			world.removeEntity(this);
+		}
 	}
 
 	public BulletType getBulletType() {
@@ -106,7 +109,8 @@ public class EntityBullet extends EntityMod {
 
 	@Override
 	public void writeCustomNBT(@NotNull NBTTagCompound compound) {
-		super.writeCustomNBT(compound);
+		// in case of wawla
+		if (world.isRemote) return;
 
 		compound.setByte("bullet_type", dataManager.get(BULLET_TYPE));
 		compound.setString("effect", dataManager.get(BULLET_EFFECT));

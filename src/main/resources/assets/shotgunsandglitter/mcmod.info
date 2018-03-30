@@ -1,0 +1,20 @@
+[
+  {
+    "modid": "shotgunsandglitter",
+    "name": "Shotguns And Glitter",
+    "description": "A Modjam mod",
+    "version": "${mod_version}",
+    "mcversion": "${mc_version}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Demoniaque",
+      "wiresegal",
+      "Daniel Astral"
+    ],
+    "credits": "Team Wizardry",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
