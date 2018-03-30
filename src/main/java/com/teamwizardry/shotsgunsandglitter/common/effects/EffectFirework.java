@@ -4,6 +4,7 @@ import com.teamwizardry.shotsgunsandglitter.api.Effect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -32,6 +33,11 @@ public class EffectFirework extends Effect {
 
 	@Override
 	public void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+
+	}
+
+	@Override
+	public void renderTrail(@Nonnull World world, @Nonnull Vec3d position) {
 
 	}
 }

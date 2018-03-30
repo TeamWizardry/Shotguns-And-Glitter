@@ -3,6 +3,7 @@ package com.teamwizardry.shotsgunsandglitter.api;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,4 +26,7 @@ public abstract class Effect {
 
 	@SideOnly(Side.CLIENT)
 	public abstract void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state);
+
+	@SideOnly(Side.CLIENT)
+	public abstract void renderTrail(@Nonnull World world, @Nonnull Vec3d position);
 }
