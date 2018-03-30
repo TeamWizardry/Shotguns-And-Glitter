@@ -1,14 +1,10 @@
 package com.teamwizardry.shotsgunsandglitter;
 
-import com.teamwizardry.librarianlib.features.utilities.UnsafeKt;
-import net.minecraft.world.DimensionType;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
 import static com.teamwizardry.shotsgunsandglitter.ShotgunsAndGlitter.*;
@@ -16,7 +12,7 @@ import static com.teamwizardry.shotsgunsandglitter.ShotgunsAndGlitter.*;
 @Mod(modid = MODID, version = VERSION, name = MODNAME, dependencies = DEPENDENCIES)
 public class ShotgunsAndGlitter {
 
-	public static final String MODID = "shotsandglitter";
+	public static final String MODID = "shotgunsandglitter";
 	public static final String MODNAME = "Shotguns And Glitter";
 	public static final String VERSION = "GRADLE:VERSION";
 	public static final String CLIENT = "com.teamwizardry.shotgunsandglitter.proxy.ClientProxy";
