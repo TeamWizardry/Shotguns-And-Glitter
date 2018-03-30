@@ -13,7 +13,6 @@ gen### Example user template template
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
@@ -22,5 +21,4 @@ gen### Example user template template
 
 .gradle/
 build/
-gradle/
 run/
