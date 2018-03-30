@@ -7,6 +7,9 @@ import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,8 +21,9 @@ import javax.annotation.Nullable;
 
 public class EntityBullet extends EntityMod {
 
-	private BulletType bulletType = BulletType.SMALL;
-	private Effect effect;
+	private static final DataParameter<Byte> BULLET_TYPE = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BYTE);
+	private static final DataParameter<String> BULLET_EFFECT = EntityDataManager.createKey(EntityBullet.class, DataSerializers.STRING);
+
 
 	public EntityBullet(@Nonnull World world) {
 		super(world);
@@ -32,8 +36,8 @@ public class EntityBullet extends EntityMod {
 		setSize(0.1F, 0.1F);
 		isAirBorne = true;
 
-		this.bulletType = bulletType;
-		this.effect = effect;
+		setBulletType(bulletType);
+		setEffect(effect);
 
 		rotationPitch = caster.rotationPitch;
 		rotationYaw = caster.rotationYaw;
@@ -47,7 +51,8 @@ public class EntityBullet extends EntityMod {
 
 	@Override
 	protected void entityInit() {
-
+		dataManager.register(BULLET_TYPE, (byte) 0);
+		dataManager.register(BULLET_EFFECT, "");
 	}
 
 	@Override
@@ -66,19 +71,30 @@ public class EntityBullet extends EntityMod {
 	}
 
 	public BulletType getBulletType() {
-		return bulletType;
+		return BulletType.values()[dataManager.get(BULLET_TYPE) % BulletType.values().length];
 	}
 
+	public void setBulletType(BulletType type) {
+		dataManager.set(BULLET_TYPE, (byte) type.ordinal());
+	}
+
+	@Nullable
 	public Effect getEffect() {
-		return effect;
+		return EffectRegistry.getEffectByID(dataManager.get(BULLET_EFFECT));
+	}
+
+	public void setEffect(Effect effect) {
+		dataManager.set(BULLET_EFFECT, effect.getID());
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean isInRangeToRenderDist(double distance) {
 		return distance < 4096.0D;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return super.isInRangeToRender3d(x, y, z);
 	}
@@ -92,20 +108,17 @@ public class EntityBullet extends EntityMod {
 	public void writeCustomNBT(@NotNull NBTTagCompound compound) {
 		super.writeCustomNBT(compound);
 
-		compound.setString("bullet_type", bulletType.name());
-		if (effect != null)
-			compound.setString("effect", effect.getID());
+		compound.setByte("bullet_type", dataManager.get(BULLET_TYPE));
+		compound.setString("effect", dataManager.get(BULLET_EFFECT));
 	}
 
 	@Override
 	public void readCustomNBT(@NotNull NBTTagCompound compound) {
 		super.readCustomNBT(compound);
 
-		if (compound.hasKey("bullet_type")) {
-			bulletType = BulletType.valueOf(compound.getString("bullet_type"));
-		}
-		if (compound.hasKey("effect")) {
-			effect = EffectRegistry.getEffectByID(compound.getString("effect"));
-		}
+		if (compound.hasKey("bullet_type"))
+			dataManager.set(BULLET_TYPE, compound.getByte("bullet_type"));
+		if (compound.hasKey("effect"))
+			dataManager.set(BULLET_EFFECT, compound.getString("effect"));
 	}
 }

@@ -3,29 +3,26 @@ package com.teamwizardry.shotgunsandglitter.api;
 import com.teamwizardry.shotgunsandglitter.common.effects.EffectFirework;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class EffectRegistry {
 
-	private final static HashSet<Effect> effects = new HashSet<>();
+	private final static HashMap<String, Effect> effects = new HashMap<>();
 
 	static {
 		addEffect(new EffectFirework());
 	}
 
 	public static void addEffect(Effect effect) {
-		effects.add(effect);
+		effects.put(effect.getID(), effect);
 	}
 
-	public static HashSet<Effect> getEffects() {
-		return effects;
+	public static Iterable<Effect> getEffects() {
+		return effects.values();
 	}
 
 	@Nullable
 	public static Effect getEffectByID(String id) {
-		for (Effect effect : effects) {
-			if (effect.getID().equals(id)) return effect;
-		}
-		return null;
+		return effects.get(id);
 	}
 }

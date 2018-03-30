@@ -13,6 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -30,6 +32,7 @@ public class EffectFirework extends Effect {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onCollideEntityRender(@Nonnull World world, @Nonnull Entity entity) {
 
 	}
@@ -40,11 +43,13 @@ public class EffectFirework extends Effect {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void renderTrail(@Nonnull World world, @Nonnull Vec3d position) {
 		ParticleBuilder glitter = new ParticleBuilder(1000);
 		glitter.setRender(ClientEventHandler.SPARKLE);
