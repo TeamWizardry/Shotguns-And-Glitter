@@ -7,10 +7,14 @@ import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class EntityBullet extends EntityMod {
 
@@ -33,6 +37,12 @@ public class EntityBullet extends EntityMod {
 
 		rotationPitch = caster.rotationPitch;
 		rotationYaw = caster.rotationYaw;
+	}
+
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBox(Entity entityIn) {
+		return getEntityBoundingBox();
 	}
 
 	@Override
@@ -63,12 +73,28 @@ public class EntityBullet extends EntityMod {
 		return effect;
 	}
 
+	@SideOnly(Side.CLIENT)
+	public boolean isInRangeToRenderDist(double distance) {
+		return distance < 4096.0D;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean isInRangeToRender3d(double x, double y, double z) {
+		return super.isInRangeToRender3d(x, y, z);
+	}
+
+	@Override
+	public boolean canBeCollidedWith() {
+		return true;
+	}
+
 	@Override
 	public void writeCustomNBT(@NotNull NBTTagCompound compound) {
 		super.writeCustomNBT(compound);
 
 		compound.setString("bullet_type", bulletType.name());
-		compound.setString("effect", effect.getID());
+		if (effect != null)
+			compound.setString("effect", effect.getID());
 	}
 
 	@Override
