@@ -23,7 +23,7 @@ public class RenderBullet extends Render<EntityBullet> {
 
 		if (effect == null) return;
 
-
+		effect.renderTrail(entity.world, entity.getPositionVector());
 	}
 
 	@Nullable

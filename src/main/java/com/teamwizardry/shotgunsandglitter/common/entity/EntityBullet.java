@@ -5,6 +5,7 @@ import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -43,14 +44,15 @@ public class EntityBullet extends EntityMod {
 	public void onUpdate() {
 		super.onUpdate();
 		if (world.isRemote) return;
+		if (isDead) return;
 
-		if (ticksExisted > 100) world.removeEntity(this);
+		if (ticksExisted > 1000) world.removeEntity(this);
 
-		motionX = 1.5;
-		motionY = 1.5;
-		motionZ = 1.5;
+		motionX = getLook(0).x * 0.35;
+		motionY = getLook(0).y * 0.35;
+		motionZ = getLook(0).z * 0.35;
 
-		//move(MoverType.SELF, motionX, motionY, motionZ);
+		move(MoverType.SELF, motionX, motionY, motionZ);
 	}
 
 	public BulletType getBulletType() {

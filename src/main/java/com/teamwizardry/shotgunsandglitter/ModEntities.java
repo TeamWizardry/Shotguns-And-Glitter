@@ -1,8 +1,10 @@
 package com.teamwizardry.shotgunsandglitter;
 
+import com.teamwizardry.shotgunsandglitter.client.RenderBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,7 +28,6 @@ public class ModEntities {
 
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
-		//	RenderingRegistry.registerEntityRenderingHandler(EntityZachriel.class, manager -> new RenderZachriel(manager, new ModelZachriel()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
 	}
 }
