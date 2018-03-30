@@ -1,9 +1,9 @@
-package com.teamwizardry.shotsgunsandglitter.common.entity;
+package com.teamwizardry.shotgunsandglitter.common.entity;
 
 import com.teamwizardry.librarianlib.features.base.entity.EntityMod;
-import com.teamwizardry.shotsgunsandglitter.api.BulletType;
-import com.teamwizardry.shotsgunsandglitter.api.Effect;
-import com.teamwizardry.shotsgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

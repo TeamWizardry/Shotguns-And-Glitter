@@ -1,4 +1,4 @@
-package com.teamwizardry.shotsgunsandglitter;
+package com.teamwizardry.shotgunsandglitter;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

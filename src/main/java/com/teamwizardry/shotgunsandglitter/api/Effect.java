@@ -1,4 +1,4 @@
-package com.teamwizardry.shotsgunsandglitter.api;
+package com.teamwizardry.shotgunsandglitter.api;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

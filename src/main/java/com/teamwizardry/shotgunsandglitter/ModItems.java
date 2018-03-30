@@ -1,6 +1,6 @@
-package com.teamwizardry.shotsgunsandglitter;
+package com.teamwizardry.shotgunsandglitter;
 
-import com.teamwizardry.shotsgunsandglitter.common.items.ItemPistol;
+import com.teamwizardry.shotgunsandglitter.common.items.ItemPistol;
 
 public class ModItems {
 

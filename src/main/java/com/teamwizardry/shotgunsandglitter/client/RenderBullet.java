@@ -1,7 +1,7 @@
-package com.teamwizardry.shotsgunsandglitter.client;
+package com.teamwizardry.shotgunsandglitter.client;
 
-import com.teamwizardry.shotsgunsandglitter.api.Effect;
-import com.teamwizardry.shotsgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

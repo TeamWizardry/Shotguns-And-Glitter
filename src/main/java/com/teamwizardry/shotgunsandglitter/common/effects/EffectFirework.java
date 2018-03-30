@@ -1,6 +1,6 @@
-package com.teamwizardry.shotsgunsandglitter.common.effects;
+package com.teamwizardry.shotgunsandglitter.common.effects;
 
-import com.teamwizardry.shotsgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.Effect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;

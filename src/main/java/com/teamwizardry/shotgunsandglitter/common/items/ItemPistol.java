@@ -1,4 +1,4 @@
-package com.teamwizardry.shotsgunsandglitter.common.items;
+package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.entity.player.EntityPlayer;
