@@ -19,13 +19,21 @@ public abstract class Effect {
 
 	public abstract void onCollideEntity(@Nonnull World world, @Nonnull Entity entity);
 
-	public abstract void onCollideEntityRender(@Nonnull World world, @Nonnull Entity entity);
+	public void onCollideEntityRender(@Nonnull World world, @Nonnull Entity entity) {
+
+	}
 
 	@SideOnly(Side.CLIENT)
 	public abstract void onCollideBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state);
 
 	@SideOnly(Side.CLIENT)
-	public abstract void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state);
+	public void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+
+	}
+
+	public void onCollideRender(@Nonnull World world, @Nonnull Vec3d position) {
+
+	}
 
 	@SideOnly(Side.CLIENT)
 	public abstract void renderTrail(@Nonnull World world, @Nonnull Vec3d position);

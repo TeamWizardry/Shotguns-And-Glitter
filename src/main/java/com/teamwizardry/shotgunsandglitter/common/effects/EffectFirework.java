@@ -32,20 +32,13 @@ public class EffectFirework extends Effect {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void onCollideEntityRender(@Nonnull World world, @Nonnull Entity entity) {
-
-	}
-
-	@Override
 	public void onCollideBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-
+	public void onCollideRender(@Nonnull World world, @Nonnull Vec3d position) {
+		super.onCollideRender(world, position);
 	}
 
 	@Override
@@ -56,15 +49,41 @@ public class EffectFirework extends Effect {
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 0.3f));
 
 		RandUtilSeed seed = new RandUtilSeed(glitter.hashCode());
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 1, 0, (i, build) -> {
-			build.setLifetime(RandUtil.nextInt(30, 50));
-			build.setColor(new Color(seed.nextInt(100, 255), seed.nextInt(100, 255), seed.nextInt(100, 255), 255));
-			build.setScale((float) RandUtil.nextDouble(0.3, 0.5));
-			build.addMotion(new Vec3d(
-					RandUtil.nextDouble(-0.03, 0.03),
-					RandUtil.nextDouble(-0.03, 0.03),
-					RandUtil.nextDouble(-0.03, 0.03)
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 3, 0, (i, build) -> {
+			build.setLifetime(RandUtil.nextInt(5, 20));
+			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+			build.setScale((float) RandUtil.nextDouble(0.3, 1));
+
+			Vec3d motion = new Vec3d(
+					RandUtil.nextDouble(-0.1, 0.1),
+					RandUtil.nextDouble(-0.1, 0.1),
+					RandUtil.nextDouble(-0.1, 0.1));
+			build.addMotion(motion);
+			build.addAcceleration(new Vec3d(motion.x * -0.01, 0, motion.z * -0.01));
+			build.setJitter(10, new Vec3d(
+					RandUtil.nextDouble(-0.1, 0.1),
+					RandUtil.nextDouble(-0.1, 0.1),
+					RandUtil.nextDouble(-0.1, 0.1)
 			));
 		});
+
+		if (RandUtil.nextInt(4) == 0)
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 1, 0, (i, build) -> {
+				build.setLifetime(RandUtil.nextInt(50, 80));
+				build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+				build.setScale((float) RandUtil.nextDouble(1, 2));
+
+				Vec3d motion = new Vec3d(
+						RandUtil.nextDouble(-0.4, 0.4),
+						RandUtil.nextDouble(-0.4, 0.4),
+						RandUtil.nextDouble(-0.4, 0.4));
+				build.addMotion(motion);
+				build.addAcceleration(new Vec3d(motion.x * -0.01, RandUtil.nextDouble(-0.005, -0.01), motion.z * -0.01));
+				build.setJitter(5, new Vec3d(
+						RandUtil.nextDouble(-0.2, 0.2),
+						RandUtil.nextDouble(-0.2, 0.2),
+						RandUtil.nextDouble(-0.2, 0.2)
+				));
+			});
 	}
 }
