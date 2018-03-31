@@ -52,7 +52,7 @@ public class EffectTranq implements Effect {
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setColorFunction(new InterpColorHSV(Color.GREEN, Color.CYAN));
 			build.setAlphaFunction(new InterpFadeInOut(0f, 1f));
-			build.setScaleFunction(new InterpScale(1f, 0));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.8f), 0));
 			build.setDeceleration(new Vec3d(0.7, 0.7, 0.7));
 
 			double radius = 2 * RandUtil.nextFloat();
