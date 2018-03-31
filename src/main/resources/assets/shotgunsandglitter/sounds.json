@@ -38,5 +38,30 @@
       "shotgunsandglitter:bullet_flyby_8",
       "shotgunsandglitter:bullet_flyby_9"
     ]
+  },
+  "shotgun_cock": {
+    "sounds": [
+      "shotgunsandglitter:shotgun_cock"
+    ]
+  },
+  "burn": {
+    "sounds": [
+      "shotgunsandglitter:burn"
+    ]
+  },
+  "dust_sparkle": {
+    "sounds": [
+      "shotgunsandglitter:dust_sparkle"
+    ]
+  },
+  "magic_sparkle": {
+    "sounds": [
+      "shotgunsandglitter:magic_sparkle"
+    ]
+  },
+  "short_twinkle": {
+    "sounds": [
+      "shotgunsandglitter:short_twinkle"
+    ]
   }
 }

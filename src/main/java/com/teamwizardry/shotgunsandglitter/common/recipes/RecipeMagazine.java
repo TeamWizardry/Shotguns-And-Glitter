@@ -1,10 +1,15 @@
 package com.teamwizardry.shotgunsandglitter.common.recipes;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
@@ -13,47 +18,36 @@ public class RecipeMagazine extends IForgeRegistryEntry.Impl<IRecipe> implements
 
 	@Override
 	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World worldIn) {
-		int damage = -1;
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
 			ItemStack stack = inv.getStackInSlot(i);
-			if (stack.getItem() == ModItems.BULLET) {
-				if (damage == -1) {
-					damage = stack.getItemDamage();
+			if (stack.isEmpty()) continue;
 
-				} else if (stack.getItemDamage() != damage) {
-					return false;
-				}
-
+			if (stack.getItem() != ModItems.BULLET || BulletType.byOrdinal(stack.getItemDamage()) != BulletType.SMALL) {
+				return false;
 			}
 		}
-		return damage != -1;
+		return true;
 	}
 
 	@NotNull
 	@Override
 	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
-		int damage = -1;
-		int count = 0;
+		ItemStack magazine = new ItemStack(ModItems.MAGAZINE, 1);
+
+		NBTTagList loadedAmmo = new NBTTagList();
+
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
+			if (loadedAmmo.tagCount() >= 5) break;
 			ItemStack stack = inv.getStackInSlot(i);
-			if (stack.getItem() == ModItems.BULLET) {
-				if (damage == -1) {
-					damage = stack.getItemDamage();
-					count += stack.getCount();
 
-				} else if (stack.getItemDamage() != damage) {
-					return ItemStack.EMPTY;
-				}
-
-				count++;
+			for (int j = 0; j < stack.getCount(); j++) {
+				if (loadedAmmo.tagCount() >= 5) break;
+				Effect effect = ItemBullet.getEffectFromItem(stack);
+				loadedAmmo.appendTag(new NBTTagString(effect.getID()));
 			}
 		}
 
-		if (damage == -1) return ItemStack.EMPTY;
-
-		ItemStack magazine = new ItemStack(ModItems.MAGAZINE, 0, 0);
-		ItemNBTHelper.setInt(magazine, "bullets", count);
-		ItemNBTHelper.setInt(magazine, "type", damage);
+		ItemNBTHelper.setList(magazine, "ammo", loadedAmmo);
 
 		return magazine;
 	}
