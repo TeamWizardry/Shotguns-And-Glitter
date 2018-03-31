@@ -8,7 +8,7 @@ import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.Entity;
@@ -33,7 +33,7 @@ public class EffectTranq implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
+	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
 		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), 0.0f);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.TRANQUILIZER, (int) (120 * bullet.getBulletType().damage)));
@@ -42,7 +42,7 @@ public class EffectTranq implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.disableMotionCalculation();

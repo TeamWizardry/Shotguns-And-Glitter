@@ -1,17 +1,16 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.shotgunsandglitter.ModSounds;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,8 +32,6 @@ public class ItemShotgun extends ItemMod {
 				BulletType bulletType = BulletType.byOrdinal(bulletStack.getItemDamage());
 				// End temporary code!
 				EntityBullet bullet = new EntityBullet(worldIn, playerIn, bulletType, effect, 0.05f);
-				Vec3d position = playerIn.getPositionVector().addVector(0, playerIn.eyeHeight, 0).add(playerIn.getLook(0));
-				bullet.setPosition(position.x, position.y, position.z);
 				worldIn.spawnEntity(bullet);
 			}
 		} else {

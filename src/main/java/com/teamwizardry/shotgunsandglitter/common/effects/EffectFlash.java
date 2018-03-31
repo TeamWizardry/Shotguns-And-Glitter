@@ -31,7 +31,7 @@ public class EffectFlash implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		if (!world.isRemote) {
 			int radius = (int) bullet.getBulletType().damage * 50;
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
@@ -59,7 +59,7 @@ public class EffectFlash implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

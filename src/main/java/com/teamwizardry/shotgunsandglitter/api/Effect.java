@@ -5,8 +5,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,11 +20,11 @@ public interface Effect {
 
 	// Logic Methods
 
-	default void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	default void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		// NO-OP
 	}
 
-	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
+	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
 		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), damage(world, bullet));
 		if (hitEntity instanceof EntityLivingBase)
 			((EntityLivingBase) hitEntity).knockBack(bullet, knockbackStrength(world, bullet),
@@ -33,7 +33,7 @@ public interface Effect {
 		return true;
 	}
 
-	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
+	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, BlockPos pos, @NotNull IBlockState state) {
 		return true;
 	}
 
@@ -60,7 +60,7 @@ public interface Effect {
 	// Render Methods
 
 	@SideOnly(Side.CLIENT)
-	default void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	default void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		// NO-OP
 	}
 
@@ -70,12 +70,12 @@ public interface Effect {
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
+	default void renderCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		// NO-OP
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
+	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
 		// NO-OP
 	}
 

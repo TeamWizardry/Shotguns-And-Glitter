@@ -8,10 +8,9 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +27,7 @@ public class EffectFirework implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);

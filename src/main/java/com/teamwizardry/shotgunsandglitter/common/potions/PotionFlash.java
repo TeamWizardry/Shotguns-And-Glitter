@@ -3,7 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.potions;
 import com.teamwizardry.librarianlib.features.animator.Easing;
 import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;

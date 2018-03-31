@@ -1,4 +1,4 @@
-package com.teamwizardry.shotgunsandglitter.client;
+package com.teamwizardry.shotgunsandglitter.client.core;
 
 import com.teamwizardry.librarianlib.features.animator.Animator;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;

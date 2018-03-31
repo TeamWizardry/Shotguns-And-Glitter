@@ -1,4 +1,4 @@
-package com.teamwizardry.shotgunsandglitter;
+package com.teamwizardry.shotgunsandglitter.common.core;
 
 import com.teamwizardry.librarianlib.features.base.ModCreativeTab;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;

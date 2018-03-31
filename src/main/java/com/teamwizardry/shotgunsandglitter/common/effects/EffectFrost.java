@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -20,15 +19,15 @@ public class EffectFrost implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
-		Effect.super.onCollideEntity(world, bullet, hitEntity, hit);
+	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+		Effect.super.onCollideEntity(world, bullet, hitEntity);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.FROST, 300, bullet.getBulletType().ordinal() + 1));
 		return true;
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		if (!world.isRemote) {
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
 					new AxisAlignedBB(bullet.posX - 10, bullet.posY - 10, bullet.posZ - 10,
@@ -47,7 +46,7 @@ public class EffectFrost implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 
 	}
 

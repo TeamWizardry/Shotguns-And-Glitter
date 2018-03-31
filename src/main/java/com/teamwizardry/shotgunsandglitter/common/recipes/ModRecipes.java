@@ -1,6 +1,6 @@
-package com.teamwizardry.shotgunsandglitter;
+package com.teamwizardry.shotgunsandglitter.common.recipes;
 
-import com.teamwizardry.shotgunsandglitter.common.recipes.RecipeMagazine;
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;

@@ -8,10 +8,9 @@ import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +25,7 @@ public class EffectHookshot implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower != null) {
 			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector());
@@ -39,7 +38,7 @@ public class EffectHookshot implements Effect {
 
 	// TODO: check effect once thrower nullity is fixed
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		Vec3d position = bullet.getPositionVector();
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower == null) return;

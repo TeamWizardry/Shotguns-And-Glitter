@@ -85,12 +85,13 @@ public class EntityBullet extends EntityThrowable {
 			IBlockState state = world.getBlockState(result.getBlockPos());
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
 					state.getBlock().canCollideCheck(state, false) &&
-					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result, state, getEffect()))
+					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result.getBlockPos(),
+							state, getEffect(), result.hitVec))
 				setDead();
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
-			if (result.entityHit != null && result.entityHit != caster)
+			if (result.entityHit != null && !world.isRemote)
 				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
-						result.entityHit, result, getEffect()))
+						result.entityHit, getEffect(), result.hitVec))
 					setDead();
 		}
 	}

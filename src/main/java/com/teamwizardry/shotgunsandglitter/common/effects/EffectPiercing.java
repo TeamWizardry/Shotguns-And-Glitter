@@ -7,10 +7,9 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -25,13 +24,13 @@ public class EffectPiercing implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
-		Effect.super.onCollideEntity(world, bullet, hitEntity, hit);
+	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+		Effect.super.onCollideEntity(world, bullet, hitEntity);
 		return false; // Piercing
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

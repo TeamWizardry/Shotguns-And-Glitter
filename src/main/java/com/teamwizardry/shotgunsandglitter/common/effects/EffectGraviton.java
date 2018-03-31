@@ -6,12 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,7 +41,7 @@ public class EffectGraviton implements Effect {
 	// The visual effect of the Graviton should be random particles rushing into the central point.
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
 				new AxisAlignedBB(bullet.posX - 10, bullet.posY - 10, bullet.posZ - 10,
 						bullet.posX + 10, bullet.posY + 10, bullet.posZ + 10),
@@ -62,7 +61,7 @@ public class EffectGraviton implements Effect {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		Color color, color2;
 		if (direction == 1) {
 			color = Color.CYAN;

@@ -7,12 +7,11 @@ import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -53,13 +52,13 @@ public class EffectPsychic implements Effect {
 		acceleration = acceleration.normalize().scale(getVelocity(world, bullet.getBulletType()));
 
 		bullet.motionX += acceleration.x;
-		bullet.motionY += acceleration.y;
+		bullet.motionY += acceleration.y / 2;
 		bullet.motionZ += acceleration.z;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(30);
@@ -83,7 +82,7 @@ public class EffectPsychic implements Effect {
 			build.setTick(particle -> {
 				if (particle.getAge() >= particle.getLifetime() / 30) {
 
-					particle.setVelocity(particle.getVelocity().add(hit.hitVec.subtract(particle.getPos()).normalize().scale(1 / 15.0)));
+					particle.setVelocity(particle.getVelocity().add(bullet.getPositionVector().subtract(particle.getPos()).normalize().scale(1 / 15.0)));
 					particle.setAcceleration(Vec3d.ZERO);
 				} else {
 					particle.setAcceleration(new Vec3d(0, -0.05, 0));

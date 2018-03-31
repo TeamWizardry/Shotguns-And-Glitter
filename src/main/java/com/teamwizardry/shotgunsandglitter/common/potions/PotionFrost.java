@@ -3,6 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.potions;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,8 +25,8 @@ public class PotionFrost extends PotionMod {
 	public void applySlipperiness(LivingEvent.LivingUpdateEvent e) {
 		EntityLivingBase entity = e.getEntityLiving();
 		if (hasEffect(entity)) {
-			entity.motionX = entity.motionX * 0.98 / 0.6;
-			entity.motionZ = entity.motionZ * 0.98 / 0.6;
+			entity.motionX = MathHelper.clamp(entity.motionX * 0.98 / 0.6, -0.15, 0.15);
+			entity.motionZ = MathHelper.clamp(entity.motionZ * 0.98 / 0.6, -0.15, 0.15);
 		}
 	}
 }
