@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.function.Supplier;
 
 public class EffectRegistry {
 
@@ -24,8 +23,7 @@ public class EffectRegistry {
 			addEffect(effect);
 	}
 
-	public static void addEffect(Supplier<Effect> effectSupplier) {
-		Effect effect = effectSupplier.get();
+	public static void addEffect(Effect effect) {
 		effects.put(effect.getID(), effect);
 	}
 

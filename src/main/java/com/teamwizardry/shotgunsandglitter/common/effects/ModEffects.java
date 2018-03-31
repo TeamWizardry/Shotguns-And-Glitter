@@ -17,6 +17,7 @@ public class ModEffects {
 				new EffectBiotic(),
 				new EffectTranq(),
 				new EffectFrost(),
-				new EffectTainted());
+				new EffectTainted(),
+				new EffectFlash());
 	}
 }

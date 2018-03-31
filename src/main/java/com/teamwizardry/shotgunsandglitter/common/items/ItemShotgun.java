@@ -25,7 +25,6 @@ public class ItemShotgun extends ItemMod {
 
 	@Override
 	@NotNull
-
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (!worldIn.isRemote) {
 			Effect firework = EffectRegistry.getEffectByID("piercing");
