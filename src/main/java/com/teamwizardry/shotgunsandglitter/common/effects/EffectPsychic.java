@@ -100,7 +100,7 @@ public class EffectPsychic implements Effect {
 
 		builder.setColor(new Color(0x730089));
 
-		float size = 2;
+		float size = 0.5f;
 		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
 		{
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
