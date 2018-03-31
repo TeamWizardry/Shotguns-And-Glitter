@@ -18,6 +18,7 @@ public class ModEffects {
 				new EffectTranq(),
 				new EffectFrost(),
 				new EffectTainted(),
-				new EffectFlash());
+				new EffectFlash(),
+				new EffectImpact());
 	}
 }

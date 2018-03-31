@@ -8,6 +8,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +19,10 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author WireSegal
@@ -29,6 +34,44 @@ public class EntityDroppingBlock extends Entity {
 			EntityDataManager.createKey(EntityDroppingBlock.class, DataSerializers.BLOCK_POS);
 	private static final DataParameter<Optional<IBlockState>> STATE =
 			EntityDataManager.createKey(EntityDroppingBlock.class, DataSerializers.OPTIONAL_BLOCK_STATE);
+
+	@Nullable
+	@SuppressWarnings("deprecation")
+	public static Entity dropBlock(@Nullable Entity shooter, @NotNull World world, @NotNull BlockPos position, Boolean dropState, boolean spawnInWorld, boolean breakBlock, boolean breakParticles) {
+		IBlockState state = world.getBlockState(position);
+		if (!(shooter instanceof EntityPlayer) ||
+				!world.isBlockLoaded(position) || !world.isBlockModifiable((EntityPlayer) shooter, position) ||
+				state.getBlock().getPlayerRelativeBlockHardness(state, (EntityPlayer) shooter, world, position) <= 0 ||
+				MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(world, position, state, (EntityPlayer) shooter)))
+			return null;
+		else if (!state.getBlock().isReplaceable(world, position)) {
+			if (breakBlock) {
+				world.setBlockToAir(position);
+				if (breakParticles)
+					world.playEvent(2001, position.toImmutable(), Block.getStateId(state));
+			}
+			Entity block;
+
+			if (dropState == null) {
+				block = new EntityFallingBlock(world,
+						position.getX() + 0.5,
+						position.getY() + (BlockFalling.canFallThrough(world.getBlockState(position.down())) ? 0f : 0.01f),
+						position.getZ() + 0.5,
+						state);
+				((EntityFallingBlock) block).fallTime = 1;
+			} else
+				block = new EntityDroppingBlock(world,
+					position.getX() + 0.5,
+					position.getY() + (BlockFalling.canFallThrough(world.getBlockState(position.down())) ? 0f : 0.01f),
+					position.getZ() + 0.5,
+					state).withDrop(dropState);
+
+			if (spawnInWorld)
+				world.spawnEntity(block);
+			return block;
+		}
+		return null;
+	}
 
 	public int fallTime = 0;
 	public boolean shouldDropItem = true;
@@ -95,7 +138,9 @@ public class EntityDroppingBlock extends Entity {
 		Block block = getBlock().getBlock();
 
 		if (getBlock().getMaterial() == Material.AIR) setDead();
-		else {
+		else if (prevPosY == posY && fallTime > 10) {
+			die();
+		} else {
 			prevPosX = posX;
 			prevPosY = posY;
 			prevPosZ = posZ;
@@ -128,8 +173,6 @@ public class EntityDroppingBlock extends Entity {
 					motionY *= -0.5;
 
 					if (stateInWorld.getBlock() != Blocks.PISTON_EXTENSION) {
-						setDead();
-
 						if (block instanceof BlockFalling)
 							((BlockFalling) block).onBroken(world, selfPos);
 
@@ -138,19 +181,20 @@ public class EntityDroppingBlock extends Entity {
 
 				} else if (fallTime > 100 && (selfPos.getY() < 1 || selfPos.getY() > 256) || fallTime > 600) {
 					die();
-
-					setDead();
 				}
 			}
 		}
 	}
 
 	public void die() {
-		Block block = getBlock().getBlock();
-		if (shouldDropItem && world.getGameRules().getBoolean("doTileDrops"))
-			entityDropItem(new ItemStack(block, 1, block.damageDropped(getBlock())), 0.0f);
+		if (!world.isRemote) {
+			Block block = getBlock().getBlock();
+			if (shouldDropItem && world.getGameRules().getBoolean("doTileDrops"))
+				entityDropItem(new ItemStack(block, 1, block.damageDropped(getBlock())), 0.0f);
 
-		world.playEvent(2001, getPosition(), Block.getStateId(getBlock()));
+			world.playEvent(2001, getPosition(), Block.getStateId(getBlock()));
+		}
+		setDead();
 	}
 
 	@Override
