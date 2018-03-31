@@ -1,6 +1,7 @@
 package com.teamwizardry.shotgunsandglitter;
 
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,7 @@ public class CommonProxy {
 
 		ModItems.init();
 		ModEntities.init();
+		ModEffects.init();
 		new ModTab();
 	}
 
@@ -32,10 +34,12 @@ public class CommonProxy {
 	}
 
 	public boolean collideBulletWithBlock(World world, EntityBullet bullet, RayTraceResult hit, IBlockState state, Effect effect) {
+		effect.onImpact(world, bullet, hit);
 		return effect.onCollideBlock(world, bullet, hit, state);
 	}
 
 	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, RayTraceResult hit, Effect effect) {
+		effect.onImpact(world, bullet, hit);
 		return effect.onCollideEntity(world, bullet, entity, hit);
 	}
 }

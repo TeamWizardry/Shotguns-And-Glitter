@@ -1,14 +1,5 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-import com.teamwizardry.shotgunsandglitter.common.effects.EffectFirework;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
 import java.util.HashMap;
 
@@ -16,27 +7,16 @@ public class EffectRegistry {
 
 	private final static HashMap<String, Effect> effects = new HashMap<>();
 
-	private final static Effect BASIC_EFFECT = new Effect() {
-		@Override
-		public String getID() {
-			return "basic";
-		}
-
-		@Override
-		public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
-			return false;
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
-			// NO-OP
-		}
-	};
+	// Effects are SAM types, technically.
+	private final static Effect BASIC_EFFECT = () -> "basic";
 
 	static {
 		addEffect(BASIC_EFFECT);
-		addEffect(new EffectFirework());
+	}
+
+	public static void addEffect(Effect... effects) {
+		for (Effect effect : effects)
+			addEffect(effect);
 	}
 
 	public static void addEffect(Effect effect) {

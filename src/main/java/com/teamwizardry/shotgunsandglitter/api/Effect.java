@@ -14,12 +14,18 @@ public interface Effect {
 
 	String getID();
 
-	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
-		entity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, entity), bullet.getBulletType().damage);
+	default void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+		// NO-OP
+	}
+
+	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
+		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), bullet.getBulletType().damage);
 		return false;
 	}
 
-	boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state);
+	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
+		return false;
+	}
 
 	default void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
 		// NO-OP
@@ -33,7 +39,14 @@ public interface Effect {
 	// Render Methods
 
 	@SideOnly(Side.CLIENT)
-	void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet);
+	default void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+		// NO-OP
+	}
+
+	@SideOnly(Side.CLIENT)
+	default void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+		// NO-OP
+	}
 
 	@SideOnly(Side.CLIENT)
 	default void renderCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
@@ -41,7 +54,7 @@ public interface Effect {
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
+	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		// NO-OP
 	}
 

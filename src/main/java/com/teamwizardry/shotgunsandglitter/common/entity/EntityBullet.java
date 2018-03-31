@@ -43,6 +43,11 @@ public class EntityBullet extends EntityThrowable {
 	}
 
 	@Override
+	protected float getGravityVelocity() {
+		return 0f;
+	}
+
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (isDead) return;

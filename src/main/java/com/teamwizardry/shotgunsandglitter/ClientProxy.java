@@ -34,8 +34,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public boolean collideBulletWithBlock(World world, EntityBullet bullet, RayTraceResult hit, IBlockState state, Effect effect) {
 		boolean returnValue = super.collideBulletWithBlock(world, bullet, hit, state, effect);
-		if (world.isRemote)
+		if (world.isRemote) {
+			effect.renderImpact(world, bullet, hit);
 			effect.renderCollideBlock(world, bullet, hit, state);
+		}
 
 		return returnValue;
 	}
@@ -43,8 +45,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, RayTraceResult hit, Effect effect) {
 		boolean returnValue = super.collideBulletWithEntity(world, bullet, entity, hit, effect);
-		if (world.isRemote)
+		if (world.isRemote) {
+			effect.renderImpact(world, bullet, hit);
 			effect.renderCollideEntity(world, bullet, entity, hit);
+		}
 
 		return returnValue;
 	}
