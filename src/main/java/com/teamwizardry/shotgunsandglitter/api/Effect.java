@@ -3,7 +3,9 @@ package com.teamwizardry.shotgunsandglitter.api;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,6 +22,10 @@ public interface Effect {
 
 	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), bullet.getBulletType().damage);
+		if (hitEntity instanceof EntityLivingBase)
+			((EntityLivingBase) hitEntity).knockBack(bullet, bullet.getBulletType().knockbackStrength,
+					MathHelper.sin(bullet.rotationYaw * (float) (Math.PI / 180)),
+					-MathHelper.cos(bullet.rotationYaw * (float) (Math.PI / 180)));
 		return false;
 	}
 
