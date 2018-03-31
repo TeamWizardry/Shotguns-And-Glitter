@@ -84,7 +84,7 @@ public class EntityBullet extends EntityThrowable {
 		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
 			IBlockState state = world.getBlockState(result.getBlockPos());
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
-					!state.getBlock().canCollideCheck(state, false) &&
+					state.getBlock().canCollideCheck(state, false) &&
 					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result, state, getEffect()))
 				setDead();
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
