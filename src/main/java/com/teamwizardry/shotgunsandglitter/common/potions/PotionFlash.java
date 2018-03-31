@@ -33,7 +33,7 @@ public class PotionFlash extends PotionMod {
 
 	public float opacity = 0f;
 
-	private static boolean lastFlashState = false;
+	private static int lastFlashState = -1;
 
 	public PotionFlash(@NotNull String name, boolean badEffect, int color) {
 		super(name, badEffect, color);
@@ -48,8 +48,9 @@ public class PotionFlash extends PotionMod {
 		Minecraft minecraft = Minecraft.getMinecraft();
 		EntityPlayer player = minecraft.player;
 		if (player != null) {
-			boolean hasEffect = hasEffect(player);
-			if (hasEffect) {
+			PotionEffect effect = getEffect(player);
+			int amp = effect == null ? -1 : effect.getAmplifier();
+			if (amp != -1) {
 				if (!player.getEntityData().hasKey("sng:smooth"))
 					player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
 				minecraft.gameSettings.smoothCamera = true;
@@ -60,22 +61,23 @@ public class PotionFlash extends PotionMod {
 				}
 			}
 
-			if (lastFlashState != hasEffect) {
-				PotionEffect effect = getEffect(player);
-				assert effect != null;
-
-				BasicAnimation<PotionFlash> animation = new BasicAnimation<>(PotionFlash.this, "opacity");
-				animation.setEasing(Easing.easeInQuint);
-				animation.setTo(0.2f * ((effect.getAmplifier() + 1) / 4));
-				ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
-			} else {
-				BasicAnimation<PotionFlash> animation = new BasicAnimation<>(PotionFlash.this, "opacity");
-				animation.setEasing(Easing.easeOutBack);
-				animation.setTo(0f);
-				ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
+			if (lastFlashState != amp) {
+				if (amp != -1) {
+					BasicAnimation<PotionFlash> animation = new BasicAnimation<>(this, "opacity");
+					animation.setEasing(Easing.easeInQuint);
+					animation.setTo(0.5f + 0.5f * ((amp + 1) / 4.0));
+					animation.setDuration(5);
+					ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
+				} else {
+					BasicAnimation<PotionFlash> animation = new BasicAnimation<>(this, "opacity");
+					animation.setEasing(Easing.easeOutBack);
+					animation.setTo(0f);
+					animation.setDuration(20);
+					ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
+				}
 			}
 
-			lastFlashState = hasEffect;
+			lastFlashState = amp;
 		}
 	}
 
