@@ -50,7 +50,7 @@ public class EffectPsychic implements Effect {
 			acceleration = acceleration.add(differenceVec.scale(1 / differenceVec.lengthSquared()));
 		}
 
-		acceleration = acceleration.normalize().scale(0.5);
+		acceleration = acceleration.normalize().scale(getVelocity(world, bullet.getBulletType()));
 
 		bullet.motionX += acceleration.x;
 		bullet.motionY += acceleration.y;

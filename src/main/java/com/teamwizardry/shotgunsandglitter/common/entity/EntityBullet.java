@@ -4,6 +4,8 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,7 +38,7 @@ public class EntityBullet extends EntityThrowable {
 		setEffect(effect);
 
 		this.caster = caster;
-		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, caster, bulletType), inaccuracy);
+		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
 	}
 
 	@Override
@@ -80,8 +82,10 @@ public class EntityBullet extends EntityThrowable {
 	@Override
 	protected void onImpact(@NotNull RayTraceResult result) {
 		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-			if (ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this,
-					result, world.getBlockState(result.getBlockPos()), getEffect()))
+			IBlockState state = world.getBlockState(result.getBlockPos());
+			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
+					!state.getBlock().canCollideCheck(state, false) &&
+					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result, state, getEffect()))
 				setDead();
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
 			if (result.entityHit != null && result.entityHit != caster)
