@@ -1,49 +1,63 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
+import com.teamwizardry.librarianlib.core.client.ModelHandler;
+import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import kotlin.jvm.functions.Function1;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.Arrays;
 
-public class ItemBullet extends ItemMod {
+
+public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 	public ItemBullet() {
-		super("bullet", "bullet_heavy", "bullet_medium", "bullet_light");
+		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
+	}
 
-		this.addPropertyOverride(new ResourceLocation("effect"), new IItemPropertyGetter() {
-			@SideOnly(Side.CLIENT)
-			@Override
-			public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-				String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
+	@NotNull
+	@Override
+	public String[] getExtraVariants() {
+		return EffectRegistry.getEffects().stream()
+				.flatMap((effect) -> Arrays.stream(BulletType.values())
+						.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
+				.toArray(String[]::new);
+	}
 
-				Effect effect = EffectRegistry.getEffectByID(effectID);
+	@Nullable
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Function1<ItemStack, ModelResourceLocation> getMeshDefinition() {
+		return (stack) -> {
+			BulletType type = BulletType.byOrdinal(stack.getItemDamage());
+			Effect effect = getEffectFromItem(stack);
+			return ModelHandler.INSTANCE.getResource(ShotgunsAndGlitter.MODID,
+					type.serializeName + "/" + effect.getID());
+		};
+	}
 
-				return EffectRegistry.getEffectIndex(effect);
-			}
-		});
+	@NotNull
+	public static Effect getEffectFromItem(@NotNull ItemStack stack) {
+		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
+		return EffectRegistry.getEffectByID(effectID);
 	}
 
 	@NotNull
 	@Override
 	public String getUnlocalizedName(@NotNull ItemStack stack) {
-		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
-
-		Effect effect = EffectRegistry.getEffectByID(effectID);
-
-		return super.getUnlocalizedName(stack) + "." + effect.getID();
+		return super.getUnlocalizedName(stack) + "." + getEffectFromItem(stack).getID();
 	}
 
 	@Override

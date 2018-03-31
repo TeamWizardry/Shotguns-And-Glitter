@@ -14,7 +14,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class EntityBullet extends EntityThrowable {
@@ -24,12 +23,12 @@ public class EntityBullet extends EntityThrowable {
 
 	private EntityLivingBase caster = null;
 
-	public EntityBullet(@Nonnull World world) {
+	public EntityBullet(@NotNull World world) {
 		super(world);
 		setSize(0.1F, 0.1F);
 	}
 
-	public EntityBullet(@Nonnull World world, @Nonnull EntityLivingBase caster, @Nonnull BulletType bulletType, @Nonnull Effect effect, float inaccuracy) {
+	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
 		super(world, caster);
 		setSize(0.1F, 0.1F);
 
@@ -112,7 +111,7 @@ public class EntityBullet extends EntityThrowable {
 	}
 
 	public BulletType getBulletType() {
-		return BulletType.values()[dataManager.get(BULLET_TYPE) % BulletType.values().length];
+		return BulletType.byOrdinal(dataManager.get(BULLET_TYPE));
 	}
 
 	public void setBulletType(BulletType type) {

@@ -1,12 +1,16 @@
 item_group.shotgunsandglitter=Shotguns & Glitter
 
-item.shotgunsandglitter:bullet_medium.basic.name=Medium Weight Round
-item.shotgunsandglitter:bullet_medium.firework.name=Medium Firework Round
-item.shotgunsandglitter:bullet_medium.gravity_in.name=Medium Graviton Round
-item.shotgunsandglitter:bullet_medium.gravity_out.name=Medium Repulsor Round
-item.shotgunsandglitter:bullet_medium.hookshot.name=Medium Hookshot Round
-item.shotgunsandglitter:bullet_medium.piercing.name=Medium Piercing Round
-item.shotgunsandglitter:bullet_medium.psychic.name=Medium Psyker Round
+item.shotgunsandglitter:bullet_medium.basic.name=Weight Round
+item.shotgunsandglitter:bullet_medium.firework.name=Firework Round
+item.shotgunsandglitter:bullet_medium.gravity_in.name=Graviton Round
+item.shotgunsandglitter:bullet_medium.gravity_out.name=Repulsor Round
+item.shotgunsandglitter:bullet_medium.hookshot.name=Hookshot Round
+item.shotgunsandglitter:bullet_medium.piercing.name=Piercing Round
+item.shotgunsandglitter:bullet_medium.psychic.name=Psyker Round
+item.shotgunsandglitter:bullet_medium.biotic.name=Biotic Round
+item.shotgunsandglitter:bullet_medium.tranq.name=Tranquilizer Round
+item.shotgunsandglitter:bullet_medium.frost.name=Freezing Round
+item.shotgunsandglitter:bullet_medium.tainted.name=Tainted Round
 
 item.shotgunsandglitter:bullet_heavy.basic.name=Heavyweight Round
 item.shotgunsandglitter:bullet_heavy.firework.name=Heavy Firework Round
@@ -15,6 +19,9 @@ item.shotgunsandglitter:bullet_heavy.gravity_out.name=Heavy Repulsion Round
 item.shotgunsandglitter:bullet_heavy.hookshot.name=Heavy Hookshot Round
 item.shotgunsandglitter:bullet_heavy.piercing.name=Heavy Piercing Round
 item.shotgunsandglitter:bullet_heavy.psychic.name=Heavy Psyker Round
+item.shotgunsandglitter:bullet_heavy.tranq.name=Heavy Tranquilizer Round
+item.shotgunsandglitter:bullet_heavy.frost.name=Heavy Freezing Round
+item.shotgunsandglitter:bullet_heavy.tainted.name=Heavy Tainted Round
 
 item.shotgunsandglitter:bullet_light.basic.name=Lightweight Round
 item.shotgunsandglitter:bullet_light.firework.name=Light Firework Round
@@ -23,3 +30,6 @@ item.shotgunsandglitter:bullet_light.gravity_out.name=Light Repulsion Round
 item.shotgunsandglitter:bullet_light.hookshot.name=Light Hookshot Round
 item.shotgunsandglitter:bullet_light.piercing.name=Light Piercing Round
 item.shotgunsandglitter:bullet_light.psychic.name=Light Psyker Round
+item.shotgunsandglitter:bullet_light.tranq.name=Light Tranquilizer Round
+item.shotgunsandglitter:bullet_light.frost.name=Light Freezing Round
+item.shotgunsandglitter:bullet_light.tainted.name=Light Tainted Round

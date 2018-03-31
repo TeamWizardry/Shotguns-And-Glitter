@@ -49,13 +49,13 @@ public class EffectGraviton implements Effect {
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
 					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
-					return differenceVec.lengthSquared() < 7.5 * 7.5;
+					return differenceVec.lengthSquared() < 7.5 * 7.5 && differenceVec.lengthSquared() != 0;
 				})) {
 			Vec3d differenceVec = bullet.getPositionVector().subtract(target.getPositionVector());
 			differenceVec = differenceVec.scale(direction / differenceVec.lengthSquared());
-			target.motionX = differenceVec.x * 2f;
-			target.motionY = Math.max(differenceVec.y, 0) * 2f + 0.5f;
-			target.motionZ = differenceVec.z * 2f;
+			target.motionX = differenceVec.x * bullet.getBulletType().damage;
+			target.motionY = Math.max(differenceVec.y, 0) * bullet.getBulletType().damage + 0.5f;
+			target.motionZ = differenceVec.z * bullet.getBulletType().damage;
 			target.velocityChanged = true;
 		}
 	}

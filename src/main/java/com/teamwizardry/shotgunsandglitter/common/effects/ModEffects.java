@@ -15,6 +15,8 @@ public class ModEffects {
 				new EffectPiercing(),
 				new EffectPsychic(),
 				new EffectBiotic(),
-				new EffectTranq());
+				new EffectTranq(),
+				new EffectFrost(),
+				new EffectTainted());
 	}
 }

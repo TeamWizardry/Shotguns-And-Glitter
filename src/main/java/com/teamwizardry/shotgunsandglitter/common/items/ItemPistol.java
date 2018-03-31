@@ -14,8 +14,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 
 public class ItemPistol extends ItemMod {
 
@@ -24,8 +24,8 @@ public class ItemPistol extends ItemMod {
 	}
 
 	@Override
-	@Nonnull
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+	@NotNull
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (!worldIn.isRemote) {
 			Effect firework = EffectRegistry.getEffectByID("piercing");
 			EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.SMALL, firework, 0.05f);

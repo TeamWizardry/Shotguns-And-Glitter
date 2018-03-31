@@ -22,7 +22,7 @@ public class EffectBiotic implements Effect {
 	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), 0.0f);
 		if (hitEntity instanceof EntityLivingBase)
-			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20, 1));
+			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20, bullet.getBulletType().ordinal()));
 		return true;
 	}
 }

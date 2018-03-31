@@ -30,9 +30,9 @@ public class EffectHookshot implements Effect {
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower != null) {
 			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector());
-			thrower.motionX = differenceVec.x * 2f;
-			thrower.motionY = Math.max(differenceVec.y, 0) * 2f + 0.5f;
-			thrower.motionZ = differenceVec.z * 2f;
+			thrower.motionX = differenceVec.x * bullet.getBulletType().damage;
+			thrower.motionY = Math.max(differenceVec.y, 0) * bullet.getBulletType().damage + 0.5f;
+			thrower.motionZ = differenceVec.z * bullet.getBulletType().damage;
 			thrower.velocityChanged = true;
 		}
 	}
