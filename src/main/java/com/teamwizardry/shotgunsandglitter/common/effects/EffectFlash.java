@@ -31,7 +31,7 @@ public class EffectFlash implements Effect {
 						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
 						double dot = motionVec.normalize().dotProduct(differenceVec.normalize());
 
-						return differenceVec.lengthSquared() <= radius*radius && dot >= 0;
+						return differenceVec.lengthSquared() <= radius * radius && dot >= 0;
 					})) {
 
 				Vec3d motionVec = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
