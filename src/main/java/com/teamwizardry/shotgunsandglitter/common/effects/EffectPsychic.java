@@ -50,7 +50,7 @@ public class EffectPsychic implements Effect {
 			acceleration = acceleration.add(differenceVec.scale(1 / differenceVec.lengthSquared()));
 		}
 
-		acceleration = acceleration.normalize().scale(0.05);
+		acceleration = acceleration.normalize().scale(0.5);
 
 		bullet.motionX += acceleration.x;
 		bullet.motionY += acceleration.y;
@@ -68,7 +68,7 @@ public class EffectPsychic implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		glitter.setColor(new Color(0x893000));
+		glitter.setColor(new Color(0x730089));
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
 			double radius = RandUtil.nextDouble(0.1, 1);
@@ -99,7 +99,7 @@ public class EffectPsychic implements Effect {
 		builder.setRender(ClientEventHandler.SPARKLE);
 		builder.disableRandom();
 
-		builder.setColor(new Color(0x893000));
+		builder.setColor(new Color(0x730089));
 
 		float size = 2;
 		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
