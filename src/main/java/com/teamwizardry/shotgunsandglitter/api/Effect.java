@@ -14,16 +14,20 @@ import org.jetbrains.annotations.NotNull;
 
 public interface Effect {
 
+	// Effect ID
+
 	String getID();
+
+	// Logic Methods
 
 	default void onImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
 		// NO-OP
 	}
 
 	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
-		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), bullet.getBulletType().damage);
+		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), damage(world, bullet));
 		if (hitEntity instanceof EntityLivingBase)
-			((EntityLivingBase) hitEntity).knockBack(bullet, bullet.getBulletType().knockbackStrength,
+			((EntityLivingBase) hitEntity).knockBack(bullet, knockbackStrength(world, bullet),
 					MathHelper.sin(bullet.rotationYaw * (float) (Math.PI / 180)),
 					-MathHelper.cos(bullet.rotationYaw * (float) (Math.PI / 180)));
 		return false;
@@ -37,8 +41,19 @@ public interface Effect {
 		// NO-OP
 	}
 
+
+	// Numerical Methods
+
 	default float getVelocity(@NotNull World world, @NotNull Entity caster, @NotNull BulletType bulletType) {
 		return 3.0F;
+	}
+
+	default float damage(@NotNull World world, @NotNull EntityBullet bullet) {
+		return bullet.getBulletType().damage;
+	}
+
+	default float knockbackStrength(@NotNull World world, @NotNull EntityBullet bullet) {
+		return bullet.getBulletType().knockbackStrength;
 	}
 
 
