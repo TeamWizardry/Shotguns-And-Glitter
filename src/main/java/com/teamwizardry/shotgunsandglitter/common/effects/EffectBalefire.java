@@ -23,7 +23,7 @@ public class EffectBalefire implements Effect {
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity);
-		hitEntity.setFire(20);
+		hitEntity.setFire(20 + 20 * bullet.getBulletType().ordinal());
 		if (hitEntity instanceof EntityLiving && RandUtil.nextDouble() < 0.25)
 			hitEntity.onKillCommand();
 		return RandUtil.nextDouble() < 0.8;
@@ -39,8 +39,13 @@ public class EffectBalefire implements Effect {
 
 	@Override
 	public void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPosition().add(-2, -1, -2), bullet.getPosition().add(2, -1, 2)))
-			if (world.isAirBlock(pos))
-				world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+		if (!world.isRemote) {
+			int expansion = bullet.getBulletType().ordinal();
+			for (BlockPos pos : BlockPos.getAllInBoxMutable(
+					bullet.getPosition().add(-expansion, -1, -expansion),
+					bullet.getPosition().add(expansion, -1, expansion)))
+				if (world.isAirBlock(pos))
+					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+		}
 	}
 }

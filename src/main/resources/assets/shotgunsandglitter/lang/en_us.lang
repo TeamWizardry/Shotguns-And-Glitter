@@ -14,6 +14,7 @@ item.shotgunsandglitter:bullet_medium.tainted.name=Tainted Round
 item.shotgunsandglitter:bullet_medium.flash.name=Flashbang Round
 item.shotgunsandglitter:bullet_medium.impact.name=Impact Round
 item.shotgunsandglitter:bullet_medium.balefire.name=Balefire Round
+item.shotgunsandglitter:bullet_medium.draconic.name=Dragonfire Round
 
 item.shotgunsandglitter:bullet_heavy.basic.name=Heavyweight Round
 item.shotgunsandglitter:bullet_heavy.firework.name=Heavy Firework Round
@@ -28,7 +29,8 @@ item.shotgunsandglitter:bullet_heavy.frost.name=Heavy Freezing Round
 item.shotgunsandglitter:bullet_heavy.tainted.name=Heavy Tainted Round
 item.shotgunsandglitter:bullet_heavy.flash.name=Heavy Flashbang Round
 item.shotgunsandglitter:bullet_heavy.impact.name=Heavy Impact Round
-item.shotgunsandglitter:bullet_heavy.balefire.name=Heavy Balescream Round
+item.shotgunsandglitter:bullet_heavy.balefire.name=Balescream Round
+item.shotgunsandglitter:bullet_heavy.draconic.name=Heavy Dragonfire Round
 
 item.shotgunsandglitter:bullet_light.basic.name=Lightweight Round
 item.shotgunsandglitter:bullet_light.firework.name=Light Firework Round
@@ -43,5 +45,6 @@ item.shotgunsandglitter:bullet_light.frost.name=Light Freezing Round
 item.shotgunsandglitter:bullet_light.tainted.name=Light Tainted Round
 item.shotgunsandglitter:bullet_light.flash.name=Light Flashbang Round
 item.shotgunsandglitter:bullet_light.impact.name=Light Impact Round
-item.shotgunsandglitter:bullet_light.balefire.name=Light Fireweave Round
+item.shotgunsandglitter:bullet_light.balefire.name=Fireweave Round
+item.shotgunsandglitter:bullet_light.draconic.name=Light Dragonfire Round
 

@@ -20,6 +20,7 @@ public class ModEffects {
 				new EffectTainted(),
 				new EffectFlash(),
 				new EffectImpact(),
-				new EffectBalefire());
+				new EffectBalefire(),
+				new EffectDraconic());
 	}
 }
