@@ -1,8 +1,4 @@
-package com.teamwizardry.shotgunsandglitter;
-
-import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
-import com.teamwizardry.shotgunsandglitter.common.items.ItemPistol;
-import com.teamwizardry.shotgunsandglitter.common.items.ItemShotgun;
+package com.teamwizardry.shotgunsandglitter.common.items;
 
 public class ModItems {
 

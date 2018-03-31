@@ -27,7 +27,7 @@ public class EffectPiercing implements Effect {
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity, hit);
-		return true; // Piercing
+		return false; // Piercing
 	}
 
 	@Override

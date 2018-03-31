@@ -1,7 +1,7 @@
-package com.teamwizardry.shotgunsandglitter;
+package com.teamwizardry.shotgunsandglitter.common.entity;
 
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.client.RenderBullet;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

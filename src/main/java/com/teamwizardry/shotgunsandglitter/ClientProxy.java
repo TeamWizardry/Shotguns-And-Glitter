@@ -3,6 +3,7 @@ package com.teamwizardry.shotgunsandglitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RayTraceResult;

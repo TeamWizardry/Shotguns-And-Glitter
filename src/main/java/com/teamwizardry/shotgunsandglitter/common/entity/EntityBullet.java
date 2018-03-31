@@ -53,8 +53,19 @@ public class EntityBullet extends EntityThrowable {
 
 	@Override
 	public void onUpdate() {
+
+		double mX = motionX,
+				mY = motionY,
+				mZ = motionZ;
+
 		super.onUpdate();
 		if (isDead) return;
+
+		if (!inGround) {
+			motionX = mX;
+			motionY = mY;
+			motionZ = mZ;
+		}
 
 		if (!world.isRemote && ticksExisted > 1000)
 			setDead();
@@ -70,12 +81,12 @@ public class EntityBullet extends EntityThrowable {
 	@Override
 	protected void onImpact(@NotNull RayTraceResult result) {
 		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-			if (!ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this,
+			if (ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this,
 					result, world.getBlockState(result.getBlockPos()), getEffect()))
 				setDead();
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
 			if (result.entityHit != null && result.entityHit != caster)
-				if (!ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
+				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
 						result.entityHit, result, getEffect()))
 					setDead();
 		}

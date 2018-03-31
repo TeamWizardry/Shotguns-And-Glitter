@@ -1,7 +1,6 @@
-package com.teamwizardry.shotgunsandglitter;
+package com.teamwizardry.shotgunsandglitter.common.effects;
 
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.common.effects.*;
 
 /**
  * @author WireSegal
@@ -14,6 +13,8 @@ public class ModEffects {
 				new EffectGraviton(false),
 				new EffectHookshot(),
 				new EffectPiercing(),
-				new EffectPsychic());
+				new EffectPsychic(),
+				new EffectBiotic(),
+				new EffectTranq());
 	}
 }

@@ -1,7 +1,11 @@
 package com.teamwizardry.shotgunsandglitter;
 
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
+import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
+import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RayTraceResult;
@@ -18,6 +22,7 @@ public class CommonProxy {
 		ModEntities.init();
 		ModEffects.init();
 		new ModTab();
+		new ModPotions();
 	}
 
 	public void init(FMLInitializationEvent event) {

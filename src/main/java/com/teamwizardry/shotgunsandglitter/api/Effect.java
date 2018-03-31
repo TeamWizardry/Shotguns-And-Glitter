@@ -30,11 +30,11 @@ public interface Effect {
 			((EntityLivingBase) hitEntity).knockBack(bullet, knockbackStrength(world, bullet),
 					MathHelper.sin(bullet.rotationYaw * (float) (Math.PI / 180)),
 					-MathHelper.cos(bullet.rotationYaw * (float) (Math.PI / 180)));
-		return false;
+		return true;
 	}
 
 	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
-		return false;
+		return true;
 	}
 
 	default void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {

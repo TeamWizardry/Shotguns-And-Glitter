@@ -3,6 +3,7 @@ package com.teamwizardry.shotgunsandglitter.api;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Supplier;
 
 public class EffectRegistry {
 
@@ -22,7 +23,8 @@ public class EffectRegistry {
 			addEffect(effect);
 	}
 
-	public static void addEffect(Effect effect) {
+	public static void addEffect(Supplier<Effect> effectSupplier) {
+		Effect effect = effectSupplier.get();
 		effects.put(effect.getID(), effect);
 		indexedEffects.add(effect);
 	}

@@ -1,6 +1,7 @@
 package com.teamwizardry.shotgunsandglitter;
 
 import com.teamwizardry.librarianlib.features.base.ModCreativeTab;
+import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;

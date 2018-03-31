@@ -50,7 +50,7 @@ public class ItemBullet extends ItemMod {
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
 		super.getSubItems(tab, subItems);
 
-		for (int damage = 0; damage <= 2; damage++) {
+		for (int damage = 0; damage < getVariants().length; damage++) {
 			ItemStack base = new ItemStack(this);
 			base.setItemDamage(damage);
 			subItems.add(base);
