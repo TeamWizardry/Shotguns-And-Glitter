@@ -22,7 +22,7 @@ public class EffectFrost implements Effect {
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity, hit);
-		if (hitEntity instanceof EntityLivingBase)
+		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.FROST, 300, bullet.getBulletType().ordinal() + 1));
 		return true;
 	}

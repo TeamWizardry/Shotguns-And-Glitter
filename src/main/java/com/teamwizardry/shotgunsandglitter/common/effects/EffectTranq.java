@@ -21,7 +21,7 @@ public class EffectTranq implements Effect {
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity, @NotNull RayTraceResult hit) {
 		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), 0.0f);
-		if (hitEntity instanceof EntityLivingBase)
+		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.TRANQUILIZER, (int) (120 * bullet.getBulletType().damage)));
 		return true;
 	}
