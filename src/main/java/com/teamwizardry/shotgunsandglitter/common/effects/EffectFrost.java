@@ -16,7 +16,7 @@ public class EffectFrost implements Effect {
 
 	@Override
 	public String getID() {
-		return "tranq";
+		return "frost";
 	}
 
 	@Override
