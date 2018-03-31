@@ -27,18 +27,18 @@ public class EffectFlash implements Effect {
 							bullet.posX + radius, bullet.posY + radius, bullet.posZ + radius),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
-						Vec3d motionVec = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
+						Vec3d look = entity.getLook(0f);
 						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
-						double dot = motionVec.normalize().dotProduct(differenceVec.normalize());
+						double dot = look.dotProduct(differenceVec.normalize());
 
-						return differenceVec.lengthSquared() <= radius * radius && dot >= 0;
+						return differenceVec.lengthSquared() <= radius * radius && dot <= 0;
 					})) {
 
 				Vec3d motionVec = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
 				Vec3d differenceVec = target.getPositionVector().subtract(bullet.getPositionVector());
 				double dot = motionVec.normalize().dotProduct(differenceVec.normalize());
 				double lengthIntensity = Math.min(1 / differenceVec.lengthVector(), 1 / 10.0) * dot * 100 / radius;
-				int amp = (int) (100.0 / 3 - lengthIntensity / 3);
+				int amp = (int) (100 * lengthIntensity / 3 - 1.0 / 3);
 				int duration = (int) (400.0 / 9 - lengthIntensity * 50000 / 9);
 
 				target.addPotionEffect(new PotionEffect(ModPotions.FLASH, duration, amp));
