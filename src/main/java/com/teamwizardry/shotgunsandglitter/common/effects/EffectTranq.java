@@ -16,6 +16,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -36,11 +38,13 @@ public class EffectTranq implements Effect {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
 
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);

@@ -38,7 +38,7 @@ public class EffectFlash implements Effect {
 				Vec3d differenceVec = bullet.getPositionVector().subtract(target.getPositionVector());
 				double dot = look.dotProduct(differenceVec.normalize());
 				double lengthIntensity = Math.min(1 / differenceVec.lengthVector(), 1 / 10.0) * dot;
-				int amp = (int) (100 * lengthIntensity / 3 - 1.0 / 3);
+				int amp = (int) (100 * lengthIntensity / 3 + 1.0 / 6);
 				int duration = (int) (400.0 / 9 + lengthIntensity * 50000 / 9);
 
 				target.addPotionEffect(new PotionEffect(ModPotions.FLASH, duration, amp));
