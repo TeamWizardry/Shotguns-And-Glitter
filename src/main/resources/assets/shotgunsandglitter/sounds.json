@@ -13,5 +13,30 @@
     "sounds": [
       "shotgunsandglitter:shot_sniper"
     ]
+  },
+  "bullet_impact": {
+    "sounds": [
+      "shotgunsandglitter:bullet_impact_1",
+      "shotgunsandglitter:bullet_impact_2",
+      "shotgunsandglitter:bullet_impact_3",
+      "shotgunsandglitter:bullet_impact_4",
+      "shotgunsandglitter:bullet_impact_5",
+      "shotgunsandglitter:bullet_impact_6",
+      "shotgunsandglitter:bullet_impact_7",
+      "shotgunsandglitter:bullet_impact_8"
+    ]
+  },
+  "bullet_flyby": {
+    "sounds": [
+      "shotgunsandglitter:bullet_flyby_1",
+      "shotgunsandglitter:bullet_flyby_2",
+      "shotgunsandglitter:bullet_flyby_3",
+      "shotgunsandglitter:bullet_flyby_4",
+      "shotgunsandglitter:bullet_flyby_5",
+      "shotgunsandglitter:bullet_flyby_6",
+      "shotgunsandglitter:bullet_flyby_7",
+      "shotgunsandglitter:bullet_flyby_8",
+      "shotgunsandglitter:bullet_flyby_9"
+    ]
   }
 }
