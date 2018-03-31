@@ -12,6 +12,7 @@ item.shotgunsandglitter:bullet_medium.tranq.name=Tranquilizer Round
 item.shotgunsandglitter:bullet_medium.frost.name=Freezing Round
 item.shotgunsandglitter:bullet_medium.tainted.name=Tainted Round
 item.shotgunsandglitter:bullet_medium.flash.name=Flashbang Round
+item.shotgunsandglitter:bullet_medium.impact.name=Impact Round
 
 item.shotgunsandglitter:bullet_heavy.basic.name=Heavyweight Round
 item.shotgunsandglitter:bullet_heavy.firework.name=Heavy Firework Round
@@ -25,6 +26,7 @@ item.shotgunsandglitter:bullet_heavy.tranq.name=Heavy Tranquilizer Round
 item.shotgunsandglitter:bullet_heavy.frost.name=Heavy Freezing Round
 item.shotgunsandglitter:bullet_heavy.tainted.name=Heavy Tainted Round
 item.shotgunsandglitter:bullet_heavy.flash.name=Heavy Flashbang Round
+item.shotgunsandglitter:bullet_heavy.impact.name=Heavy Impact Round
 
 item.shotgunsandglitter:bullet_light.basic.name=Lightweight Round
 item.shotgunsandglitter:bullet_light.firework.name=Light Firework Round
@@ -38,4 +40,5 @@ item.shotgunsandglitter:bullet_light.tranq.name=Light Tranquilizer Round
 item.shotgunsandglitter:bullet_light.frost.name=Light Freezing Round
 item.shotgunsandglitter:bullet_light.tainted.name=Light Tainted Round
 item.shotgunsandglitter:bullet_light.flash.name=Light Flashbang Round
+item.shotgunsandglitter:bullet_light.impact.name=Light Impact Round
 
