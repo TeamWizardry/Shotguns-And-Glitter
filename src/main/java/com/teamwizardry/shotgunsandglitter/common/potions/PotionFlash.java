@@ -33,6 +33,9 @@ import org.lwjgl.opengl.GL11;
  * Created at 10:35 AM on 3/31/18.
  */
 public class PotionFlash extends PotionMod {
+
+	public float opacity = 0f;
+
 	public PotionFlash(@NotNull String name, boolean badEffect, int color) {
 		super(name, badEffect, color);
 
@@ -51,7 +54,6 @@ public class PotionFlash extends PotionMod {
 				if (entityLivingBaseIn instanceof EntityPlayerSP) {
 					BasicAnimation<PotionFlash> animation = new BasicAnimation<>(PotionFlash.this, "opacity");
 					animation.setEasing(Easing.easeInQuint);
-					animation.setFrom(opacity);
 					animation.setTo(0.2f * ((amplifier + 1) / 4));
 					ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
 				}
@@ -68,18 +70,14 @@ public class PotionFlash extends PotionMod {
 			@SideOnly(Side.CLIENT)
 			public void runIfClient() {
 				if (entityLivingBaseIn instanceof EntityPlayerSP) {
-					ClientEventHandler.FLASH_ANIMATION_HANDLER.removeAnimationsFor(PotionFlash.this);
 					BasicAnimation<PotionFlash> animation = new BasicAnimation<>(PotionFlash.this, "opacity");
 					animation.setEasing(Easing.easeOutBack);
-					animation.setFrom(opacity);
 					animation.setTo(0f);
 					ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
 				}
 			}
 		});
 	}
-
-	private float opacity = 0f;
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
