@@ -33,7 +33,7 @@ public interface Effect {
 		return true;
 	}
 
-	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, BlockPos pos, @NotNull IBlockState state) {
+	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		return true;
 	}
 

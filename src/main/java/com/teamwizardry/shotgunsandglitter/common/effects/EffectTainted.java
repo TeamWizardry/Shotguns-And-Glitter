@@ -40,7 +40,7 @@ public class EffectTainted implements Effect {
 	}
 
 	@Override
-	public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, BlockPos pos, @NotNull IBlockState state) {
+	public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		if (!world.isRemote) {
 			EntityAreaEffectCloud aEC = new EntityAreaEffectCloud(world, bullet.posX, bullet.posY, bullet.posZ);
 

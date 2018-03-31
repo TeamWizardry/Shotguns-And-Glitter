@@ -19,6 +19,7 @@ public class ModEffects {
 				new EffectFrost(),
 				new EffectTainted(),
 				new EffectFlash(),
-				new EffectImpact());
+				new EffectImpact(),
+				new EffectBalefire());
 	}
 }
