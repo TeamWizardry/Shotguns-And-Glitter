@@ -1,9 +1,10 @@
 package com.teamwizardry.shotgunsandglitter.common.effects;
 
 import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
-import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpCircle;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
+import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
+import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -14,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -40,18 +42,24 @@ public class EffectBiotic implements Effect {
 	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
-		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 		glitter.disableMotionCalculation();
-		glitter.setColor(Color.RED);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 15, 10, (i, build) -> {
-			build.setLifetime(RandUtil.nextInt(5, 10));
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.1f, 0.5f), 0));
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+			build.setLifetime(RandUtil.nextInt(20, 40));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.4f, 1f), 0));
+			build.setColorFunction(new InterpColorHSV(Color.RED, Color.YELLOW));
+			build.setAlphaFunction(new InterpFadeInOut(1f, 1f));
 
-			Vec3d position = new InterpCircle(Vec3d.ZERO, new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ).normalize(), RandUtil.nextFloat(0.2f, 0.5f), 50, 0).get(RandUtil.nextFloat());
-			build.setPositionOffset(position);
-			build.setMotion(position.scale(-1));
+			double radius = 2;
+			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
+			double r = radius * RandUtil.nextFloat();
+			double x = r * MathHelper.cos((float) theta);
+			double z = r * MathHelper.sin((float) theta);
+
+			Vec3d offset = new Vec3d(x, RandUtil.nextDouble(-1, 1), z);
+			build.setPositionOffset(offset);
+			build.setMotion(offset.scale(-1 / 10.0));
 		});
 	}
 
@@ -67,8 +75,7 @@ public class EffectBiotic implements Effect {
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 15, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.5f), 0));
-
-			build.setMotion(new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ).scale(1.0 / 2.0));
+			build.setColorFunction(new InterpColorHSV(Color.RED, Color.YELLOW));
 		});
 	}
 }
