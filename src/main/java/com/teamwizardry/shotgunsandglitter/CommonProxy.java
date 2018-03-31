@@ -1,7 +1,6 @@
 package com.teamwizardry.shotgunsandglitter;
 
 import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

@@ -1,6 +1,7 @@
-package com.teamwizardry.shotgunsandglitter.common.effects;
+package com.teamwizardry.shotgunsandglitter;
 
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.common.effects.*;
 
 /**
  * @author WireSegal

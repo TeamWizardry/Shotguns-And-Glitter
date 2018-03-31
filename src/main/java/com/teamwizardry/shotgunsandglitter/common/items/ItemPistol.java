@@ -25,7 +25,7 @@ public class ItemPistol extends ItemMod {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, handIn);
 
-		Effect firework = EffectRegistry.getEffectByID("hookshot");
+		Effect firework = EffectRegistry.getEffectByID("piercing");
 		EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.SMALL, firework, 0.05f);
 		Vec3d position = playerIn.getPositionVector().addVector(0, playerIn.eyeHeight, 0).add(playerIn.getLook(0));
 		bullet.setPosition(position.x, position.y, position.z);

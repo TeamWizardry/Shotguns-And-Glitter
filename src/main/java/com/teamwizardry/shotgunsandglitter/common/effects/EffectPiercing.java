@@ -19,4 +19,14 @@ public class EffectPiercing implements Effect {
 		Effect.super.onCollideEntity(world, bullet, hitEntity, hit);
 		return true; // Piercing
 	}
+
+	@Override
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+
+	}
+
+	@Override
+	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+
+	}
 }
