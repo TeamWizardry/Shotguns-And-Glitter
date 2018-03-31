@@ -27,7 +27,7 @@ public class ItemPistol extends ItemMod {
 	@NotNull
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (!worldIn.isRemote) {
-			Effect firework = EffectRegistry.getEffectByID("flash");
+			Effect firework = EffectRegistry.getEffectByID("tranq");
 			EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.HEAVY, firework, 0.05f);
 			Vec3d position = playerIn.getPositionVector().addVector(0, playerIn.eyeHeight, 0).add(playerIn.getLook(0));
 			bullet.setPosition(position.x, position.y, position.z);
