@@ -68,7 +68,7 @@ public class EffectPsychic implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		glitter.setColor(Color.YELLOW);
+		glitter.setColor(new Color(0x893000));
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
 			double radius = RandUtil.nextDouble(0.1, 1);
@@ -95,18 +95,38 @@ public class EffectPsychic implements Effect {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
-		Vec3d position = bullet.getPositionVector();
+		ParticleBuilder builder = new ParticleBuilder(50);
+		builder.setRender(ClientEventHandler.SPARKLE);
+		builder.disableRandom();
 
-		ParticleBuilder glitter = new ParticleBuilder(30);
-		glitter.setRender(ClientEventHandler.SPARKLE);
-		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
-		glitter.disableMotionCalculation();
-		glitter.disableRandom();
+		builder.setColor(new Color(0x893000));
 
-		glitter.setColor(Color.YELLOW);
-		glitter.setScaleFunction(new InterpScale(2f, 0f));
+		float size = 2;
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
+		{
+			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
+			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
+		});
+		double scatter = 0.1f;
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 3, 0, (i, particleBuilder) ->
+		{
+			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
+			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
+			Vec3d offset = new Vec3d(
+					RandUtil.nextDouble(-scatter, scatter),
+					RandUtil.nextDouble(-scatter, scatter),
+					RandUtil.nextDouble(-scatter, scatter));
+			particleBuilder.setPositionOffset(offset);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 1, 0, (i, build) -> {
+		});
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 4, 0, (i, particleBuilder) -> {
+			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
+			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
+			Vec3d offset = new Vec3d(
+					RandUtil.nextDouble(-scatter, scatter),
+					RandUtil.nextDouble(-scatter, scatter),
+					RandUtil.nextDouble(-scatter, scatter));
+			particleBuilder.setPositionOffset(offset);
 		});
 	}
 }
