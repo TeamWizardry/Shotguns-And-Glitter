@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "shotgunsandglitter:items/bullet_firework_heavy"
-  }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "shotgunsandglitter:items/heavy/firework"
+	}
 }

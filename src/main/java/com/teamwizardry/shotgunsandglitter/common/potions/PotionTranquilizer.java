@@ -69,13 +69,15 @@ public class PotionTranquilizer extends PotionMod {
 	public void onClientTick(TickEvent.ClientTickEvent e) {
 		Minecraft minecraft = Minecraft.getMinecraft();
 		EntityPlayer player = minecraft.player;
-		if (hasEffect(player)) {
-			if (!player.getEntityData().hasKey("sng:smooth"))
-				player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
-			minecraft.gameSettings.smoothCamera = true;
-		} else {
-			if (player.getEntityData().hasKey("sng:smooth"))
-				minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
+		if (player != null) {
+			if (hasEffect(player)) {
+				if (!player.getEntityData().hasKey("sng:smooth"))
+					player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
+				minecraft.gameSettings.smoothCamera = true;
+			} else {
+				if (player.getEntityData().hasKey("sng:smooth"))
+					minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
+			}
 		}
 	}
 

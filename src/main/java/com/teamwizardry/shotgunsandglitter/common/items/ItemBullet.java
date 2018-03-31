@@ -18,7 +18,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class ItemBullet extends ItemMod implements IExtraVariantHolder {
@@ -27,10 +29,12 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
 	}
 
+	private List<Effect> allEffects = new ArrayList<>(EffectRegistry.getEffects());
+
 	@NotNull
 	@Override
 	public String[] getExtraVariants() {
-		return EffectRegistry.getEffects().stream()
+		return allEffects.stream()
 				.flatMap((effect) -> Arrays.stream(BulletType.values())
 						.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
 				.toArray(String[]::new);
@@ -62,14 +66,12 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		super.getSubItems(tab, subItems);
-
 		for (int damage = 0; damage < getVariants().length; damage++) {
 			ItemStack base = new ItemStack(this);
 			base.setItemDamage(damage);
 			subItems.add(base);
 
-			for (Effect effect : EffectRegistry.getEffects()) {
+			for (Effect effect : allEffects) {
 				ItemStack effectStack = base.copy();
 				ItemNBTHelper.setString(effectStack, "effect", effect.getID());
 				subItems.add(effectStack);

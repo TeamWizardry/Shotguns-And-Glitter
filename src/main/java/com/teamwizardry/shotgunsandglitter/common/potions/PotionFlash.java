@@ -19,6 +19,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -85,14 +86,25 @@ public class PotionFlash extends PotionMod {
 	public void onClientTick(TickEvent.ClientTickEvent e) {
 		Minecraft minecraft = Minecraft.getMinecraft();
 		EntityPlayer player = minecraft.player;
-		if (hasEffect(player)) {
-			if (!player.getEntityData().hasKey("sng:smooth"))
-				player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
-			minecraft.gameSettings.smoothCamera = true;
-		} else {
-			if (player.getEntityData().hasKey("sng:smooth"))
-				minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
+		if (player != null) {
+			if (hasEffect(player)) {
+				if (!player.getEntityData().hasKey("sng:smooth"))
+					player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
+				minecraft.gameSettings.smoothCamera = true;
+			} else {
+				if (player.getEntityData().hasKey("sng:smooth"))
+					minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
+			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void playSound(PlaySoundEvent e) {
+		Minecraft minecraft = Minecraft.getMinecraft();
+		EntityPlayer player = minecraft.player;
+		if (player != null && hasEffect(player))
+			e.setResultSound(null);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -102,26 +114,29 @@ public class PotionFlash extends PotionMod {
 			e.setCanceled(true);
 		else if (e.getType() == RenderGameOverlayEvent.ElementType.ALL) {
 			opacity = Math.min(opacity, 1);
-			ScaledResolution res = e.getResolution();
-			double h = res.getScaledHeight();
-			double w = res.getScaledWidth();
 
+			if (opacity > 0) {
+				ScaledResolution res = e.getResolution();
+				double h = res.getScaledHeight();
+				double w = res.getScaledWidth();
 
-			GlStateManager.disableDepth();
-			GlStateManager.depthMask(false);
-			GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
-			GlStateManager.color(1, 1, 1, 1);
-			GlStateManager.disableAlpha();
-			BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-			buffer.pos(0, h, -90).color(1, 1, 1, opacity).endVertex();
-			buffer.pos(w, h, -90).color(1, 1, 1, opacity).endVertex();
-			buffer.pos(w, 0, -90).color(1, 1, 1, opacity).endVertex();
-			buffer.pos(0, 0, -90).color(1, 1, 1, opacity).endVertex();
-			Tessellator.getInstance().draw();
-			GlStateManager.depthMask(true);
-			GlStateManager.enableDepth();
-			GlStateManager.enableAlpha();
+				GlStateManager.disableDepth();
+				GlStateManager.depthMask(false);
+				GlStateManager.enableBlend();
+				GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
+				GlStateManager.color(1, 1, 1, 1);
+				BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+				buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+				buffer.pos(0, h, -90).color(1, 1, 1, opacity).endVertex();
+				buffer.pos(w, h, -90).color(1, 1, 1, opacity).endVertex();
+				buffer.pos(w, 0, -90).color(1, 1, 1, opacity).endVertex();
+				buffer.pos(0, 0, -90).color(1, 1, 1, opacity).endVertex();
+				Tessellator.getInstance().draw();
+				GlStateManager.depthMask(true);
+				GlStateManager.disableBlend();
+				GlStateManager.enableDepth();
+				GlStateManager.enableAlpha();
+			}
 		}
 	}
 }
