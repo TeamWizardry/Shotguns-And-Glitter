@@ -23,6 +23,7 @@ public class CommonProxy {
 		ModEffects.init();
 		new ModTab();
 		new ModPotions();
+		ModSounds.init();
 	}
 
 	public void init(FMLInitializationEvent event) {

@@ -6,11 +6,13 @@ public class ModItems {
 	public static ItemShotgun SHOTGUN;
 
 	public static ItemBullet BULLET;
+	public static ItemMagazine MAGAZINE;
 
 	public static void init() {
 		PISTOL = new ItemPistol();
 		SHOTGUN = new ItemShotgun();
 
 		BULLET = new ItemBullet();
+		MAGAZINE = new ItemMagazine();
 	}
 }

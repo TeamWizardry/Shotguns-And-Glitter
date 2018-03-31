@@ -1,0 +1,17 @@
+{
+  "shot_pistol": {
+    "sounds": [
+      "shotgunsandglitter:shot_pistol"
+    ]
+  },
+  "shot_shotgun": {
+    "sounds": [
+      "shotgunsandglitter:shot_shotgun"
+    ]
+  },
+  "shot_sniper": {
+    "sounds": [
+      "shotgunsandglitter:shot_sniper"
+    ]
+  }
+}
