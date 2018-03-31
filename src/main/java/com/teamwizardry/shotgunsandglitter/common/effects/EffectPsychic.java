@@ -1,13 +1,23 @@
 package com.teamwizardry.shotgunsandglitter.common.effects;
 
+import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
+import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
+import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
+import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.List;
 
 public class EffectPsychic implements Effect {
@@ -43,5 +53,56 @@ public class EffectPsychic implements Effect {
 		bullet.motionX += acceleration.x;
 		bullet.motionY += acceleration.y;
 		bullet.motionZ += acceleration.z;
+	}
+
+	@Override
+	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
+		Vec3d position = bullet.getPositionVector();
+
+		ParticleBuilder glitter = new ParticleBuilder(30);
+		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
+		glitter.setCollision(true);
+		glitter.setCanBounce(true);
+
+		glitter.setColor(Color.YELLOW);
+
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
+			double radius = RandUtil.nextDouble(0.1, 1);
+			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
+			double r = radius * RandUtil.nextFloat();
+			double x = r * MathHelper.cos((float) theta);
+			double z = r * MathHelper.sin((float) theta);
+			build.setLifetime(RandUtil.nextInt(50, 100));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0f));
+			build.setMotion(new Vec3d(x, RandUtil.nextDouble(-1, 1), z));
+
+			build.setTick(particle -> {
+				if (particle.getAge() >= particle.getLifetime() / 30) {
+
+					particle.setVelocity(particle.getVelocity().add(hit.hitVec.subtract(particle.getPos()).normalize().scale(1 / 15.0)));
+					particle.setAcceleration(Vec3d.ZERO);
+				} else {
+					particle.setAcceleration(new Vec3d(0, -0.05, 0));
+				}
+			});
+		});
+	}
+
+	@Override
+	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+		Vec3d position = bullet.getPositionVector();
+
+		ParticleBuilder glitter = new ParticleBuilder(30);
+		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
+		glitter.disableMotionCalculation();
+		glitter.disableRandom();
+
+		glitter.setColor(Color.YELLOW);
+		glitter.setScaleFunction(new InterpScale(2f, 0f));
+
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 1, 0, (i, build) -> {
+		});
 	}
 }
