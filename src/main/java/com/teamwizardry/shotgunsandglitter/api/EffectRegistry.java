@@ -1,5 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.shotgunsandglitter.common.effects.EffectFirework;
+
 import javax.annotation.Nullable;
 import java.util.HashMap;
 
@@ -9,9 +11,10 @@ public class EffectRegistry {
 
 	// Effects are SAM types, technically.
 	private final static Effect BASIC_EFFECT = () -> "basic";
+	private final static Effect FIREWORK_EFFECT = new EffectFirework();
 
 	static {
-		addEffect(BASIC_EFFECT);
+		addEffect(BASIC_EFFECT, FIREWORK_EFFECT);
 	}
 
 	public static void addEffect(Effect... effects) {

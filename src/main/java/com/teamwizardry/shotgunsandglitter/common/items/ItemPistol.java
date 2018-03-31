@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -24,10 +25,11 @@ public class ItemPistol extends ItemMod {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, handIn);
 
-		Effect firework = EffectRegistry.getEffectByID("effect_firework");
+		Effect firework = EffectRegistry.getEffectByID("firework");
 		if (firework != null) {
 			EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.SMALL, firework, 0.05f);
-			bullet.setPosition(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ);
+			Vec3d position = playerIn.getPositionVector().addVector(0, playerIn.eyeHeight, 0).add(playerIn.getLook(0));
+			bullet.setPosition(position.x, position.y, position.z);
 			worldIn.spawnEntity(bullet);
 		}
 

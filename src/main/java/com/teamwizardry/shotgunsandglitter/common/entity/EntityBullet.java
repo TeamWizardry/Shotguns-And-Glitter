@@ -15,11 +15,14 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.util.UUID;
 
 public class EntityBullet extends EntityThrowable {
 
 	private static final DataParameter<Byte> BULLET_TYPE = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BYTE);
 	private static final DataParameter<String> BULLET_EFFECT = EntityDataManager.createKey(EntityBullet.class, DataSerializers.STRING);
+
+	private EntityLivingBase caster = null;
 
 	public EntityBullet(@Nonnull World world) {
 		super(world);
@@ -33,6 +36,7 @@ public class EntityBullet extends EntityThrowable {
 		setBulletType(bulletType);
 		setEffect(effect);
 
+		this.caster = caster;
 		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, caster, bulletType), inaccuracy);
 	}
 
@@ -70,9 +74,10 @@ public class EntityBullet extends EntityThrowable {
 					result, world.getBlockState(result.getBlockPos()), getEffect()))
 				setDead();
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
-			if (!ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
-					result.entityHit, result, getEffect()))
-				setDead();
+			if (result.entityHit != null && result.entityHit != caster)
+				if (!ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
+						result.entityHit, result, getEffect()))
+					setDead();
 		}
 	}
 
@@ -81,6 +86,8 @@ public class EntityBullet extends EntityThrowable {
 		super.writeEntityToNBT(compound);
 		compound.setByte("bulletType", dataManager.get(BULLET_TYPE));
 		compound.setString("bulletEffect", dataManager.get(BULLET_EFFECT));
+		if (caster != null)
+			compound.setString("caster", caster.getUniqueID().toString());
 	}
 
 	@Override
@@ -88,6 +95,9 @@ public class EntityBullet extends EntityThrowable {
 		super.readEntityFromNBT(compound);
 		dataManager.set(BULLET_TYPE, compound.getByte("bulletType"));
 		dataManager.set(BULLET_EFFECT, compound.getString("bulletEffect"));
+
+		if (compound.hasKey("caster"))
+			caster = world.getPlayerEntityByUUID(UUID.fromString(compound.getString("caster")));
 	}
 
 	public BulletType getBulletType() {
