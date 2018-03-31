@@ -3,8 +3,6 @@ package com.teamwizardry.shotgunsandglitter.api;
 import com.teamwizardry.shotgunsandglitter.common.effects.EffectFirework;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,12 +20,6 @@ public class EffectRegistry {
 		@Override
 		public String getID() {
 			return "basic";
-		}
-
-		@Override
-		public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
-			entity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, entity), 5f);
-			return false;
 		}
 
 		@Override

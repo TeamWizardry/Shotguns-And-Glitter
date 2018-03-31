@@ -10,7 +10,6 @@ import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
 import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,11 +24,6 @@ public class EffectFirework implements Effect {
 	@Override
 	public String getID() {
 		return "effect_firework";
-	}
-
-	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
-		return false;
 	}
 
 	@Override
