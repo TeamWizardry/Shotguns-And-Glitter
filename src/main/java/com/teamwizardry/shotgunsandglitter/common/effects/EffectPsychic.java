@@ -45,7 +45,7 @@ public class EffectPsychic implements Effect {
 		Vec3d acceleration = Vec3d.ZERO;
 
 		for (EntityLivingBase target : targets) {
-			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height / 2, 0).subtract(bullet.getPositionVector());
+			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height, 0).subtract(bullet.getPositionVector());
 			acceleration = acceleration.add(differenceVec.scale(Math.pow(differenceVec.lengthVector(), -3)));
 		}
 
