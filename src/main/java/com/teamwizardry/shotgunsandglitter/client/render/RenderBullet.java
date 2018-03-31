@@ -1,4 +1,4 @@
-package com.teamwizardry.shotgunsandglitter.client;
+package com.teamwizardry.shotgunsandglitter.client.render;
 
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.client.renderer.entity.Render;

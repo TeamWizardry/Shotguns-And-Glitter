@@ -1,7 +1,8 @@
 package com.teamwizardry.shotgunsandglitter.common.entity;
 
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.client.RenderBullet;
+import com.teamwizardry.shotgunsandglitter.client.render.RenderBullet;
+import com.teamwizardry.shotgunsandglitter.client.render.RenderFalling;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -15,10 +16,11 @@ public class ModEntities {
 
 	public static void init() {
 		registerEntity(new ResourceLocation(ShotgunsAndGlitter.MODID, "bullet"), EntityBullet.class, "bullet");
+		registerEntity(new ResourceLocation(ShotgunsAndGlitter.MODID, "dropping"), EntityDroppingBlock.class, "dropping");
 	}
 
 	public static void registerEntity(ResourceLocation loc, Class<? extends Entity> entityClass, String entityName) {
-		registerEntity(loc, entityClass, entityName, 256, 1, true);
+		registerEntity(loc, entityClass, entityName, 256, 3, true);
 	}
 
 	public static void registerEntity(ResourceLocation loc, Class<? extends Entity> entityClass, String entityName, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
@@ -29,5 +31,6 @@ public class ModEntities {
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDroppingBlock.class, RenderFalling::new);
 	}
 }
