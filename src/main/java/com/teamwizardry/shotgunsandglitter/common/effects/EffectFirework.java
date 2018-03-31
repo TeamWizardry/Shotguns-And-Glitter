@@ -39,7 +39,7 @@ public class EffectFirework implements Effect {
 
 		RandUtilSeed seed = new RandUtilSeed(glitter.hashCode());
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 50, 0, (i, build) -> {
 			build.setDeceleration(new Vec3d(
 					RandUtil.nextDouble(0.8, 1),
 					RandUtil.nextDouble(0.8, 1),
@@ -56,7 +56,7 @@ public class EffectFirework implements Effect {
 			double x = r * MathHelper.cos((float) theta);
 			double z = r * MathHelper.sin((float) theta);
 
-			build.setMotion(new Vec3d(x, RandUtil.nextDouble(-1, 2), z));
+			build.setMotion(new Vec3d(x, RandUtil.nextDouble(-1, 1), z));
 			build.setJitter(10, new Vec3d(
 					RandUtil.nextDouble(-0.1, 0.1),
 					RandUtil.nextDouble(-0.1, 0.1),
@@ -64,7 +64,7 @@ public class EffectFirework implements Effect {
 			));
 		});
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 200, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
 			build.setDeceleration(new Vec3d(
 					RandUtil.nextDouble(0.8, 1),
 					RandUtil.nextDouble(0.8, 1),
@@ -75,13 +75,13 @@ public class EffectFirework implements Effect {
 			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1, 3), RandUtil.nextFloat(0, 1f)));
 
-			double radius = 3;
+			double radius = 2;
 			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
 			double r = radius * RandUtil.nextFloat();
 			double x = r * MathHelper.cos((float) theta);
 			double z = r * MathHelper.sin((float) theta);
 
-			build.setMotion(new Vec3d(x, RandUtil.nextDouble(-2, 3), z));
+			build.setMotion(new Vec3d(x, RandUtil.nextDouble(-2, 2), z));
 			build.setJitter(10, new Vec3d(
 					RandUtil.nextDouble(-0.1, 0.1),
 					RandUtil.nextDouble(-0.1, 0.1),
