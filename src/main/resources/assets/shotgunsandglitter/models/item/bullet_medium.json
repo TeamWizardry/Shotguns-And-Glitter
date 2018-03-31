@@ -1,0 +1,50 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "shotgunsandglitter:items/bullet_normal_medium"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "effect": 0
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_normal_medium"
+    },
+    {
+      "predicate": {
+        "effect": 1
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_firework_medium"
+    },
+    {
+      "predicate": {
+        "effect": 2
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_gravity_medium"
+    },
+    {
+      "predicate": {
+        "effect": 3
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_gravity_medium"
+    },
+    {
+      "predicate": {
+        "effect": 4
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_hookshot_medium"
+    },
+    {
+      "predicate": {
+        "effect": 5
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_piercing_medium"
+    },
+    {
+      "predicate": {
+        "effect": 6
+      },
+      "model": "shotgunsandglitter:item/medium/bullet_psychic_medium"
+    }
+  ]
+}

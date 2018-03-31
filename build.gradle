@@ -33,10 +33,13 @@ minecraft {
 repositories {
     mavenCentral()
     maven { url = "http://maven.bluexin.be/repository/snapshots/" }
+    maven { url = "http://dvs1.progwml6.com/files/maven" }
 }
 
 dependencies {
     compile "com.teamwizardry.librarianlib:librarianlib-1.12.2:$liblib_version-SNAPSHOT:deobf"
+    deobfCompile "mezz.jei:jei_1.12:$jei_version:api"
+    runtime "mezz.jei:jei_1.12:$jei_version"
 }
 
 processResources {

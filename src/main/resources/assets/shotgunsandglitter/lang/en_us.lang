@@ -1,0 +1,25 @@
+item_group.shotgunsandglitter=Shotguns & Glitter
+
+item.shotgunsandglitter:bullet_medium.basic.name=Basic Medium Bullet
+item.shotgunsandglitter:bullet_medium.firework.name=Medium Firework Bullet
+item.shotgunsandglitter:bullet_medium.gravity_in.name=Medium Graviton In Bullet
+item.shotgunsandglitter:bullet_medium.gravity_out.name=Medium Graviton Out Bullet
+item.shotgunsandglitter:bullet_medium.hookshot.name=Medium Hookshot Bullet
+item.shotgunsandglitter:bullet_medium.piercing.name=Medium Piercing Bullet
+item.shotgunsandglitter:bullet_medium.psychic.name=Medium Psychic Bullet
+
+item.shotgunsandglitter:bullet_heavy.basic.name=Basic Heavy Bullet
+item.shotgunsandglitter:bullet_heavy.firework.name=Heavy Firework Bullet
+item.shotgunsandglitter:bullet_heavy.gravity_in.name=Heavy Graviton In Bullet
+item.shotgunsandglitter:bullet_heavy.gravity_out.name=Heavy Graviton Out Bullet
+item.shotgunsandglitter:bullet_heavy.hookshot.name=Heavy Hookshot Bullet
+item.shotgunsandglitter:bullet_heavy.piercing.name=Heavy Piercing Bullet
+item.shotgunsandglitter:bullet_heavy.psychic.name=Heavy Psychic Bullet
+
+item.shotgunsandglitter:bullet_light.basic.name=Basic Light Bullet
+item.shotgunsandglitter:bullet_light.firework.name=Light Firework Bullet
+item.shotgunsandglitter:bullet_light.gravity_in.name=Light Graviton In Bullet
+item.shotgunsandglitter:bullet_light.gravity_out.name=Light Graviton Out Bullet
+item.shotgunsandglitter:bullet_light.hookshot.name=Light Hookshot Bullet
+item.shotgunsandglitter:bullet_light.piercing.name=Light Piercing Bullet
+item.shotgunsandglitter:bullet_light.psychic.name=Light Psychic Bullet

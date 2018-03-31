@@ -1,8 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-import com.teamwizardry.shotgunsandglitter.common.effects.EffectFirework;
-
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EffectRegistry {
@@ -11,10 +10,11 @@ public class EffectRegistry {
 
 	// Effects are SAM types, technically.
 	private final static Effect BASIC_EFFECT = () -> "basic";
-	private final static Effect FIREWORK_EFFECT = new EffectFirework();
+
+	private final static ArrayList<Effect> indexedEffects = new ArrayList<>();
 
 	static {
-		addEffect(BASIC_EFFECT, FIREWORK_EFFECT);
+		addEffect(BASIC_EFFECT);
 	}
 
 	public static void addEffect(Effect... effects) {
@@ -24,13 +24,18 @@ public class EffectRegistry {
 
 	public static void addEffect(Effect effect) {
 		effects.put(effect.getID(), effect);
+		indexedEffects.add(effect);
 	}
 
 	public static Iterable<Effect> getEffects() {
 		return effects.values();
 	}
 
-	@Nullable
+	public static int getEffectIndex(@Nonnull Effect effect) {
+		return indexedEffects.indexOf(effect);
+	}
+
+	@Nonnull
 	public static Effect getEffectByID(String id) {
 		return effects.getOrDefault(id, BASIC_EFFECT);
 	}

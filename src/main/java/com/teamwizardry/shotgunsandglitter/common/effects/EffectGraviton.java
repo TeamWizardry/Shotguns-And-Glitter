@@ -14,6 +14,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -26,6 +28,10 @@ public class EffectGraviton implements Effect {
 	public EffectGraviton(boolean outwards) {
 		direction = outwards ? -1 : 1;
 		idSuffix = outwards ? "out" : "in";
+	}
+
+	public String getIdSuffix() {
+		return idSuffix;
 	}
 
 	@Override
@@ -54,6 +60,7 @@ public class EffectGraviton implements Effect {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult hit) {
 		Color color, color2;
@@ -99,6 +106,7 @@ public class EffectGraviton implements Effect {
 		});
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
 		Color color, color2;
