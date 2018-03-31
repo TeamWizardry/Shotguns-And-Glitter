@@ -1,6 +1,6 @@
 item_group.shotgunsandglitter=Shotguns & Glitter
 
-item.shotgunsandglitter:bullet_medium.basic.name=Weight Round
+item.shotgunsandglitter:bullet_medium.basic.name=Simple Round
 item.shotgunsandglitter:bullet_medium.firework.name=Firework Round
 item.shotgunsandglitter:bullet_medium.gravity_in.name=Graviton Round
 item.shotgunsandglitter:bullet_medium.gravity_out.name=Repulsor Round
@@ -20,6 +20,7 @@ item.shotgunsandglitter:bullet_heavy.gravity_out.name=Heavy Repulsion Round
 item.shotgunsandglitter:bullet_heavy.hookshot.name=Heavy Hookshot Round
 item.shotgunsandglitter:bullet_heavy.piercing.name=Heavy Piercing Round
 item.shotgunsandglitter:bullet_heavy.psychic.name=Heavy Psyker Round
+item.shotgunsandglitter:bullet_heavy.biotic.name=Heavy Biotic Round
 item.shotgunsandglitter:bullet_heavy.tranq.name=Heavy Tranquilizer Round
 item.shotgunsandglitter:bullet_heavy.frost.name=Heavy Freezing Round
 item.shotgunsandglitter:bullet_heavy.tainted.name=Heavy Tainted Round
@@ -32,6 +33,7 @@ item.shotgunsandglitter:bullet_light.gravity_out.name=Light Repulsion Round
 item.shotgunsandglitter:bullet_light.hookshot.name=Light Hookshot Round
 item.shotgunsandglitter:bullet_light.piercing.name=Light Piercing Round
 item.shotgunsandglitter:bullet_light.psychic.name=Light Psyker Round
+item.shotgunsandglitter:bullet_light.biotic.name=Light Biotic Round
 item.shotgunsandglitter:bullet_light.tranq.name=Light Tranquilizer Round
 item.shotgunsandglitter:bullet_light.frost.name=Light Freezing Round
 item.shotgunsandglitter:bullet_light.tainted.name=Light Tainted Round

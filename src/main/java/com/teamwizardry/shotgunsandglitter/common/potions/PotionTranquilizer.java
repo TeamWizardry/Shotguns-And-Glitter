@@ -75,8 +75,10 @@ public class PotionTranquilizer extends PotionMod {
 					player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
 				minecraft.gameSettings.smoothCamera = true;
 			} else {
-				if (player.getEntityData().hasKey("sng:smooth"))
+				if (player.getEntityData().hasKey("sng:smooth")) {
 					minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
+					player.getEntityData().removeTag("sng:smooth");
+				}
 			}
 		}
 	}

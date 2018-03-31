@@ -29,12 +29,18 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
 	}
 
-	private List<Effect> allEffects = new ArrayList<>(EffectRegistry.getEffects());
+	private List<Effect> allEffects = null;
+
+	private List<Effect> getAllEffects() {
+		if (allEffects == null)
+			allEffects = new ArrayList<>(EffectRegistry.getEffects());
+		return allEffects;
+	}
 
 	@NotNull
 	@Override
 	public String[] getExtraVariants() {
-		return allEffects.stream()
+		return getAllEffects().stream()
 				.flatMap((effect) -> Arrays.stream(BulletType.values())
 						.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
 				.toArray(String[]::new);
@@ -66,16 +72,15 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		for (int damage = 0; damage < getVariants().length; damage++) {
-			ItemStack base = new ItemStack(this);
-			base.setItemDamage(damage);
-			subItems.add(base);
 
-			for (Effect effect : allEffects) {
-				ItemStack effectStack = base.copy();
-				ItemNBTHelper.setString(effectStack, "effect", effect.getID());
-				subItems.add(effectStack);
-			}
-		}
+		super.getSubItems(tab, subItems);
+
+		for (Effect effect : getAllEffects())
+			if (!effect.getID().equals("basic"))
+				for (int damage = 0; damage < getVariants().length; damage++) {
+					ItemStack base = new ItemStack(this, 1, damage);
+					ItemNBTHelper.setString(base, "effect", effect.getID());
+					subItems.add(base);
+				}
 	}
 }
