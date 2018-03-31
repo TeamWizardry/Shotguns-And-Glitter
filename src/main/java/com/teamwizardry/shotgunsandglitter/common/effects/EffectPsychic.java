@@ -46,13 +46,13 @@ public class EffectPsychic implements Effect {
 
 		for (EntityLivingBase target : targets) {
 			Vec3d differenceVec = target.getPositionVector().subtract(bullet.getPositionVector());
-			acceleration = acceleration.add(differenceVec.scale(1 / differenceVec.lengthSquared()));
+			acceleration = acceleration.add(differenceVec.scale(Math.pow(differenceVec.lengthVector(), -3)));
 		}
 
-		acceleration = acceleration.normalize().scale(getVelocity(world, bullet.getBulletType()));
+		acceleration = acceleration.normalize().scale(getVelocity(world, bullet.getBulletType()) / 2);
 
 		bullet.motionX += acceleration.x;
-		bullet.motionY += acceleration.y / 2;
+		bullet.motionY += acceleration.y;
 		bullet.motionZ += acceleration.z;
 	}
 
