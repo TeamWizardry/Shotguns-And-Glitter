@@ -26,8 +26,7 @@ public class ItemPistol extends ItemMod {
 
 		Effect firework = EffectRegistry.getEffectByID("effect_firework");
 		if (firework != null) {
-
-			EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.SMALL, firework);
+			EntityBullet bullet = new EntityBullet(worldIn, playerIn, BulletType.SMALL, firework, 0.05f);
 			bullet.setPosition(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ);
 			worldIn.spawnEntity(bullet);
 		}

@@ -18,31 +18,29 @@ public class ShotgunsAndGlitter {
 	public static final String CLIENT = "com.teamwizardry.shotgunsandglitter.ClientProxy";
 	public static final String SERVER = "com.teamwizardry.shotgunsandglitter.ServerProxy";
 	public static final String DEPENDENCIES = "required-before:librarianlib";
-	public static Logger logger;
+	public static Logger LOG;
 
 	@SidedProxy(clientSide = CLIENT, serverSide = SERVER)
-	public static CommonProxy proxy;
+	public static CommonProxy PROXY;
 	@Mod.Instance
 	public static ShotgunsAndGlitter instance;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		logger = event.getModLog();
+		LOG = event.getModLog();
 
-		logger.info("Did someone say glitter? OwO");
+		LOG.info("Did someone say glitter? OwO");
 
-		logger = event.getModLog();
-
-		proxy.preInit(event);
+		PROXY.preInit(event);
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent e) {
-		proxy.init(e);
+		PROXY.init(e);
 	}
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
-		proxy.postInit(e);
+		PROXY.postInit(e);
 	}
 }

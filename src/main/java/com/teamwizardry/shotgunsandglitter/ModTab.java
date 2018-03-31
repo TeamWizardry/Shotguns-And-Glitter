@@ -10,9 +10,6 @@ import javax.annotation.Nonnull;
  */
 public class ModTab extends ModCreativeTab {
 
-	public ModTab() {
-	}
-
 	@Nonnull
 	@Override
 	public ItemStack getIconStack() {

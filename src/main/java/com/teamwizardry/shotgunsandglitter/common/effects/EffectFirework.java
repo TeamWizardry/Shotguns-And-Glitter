@@ -8,18 +8,19 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
 import com.teamwizardry.shotgunsandglitter.client.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 
-public class EffectFirework extends Effect {
+public class EffectFirework implements Effect {
 
 	@Override
 	public String getID() {
@@ -27,23 +28,20 @@ public class EffectFirework extends Effect {
 	}
 
 	@Override
-	public void onCollideEntity(@Nonnull World world, @Nonnull Entity entity) {
-
+	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
+		return false;
 	}
 
 	@Override
-	public void onCollideBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-
-	}
-
-	@Override
-	public void onCollideRender(@Nonnull World world, @Nonnull Vec3d position) {
-		super.onCollideRender(world, position);
+	public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
+		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderTrail(@Nonnull World world, @Nonnull Vec3d position) {
+	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+		Vec3d position = bullet.getPositionVector();
+
 		ParticleBuilder glitter = new ParticleBuilder(50);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 0.3f));

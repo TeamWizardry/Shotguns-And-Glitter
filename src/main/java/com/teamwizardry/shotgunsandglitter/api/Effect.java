@@ -1,40 +1,44 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+public interface Effect {
 
-public abstract class Effect {
+	String getID();
 
-	public Effect() {
+	boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit);
+
+	boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state);
+
+	default void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+		// NO-OP
 	}
 
-	public abstract String getID();
+	default float getVelocity(@NotNull World world, @NotNull Entity caster, @NotNull BulletType bulletType) {
+		return 3.0F;
+	}
 
-	public abstract void onCollideEntity(@Nonnull World world, @Nonnull Entity entity);
 
-	public void onCollideEntityRender(@Nonnull World world, @Nonnull Entity entity) {
+	// Render Methods
 
+	@SideOnly(Side.CLIENT)
+	void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet);
+
+	@SideOnly(Side.CLIENT)
+	default void renderCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull RayTraceResult pos, @NotNull IBlockState state) {
+		// NO-OP
 	}
 
 	@SideOnly(Side.CLIENT)
-	public abstract void onCollideBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state);
-
-	@SideOnly(Side.CLIENT)
-	public void onCollideBlockRender(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-
+	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity entity, @NotNull RayTraceResult hit) {
+		// NO-OP
 	}
 
-	public void onCollideRender(@Nonnull World world, @Nonnull Vec3d position) {
-
-	}
-
-	@SideOnly(Side.CLIENT)
-	public abstract void renderTrail(@Nonnull World world, @Nonnull Vec3d position);
 }
