@@ -56,12 +56,92 @@
   },
   "magic_sparkle": {
     "sounds": [
-      "shotgunsandglitter:magic_sparkle"
+      "shotgunsandglitter:magic_sparkle",
+      "shotgunsandglitter:fairy_1"
     ]
   },
   "short_twinkle": {
     "sounds": [
       "shotgunsandglitter:short_twinkle"
+    ]
+  },
+  "reload_pistol": {
+    "sounds": [
+      "shotgunsandglitter:reload_pistol"
+    ]
+  },
+  "reload_shotgun": {
+    "sounds": [
+      "shotgunsandglitter:reload_shotgun"
+    ]
+  },
+  "reload_sniper": {
+    "sounds": [
+      "shotgunsandglitter:reload_sniper"
+    ]
+  },
+  "pop": {
+    "sounds": [
+      "shotgunsandglitter:pop_1",
+      "shotgunsandglitter:pop_2",
+      "shotgunsandglitter:pop_3",
+      "shotgunsandglitter:pop_4",
+      "shotgunsandglitter:pop_5"
+    ]
+  },
+  "chainy_zap": {
+    "sounds": [
+      "shotgunsandglitter:chainy_zap"
+    ]
+  },
+  "cold_wind": {
+    "sounds": [
+      "shotgunsandglitter:cold_wind"
+    ]
+  },
+  "electric_blast": {
+    "sounds": [
+      "shotgunsandglitter:electric_blast"
+    ]
+  },
+  "fire": {
+    "sounds": [
+      "shotgunsandglitter:fire"
+    ]
+  },
+  "fireball": {
+    "sounds": [
+      "shotgunsandglitter:fireball"
+    ]
+  },
+  "frost_form": {
+    "sounds": [
+      "shotgunsandglitter:frost_form"
+    ]
+  },
+  "lightning": {
+    "sounds": [
+      "shotgunsandglitter:lightning"
+    ]
+  },
+  "smoke_blast": {
+    "sounds": [
+      "shotgunsandglitter:smoke_blast"
+    ]
+  },
+  "thunderblast": {
+    "sounds": [
+      "shotgunsandglitter:thunderblast"
+    ]
+  },
+  "heal": {
+    "sounds": [
+      "shotgunsandglitter:heal"
+    ]
+  },
+  "shot_shotgun_cock": {
+    "sounds": [
+      "shotgunsandglitter:shot_shotgun_cock"
     ]
   }
 }

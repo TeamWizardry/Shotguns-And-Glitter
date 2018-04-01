@@ -9,19 +9,21 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -77,5 +79,15 @@ public class EffectTranq implements Effect {
 			build.setScaleFunction(new InterpScale(0.5f, 0));
 			build.setColorFunction(new InterpColorHSV(Color.GREEN, Color.CYAN));
 		});
+	}
+
+	@Override
+	public @Nullable SoundEvent getImpactSound() {
+		return ModSounds.BULLET_FLYBY;
+	}
+
+	@Override
+	public @Nullable SoundEvent getFireSound() {
+		return ModSounds.BULLET_FLYBY;
 	}
 }

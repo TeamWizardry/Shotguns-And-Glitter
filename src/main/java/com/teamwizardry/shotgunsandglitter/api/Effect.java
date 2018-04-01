@@ -5,12 +5,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface Effect {
 
@@ -79,4 +81,14 @@ public interface Effect {
 		// NO-OP
 	}
 
+	@Nullable
+	default SoundEvent getFireSound() {
+		return null;
+	}
+
+
+	@Nullable
+	default SoundEvent getImpactSound() {
+		return null;
+	}
 }

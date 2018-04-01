@@ -4,6 +4,7 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -55,9 +57,7 @@ public class EntityBullet extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 
-		double mX = motionX,
-				mY = motionY,
-				mZ = motionZ;
+		double mX = motionX, mY = motionY, mZ = motionZ;
 
 		super.onUpdate();
 		if (isDead) return;
@@ -86,13 +86,25 @@ public class EntityBullet extends EntityThrowable {
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
 					state.getBlock().canCollideCheck(state, false) &&
 					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result.getBlockPos(),
-							state, getEffect(), result.hitVec))
+							state, getEffect(), result.hitVec)) {
+
+				if (getEffect().getImpactSound() != null) {
+					world.playSound(posX, posY, posZ, getEffect().getImpactSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+				}
+
 				setDead();
+			}
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
 			if (result.entityHit != null && !world.isRemote)
 				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
-						result.entityHit, getEffect(), result.hitVec))
+						result.entityHit, getEffect(), result.hitVec)) {
+
+					if (getEffect().getImpactSound() != null) {
+						world.playSound(posX, posY, posZ, getEffect().getImpactSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+					}
+
 					setDead();
+				}
 		}
 	}
 

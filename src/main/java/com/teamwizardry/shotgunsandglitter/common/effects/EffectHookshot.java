@@ -9,11 +9,14 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -86,5 +89,10 @@ public class EffectHookshot implements Effect {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 3), 0f));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.005, -0.001), 0));
 		});
+	}
+
+	@Override
+	public @Nullable SoundEvent getImpactSound() {
+		return ModSounds.CHAINY_ZAP;
 	}
 }

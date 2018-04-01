@@ -8,11 +8,14 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -66,5 +69,10 @@ public class EffectPiercing implements Effect {
 			Vec3d position = new InterpCircle(Vec3d.ZERO, new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ).normalize(), 1, 50, 0).get(RandUtil.nextFloat());
 			build.setMotion(position.scale(1.0 / 10.0));
 		});
+	}
+
+	@Override
+	public @Nullable SoundEvent getImpactSound() {
+		return ModSounds.POP;
 	}
 }

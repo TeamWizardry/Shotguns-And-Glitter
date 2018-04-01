@@ -47,20 +47,28 @@ public interface IGun {
 			EntityBullet bullet = new EntityBullet(world, player, getBulletType(), effect, getInaccuracy());
 			bullet.setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 			world.spawnEntity(bullet);
+		} else {
+			if (effect.getFireSound() != null)
+				world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+
 		}
+
 
 		setFireCooldown(world, player, stack);
 	}
 
 	default void setFireCooldown(World world, EntityPlayer player, ItemStack stack) {
 		player.getCooldownTracker().setCooldown(stack.getItem(), getFireCooldownTime());
+
 		if (world.isRemote && getFireSoundEvents() != null)
 			for (SoundEvent sound : getFireSoundEvents())
 				world.playSound(player.posX, player.posY, player.posZ, sound, SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+
 	}
 
 	default void setReloadCooldown(World world, EntityPlayer player, ItemStack stack) {
 		player.getCooldownTracker().setCooldown(stack.getItem(), getReloadCooldownTime());
+
 		if (world.isRemote && getReloadSoundEvent() != null)
 			world.playSound(player.posX, player.posY, player.posZ, getReloadSoundEvent(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
 	}

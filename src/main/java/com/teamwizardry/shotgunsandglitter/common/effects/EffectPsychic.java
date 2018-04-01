@@ -8,8 +8,11 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -17,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.List;
@@ -54,6 +58,10 @@ public class EffectPsychic implements Effect {
 		bullet.motionX += acceleration.x;
 		bullet.motionY += acceleration.y;
 		bullet.motionZ += acceleration.z;
+
+		if (RandUtil.nextInt(20) == 0) {
+			world.playSound(bullet.posX, bullet.posY, bullet.posZ, ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -127,5 +135,10 @@ public class EffectPsychic implements Effect {
 					RandUtil.nextDouble(-scatter, scatter));
 			particleBuilder.setPositionOffset(offset);
 		});
+	}
+
+	@Override
+	public @Nullable SoundEvent getImpactSound() {
+		return ModSounds.SMOKE_BLAST;
 	}
 }
