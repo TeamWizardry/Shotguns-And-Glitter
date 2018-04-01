@@ -102,12 +102,8 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-
-		super.getSubItems(tab, subItems);
-
 		for (Effect effect : EffectRegistry.getEffects())
-			if (!effect.getID().equals("basic"))
-				for (BulletType type : BulletType.values())
-					subItems.add(getStackOfEffect(type, effect.getID()));
+			for (BulletType type : BulletType.values())
+				subItems.add(getStackOfEffect(type, effect.getID()));
 	}
 }
