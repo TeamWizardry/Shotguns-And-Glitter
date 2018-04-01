@@ -44,6 +44,11 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
+	@Override
+	public float getPotency() {
+		return 0.15f;
+	}
+
 	@NotNull
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {

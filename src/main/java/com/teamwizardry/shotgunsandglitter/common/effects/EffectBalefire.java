@@ -73,7 +73,7 @@ public class EffectBalefire implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), RandUtil.nextFloat(0, 0.5f)));
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColorFunction(new InterpColorHSV(new Color(0x893000), Color.YELLOW));
@@ -102,7 +102,7 @@ public class EffectBalefire implements Effect {
 		glitter.setCollision(true);
 
 		for (int j = 0; j < 5; j++) {
-			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 1, (i, build) -> {
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (5 * bullet.getFalloff()), 1, (i, build) -> {
 				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0));
 				build.setAlphaFunction(new InterpFadeInOut(0.1f, 1f));
 				build.setLifetime(RandUtil.nextInt(40, 80));

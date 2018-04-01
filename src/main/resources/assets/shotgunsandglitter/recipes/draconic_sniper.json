@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "shotgunsandglitter:bullet",
+      "data": 0
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    }
+  ],
+  "result": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 0,
+    "nbt": "{effect:\"draconic\"}"
+  },
+  "group": "sng:draconic"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "shotgunsandglitter:bullet",
+      "data": 0
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "enderpearl"
+    }
+  ],
+  "result": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 0,
+    "nbt": "{effect:\"psychic\"}"
+  },
+  "group": "sng:psychic"
+}

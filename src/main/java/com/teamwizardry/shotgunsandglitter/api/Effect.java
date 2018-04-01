@@ -43,7 +43,6 @@ public interface Effect {
 		// NO-OP
 	}
 
-
 	// Numerical Methods
 
 	default float getVelocity(@NotNull World world, @NotNull BulletType bulletType) {
@@ -57,7 +56,6 @@ public interface Effect {
 	default float knockbackStrength(@NotNull World world, @NotNull IBulletEntity bullet) {
 		return bullet.getBulletType().knockbackStrength;
 	}
-
 
 	// Render Methods
 

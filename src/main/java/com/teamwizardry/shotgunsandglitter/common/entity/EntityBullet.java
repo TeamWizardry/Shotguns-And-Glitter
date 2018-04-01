@@ -8,6 +8,7 @@ import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -83,7 +84,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		dataManager.register(BULLET_EFFECT, "");
 		dataManager.register(CASTER_ID, -1);
 		dataManager.register(ORIGIN, BlockPos.ORIGIN);
-		dataManager.register(POTENCY, 0f);
+		dataManager.register(POTENCY, 1f);
 	}
 
 	@Override
@@ -100,13 +101,14 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		super.onUpdate();
 		if (isDead) return;
 
+		Minecraft.getMinecraft().player.sendChatMessage(ticksExisted + " - " + getFalloff());
 		if (!inGround) {
 			motionX = mX;
-			motionY = mY;
+			motionY = mY - (getFalloff());
 			motionZ = mZ;
 		}
 
-		if (ticksExisted >= 100) {
+		if (ticksExisted >= getFalloff() * 50.0) {
 			setDead();
 			world.removeEntity(this);
 		} else {

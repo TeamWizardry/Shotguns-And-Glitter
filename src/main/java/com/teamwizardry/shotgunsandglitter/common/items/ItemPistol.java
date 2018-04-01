@@ -45,6 +45,11 @@ public class ItemPistol extends ItemMod implements IGunItem {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
+	@Override
+	public float getPotency() {
+		return 0.5f;
+	}
+
 	@NotNull
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {

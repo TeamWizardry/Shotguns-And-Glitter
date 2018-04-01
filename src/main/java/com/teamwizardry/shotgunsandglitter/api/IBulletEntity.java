@@ -57,4 +57,17 @@ public interface IBulletEntity {
 	float getPotency();
 
 	void setPotency(float potency);
+
+	default double getBulletDistanceSq() {
+		BlockPos origin = getOrigin();
+		Vec3d pos = getPositionVector();
+		return pos.squareDistanceTo(origin.getX(), origin.getY(), origin.getZ());
+	}
+
+	default float getFalloff() {
+		double dist = getBulletDistanceSq();
+		double decay = dist / (dist + 60);
+		float potency = getPotency();
+		return (float) (decay * ((1 - potency) + 0.5));
+	}
 }

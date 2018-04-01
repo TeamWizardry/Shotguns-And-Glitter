@@ -48,6 +48,10 @@ public interface IGunItem extends IAmmoItem {
 		return firedPreviouslyThisShot == 0;
 	}
 
+	default float getPotency() {
+		return 1;
+	}
+
 	default void fireGun(World world, EntityPlayer player, ItemStack stack, EnumHand hand) {
 		List<Effect> ammo = getEffectsFromItem(stack);
 
@@ -64,7 +68,7 @@ public interface IGunItem extends IAmmoItem {
 						break;
 					effect = ammo.get(consumed++);
 				}
-				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack), 1f); // Todo potency
+				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack), getPotency());
 				bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 				world.spawnEntity(bullet.getAsEntity());
 			}

@@ -6,11 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -47,7 +47,7 @@ public class EffectBiotic implements Effect {
 		glitter.setCanBounce(true);
 		glitter.disableMotionCalculation();
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.4f, 1f), 0));
 			build.setColorFunction(new InterpColorHSV(Color.RED, Color.YELLOW));

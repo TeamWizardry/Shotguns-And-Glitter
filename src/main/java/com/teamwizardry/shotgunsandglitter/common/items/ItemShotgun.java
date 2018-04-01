@@ -33,6 +33,11 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 	}
 
 	@Override
+	public float getPotency() {
+		return 0.35f;
+	}
+
+	@Override
 	public int getFireCount(ItemStack stack) {
 		return 5;
 	}

@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "shotgunsandglitter:bullet",
+      "data": 1
+    },
+    {
+      "item": "minecraft:shulker_shell"
+    }
+  ],
+  "result": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 1,
+    "nbt": "{effect:\"gravity_in\"}"
+  },
+  "group": "sng:gravity_in"
+}
