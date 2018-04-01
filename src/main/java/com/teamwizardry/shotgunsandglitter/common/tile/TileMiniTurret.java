@@ -2,27 +2,25 @@ package com.teamwizardry.shotgunsandglitter.common.tile;
 
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory;
+import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.common.util.Constants;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -30,8 +28,6 @@ import java.util.UUID;
 @TileRegister(value = "mini_turret")
 @TileRenderer(TESRMiniTurret.class)
 public class TileMiniTurret extends TileModTickable {
-
-	private final List<Effect> ammo = new ArrayList<>();
 
 	@Save
 	private int targetID = -1;
@@ -42,31 +38,15 @@ public class TileMiniTurret extends TileModTickable {
 	@Nullable
 	private UUID owner = null;
 
-	@Override
-	public void writeCustomNBT(@NotNull NBTTagCompound cmp, boolean sync) {
-		super.writeCustomNBT(cmp, sync);
-
-		NBTTagList list = new NBTTagList();
-		for (Effect effect : ammo) {
-			list.appendTag(new NBTTagString(effect.getID()));
+	@Module
+	public ModuleInventory inventory = new ModuleInventory(new ItemStackHandler() {
+		@Override
+		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+			if (stack.getItem() instanceof ItemBullet && BulletType.byOrdinal(stack.getItemDamage()) == BulletType.SMALL)
+				return super.getStackLimit(slot, stack);
+			else return 0;
 		}
-		cmp.setTag("ammo", list);
-	}
-
-	@Override
-	public void readCustomNBT(@NotNull NBTTagCompound cmp) {
-		super.readCustomNBT(cmp);
-
-		if (cmp.hasKey("ammo")) {
-			ammo.clear();
-			NBTTagList list = cmp.getTagList("ammo", Constants.NBT.TAG_STRING);
-			for (NBTBase base : list) {
-				if (!(base instanceof NBTTagString)) continue;
-				Effect effect = EffectRegistry.getEffectByID(((NBTTagString) base).getString());
-				ammo.add(effect);
-			}
-		}
-	}
+	});
 
 	@Override
 	public void tick() {
@@ -75,10 +55,19 @@ public class TileMiniTurret extends TileModTickable {
 			markDirty();
 		} else {
 
-			setOwner(null);
-			//if (getAmmo().isEmpty()) return;
+			boolean empty = true;
+			int fullSlot = -1;
+			for (int i = 0; i < inventory.getHandler().getSlots(); i++) {
+				if (!inventory.getHandler().getStackInSlot(i).isEmpty()) {
+					empty = false;
+					fullSlot = i;
+					break;
+				}
+			}
 
-			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 64 * 64) && (owner == null || input.getUniqueID().equals(owner)));
+			if (empty) return;
+
+			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 64 * 64) && input.getDistanceSqToCenter(getPos()) > 5 * 5 && (owner == null || !input.getUniqueID().equals(owner)));
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
 
 			if (entities.isEmpty()) {
@@ -95,14 +84,17 @@ public class TileMiniTurret extends TileModTickable {
 				markDirty();
 			}
 
-			Effect effect = EffectRegistry.getEffectByID("firework");//ammo.get(0);
+			ItemStack ammo = inventory.getHandler().extractItem(fullSlot, 1, false);
+
+			Effect effect = ItemBullet.getEffectFromItem(ammo);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
-					.add(new Vec3d(target.motionX, target.motionY, target.motionZ))
-					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5));
-			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal.scale(1.0 / 2.0));
+					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5))
+					.add(new Vec3d(target.motionX, target.motionY, target.motionZ).normalize())
+					.normalize();
+			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
 
 			if (!world.isRemote) {
-				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 2f);
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 0f);
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);
@@ -125,9 +117,5 @@ public class TileMiniTurret extends TileModTickable {
 
 	public void setOwner(@Nullable UUID owner) {
 		this.owner = owner;
-	}
-
-	public List<Effect> getAmmo() {
-		return ammo;
 	}
 }
