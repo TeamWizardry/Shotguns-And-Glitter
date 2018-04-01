@@ -4,7 +4,6 @@ import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
-import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,7 +20,7 @@ public class EffectBasic implements Effect {
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(InternalHandler.INTERNAL_HANDLER.getSparkle());
 		glitter.setCollision(true);
 		glitter.setScale(0.3f);
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));

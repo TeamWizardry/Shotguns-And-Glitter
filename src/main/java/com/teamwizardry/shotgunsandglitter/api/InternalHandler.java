@@ -1,6 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +13,10 @@ public class InternalHandler {
 	public static InternalHandler INTERNAL_HANDLER = new InternalHandler();
 
 	public IBulletEntity newBulletEntity(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
+		return null;
+	}
+
+	public ResourceLocation getSparkle() {
 		return null;
 	}
 }
