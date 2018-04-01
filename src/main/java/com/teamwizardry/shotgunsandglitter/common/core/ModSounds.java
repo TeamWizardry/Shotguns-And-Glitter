@@ -7,6 +7,7 @@ public class ModSounds {
 	public static ModSoundEvent SHOT_PISTOL;
 	public static ModSoundEvent SHOT_SHOTGUN;
 	public static ModSoundEvent SHOT_SNIPER;
+	public static ModSoundEvent SHOT_MINIGUN;
 	public static ModSoundEvent RELOAD_PISTOL;
 	public static ModSoundEvent RELOAD_SHOTGUN;
 	public static ModSoundEvent RELOAD_SNIPER;
@@ -35,6 +36,7 @@ public class ModSounds {
 		SHOT_PISTOL = new ModSoundEvent("shot_pistol");
 		SHOT_SHOTGUN = new ModSoundEvent("shot_shotgun");
 		SHOT_SNIPER = new ModSoundEvent("shot_sniper");
+		SHOT_MINIGUN = new ModSoundEvent("shot_minigun");
 		RELOAD_PISTOL = new ModSoundEvent("reload_pistol");
 		RELOAD_SHOTGUN = new ModSoundEvent("reload_shotgun");
 		RELOAD_SNIPER = new ModSoundEvent("reload_sniper");

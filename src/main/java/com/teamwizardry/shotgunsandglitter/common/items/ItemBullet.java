@@ -8,7 +8,7 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.IGun;
+import com.teamwizardry.shotgunsandglitter.api.IAmmo;
 import kotlin.jvm.functions.Function1;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 
 
-public class ItemBullet extends ItemMod implements IExtraVariantHolder {
+public class ItemBullet extends ItemMod implements IExtraVariantHolder, IAmmo {
 
 	public ItemBullet() {
 		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
@@ -46,24 +46,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 	@NotNull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
-		if (!worldIn.isRemote)
-			if (handIn == EnumHand.MAIN_HAND) {
-				ItemStack bullets = playerIn.getHeldItemMainhand().copy();
-				ItemStack offhand = playerIn.getHeldItemOffhand().copy();
-				playerIn.setHeldItem(EnumHand.OFF_HAND, bullets);
-				playerIn.setHeldItem(EnumHand.MAIN_HAND, offhand);
-				playerIn.inventoryContainer.detectAndSendChanges();
-			} else {
-				ItemStack offhand = playerIn.getHeldItemMainhand().copy();
-				ItemStack bullets = playerIn.getHeldItemOffhand().copy();
-
-				if (!(offhand.getItem() instanceof IGun)) {
-					playerIn.setHeldItem(EnumHand.MAIN_HAND, bullets);
-					playerIn.setHeldItem(EnumHand.OFF_HAND, offhand);
-					playerIn.inventoryContainer.detectAndSendChanges();
-				}
-			}
-
+		onAmmoRightClick(worldIn, playerIn, handIn);
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 

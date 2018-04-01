@@ -80,7 +80,8 @@ public interface IGun {
 	}
 
 	default void setFireCooldown(World world, EntityPlayer player, ItemStack stack) {
-		player.getCooldownTracker().setCooldown(stack.getItem(), getFireCooldownTime());
+		if (getFireCooldownTime() > 0)
+			player.getCooldownTracker().setCooldown(stack.getItem(), getFireCooldownTime());
 
 		if (world.isRemote && getFireSoundEvents() != null)
 			for (SoundEvent sound : getFireSoundEvents())
@@ -89,6 +90,8 @@ public interface IGun {
 	}
 
 	default void setReloadCooldown(World world, EntityPlayer player, ItemStack stack) {
+		if (getReloadCooldownTime() <= 0) return;
+
 		player.getCooldownTracker().setCooldown(stack.getItem(), getReloadCooldownTime());
 
 		if (world.isRemote && getReloadSoundEvent() != null)

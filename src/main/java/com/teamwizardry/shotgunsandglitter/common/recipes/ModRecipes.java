@@ -40,6 +40,7 @@ public class ModRecipes {
 
 	public static void init() {
 		RegistrationHandler.register(new RecipeMagazine(), new ResourceLocation(ShotgunsAndGlitter.MODID, "magazine"));
+		RegistrationHandler.register(new RecipeDrum(), new ResourceLocation(ShotgunsAndGlitter.MODID, "drum"));
 
 		RecipeGeneratorHandler.addShapedRecipe("basic_light",
 				ItemBullet.getStackOfEffect(BulletType.SMALL, "basic", 4),

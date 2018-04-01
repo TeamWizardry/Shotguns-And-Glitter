@@ -148,5 +148,10 @@
     "sounds": [
       "shotgunsandglitter:ethereal_pass_by"
     ]
+  },
+  "shot_minigun": {
+    "sounds": [
+      "shotgunsandglitter:shot_minigun"
+    ]
   }
 }

@@ -106,14 +106,15 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 			motionZ = mZ;
 		}
 
-		if (!world.isRemote && ticksExisted >= 1000) {
+		if (ticksExisted >= 100) {
 			setDead();
+			world.removeEntity(this);
 		} else {
 			if (world.isRemote) {
 				List<EntityPlayer> entities = world.getEntities(EntityPlayer.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 5 * 5));
 
-
 				for (EntityPlayer player : entities) {
+					if (player.getEntityId() == getCasterId()) continue;
 					world.playSound(player, getPosition(), ModSounds.BULLET_FLYBY, SoundCategory.PLAYERS, RandUtil.nextFloat(0.9f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f));
 					world.playSound(player, getPosition(), ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.1f, 0.3f), RandUtil.nextFloat(0.95f, 1.1f));
 				}

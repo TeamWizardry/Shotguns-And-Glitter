@@ -11,12 +11,12 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,10 +26,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMagazine extends ItemMod implements IAmmo {
+public class ItemDrum extends ItemMod implements IAmmo {
 
-	public ItemMagazine() {
-		super("magazine");
+	public ItemDrum() {
+		super("drum");
+		setMaxStackSize(1);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -37,10 +38,14 @@ public class ItemMagazine extends ItemMod implements IAmmo {
 		NBTTagList loadedAmmo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (loadedAmmo == null) loadedAmmo = new NBTTagList();
 
-		for (NBTBase base : loadedAmmo) {
-			if (!(base instanceof NBTTagString)) continue;
-			TooltipHelper.addToTooltip(tooltip, ShotgunsAndGlitter.MODID + "." + ((NBTTagString) base).getString() + ".name");
+		for (int i = 0; i < loadedAmmo.tagCount(); i++) {
+			if (i > 5) {
+				tooltip.add(TextFormatting.ITALIC.toString() + "... " + (loadedAmmo.tagCount() - 5) + "+");
+				break;
+			}
+			TooltipHelper.addToTooltip(tooltip, ShotgunsAndGlitter.MODID + "." + loadedAmmo.getStringTagAt(i) + ".name");
 		}
+
 	}
 
 	@NotNull
@@ -63,7 +68,7 @@ public class ItemMagazine extends ItemMod implements IAmmo {
 			for (Effect effect : EffectRegistry.getEffects()) {
 				ItemStack stack = new ItemStack(this);
 				NBTTagList list = new NBTTagList();
-				for (int i = 0; i < 5; i++)
+				for (int i = 0; i < 200; i++)
 					list.appendTag(new NBTTagString(effect.getID()));
 				ItemNBTHelper.setList(stack, "ammo", list);
 				subItems.add(stack);

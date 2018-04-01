@@ -63,7 +63,7 @@ public class EffectDraconic implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2), 0));
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColorFunction(new InterpColorHSV(RandUtil.nextBoolean() ? Color.RED : Color.ORANGE, RandUtil.nextBoolean() ? Color.RED : Color.WHITE));
