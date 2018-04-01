@@ -21,7 +21,6 @@ public class ItemMagazine extends ItemMod implements IAmmoItem {
 
 	public ItemMagazine() {
 		super("magazine");
-		setMaxStackSize(1);
 	}
 
 	@NotNull

@@ -21,7 +21,6 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 
 	public ItemDrum() {
 		super("drum");
-		setMaxStackSize(1);
 	}
 
 	@Override

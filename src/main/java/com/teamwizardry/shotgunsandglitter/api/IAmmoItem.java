@@ -37,26 +37,35 @@ public interface IAmmoItem {
 		if (ammo == null) return Lists.newArrayList();
 
 		List<Effect> effects = Lists.newArrayList();
-		for (NBTBase effect : ammo)
+		for (int i = 0; i < stack.getCount(); i++) for (NBTBase effect : ammo)
 			effects.add(EffectRegistry.getEffectByID(((NBTTagString) effect).getString()));
 
 		return effects;
 	}
 
 	default void takeEffectsFromItem(@NotNull ItemStack stack, int n) {
+		boolean canDestroy = destroyable(stack);
+
 		NBTTagList ammo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (ammo == null) {
-			if (destroyable(stack)) stack.setCount(0);
+			if (canDestroy) stack.setCount(0);
 		} else {
-			for (int i = 0; i < n && !ammo.hasNoTags(); i++)
-				ammo.removeTag(0);
+			int size = getEffectsFromItem(stack).size();
 
-			if (ammo.hasNoTags()) {
-				if (destroyable(stack))
-					stack.setCount(0);
-				else
-					ItemNBTHelper.removeEntry(stack, "ammo");
-			}
+			if (canDestroy)
+				stack.shrink(n / size);
+
+			if (!canDestroy || stack.getCount() == 1) {
+				for (int i = 0; i < n % size && !ammo.hasNoTags(); i++)
+					ammo.removeTag(0);
+
+				if (ammo.hasNoTags()) {
+					if (destroyable(stack))
+						stack.setCount(0);
+					else
+						ItemNBTHelper.removeEntry(stack, "ammo");
+				}
+			} else stack.shrink(1);
 		}
 	}
 
