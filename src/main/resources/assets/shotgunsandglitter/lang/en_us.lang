@@ -65,3 +65,10 @@ item.shotgunsandglitter:bullet_light.impact.name=Light Impact Round
 item.shotgunsandglitter:bullet_light.balefire.name=Fireweave Round
 item.shotgunsandglitter:bullet_light.draconic.name=Light Dragonfire Round
 
+
+item.shotgunsandglitter:pistol.name=Spark Pistol
+item.shotgunsandglitter:shotgun.name=Field-Flux Shotgun
+item.shotgunsandglitter:sniper.name=Gaussian Sniper Rifle
+
+item.shotgunsandglitter:magazine.name=Spark Magazine
+
