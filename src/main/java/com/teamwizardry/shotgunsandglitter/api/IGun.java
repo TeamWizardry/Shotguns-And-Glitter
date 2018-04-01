@@ -5,6 +5,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -31,7 +32,7 @@ public interface IGun {
 	@Nullable
 	SoundEvent getReloadSoundEvent();
 
-	default void fireGun(World world, EntityPlayer player, ItemStack stack) {
+	default void fireGun(World world, EntityPlayer player, ItemStack stack, EnumHand hand) {
 		NBTTagList list = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (list == null) list = new NBTTagList();
 		if (list.tagCount() == 0) return;
@@ -51,6 +52,7 @@ public interface IGun {
 		}
 
 		setFireCooldown(world, player, stack);
+		player.swingArm(hand);
 	}
 
 	default void setFireCooldown(World world, EntityPlayer player, ItemStack stack) {

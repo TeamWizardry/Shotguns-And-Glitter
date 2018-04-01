@@ -33,7 +33,7 @@ public class ItemSniper extends ItemMod implements IGun {
 		ItemStack mainHand = playerIn.getHeldItemMainhand();
 
 		if (reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
-			fireGun(worldIn, playerIn, playerIn.getHeldItemMainhand());
+			fireGun(worldIn, playerIn, playerIn.getHeldItem(handIn), handIn);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}

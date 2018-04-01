@@ -2,5 +2,32 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "shotgunsandglitter:items/sniper"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 0, -90, 55 ],
+      "translation": [ 0, 0.5, -2 ],
+      "scale": [ 0.9775, 0.9775, 0.9775 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 90, -55 ],
+      "translation": [ 0, 0.5, -2 ],
+      "scale": [ 0.9775, 0.9775, 0.9775 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 25 ],
+      "translation": [ 1.13, 3.2, 1.13 ],
+      "scale": [ 0.782, 0.782, 0.782 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 90, -25 ],
+      "translation": [ 1.13, 3.2, 1.13 ],
+      "scale": [ 0.782, 0.782, 0.782 ]
+    },
+    "head": {
+      "rotation": [ 0, -90, 45 ],
+      "translation": [ 0, 7.5, -6 ],
+      "scale": [ 2, 2, 2 ]
+    }
   }
 }

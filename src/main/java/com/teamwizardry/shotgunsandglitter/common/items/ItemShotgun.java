@@ -37,14 +37,14 @@ public class ItemShotgun extends ItemMod implements IGun {
 		ItemStack mainHand = playerIn.getHeldItemMainhand();
 
 		if (reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
-			fireGun(worldIn, playerIn, playerIn.getHeldItemMainhand());
+			fireGun(worldIn, playerIn, playerIn.getHeldItem(handIn), handIn);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 
 	@Override
-	public void fireGun(World world, EntityPlayer player, ItemStack stack) {
+	public void fireGun(World world, EntityPlayer player, ItemStack stack, EnumHand hand) {
 		NBTTagList list = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (list == null) list = new NBTTagList();
 		if (list.tagCount() == 0) return;
@@ -66,6 +66,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 		}
 
 		setFireCooldown(world, player, stack);
+		player.swingArm(hand);
 	}
 
 	@Override
