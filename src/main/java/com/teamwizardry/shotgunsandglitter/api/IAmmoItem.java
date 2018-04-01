@@ -52,11 +52,15 @@ public interface IAmmoItem {
 		} else {
 			int size = getEffectsFromItem(stack).size();
 
-			if (canDestroy)
+			int toTake = n;
+
+			if (canDestroy) {
 				stack.shrink(n / size);
+				toTake = n % size;
+			}
 
 			if (!canDestroy || stack.getCount() == 1) {
-				for (int i = 0; i < n % size && !ammo.hasNoTags(); i++)
+				for (int i = 0; i < toTake && !ammo.hasNoTags(); i++)
 					ammo.removeTag(0);
 
 				if (ammo.hasNoTags()) {

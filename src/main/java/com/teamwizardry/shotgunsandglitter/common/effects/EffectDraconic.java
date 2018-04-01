@@ -46,7 +46,7 @@ public class EffectDraconic implements Effect {
 					new AxisAlignedBB(bullet.posX() - 4, bullet.posY() - 4, bullet.posZ() - 4,
 							bullet.posX() + 4, bullet.posY() + 4, bullet.posZ() + 4),
 					(entity) -> {
-						if (entity == null || !entity.isEntityAlive()) return false;
+						if (entity == null || !entity.isEntityAlive() || entity == bullet.getThrower()) return false;
 						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
 						return differenceVec.lengthSquared() < 4 * 4;
 					})) {
