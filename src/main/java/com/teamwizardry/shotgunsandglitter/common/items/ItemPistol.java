@@ -104,7 +104,7 @@ public class ItemPistol extends ItemMod implements IGun {
 
 	@Override
 	public int getReloadCooldownTime() {
-		return 20;
+		return 40;
 	}
 
 	@Override
