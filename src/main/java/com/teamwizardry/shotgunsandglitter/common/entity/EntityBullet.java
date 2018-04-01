@@ -2,10 +2,7 @@ package com.teamwizardry.shotgunsandglitter.common.entity;
 
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
+import com.teamwizardry.shotgunsandglitter.api.*;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
@@ -23,6 +20,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -124,6 +122,9 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	@Override
 	protected void onImpact(@NotNull RayTraceResult result) {
+		if (MinecraftForge.EVENT_BUS.post(new BulletImpactEvent(world, this, result)))
+			return;
+
 		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
 			IBlockState state = world.getBlockState(result.getBlockPos());
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&

@@ -2,30 +2,24 @@ package com.teamwizardry.shotgunsandglitter.api;
 
 import com.teamwizardry.librarianlib.features.animator.Easing;
 import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public interface IGunItem extends IAmmoItem {
-
-	int getMaxAmmo(ItemStack stack);
 
 	int getReloadCooldownTime(ItemStack stack);
 
@@ -41,24 +35,43 @@ public interface IGunItem extends IAmmoItem {
 	@Nullable
 	SoundEvent getReloadSoundEvent(ItemStack stack);
 
+	@Override
+	default boolean destroyable(@NotNull ItemStack stack) {
+		return false;
+	}
+
+	default int getFireCount(ItemStack stack) {
+		return 1;
+	}
+
+	default boolean shouldConsumeAmmo(ItemStack stack, int firedPreviouslyThisShot) {
+		return firedPreviouslyThisShot == 0;
+	}
+
 	default void fireGun(World world, EntityPlayer player, ItemStack stack, EnumHand hand) {
-		NBTTagList list = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
-		if (list == null) list = new NBTTagList();
-		if (list.tagCount() == 0) return;
+		List<Effect> ammo = getEffectsFromItem(stack);
 
-		String effectID = list.getStringTagAt(list.tagCount() - 1);
-		Effect effect = EffectRegistry.getEffectByID(effectID);
+		if (ammo.isEmpty()) return;
 
-		list.removeTag(list.tagCount() - 1);
-		ItemNBTHelper.setList(stack, "ammo", list);
+		int consumed = 0;
+
+		Effect effect = ammo.get(0);
 
 		if (!world.isRemote) {
-			IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack));
-			bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
-			world.spawnEntity(bullet.getAsEntity());
-		} else if (effect.getFireSound() != null) {
+			for (int i = 0; i < getFireCount(stack); i++) {
+				if (shouldConsumeAmmo(stack, i)) {
+					if (ammo.size() == consumed + 1)
+						break;
+					effect = ammo.get(consumed++);
+				}
+				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack));
+				bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
+				world.spawnEntity(bullet.getAsEntity());
+			}
+		} else if (effect.getFireSound() != null)
 			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-		}
+
+		takeEffectsFromItem(stack, consumed);
 
 		setFireCooldown(world, player, stack);
 		player.swingArm(hand);
@@ -72,12 +85,13 @@ public interface IGunItem extends IAmmoItem {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void runIfClient() {
-				if (Minecraft.getMinecraft().player == null) return;
-				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(Minecraft.getMinecraft().player, "rotationPitch");
+				EntityPlayer clientPlayer = Minecraft.getMinecraft().player;
+				if (clientPlayer == null) return;
+				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(clientPlayer, "rotationPitch");
 				anim.setDuration(2);
 				anim.setTo(Minecraft.getMinecraft().player.rotationPitch - headKnockStrength(stack));
 				anim.setEasing(Easing.easeOutCubic);
-				ClientEventHandler.HEAD_TILT_ANIMATION_HANDLER.add(anim);
+				InternalHandler.INTERNAL_HANDLER.addTiltAnimation(anim);
 			}
 		});
 	}
@@ -86,23 +100,19 @@ public interface IGunItem extends IAmmoItem {
 		if (!(ammo.getItem() instanceof IAmmoItem) || ammo.getItem() instanceof IGunItem) return true;
 
 		IAmmoItem ammoItem = (IAmmoItem) ammo.getItem();
-
 		if (ammoItem.getBulletType(ammo) != getBulletType(gun)) return true;
 
-		NBTTagList gunAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
-		if (gunAmmo == null) {
-			gunAmmo = new NBTTagList();
-			ItemNBTHelper.setList(gun, "ammo", gunAmmo);
-		}
+		List<Effect> gunAmmo = getEffectsFromItem(gun);
 
-		if (!gunAmmo.hasNoTags()) return true;
+		if (!gunAmmo.isEmpty()) return true;
 
 		List<Effect> ammoEffects = ((IAmmoItem) ammo.getItem()).getEffectsFromItem(ammo);
 
 		for (int index = 0; index < Math.max(ammoEffects.size(), getMaxAmmo(gun)); index++)
-			gunAmmo.appendTag(new NBTTagString(ammoEffects.get(index).getID()));
+			gunAmmo.add(ammoEffects.get(index));
 
 		ammoItem.takeEffectsFromItem(ammo, Math.max(ammoEffects.size(), getMaxAmmo(gun)));
+		setEffects(gun, gunAmmo);
 
 		setReloadCooldown(world, player, gun);
 		return false;

@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,15 +45,47 @@ public interface IAmmoItem {
 
 	default void takeEffectsFromItem(@NotNull ItemStack stack, int n) {
 		NBTTagList ammo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
-		if (ammo == null)
-			stack.setCount(0);
-		else {
+		if (ammo == null) {
+			if (destroyable(stack)) stack.setCount(0);
+		} else {
 			for (int i = 0; i < n && !ammo.hasNoTags(); i++)
 				ammo.removeTag(0);
 
-			if (ammo.hasNoTags())
-				stack.setCount(0);
+			if (ammo.hasNoTags()) {
+				if (destroyable(stack))
+					stack.setCount(0);
+				else
+					ItemNBTHelper.removeEntry(stack, "ammo");
+			}
 		}
+	}
+
+	default boolean destroyable(@NotNull ItemStack stack) {
+		return true;
+	}
+
+	default ItemStack fillEffects(ItemStack stack, Effect effect) {
+		setEffects(stack, NonNullList.withSize(getMaxAmmo(stack), effect));
+		return stack;
+	}
+
+	default ItemStack setEffects(ItemStack stack, List<Effect> effects) {
+		NBTTagList ammo = new NBTTagList();
+		ItemNBTHelper.setList(stack, "ammo", ammo);
+
+		for (Effect effect : effects) {
+			if (ammo.tagCount() >= getMaxAmmo(stack))
+				break;
+			ammo.appendTag(new NBTTagString(effect.getID()));
+		}
+
+		return stack;
+	}
+
+	int getMaxAmmo(@NotNull ItemStack stack);
+
+	default int getMinAmmo(@NotNull ItemStack stack) {
+		return 0;
 	}
 
 	@NotNull

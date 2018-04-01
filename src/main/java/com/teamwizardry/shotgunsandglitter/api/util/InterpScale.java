@@ -1,6 +1,5 @@
 package com.teamwizardry.shotgunsandglitter.api.util;
 
-
 import com.teamwizardry.librarianlib.features.math.interpolate.InterpFunction;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +14,6 @@ public class InterpScale implements InterpFunction<Float> {
 	private float finish;
 
 	public InterpScale(float start, float finish) {
-
 		this.start = start;
 		this.finish = finish;
 	}
@@ -28,12 +26,12 @@ public class InterpScale implements InterpFunction<Float> {
 	@NotNull
 	@Override
 	public InterpFunction<Float> reverse() {
-		return null;
+		return InterpFunction.DefaultImpls.reverse(this);
 	}
 
 	@NotNull
 	@Override
 	public List<Float> list(int i) {
-		return null;
+		return InterpFunction.DefaultImpls.list(this, i);
 	}
 }

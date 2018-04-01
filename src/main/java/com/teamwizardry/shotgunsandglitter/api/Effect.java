@@ -86,7 +86,6 @@ public interface Effect {
 		return null;
 	}
 
-
 	@Nullable
 	default SoundEvent getImpactSound() {
 		return null;

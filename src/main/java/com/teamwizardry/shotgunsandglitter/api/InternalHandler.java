@@ -25,7 +25,7 @@ public class InternalHandler {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void addFlashAnimation(Animation<?> animation) {
+	public void addTiltAnimation(Animation<?> animation) {
 		// NO-OP
 	}
 }

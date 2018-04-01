@@ -5,6 +5,7 @@ import com.teamwizardry.librarianlib.core.common.RegistrationHandler;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
+import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,8 @@ public class ModRecipes {
 	}
 
 	public static void init() {
-		RegistrationHandler.register(new RecipeMagazine(), new ResourceLocation(ShotgunsAndGlitter.MODID, "magazine"));
-		RegistrationHandler.register(new RecipeDrum(), new ResourceLocation(ShotgunsAndGlitter.MODID, "drum"));
+		RegistrationHandler.register(new RecipeAmmoHolder(ModItems.MAGAZINE), new ResourceLocation(ShotgunsAndGlitter.MODID, "magazine"));
+		RegistrationHandler.register(new RecipeAmmoHolder(ModItems.DRUM), new ResourceLocation(ShotgunsAndGlitter.MODID, "drum"));
 
 		RecipeGeneratorHandler.addShapedRecipe("basic_light",
 				ItemBullet.getStackOfEffect(BulletType.SMALL, "basic", 4),

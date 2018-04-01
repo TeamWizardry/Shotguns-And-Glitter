@@ -52,7 +52,7 @@ public class ItemPistol extends ItemMod implements IGunItem {
 	}
 
 	@Override
-	public int getMaxAmmo(ItemStack stack) {
+	public int getMaxAmmo(@NotNull ItemStack stack) {
 		return 5;
 	}
 

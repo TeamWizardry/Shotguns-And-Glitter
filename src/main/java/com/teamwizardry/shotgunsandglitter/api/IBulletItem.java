@@ -16,7 +16,15 @@ public interface IBulletItem extends IAmmoItem {
 	@NotNull
 	@Override
 	default List<Effect> getEffectsFromItem(@NotNull ItemStack stack) {
-		return Lists.newArrayList(getEffectFromItem(stack));
+		List<Effect> outList = Lists.newArrayList();
+		for (int i = 0; i < stack.getCount(); i++)
+			outList.add(getEffectFromItem(stack));
+		return outList;
+	}
+
+	@Override
+	default int getMaxAmmo(@NotNull ItemStack stack) {
+		return stack.getMaxStackSize();
 	}
 
 	@Override

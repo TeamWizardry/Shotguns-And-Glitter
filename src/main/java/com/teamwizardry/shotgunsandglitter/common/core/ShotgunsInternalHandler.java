@@ -32,7 +32,7 @@ public class ShotgunsInternalHandler extends InternalHandler {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addFlashAnimation(Animation<?> animation) {
-		ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
+	public void addTiltAnimation(Animation<?> animation) {
+		ClientEventHandler.HEAD_TILT_ANIMATION_HANDLER.add(animation);
 	}
 }

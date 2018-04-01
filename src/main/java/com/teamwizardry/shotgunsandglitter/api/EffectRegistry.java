@@ -1,6 +1,5 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
