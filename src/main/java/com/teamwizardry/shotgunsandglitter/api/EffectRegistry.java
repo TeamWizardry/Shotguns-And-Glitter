@@ -1,7 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
 
-import com.teamwizardry.shotgunsandglitter.common.effects.EffectBasic;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

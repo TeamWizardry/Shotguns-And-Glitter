@@ -10,7 +10,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,8 +35,8 @@ public class EffectTranq implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
-		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), 0.0f);
+	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
+		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet.getAsEntity(), hitEntity), 0.0f);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.TRANQUILIZER, (int) (120 * bullet.getBulletType().damage)));
 		return true;
@@ -44,7 +44,7 @@ public class EffectTranq implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.disableMotionCalculation();
@@ -68,7 +68,7 @@ public class EffectTranq implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

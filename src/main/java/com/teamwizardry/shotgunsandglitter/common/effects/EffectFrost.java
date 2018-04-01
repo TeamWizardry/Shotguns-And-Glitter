@@ -5,11 +5,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,7 +30,7 @@ public class EffectFrost implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.FROST, 300, bullet.getBulletType().ordinal() + 1));
@@ -38,11 +38,11 @@ public class EffectFrost implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
-					new AxisAlignedBB(bullet.posX - 10, bullet.posY - 10, bullet.posZ - 10,
-							bullet.posX + 10, bullet.posY + 10, bullet.posZ + 10),
+					new AxisAlignedBB(bullet.posX() - 10, bullet.posY() - 10, bullet.posZ() - 10,
+							bullet.posX() + 10, bullet.posY() + 10, bullet.posZ() + 10),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
 						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
@@ -58,7 +58,7 @@ public class EffectFrost implements Effect {
 
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -82,7 +82,7 @@ public class EffectFrost implements Effect {
 	}
 
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

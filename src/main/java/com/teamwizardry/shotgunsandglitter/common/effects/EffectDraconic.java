@@ -6,11 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -32,17 +32,19 @@ public class EffectDraconic implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote)
-			world.newExplosion(bullet, bullet.posX, bullet.posY, bullet.posZ, bullet.getBulletType().damage, true, true);
+			world.newExplosion(bullet.getAsEntity(),
+					bullet.posX(), bullet.posY(), bullet.posZ(),
+					bullet.getBulletType().damage, true, true);
 	}
 
 	@Override
-	public void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
-					new AxisAlignedBB(bullet.posX - 4, bullet.posY - 4, bullet.posZ - 4,
-							bullet.posX + 4, bullet.posY + 4, bullet.posZ + 4),
+					new AxisAlignedBB(bullet.posX() - 4, bullet.posY() - 4, bullet.posZ() - 4,
+							bullet.posX() + 4, bullet.posY() + 4, bullet.posZ() + 4),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
 						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
@@ -55,7 +57,7 @@ public class EffectDraconic implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -84,7 +86,7 @@ public class EffectDraconic implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

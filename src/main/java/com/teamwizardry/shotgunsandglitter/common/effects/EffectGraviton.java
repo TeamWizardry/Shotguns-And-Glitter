@@ -5,10 +5,10 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -44,10 +44,10 @@ public class EffectGraviton implements Effect {
 	// The visual effect of the Graviton should be random particles rushing into the central point.
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
-				new AxisAlignedBB(bullet.posX - 10, bullet.posY - 10, bullet.posZ - 10,
-						bullet.posX + 10, bullet.posY + 10, bullet.posZ + 10),
+				new AxisAlignedBB(bullet.posX() - 10, bullet.posY() - 10, bullet.posZ() - 10,
+						bullet.posX() + 10, bullet.posY() + 10, bullet.posZ() + 10),
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
 					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
@@ -64,7 +64,7 @@ public class EffectGraviton implements Effect {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Color color, color2;
 		if (direction == 1) {
 			color = Color.CYAN;
@@ -110,7 +110,7 @@ public class EffectGraviton implements Effect {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Color color, color2;
 		if (direction == 1) {
 			color = Color.CYAN;

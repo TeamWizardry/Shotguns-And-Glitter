@@ -9,7 +9,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
@@ -35,7 +35,7 @@ public class EffectTainted implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(MobEffects.POISON, 300, bullet.getBulletType().ordinal()));
@@ -43,9 +43,9 @@ public class EffectTainted implements Effect {
 	}
 
 	@Override
-	public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
+	public boolean onCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		if (!world.isRemote) {
-			EntityAreaEffectCloud aEC = new EntityAreaEffectCloud(world, bullet.posX, bullet.posY, bullet.posZ);
+			EntityAreaEffectCloud aEC = new EntityAreaEffectCloud(world, bullet.posX(), bullet.posY(), bullet.posZ());
 
 			aEC.setOwner(bullet.getThrower());
 			aEC.setRadius(3.0F);
@@ -60,7 +60,7 @@ public class EffectTainted implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -94,7 +94,7 @@ public class EffectTainted implements Effect {
 	}
 
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);

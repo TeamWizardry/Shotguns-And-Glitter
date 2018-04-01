@@ -7,11 +7,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityDroppingBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;
@@ -34,12 +34,12 @@ public class EffectImpact implements Effect {
 
 
 	@Override
-	public float knockbackStrength(@NotNull World world, @NotNull EntityBullet bullet) {
+	public float knockbackStrength(@NotNull World world, @NotNull IBulletEntity bullet) {
 		return bullet.getBulletType().knockbackStrength * 2;
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			BulletType type = bullet.getBulletType();
 			float range = 2f * type.knockbackStrength;
@@ -62,7 +62,7 @@ public class EffectImpact implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 
@@ -91,7 +91,7 @@ public class EffectImpact implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 
@@ -99,7 +99,7 @@ public class EffectImpact implements Effect {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 2f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xb342f4), new Color(0x700000)));
-			build.setMotion(new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ).scale(1.0 / 2.0));
+			build.setMotion(new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ()).scale(1.0 / 2.0));
 			build.setPositionFunction(new InterpBezier3D(Vec3d.ZERO,
 					new Vec3d(
 							RandUtil.nextDouble(-0.2, 0.2),

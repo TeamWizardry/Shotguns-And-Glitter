@@ -10,7 +10,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -30,7 +30,7 @@ public class EffectFirework implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
@@ -94,7 +94,7 @@ public class EffectFirework implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);

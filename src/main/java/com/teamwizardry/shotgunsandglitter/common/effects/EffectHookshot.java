@@ -6,11 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
@@ -28,7 +28,7 @@ public class EffectHookshot implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower != null) {
 			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector());
@@ -41,7 +41,7 @@ public class EffectHookshot implements Effect {
 
 	// TODO: check effect once thrower nullity is fixed
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower == null) return;
@@ -68,7 +68,7 @@ public class EffectHookshot implements Effect {
 	}
 
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
@@ -79,7 +79,7 @@ public class EffectHookshot implements Effect {
 		glitter.setCollision(true);
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 10, 0, (i, build) -> {
-			build.setMotion(new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ).scale(-1 / 2.0));
+			build.setMotion(new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ()).scale(-1 / 2.0));
 			build.setPositionOffset(new Vec3d(
 					RandUtil.nextDouble(-0.1, 0.1),
 					RandUtil.nextDouble(-0.1, 0.1),

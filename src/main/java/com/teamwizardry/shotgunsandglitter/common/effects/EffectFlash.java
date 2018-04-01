@@ -7,11 +7,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
@@ -33,12 +33,12 @@ public class EffectFlash implements Effect {
 	}
 
 	@Override
-	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			int radius = (int) bullet.getBulletType().damage * 50;
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
-					new AxisAlignedBB(bullet.posX - radius, bullet.posY - radius, bullet.posZ - radius,
-							bullet.posX + radius, bullet.posY + radius, bullet.posZ + radius),
+					new AxisAlignedBB(bullet.posX() - radius, bullet.posY() - radius, bullet.posZ() - radius,
+							bullet.posX() + radius, bullet.posY() + radius, bullet.posZ() + radius),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
 						Vec3d look = entity.getLook(0f);
@@ -61,7 +61,7 @@ public class EffectFlash implements Effect {
 	}
 
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -86,7 +86,7 @@ public class EffectFlash implements Effect {
 	}
 
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -95,7 +95,7 @@ public class EffectFlash implements Effect {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xc1ffec), new Color(0xfffac1)));
-			build.setMotion(new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ));
+			build.setMotion(new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ()));
 			build.setPositionFunction(new InterpBezier3D(Vec3d.ZERO,
 					new Vec3d(
 							RandUtil.nextDouble(-0.2, 0.2),

@@ -45,7 +45,7 @@ public class ItemPistol extends ItemMod implements IGun {
 		ItemStack offHand = playerIn.getHeldItemOffhand();
 		ItemStack mainHand = playerIn.getHeldItemMainhand();
 
-		if (!reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
+		if (reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
 			fireGun(worldIn, playerIn, playerIn.getHeldItemMainhand());
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -53,18 +53,18 @@ public class ItemPistol extends ItemMod implements IGun {
 
 	@Override
 	public boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
-		if (ammo.getItem() != ModItems.MAGAZINE) return false;
+		if (ammo.getItem() != ModItems.MAGAZINE) return true;
 
 		ItemStack realAmmo = ammo.copy();
 		realAmmo.setCount(1);
 
 		NBTTagList newAmmoList = ItemNBTHelper.getList(realAmmo, "ammo", Constants.NBT.TAG_STRING);
-		if (newAmmoList == null) return false;
+		if (newAmmoList == null) return true;
 
 		NBTTagList loadedAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
 		if (loadedAmmo == null) loadedAmmo = new NBTTagList();
 
-		if (loadedAmmo.tagCount() >= getMaxAmmo()) return false;
+		if (loadedAmmo.tagCount() >= getMaxAmmo()) return true;
 
 
 		NBTTagList ammoToAdd = newAmmoList.copy();
@@ -90,7 +90,7 @@ public class ItemPistol extends ItemMod implements IGun {
 		ItemNBTHelper.setList(gun, "ammo", loadedAmmo);
 
 		setReloadCooldown(world, player, gun);
-		return true;
+		return false;
 	}
 
 	@Override

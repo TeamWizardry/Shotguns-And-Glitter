@@ -10,7 +10,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -34,13 +34,13 @@ public class EffectPsychic implements Effect {
 	}
 
 	@Override
-	public void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class,
-				new AxisAlignedBB(bullet.posX - 10, bullet.posY - 10, bullet.posZ - 10,
-						bullet.posX + 10, bullet.posY + 10, bullet.posZ + 10),
+				new AxisAlignedBB(bullet.posX() - 10, bullet.posY() - 10, bullet.posZ() - 10,
+						bullet.posX() + 10, bullet.posY() + 10, bullet.posZ() + 10),
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
-					Vec3d motionVec = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
+					Vec3d motionVec = new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ());
 					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
 					double dot = motionVec.normalize().dotProduct(differenceVec.normalize());
 
@@ -56,18 +56,17 @@ public class EffectPsychic implements Effect {
 
 		acceleration = acceleration.normalize().scale(getVelocity(world, bullet.getBulletType()) * 0.75);
 
-		bullet.motionX += acceleration.x;
-		bullet.motionY += acceleration.y;
-		bullet.motionZ += acceleration.z;
+		bullet.getAsEntity().motionX += acceleration.x;
+		bullet.getAsEntity().motionY += acceleration.y;
+		bullet.getAsEntity().motionZ += acceleration.z;
 
-		if (RandUtil.nextInt(20) == 0) {
-			world.playSound(bullet.posX, bullet.posY, bullet.posZ, ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
-		}
+		if (RandUtil.nextInt(20) == 0)
+			world.playSound(bullet.posX(), bullet.posY(), bullet.posZ(), ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(30);
@@ -102,7 +101,7 @@ public class EffectPsychic implements Effect {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder builder = new ParticleBuilder(50);
 		builder.setRender(ClientEventHandler.SPARKLE);
 		builder.disableRandom();

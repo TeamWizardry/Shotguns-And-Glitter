@@ -1,6 +1,8 @@
 package com.teamwizardry.shotgunsandglitter;
 
+import com.teamwizardry.shotgunsandglitter.api.InternalHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
+import com.teamwizardry.shotgunsandglitter.common.core.ShotgunsInternalHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,8 +31,9 @@ public class ShotgunsAndGlitter {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		LOG = event.getModLog();
-
 		LOG.info("Did someone say glitter? OwO");
+
+		InternalHandler.INTERNAL_HANDLER = new ShotgunsInternalHandler();
 
 		PROXY.preInit(event);
 	}

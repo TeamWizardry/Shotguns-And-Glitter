@@ -2,7 +2,6 @@ package com.teamwizardry.shotgunsandglitter.api;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
@@ -44,9 +43,9 @@ public interface IGun {
 		ItemNBTHelper.setList(stack, "ammo", list);
 
 		if (!world.isRemote) {
-			EntityBullet bullet = new EntityBullet(world, player, getBulletType(), effect, getInaccuracy());
-			bullet.setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
-			world.spawnEntity(bullet);
+			IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(), effect, getInaccuracy());
+			bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
+			world.spawnEntity(bullet.getAsEntity());
 		} else if (effect.getFireSound() != null) {
 			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}

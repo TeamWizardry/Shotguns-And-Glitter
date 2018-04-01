@@ -24,10 +24,10 @@ public class PacketImpactSound extends PacketBase {
 	private String effectID;
 
 	public PacketImpactSound() {
+		// NO-OP
 	}
 
 	public PacketImpactSound(Vec3d pos, String effectID) {
-
 		this.pos = pos;
 		this.effectID = effectID;
 	}

@@ -1,7 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,24 +22,24 @@ public interface Effect {
 
 	// Logic Methods
 
-	default void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	default void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		// NO-OP
 	}
 
-	default boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
-		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet, hitEntity), damage(world, bullet));
+	default boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
+		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet.getAsEntity(), hitEntity), damage(world, bullet));
 		if (hitEntity instanceof EntityLivingBase)
-			((EntityLivingBase) hitEntity).knockBack(bullet, knockbackStrength(world, bullet),
-					MathHelper.sin(bullet.rotationYaw * (float) (Math.PI / 180)),
-					-MathHelper.cos(bullet.rotationYaw * (float) (Math.PI / 180)));
+			((EntityLivingBase) hitEntity).knockBack(bullet.getAsEntity(), knockbackStrength(world, bullet),
+					MathHelper.sin(bullet.getAsEntity().rotationYaw * (float) (Math.PI / 180)),
+					-MathHelper.cos(bullet.getAsEntity().rotationYaw * (float) (Math.PI / 180)));
 		return true;
 	}
 
-	default boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
+	default boolean onCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		return true;
 	}
 
-	default void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	default void onUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		// NO-OP
 	}
 
@@ -51,11 +50,11 @@ public interface Effect {
 		return 3.0F;
 	}
 
-	default float damage(@NotNull World world, @NotNull EntityBullet bullet) {
+	default float damage(@NotNull World world, @NotNull IBulletEntity bullet) {
 		return bullet.getBulletType().damage;
 	}
 
-	default float knockbackStrength(@NotNull World world, @NotNull EntityBullet bullet) {
+	default float knockbackStrength(@NotNull World world, @NotNull IBulletEntity bullet) {
 		return bullet.getBulletType().knockbackStrength;
 	}
 
@@ -63,22 +62,22 @@ public interface Effect {
 	// Render Methods
 
 	@SideOnly(Side.CLIENT)
-	default void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	default void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		// NO-OP
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	default void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		// NO-OP
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
+	default void renderCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		// NO-OP
 	}
 
 	@SideOnly(Side.CLIENT)
-	default void renderCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+	default void renderCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
 		// NO-OP
 	}
 

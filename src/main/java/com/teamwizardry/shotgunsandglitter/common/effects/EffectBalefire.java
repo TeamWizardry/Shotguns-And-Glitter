@@ -6,11 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityDroppingBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -37,7 +37,7 @@ public class EffectBalefire implements Effect {
 	}
 
 	@Override
-	public boolean onCollideEntity(@NotNull World world, @NotNull EntityBullet bullet, @NotNull Entity hitEntity) {
+	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
 		Effect.super.onCollideEntity(world, bullet, hitEntity);
 		hitEntity.setFire(20 + 20 * bullet.getBulletType().ordinal());
 		if (hitEntity instanceof EntityLiving && RandUtil.nextDouble() < 0.25)
@@ -46,7 +46,7 @@ public class EffectBalefire implements Effect {
 	}
 
 	@Override
-	public boolean onCollideBlock(@NotNull World world, @NotNull EntityBullet bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
+	public boolean onCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
 		EntityDroppingBlock.dropBlock(bullet.getThrower(), world, pos, false, true, true, true);
 		for (EnumFacing facing : EnumFacing.VALUES)
 			EntityDroppingBlock.dropBlock(bullet.getThrower(), world, pos.offset(facing), false, true, true, true);
@@ -54,7 +54,7 @@ public class EffectBalefire implements Effect {
 	}
 
 	@Override
-	public void onUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void onUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			int expansion = bullet.getBulletType().ordinal();
 			for (BlockPos pos : BlockPos.getAllInBoxMutable(
@@ -67,7 +67,7 @@ public class EffectBalefire implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderImpact(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -96,7 +96,7 @@ public class EffectBalefire implements Effect {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderUpdate(@NotNull World world, @NotNull EntityBullet bullet) {
+	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
@@ -107,7 +107,7 @@ public class EffectBalefire implements Effect {
 				build.setAlphaFunction(new InterpFadeInOut(0.1f, 1f));
 				build.setLifetime(RandUtil.nextInt(40, 80));
 				build.setColorFunction(new InterpColorHSV(new Color(0xffc300), Color.YELLOW));
-				Vec3d bulletMotion = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
+				Vec3d bulletMotion = new Vec3d(bullet.getAsEntity().motionX, bullet.getAsEntity().motionY, bullet.getAsEntity().motionZ);
 				Vec3d norm = bulletMotion.normalize();
 				build.setMotion(norm.scale(1.0 / 10.0).addVector(
 						norm.x * RandUtil.nextDouble(0, 0.3),

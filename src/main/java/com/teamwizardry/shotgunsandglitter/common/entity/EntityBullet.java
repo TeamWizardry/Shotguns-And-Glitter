@@ -5,10 +5,13 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -22,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class EntityBullet extends EntityThrowable {
+public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	private static final DataParameter<Byte> BULLET_TYPE = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BYTE);
 	private static final DataParameter<String> BULLET_EFFECT = EntityDataManager.createKey(EntityBullet.class, DataSerializers.STRING);
@@ -53,6 +56,18 @@ public class EntityBullet extends EntityThrowable {
 
 		this.caster = caster;
 		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
+	}
+
+	@NotNull
+	@Override
+	public Entity getAsEntity() {
+		return this;
+	}
+
+	@NotNull
+	@Override
+	public IProjectile getAsProjectile() {
+		return this;
 	}
 
 	@Override
@@ -141,19 +156,55 @@ public class EntityBullet extends EntityThrowable {
 			caster = world.getPlayerEntityByUUID(UUID.fromString(compound.getString("caster")));
 	}
 
+	@Override
+	public double posX() {
+		return posX;
+	}
+
+	@Override
+	public double posY() {
+		return posY;
+	}
+
+	@Override
+	public double posZ() {
+		return posZ;
+	}
+
+	@Override
+	public double motionX() {
+		return motionX;
+	}
+
+	@Override
+	public double motionY() {
+		return motionY;
+	}
+
+	@Override
+	public double motionZ() {
+		return motionZ;
+	}
+
+	@NotNull
+	@Override
 	public BulletType getBulletType() {
 		return BulletType.byOrdinal(dataManager.get(BULLET_TYPE));
 	}
 
-	public void setBulletType(BulletType type) {
+	@Override
+	public void setBulletType(@NotNull BulletType type) {
 		dataManager.set(BULLET_TYPE, (byte) type.ordinal());
 	}
 
+	@NotNull
+	@Override
 	public Effect getEffect() {
 		return EffectRegistry.getEffectByID(dataManager.get(BULLET_EFFECT));
 	}
 
-	public void setEffect(Effect effect) {
+	@Override
+	public void setEffect(@NotNull Effect effect) {
 		dataManager.set(BULLET_EFFECT, effect.getID());
 	}
 }
