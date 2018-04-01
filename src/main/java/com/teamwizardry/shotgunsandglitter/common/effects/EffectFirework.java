@@ -166,7 +166,7 @@ public class EffectFirework implements Effect {
 	}
 
 	@Override
-	public float getImpactVolume() {
+	public float getVolume() {
 		return RandUtil.nextFloat(4, 4.5f);
 	}
 }

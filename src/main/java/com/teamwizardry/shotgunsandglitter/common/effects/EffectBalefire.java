@@ -116,4 +116,9 @@ public class EffectBalefire implements Effect {
 	public @Nullable SoundEvent getImpactSound() {
 		return ModSounds.FIRE;
 	}
+
+	@Override
+	public float getVolume() {
+		return RandUtil.nextFloat(4, 4.5f);
+	}
 }

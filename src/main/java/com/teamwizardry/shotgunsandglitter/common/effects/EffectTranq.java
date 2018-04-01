@@ -90,4 +90,9 @@ public class EffectTranq implements Effect {
 	public @Nullable SoundEvent getFireSound() {
 		return ModSounds.BULLET_FLYBY;
 	}
+
+	@Override
+	public float getVolume() {
+		return RandUtil.nextFloat(10, 10.5f);
+	}
 }

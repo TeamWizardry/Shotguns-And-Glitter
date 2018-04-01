@@ -40,7 +40,7 @@ public class PacketImpactSound extends PacketBase {
 		Effect effect = EffectRegistry.getEffectByID(effectID);
 
 		if (effect.getImpactSound() != null) {
-			world.playSound(pos.x, pos.y, pos.z, effect.getImpactSound(), SoundCategory.HOSTILE, effect.getImpactVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
+			world.playSound(pos.x, pos.y, pos.z, effect.getImpactSound(), SoundCategory.HOSTILE, effect.getVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}
 	}
 }

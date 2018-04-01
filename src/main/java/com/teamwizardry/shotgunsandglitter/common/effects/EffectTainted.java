@@ -8,6 +8,7 @@ import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -16,11 +17,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -120,5 +123,8 @@ public class EffectTainted implements Effect {
 		}
 	}
 
-
+	@Override
+	public @Nullable SoundEvent getImpactSound() {
+		return ModSounds.ETHEREAL;
+	}
 }

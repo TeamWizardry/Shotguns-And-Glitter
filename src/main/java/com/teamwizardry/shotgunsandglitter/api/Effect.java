@@ -93,7 +93,7 @@ public interface Effect {
 		return null;
 	}
 
-	default float getImpactVolume() {
+	default float getVolume() {
 		return RandUtil.nextFloat(0.95f, 1.1f);
 	}
 }

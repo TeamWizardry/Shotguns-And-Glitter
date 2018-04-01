@@ -1,6 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
 
+import com.teamwizardry.shotgunsandglitter.common.effects.EffectBasic;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -10,9 +11,7 @@ public class EffectRegistry {
 
 	private final static HashMap<String, Effect> effects = new HashMap<>();
 
-	// Effects are SAM types, technically.
-	private final static Effect BASIC_EFFECT = () -> "basic";
-
+	private final static Effect BASIC_EFFECT = new EffectBasic();
 
 	static {
 		addEffect(BASIC_EFFECT);

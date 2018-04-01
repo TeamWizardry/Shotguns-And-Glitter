@@ -143,5 +143,10 @@
     "sounds": [
       "shotgunsandglitter:shot_shotgun_cock"
     ]
+  },
+  "ethereal_pass_by": {
+    "sounds": [
+      "shotgunsandglitter:ethereal_pass_by"
+    ]
   }
 }

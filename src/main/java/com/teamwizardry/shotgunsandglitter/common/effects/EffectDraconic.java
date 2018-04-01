@@ -121,4 +121,9 @@ public class EffectDraconic implements Effect {
 	public @Nullable SoundEvent getImpactSound() {
 		return ModSounds.FIREBALL;
 	}
+
+	@Override
+	public float getVolume() {
+		return RandUtil.nextFloat(3, 3.5f);
+	}
 }
