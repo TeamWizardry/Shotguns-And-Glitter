@@ -23,9 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class ItemBullet extends ItemMod implements IExtraVariantHolder {
@@ -43,14 +41,6 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 		if (!EffectRegistry.getEffectByID(effect).getID().equals("basic"))
 			ItemNBTHelper.setString(stack, "effect", effect);
 		return stack;
-	}
-
-	private static List<Effect> allEffects = null;
-
-	public static List<Effect> getAllEffects() {
-		if (allEffects == null)
-			allEffects = new ArrayList<>(EffectRegistry.getEffects());
-		return allEffects;
 	}
 
 	@NotNull
@@ -80,7 +70,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 	@NotNull
 	@Override
 	public String[] getExtraVariants() {
-		return getAllEffects().stream()
+		return EffectRegistry.getEffects().stream()
 				.flatMap((effect) -> Arrays.stream(BulletType.values())
 						.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
 				.toArray(String[]::new);
@@ -115,7 +105,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 		super.getSubItems(tab, subItems);
 
-		for (Effect effect : getAllEffects())
+		for (Effect effect : EffectRegistry.getEffects())
 			if (!effect.getID().equals("basic"))
 				for (BulletType type : BulletType.values())
 					subItems.add(getStackOfEffect(type, effect.getID()));

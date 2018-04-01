@@ -5,6 +5,7 @@ import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -55,7 +56,7 @@ public class ItemMagazine extends ItemMod {
 			ItemNBTHelper.setList(basicStack, "ammo", basicList);
 			subItems.add(basicStack);
 
-			for (Effect effect : ItemBullet.getAllEffects()) {
+			for (Effect effect : EffectRegistry.getEffects()) {
 				if (!effect.getID().equals("basic")) {
 					ItemStack stack = new ItemStack(this);
 					NBTTagList list = new NBTTagList();
