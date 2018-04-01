@@ -26,7 +26,7 @@ public class ItemMagazine extends ItemMod implements IAmmoItem {
 	@NotNull
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {
-		return BulletType.SMALL;
+		return BulletType.PISTOL;
 	}
 
 	@Override

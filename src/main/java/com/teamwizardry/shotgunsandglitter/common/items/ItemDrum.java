@@ -25,7 +25,7 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 
 	@Override
 	public @NotNull BulletType getBulletType(@NotNull ItemStack stack) {
-		return BulletType.SMALL;
+		return BulletType.PISTOL;
 	}
 
 	@Override

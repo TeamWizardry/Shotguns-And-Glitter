@@ -35,7 +35,7 @@ public class ItemSniper extends ItemMod implements IGunItem {
 	@NotNull
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {
-		return BulletType.HEAVY;
+		return BulletType.SNIPER;
 	}
 
 	@Override

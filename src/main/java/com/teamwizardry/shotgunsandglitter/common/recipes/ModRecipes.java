@@ -44,18 +44,18 @@ public class ModRecipes {
 		RegistrationHandler.register(new RecipeAmmoHolder(ModItems.DRUM), new ResourceLocation(ShotgunsAndGlitter.MODID, "drum"));
 
 		RecipeGeneratorHandler.addShapedRecipe("basic_light",
-				ItemBullet.getStackOfEffect(BulletType.SMALL, "basic", 4),
+				ItemBullet.getStackOfEffect(BulletType.PISTOL, "basic", 4),
 				"IIG",
 				'I', "ingotIron",
 				'G', "gunpowder");
 		RecipeGeneratorHandler.addShapedRecipe("basic_medium",
-				ItemBullet.getStackOfEffect(BulletType.MEDIUM, "basic", 6),
+				ItemBullet.getStackOfEffect(BulletType.SHOTGUN, "basic", 6),
 				"IG ",
 				"IIG",
 				'I', "ingotIron",
 				'G', "gunpowder");
 		RecipeGeneratorHandler.addShapedRecipe("basic_heavy",
-				ItemBullet.getStackOfEffect(BulletType.HEAVY, "basic", 8),
+				ItemBullet.getStackOfEffect(BulletType.SNIPER, "basic", 8),
 				"IG ",
 				"IIG",
 				"IG ",
