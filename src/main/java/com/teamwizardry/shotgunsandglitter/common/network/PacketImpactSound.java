@@ -7,6 +7,7 @@ import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -39,6 +40,8 @@ public class PacketImpactSound extends PacketBase {
 
 		Effect effect = EffectRegistry.getEffectByID(effectID);
 
+		world.playSound(pos.x, pos.y, pos.z, ModSounds.BULLET_IMPACT, SoundCategory.HOSTILE, effect.getVolume(), RandUtil.nextFloat(2, 3f), false);
+		world.playSound(pos.x, pos.y, pos.z, ModSounds.DUST_SPARKLE, SoundCategory.HOSTILE, effect.getVolume(), RandUtil.nextFloat(1, 1.5f), false);
 		if (effect.getImpactSound() != null) {
 			world.playSound(pos.x, pos.y, pos.z, effect.getImpactSound(), SoundCategory.HOSTILE, effect.getVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}

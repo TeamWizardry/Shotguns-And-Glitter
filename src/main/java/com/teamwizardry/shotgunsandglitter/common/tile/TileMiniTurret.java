@@ -7,13 +7,16 @@ import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +35,8 @@ public class TileMiniTurret extends TileModTickable {
 
 	@Save
 	private int targetID = -1;
+	@Save
+	private int cooldown = 0;
 
 	@Save
 	@Nullable
@@ -65,28 +70,53 @@ public class TileMiniTurret extends TileModTickable {
 
 	@Override
 	public void tick() {
-		if (world.isRemote) return;
+		//if (world.isRemote) return;
 
-		if (getAmmo().isEmpty()) return;
+		if (cooldown > 0) {
+			cooldown--;
+			markDirty();
+		} else {
 
-		List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 32 * 32) && (owner == null || input.getUniqueID().equals(owner)));
-		entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
+			setOwner(null);
+			//if (getAmmo().isEmpty()) return;
 
-		if (entities.isEmpty()) return;
+			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 32 * 32) && (owner == null || input.getUniqueID().equals(owner)));
+			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
 
-		EntityLivingBase target = entities.get(0);
-		if (targetID != target.getEntityId()) {
-			targetID = target.getEntityId();
+			if (entities.isEmpty()) {
+				if (targetID != -1) {
+					targetID = -1;
+					markDirty();
+				}
+				return;
+			}
+
+			EntityLivingBase target = entities.get(0);
+			if (targetID != target.getEntityId()) {
+				targetID = target.getEntityId();
+				markDirty();
+			}
+
+			Effect effect = EffectRegistry.getEffectByID("basic");//ammo.get(0);
+			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
+					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5));
+			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal.scale(1.0 / 2.0));
+
+			if (!world.isRemote) {
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 4f);
+
+				bullet.setPosition(position.x, position.y, position.z);
+				world.spawnEntity(bullet);
+			} else {
+				if (effect.getFireSound() != null)
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+			}
+
+			cooldown = 40;
 			markDirty();
 		}
-
-		Effect effect = EffectRegistry.getEffectByID("basic");//ammo.get(0);
-		Vec3d normal = target.getPositionVector().subtract(new Vec3d(getPos()));
-		EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 4f);
-
-		Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal.scale(1.0 / 2.0));
-		bullet.setPosition(position.x, position.y, position.z);
-		world.spawnEntity(bullet);
 	}
 
 	@Nullable
