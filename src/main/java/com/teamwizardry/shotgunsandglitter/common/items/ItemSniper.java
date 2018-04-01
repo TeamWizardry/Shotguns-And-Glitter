@@ -94,4 +94,9 @@ public class ItemSniper extends ItemMod implements IGun {
 	public SoundEvent getReloadSoundEvent() {
 		return ModSounds.RELOAD_SNIPER;
 	}
+
+	@Override
+	public int headKnockStrength() {
+		return 20;
+	}
 }

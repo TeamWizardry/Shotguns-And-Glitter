@@ -1,12 +1,16 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
+import com.teamwizardry.librarianlib.features.animator.Easing;
+import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IGun;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +21,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,6 +74,28 @@ public class ItemShotgun extends ItemMod implements IGun {
 
 		setFireCooldown(world, player, stack);
 		player.swingArm(hand);
+
+		Vec3d normal = player.getLook(0);
+		player.motionX = -normal.x * getBulletType().knockbackStrength;
+		player.motionY = -normal.y * getBulletType().knockbackStrength;
+		player.motionZ = -normal.z * getBulletType().knockbackStrength;
+
+		ClientRunnable.run(new ClientRunnable() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void runIfClient() {
+				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(player, "rotationPitch");
+				anim.setDuration(headKnockStrength() / 8);
+				anim.setTo(player.rotationPitch - headKnockStrength());
+				anim.setEasing(Easing.easeOutCubic);
+				ClientEventHandler.FLASH_ANIMATION_HANDLER.add(anim);
+			}
+		});
+	}
+
+	@Override
+	public int headKnockStrength() {
+		return 30;
 	}
 
 	@Override

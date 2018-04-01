@@ -127,4 +127,9 @@ public class ItemPistol extends ItemMod implements IGun {
 	public SoundEvent getReloadSoundEvent() {
 		return ModSounds.RELOAD_PISTOL;
 	}
+
+	@Override
+	public int headKnockStrength() {
+		return 10;
+	}
 }
