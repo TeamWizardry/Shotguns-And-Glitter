@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "obsidian"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"nbt": "{effect:\"impact\"}"
+	},
+	"group": "sng:impact"
+}

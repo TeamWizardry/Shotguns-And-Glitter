@@ -5,7 +5,7 @@ import net.minecraft.util.math.MathHelper;
 public enum BulletType {
 	SNIPER(8f, 0.35f, "sniper"),
 	SHOTGUN(2f, 3f, "shotgun"),
-	PISTOL(5f, 0.5f, "pistol");
+	BASIC(5f, 0.5f, "basic");
 
 	public final float damage;
 	public final float knockbackStrength;

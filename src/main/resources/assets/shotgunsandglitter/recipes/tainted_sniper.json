@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 0
+		},
+		{
+			"item": "minecraft:spider_eye"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 0,
+		"nbt": "{effect:\"tainted\"}"
+	},
+	"group": "sng:tainted"
+}

@@ -1,0 +1,24 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:bullet",
+			"data": 2
+		},
+		"I": {
+			"item": "minecraft:arrow"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 2,
+		"count": 8,
+		"nbt": "{effect:\"piercing\"}"
+	},
+	"group": "sng:piercing"
+}
