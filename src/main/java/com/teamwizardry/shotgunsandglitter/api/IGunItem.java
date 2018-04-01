@@ -60,7 +60,7 @@ public interface IGunItem extends IAmmoItem {
 		if (!world.isRemote) {
 			for (int i = 0; i < getFireCount(stack); i++) {
 				if (shouldConsumeAmmo(stack, i)) {
-					if (ammo.size() == consumed + 1)
+					if (ammo.size() <= consumed)
 						break;
 					effect = ammo.get(consumed++);
 				}
@@ -77,9 +77,9 @@ public interface IGunItem extends IAmmoItem {
 		player.swingArm(hand);
 
 		Vec3d normal = player.getLook(0);
-		player.motionX = -normal.x * getBulletType(stack).knockbackStrength;
-		player.motionY = -normal.y * getBulletType(stack).knockbackStrength;
-		player.motionZ = -normal.z * getBulletType(stack).knockbackStrength;
+		player.motionX += -normal.x * getBulletType(stack).knockbackStrength;
+		player.motionY += -normal.y * getBulletType(stack).knockbackStrength;
+		player.motionZ += -normal.z * getBulletType(stack).knockbackStrength;
 
 		ClientRunnable.run(new ClientRunnable() {
 			@Override
@@ -90,7 +90,7 @@ public interface IGunItem extends IAmmoItem {
 				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(clientPlayer, "rotationPitch");
 				anim.setDuration(2);
 				anim.setTo(Minecraft.getMinecraft().player.rotationPitch - headKnockStrength(stack));
-				anim.setEasing(Easing.easeOutCubic);
+				anim.setEasing(Easing.easeInExpo);
 				InternalHandler.INTERNAL_HANDLER.addTiltAnimation(anim);
 			}
 		});
@@ -108,7 +108,7 @@ public interface IGunItem extends IAmmoItem {
 
 		List<Effect> ammoEffects = ((IAmmoItem) ammo.getItem()).getEffectsFromItem(ammo);
 
-		for (int index = 0; index < Math.max(ammoEffects.size(), getMaxAmmo(gun)); index++)
+		for (int index = 0; index < Math.min(ammoEffects.size(), getMaxAmmo(gun)); index++)
 			gunAmmo.add(ammoEffects.get(index));
 
 		ammoItem.takeEffectsFromItem(ammo, Math.max(ammoEffects.size(), getMaxAmmo(gun)));
