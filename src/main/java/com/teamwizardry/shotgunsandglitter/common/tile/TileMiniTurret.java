@@ -70,8 +70,6 @@ public class TileMiniTurret extends TileModTickable {
 
 	@Override
 	public void tick() {
-		//if (world.isRemote) return;
-
 		if (cooldown > 0) {
 			cooldown--;
 			markDirty();
@@ -80,7 +78,7 @@ public class TileMiniTurret extends TileModTickable {
 			setOwner(null);
 			//if (getAmmo().isEmpty()) return;
 
-			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 32 * 32) && (owner == null || input.getUniqueID().equals(owner)));
+			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 64 * 64) && (owner == null || input.getUniqueID().equals(owner)));
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
 
 			if (entities.isEmpty()) {
@@ -97,7 +95,7 @@ public class TileMiniTurret extends TileModTickable {
 				markDirty();
 			}
 
-			Effect effect = EffectRegistry.getEffectByID("basic");//ammo.get(0);
+			Effect effect = EffectRegistry.getEffectByID("firework");//ammo.get(0);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
 					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5));
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal.scale(1.0 / 2.0));

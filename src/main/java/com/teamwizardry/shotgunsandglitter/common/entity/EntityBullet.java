@@ -6,6 +6,8 @@ import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -17,12 +19,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.UUID;
 
 public class EntityBullet extends EntityThrowable implements IBulletEntity {
@@ -100,8 +104,18 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		if (!world.isRemote && ticksExisted > 1000) {
 			setDead();
 			world.removeEntity(this);
-		} else
+		} else {
+			if (world.isRemote) {
+				List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 16 * 16));
+
+				if (!entities.isEmpty()) {
+					world.playSound(posX, posY, posZ, ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.9f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+					world.playSound(posX, posY, posZ, ModSounds.DUST_SPARKLE, SoundCategory.HOSTILE, RandUtil.nextFloat(0.3f, 0.5f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				}
+			}
+
 			ShotgunsAndGlitter.PROXY.updateBulletEntity(world, this, getEffect());
+		}
 	}
 
 	@Override
