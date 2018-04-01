@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,12 +68,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	@NotNull
 	@Override
 	public Entity getAsEntity() {
-		return this;
-	}
-
-	@NotNull
-	@Override
-	public IProjectile getAsProjectile() {
 		return this;
 	}
 

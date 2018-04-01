@@ -17,6 +17,6 @@ public class ShotgunJEIPlugin implements IModPlugin {
 	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
 		subtypeRegistry.registerSubtypeInterpreter(ModItems.BULLET,
 				(stack) -> BulletType.byOrdinal(stack.getItemDamage()).serializeName +
-						"_" + ItemBullet.getEffectFromItem(stack).getID());
+						"_" + ModItems.BULLET.getEffectFromItem(stack).getID());
 	}
 }

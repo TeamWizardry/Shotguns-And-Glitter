@@ -2,7 +2,6 @@ package com.teamwizardry.shotgunsandglitter.api;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
@@ -15,9 +14,6 @@ import org.jetbrains.annotations.Nullable;
 public interface IBulletEntity {
 	@NotNull
 	Entity getAsEntity();
-
-	@NotNull
-	IProjectile getAsProjectile();
 
 	@Nullable
 	EntityLivingBase getThrower();

@@ -5,19 +5,12 @@ import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.IAmmo;
+import com.teamwizardry.shotgunsandglitter.api.*;
 import kotlin.jvm.functions.Function1;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 
 
-public class ItemBullet extends ItemMod implements IExtraVariantHolder, IAmmo {
+public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletItem {
 
 	public ItemBullet() {
 		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
@@ -45,9 +38,8 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IAmmo {
 
 	@NotNull
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
-		onAmmoRightClick(worldIn, playerIn, handIn);
-		return super.onItemRightClick(worldIn, playerIn, handIn);
+	public BulletType getBulletType(@NotNull ItemStack stack) {
+		return BulletType.byOrdinal(stack.getItemDamage());
 	}
 
 	@NotNull
@@ -72,7 +64,8 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IAmmo {
 	}
 
 	@NotNull
-	public static Effect getEffectFromItem(@NotNull ItemStack stack) {
+	@Override
+	public Effect getEffectFromItem(@NotNull ItemStack stack) {
 		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
 		return EffectRegistry.getEffectByID(effectID);
 	}

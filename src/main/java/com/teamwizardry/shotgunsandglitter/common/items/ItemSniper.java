@@ -1,25 +1,20 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.api.IGun;
+import com.teamwizardry.shotgunsandglitter.api.IGunItem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ItemSniper extends ItemMod implements IGun {
+public class ItemSniper extends ItemMod implements IGunItem {
 
 	public ItemSniper() {
 		super("sniper");
@@ -32,71 +27,51 @@ public class ItemSniper extends ItemMod implements IGun {
 		ItemStack offHand = playerIn.getHeldItemOffhand();
 		ItemStack mainHand = playerIn.getHeldItemMainhand();
 
-		if (reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
+		if (reloadAmmo(worldIn, playerIn, mainHand, offHand))
 			fireGun(worldIn, playerIn, playerIn.getHeldItem(handIn), handIn);
-		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
+	@NotNull
 	@Override
-	public boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
-		if (ammo.getItem() != ModItems.BULLET || BulletType.byOrdinal(ammo.getItemDamage()) != BulletType.HEAVY)
-			return true;
-
-		NBTTagList loadedAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
-		if (loadedAmmo == null) loadedAmmo = new NBTTagList();
-
-		if (loadedAmmo.tagCount() >= getMaxAmmo()) return true;
-
-		Effect effect = ItemBullet.getEffectFromItem(ammo);
-		loadedAmmo.appendTag(new NBTTagString(effect.getID()));
-
-		ammo.shrink(1);
-		ItemNBTHelper.setList(gun, "ammo", loadedAmmo);
-
-		setReloadCooldown(world, player, gun);
-		return false;
-	}
-
-	@Override
-	public BulletType getBulletType() {
+	public BulletType getBulletType(@NotNull ItemStack stack) {
 		return BulletType.HEAVY;
 	}
 
 	@Override
-	public int getMaxAmmo() {
+	public int getMaxAmmo(ItemStack stack) {
 		return 1;
 	}
 
 	@Override
-	public int getReloadCooldownTime() {
+	public int getReloadCooldownTime(ItemStack stack) {
 		return 40;
 	}
 
 	@Override
-	public int getFireCooldownTime() {
+	public int getFireCooldownTime(ItemStack stack) {
 		return 50;
 	}
 
 	@Override
-	public float getInaccuracy() {
+	public float getInaccuracy(ItemStack stack) {
 		return 0;
 	}
 
 	@Nullable
 	@Override
-	public SoundEvent[] getFireSoundEvents() {
+	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
 		return new SoundEvent[]{ModSounds.SHOT_SNIPER, ModSounds.DUST_SPARKLE};
 	}
 
 	@Nullable
 	@Override
-	public SoundEvent getReloadSoundEvent() {
+	public SoundEvent getReloadSoundEvent(ItemStack stack) {
 		return ModSounds.RELOAD_SNIPER;
 	}
 
 	@Override
-	public int headKnockStrength() {
+	public int headKnockStrength(ItemStack stack) {
 		return 20;
 	}
 }

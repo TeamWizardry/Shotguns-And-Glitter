@@ -1,5 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.common.core;
 
+import com.teamwizardry.librarianlib.features.animator.Animation;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
@@ -9,6 +10,8 @@ import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -22,7 +25,14 @@ public class ShotgunsInternalHandler extends InternalHandler {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public ResourceLocation getSparkle() {
 		return ClientEventHandler.SPARKLE;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addFlashAnimation(Animation<?> animation) {
+		ClientEventHandler.FLASH_ANIMATION_HANDLER.add(animation);
 	}
 }

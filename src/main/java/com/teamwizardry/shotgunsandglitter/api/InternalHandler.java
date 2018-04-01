@@ -1,8 +1,11 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.librarianlib.features.animator.Animation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,7 +19,13 @@ public class InternalHandler {
 		return null;
 	}
 
+	@SideOnly(Side.CLIENT)
 	public ResourceLocation getSparkle() {
 		return null;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addFlashAnimation(Animation<?> animation) {
+		// NO-OP
 	}
 }

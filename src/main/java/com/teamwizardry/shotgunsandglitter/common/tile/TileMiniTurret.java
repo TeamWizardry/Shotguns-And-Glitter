@@ -13,6 +13,7 @@ import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
+import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -124,7 +125,7 @@ public class TileMiniTurret extends TileModTickable {
 
 			ItemStack ammo = inventory.getHandler().extractItem(fullSlot, 1, false);
 
-			Effect effect = ItemBullet.getEffectFromItem(ammo);
+			Effect effect = ModItems.BULLET.getEffectFromItem(ammo);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
 					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5))
 					.add(new Vec3d(target.motionX, target.motionY, target.motionZ).normalize())

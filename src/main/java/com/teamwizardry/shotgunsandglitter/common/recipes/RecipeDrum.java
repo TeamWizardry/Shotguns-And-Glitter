@@ -3,7 +3,6 @@ package com.teamwizardry.shotgunsandglitter.common.recipes;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
-import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -48,7 +47,7 @@ public class RecipeDrum extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
 
 			for (int j = 0; j < stack.getCount(); j++) {
 				if (loadedAmmo.tagCount() >= 200) break;
-				Effect effect = ItemBullet.getEffectFromItem(stack);
+				Effect effect = ModItems.BULLET.getEffectFromItem(stack);
 				loadedAmmo.appendTag(new NBTTagString(effect.getID()));
 			}
 		}

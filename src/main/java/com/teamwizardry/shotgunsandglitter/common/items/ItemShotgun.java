@@ -8,7 +8,7 @@ import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.IGun;
+import com.teamwizardry.shotgunsandglitter.api.IGunItem;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
@@ -16,7 +16,6 @@ import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -30,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ItemShotgun extends ItemMod implements IGun {
+public class ItemShotgun extends ItemMod implements IGunItem {
 
 	public ItemShotgun() {
 		super("shotgun");
@@ -64,7 +63,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 
 		if (!world.isRemote) {
 			for (int i = 0; i < 5; i++) {
-				EntityBullet bullet = new EntityBullet(world, player, getBulletType(), effect, getInaccuracy());
+				EntityBullet bullet = new EntityBullet(world, player, getBulletType(stack), effect, getInaccuracy(stack));
 				bullet.setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 				world.spawnEntity(bullet);
 			}
@@ -76,17 +75,17 @@ public class ItemShotgun extends ItemMod implements IGun {
 		player.swingArm(hand);
 
 		Vec3d normal = player.getLook(0);
-		player.motionX = -normal.x * getBulletType().knockbackStrength;
-		player.motionY = -normal.y * getBulletType().knockbackStrength;
-		player.motionZ = -normal.z * getBulletType().knockbackStrength;
+		player.motionX = -normal.x * getBulletType(stack).knockbackStrength;
+		player.motionY = -normal.y * getBulletType(stack).knockbackStrength;
+		player.motionZ = -normal.z * getBulletType(stack).knockbackStrength;
 
 		ClientRunnable.run(new ClientRunnable() {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void runIfClient() {
 				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(player, "rotationPitch");
-				anim.setDuration(headKnockStrength() / 8);
-				anim.setTo(player.rotationPitch - headKnockStrength());
+				anim.setDuration(headKnockStrength(stack) / 8);
+				anim.setTo(player.rotationPitch - headKnockStrength(stack));
 				anim.setEasing(Easing.easeOutCubic);
 				ClientEventHandler.FLASH_ANIMATION_HANDLER.add(anim);
 			}
@@ -94,64 +93,45 @@ public class ItemShotgun extends ItemMod implements IGun {
 	}
 
 	@Override
-	public int headKnockStrength() {
+	public int headKnockStrength(ItemStack stack) {
 		return 30;
 	}
 
+	@NotNull
 	@Override
-	public boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
-		if (ammo.getItem() != ModItems.BULLET || BulletType.byOrdinal(ammo.getItemDamage()) != BulletType.MEDIUM)
-			return true;
-
-		NBTTagList loadedAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
-		if (loadedAmmo == null) loadedAmmo = new NBTTagList();
-
-		if (loadedAmmo.tagCount() >= getMaxAmmo()) return true;
-
-		Effect effect = ItemBullet.getEffectFromItem(ammo);
-		loadedAmmo.appendTag(new NBTTagString(effect.getID()));
-
-		ammo.shrink(1);
-		ItemNBTHelper.setList(gun, "ammo", loadedAmmo);
-
-		setReloadCooldown(world, player, gun);
-		return false;
-	}
-
-	@Override
-	public BulletType getBulletType() {
+	public BulletType getBulletType(@NotNull ItemStack stack) {
 		return BulletType.MEDIUM;
 	}
 
 	@Override
-	public int getMaxAmmo() {
+	public int getMaxAmmo(ItemStack stack) {
 		return 1;
 	}
 
 	@Override
-	public int getReloadCooldownTime() {
+	public int getReloadCooldownTime(ItemStack stack) {
 		return 10;
 	}
 
 	@Override
-	public int getFireCooldownTime() {
+	public int getFireCooldownTime(ItemStack stack) {
 		return 40;
 	}
 
 	@Override
-	public float getInaccuracy() {
+	public float getInaccuracy(ItemStack stack) {
 		return 25f;
 	}
 
 	@Nullable
 	@Override
-	public SoundEvent[] getFireSoundEvents() {
+	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
 		return new SoundEvent[]{ModSounds.SHOT_SHOTGUN_COCK, ModSounds.MAGIC_SPARKLE};
 	}
 
 	@Nullable
 	@Override
-	public SoundEvent getReloadSoundEvent() {
+	public SoundEvent getReloadSoundEvent(ItemStack stack) {
 		return ModSounds.RELOAD_SHOTGUN;
 	}
 }
