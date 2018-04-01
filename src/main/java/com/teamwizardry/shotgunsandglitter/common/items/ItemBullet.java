@@ -45,16 +45,17 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 		return stack;
 	}
 
-	private List<Effect> allEffects = null;
+	private static List<Effect> allEffects = null;
 
-	private List<Effect> getAllEffects() {
+	public static List<Effect> getAllEffects() {
 		if (allEffects == null)
 			allEffects = new ArrayList<>(EffectRegistry.getEffects());
 		return allEffects;
 	}
 
+	@NotNull
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		if (!worldIn.isRemote)
 			if (handIn == EnumHand.MAIN_HAND) {
 				ItemStack bullets = playerIn.getHeldItemMainhand().copy();
