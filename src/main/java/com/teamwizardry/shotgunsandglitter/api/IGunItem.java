@@ -71,7 +71,8 @@ public interface IGunItem extends IAmmoItem {
 		} else if (effect.getFireSound() != null)
 			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 
-		takeEffectsFromItem(stack, consumed);
+		if (!player.isCreative())
+			takeEffectsFromItem(stack, consumed);
 
 		setFireCooldown(world, player, stack);
 		player.swingArm(hand);
