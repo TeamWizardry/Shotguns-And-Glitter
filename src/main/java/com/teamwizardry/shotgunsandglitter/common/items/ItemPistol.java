@@ -54,7 +54,10 @@ public class ItemPistol extends ItemMod implements IGun {
 	public boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
 		if (ammo.getItem() != ModItems.MAGAZINE) return false;
 
-		NBTTagList newAmmoList = ItemNBTHelper.getList(ammo, "ammo", Constants.NBT.TAG_STRING);
+		ItemStack realAmmo = ammo.copy();
+		realAmmo.setCount(1);
+
+		NBTTagList newAmmoList = ItemNBTHelper.getList(realAmmo, "ammo", Constants.NBT.TAG_STRING);
 		if (newAmmoList == null) return false;
 
 		NBTTagList loadedAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
@@ -76,9 +79,13 @@ public class ItemPistol extends ItemMod implements IGun {
 			newAmmoList.removeTag(index - removed++);
 		}
 
-		if (newAmmoList.tagCount() == 0)
-			ammo.setCount(0);
+		if (newAmmoList.tagCount() == 0) {
+			realAmmo.shrink(1);
+		} else {
+			player.addItemStackToInventory(realAmmo);
+		}
 
+		ammo.shrink(1);
 		ItemNBTHelper.setList(gun, "ammo", loadedAmmo);
 
 		setReloadCooldown(world, player, gun);
