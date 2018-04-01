@@ -1,10 +1,10 @@
 package com.teamwizardry.shotgunsandglitter.common.effects;
 
 import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
-import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpHelix;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
+import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -101,15 +101,21 @@ public class EffectBalefire implements Effect {
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 3, 0, (i, build) -> {
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.8f), 0));
-			build.setLifetime(RandUtil.nextInt(20, 40));
-			build.setColorFunction(new InterpColorHSV(new Color(0x893000), Color.YELLOW));
-			build.setPositionFunction(new InterpHelix(
-					Vec3d.ZERO,
-					new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ),
-					0.1f, 0.1f, RandUtil.nextInt(-3, 3), RandUtil.nextFloat()));
-		});
+		for (int j = 0; j < 5; j++) {
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 1, (i, build) -> {
+				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0));
+				build.setAlphaFunction(new InterpFadeInOut(0.1f, 1f));
+				build.setLifetime(RandUtil.nextInt(40, 80));
+				build.setColorFunction(new InterpColorHSV(new Color(0xffc300), Color.YELLOW));
+				Vec3d bulletMotion = new Vec3d(bullet.motionX, bullet.motionY, bullet.motionZ);
+				Vec3d norm = bulletMotion.normalize();
+				build.setMotion(norm.scale(1.0 / 10.0).addVector(
+						norm.x * RandUtil.nextDouble(0, 0.3),
+						norm.y * RandUtil.nextDouble(0, 0.3),
+						norm.z * RandUtil.nextDouble(0, 0.3)
+				));
+			});
+		}
 	}
 
 	@Override

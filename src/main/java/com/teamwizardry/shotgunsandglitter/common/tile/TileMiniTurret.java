@@ -80,7 +80,7 @@ public class TileMiniTurret extends TileModTickable {
 			markDirty();
 		}
 
-		Effect effect = ammo.get(0);
+		Effect effect = EffectRegistry.getEffectByID("basic");//ammo.get(0);
 		Vec3d normal = target.getPositionVector().subtract(new Vec3d(getPos()));
 		EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 4f);
 

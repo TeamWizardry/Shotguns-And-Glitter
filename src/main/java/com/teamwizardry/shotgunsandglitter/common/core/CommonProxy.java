@@ -4,6 +4,7 @@ import com.teamwizardry.librarianlib.core.common.RegistrationHandler;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
@@ -27,6 +28,7 @@ public class CommonProxy {
 
 		ModEffects.init();
 		ModItems.init();
+		ModBlocks.init();
 		ModEntities.init();
 		new ModTab();
 		new ModPotions();
