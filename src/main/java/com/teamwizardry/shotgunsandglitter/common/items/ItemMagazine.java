@@ -5,6 +5,7 @@ import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -48,22 +49,13 @@ public class ItemMagazine extends ItemMod {
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
 		if (tab == CreativeTabs.SEARCH) {
-			ItemStack basicStack = new ItemStack(this);
-			NBTTagList basicList = new NBTTagList();
-			for (int i = 0; i < 5; i++)
-				basicList.appendTag(new NBTTagString("basic"));
-			ItemNBTHelper.setList(basicStack, "ammo", basicList);
-			subItems.add(basicStack);
-
-			for (Effect effect : ItemBullet.getAllEffects()) {
-				if (!effect.getID().equals("basic")) {
-					ItemStack stack = new ItemStack(this);
-					NBTTagList list = new NBTTagList();
-					for (int i = 0; i < 5; i++)
-						list.appendTag(new NBTTagString(effect.getID()));
-					ItemNBTHelper.setList(stack, "ammo", list);
-					subItems.add(stack);
-				}
+			for (Effect effect : EffectRegistry.getEffects()) {
+				ItemStack stack = new ItemStack(this);
+				NBTTagList list = new NBTTagList();
+				for (int i = 0; i < 5; i++)
+					list.appendTag(new NBTTagString(effect.getID()));
+				ItemNBTHelper.setList(stack, "ammo", list);
+				subItems.add(stack);
 			}
 		}
 	}

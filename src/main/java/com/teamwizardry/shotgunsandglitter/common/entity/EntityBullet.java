@@ -106,9 +106,8 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 			motionZ = mZ;
 		}
 
-		if (!world.isRemote && ticksExisted > 1000) {
+		if (!world.isRemote && ticksExisted >= 1000) {
 			setDead();
-			world.removeEntity(this);
 		} else {
 			if (world.isRemote) {
 				List<EntityPlayer> entities = world.getEntities(EntityPlayer.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 5 * 5));
