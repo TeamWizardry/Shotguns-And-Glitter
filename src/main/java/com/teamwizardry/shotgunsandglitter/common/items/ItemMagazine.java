@@ -47,13 +47,24 @@ public class ItemMagazine extends ItemMod {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		for (Effect effect : ItemBullet.getAllEffects()) {
-			ItemStack stack = new ItemStack(this);
-			NBTTagList list = new NBTTagList();
+		if (tab == CreativeTabs.SEARCH) {
+			ItemStack basicStack = new ItemStack(this);
+			NBTTagList basicList = new NBTTagList();
 			for (int i = 0; i < 5; i++)
-				list.appendTag(new NBTTagString(effect.getID()));
-			ItemNBTHelper.setList(stack, "ammo", list);
-			subItems.add(stack);
+				basicList.appendTag(new NBTTagString("basic"));
+			ItemNBTHelper.setList(basicStack, "ammo", basicList);
+			subItems.add(basicStack);
+
+			for (Effect effect : ItemBullet.getAllEffects()) {
+				if (!effect.getID().equals("basic")) {
+					ItemStack stack = new ItemStack(this);
+					NBTTagList list = new NBTTagList();
+					for (int i = 0; i < 5; i++)
+						list.appendTag(new NBTTagString(effect.getID()));
+					ItemNBTHelper.setList(stack, "ammo", list);
+					subItems.add(stack);
+				}
+			}
 		}
 	}
 }
