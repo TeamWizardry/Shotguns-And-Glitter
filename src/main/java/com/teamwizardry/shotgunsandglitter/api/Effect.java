@@ -1,5 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -90,5 +91,9 @@ public interface Effect {
 	@Nullable
 	default SoundEvent getImpactSound() {
 		return null;
+	}
+
+	default float getImpactVolume() {
+		return RandUtil.nextFloat(0.95f, 1.1f);
 	}
 }

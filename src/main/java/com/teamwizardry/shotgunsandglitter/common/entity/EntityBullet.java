@@ -1,10 +1,11 @@
 package com.teamwizardry.shotgunsandglitter.common.entity;
 
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,9 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -68,9 +69,10 @@ public class EntityBullet extends EntityThrowable {
 			motionZ = mZ;
 		}
 
-		if (!world.isRemote && ticksExisted > 1000)
+		if (!world.isRemote && ticksExisted > 1000) {
 			setDead();
-		else
+			world.removeEntity(this);
+		} else
 			ShotgunsAndGlitter.PROXY.updateBulletEntity(world, this, getEffect());
 	}
 
@@ -88,22 +90,21 @@ public class EntityBullet extends EntityThrowable {
 					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result.getBlockPos(),
 							state, getEffect(), result.hitVec)) {
 
-				if (getEffect().getImpactSound() != null) {
-					world.playSound(posX, posY, posZ, getEffect().getImpactSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
-				}
-
+				PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
+						new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 				setDead();
+				world.removeEntity(this);
+
 			}
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
 			if (result.entityHit != null && !world.isRemote)
 				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
 						result.entityHit, getEffect(), result.hitVec)) {
 
-					if (getEffect().getImpactSound() != null) {
-						world.playSound(posX, posY, posZ, getEffect().getImpactSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
-					}
-
+					PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
+							new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 					setDead();
+					world.removeEntity(this);
 				}
 		}
 	}

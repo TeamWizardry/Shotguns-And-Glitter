@@ -164,4 +164,9 @@ public class EffectFirework implements Effect {
 	public @Nullable SoundEvent getImpactSound() {
 		return ModSounds.POP;
 	}
+
+	@Override
+	public float getImpactVolume() {
+		return RandUtil.nextFloat(4, 4.5f);
+	}
 }
