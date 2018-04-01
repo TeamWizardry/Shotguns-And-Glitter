@@ -3,7 +3,6 @@ package com.teamwizardry.shotgunsandglitter.api;
 import com.google.common.collect.Lists;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
-import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
@@ -26,7 +25,7 @@ public interface IAmmoItem {
 				tooltip.add(TextFormatting.ITALIC.toString() + "... " + (effects.size() - 5) + "+");
 				break;
 			}
-			TooltipHelper.addToTooltip(tooltip, ShotgunsAndGlitter.MODID + "." + effects.get(i).getID() + ".name");
+			TooltipHelper.addToTooltip(tooltip, "shotgunsandglitter." + effects.get(i).getID() + ".name");
 		}
 
 	}
