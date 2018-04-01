@@ -27,6 +27,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 
 	public ItemShotgun() {
 		super("shotgun");
+		setMaxStackSize(1);
 	}
 
 	@Override

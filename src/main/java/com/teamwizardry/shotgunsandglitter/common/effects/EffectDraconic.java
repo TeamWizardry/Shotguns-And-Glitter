@@ -33,7 +33,8 @@ public class EffectDraconic implements Effect {
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull EntityBullet bullet) {
-		world.newExplosion(bullet, bullet.posX, bullet.posY, bullet.posZ, bullet.getBulletType().damage, true, true);
+		if (!world.isRemote)
+			world.newExplosion(bullet, bullet.posX, bullet.posY, bullet.posZ, bullet.getBulletType().damage, true, true);
 	}
 
 	@Override

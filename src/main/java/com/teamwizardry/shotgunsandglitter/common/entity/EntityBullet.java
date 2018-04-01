@@ -15,6 +15,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,16 @@ public class EntityBullet extends EntityThrowable {
 	public EntityBullet(@NotNull World world) {
 		super(world);
 		setSize(0.1F, 0.1F);
+	}
+
+	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
+		super(world);
+		setSize(0.1F, 0.1F);
+
+		setBulletType(bulletType);
+		setEffect(effect);
+
+		shoot(normal.x, normal.y, normal.z, effect.getVelocity(world, bulletType), inaccuracy);
 	}
 
 	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {

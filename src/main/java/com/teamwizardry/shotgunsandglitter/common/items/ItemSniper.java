@@ -23,6 +23,7 @@ public class ItemSniper extends ItemMod implements IGun {
 
 	public ItemSniper() {
 		super("sniper");
+		setMaxStackSize(1);
 	}
 
 	@Override

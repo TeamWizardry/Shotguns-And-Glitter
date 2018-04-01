@@ -29,6 +29,7 @@ public class ItemPistol extends ItemMod implements IGun {
 
 	public ItemPistol() {
 		super("pistol");
+		setMaxStackSize(1);
 	}
 
 	@Override
