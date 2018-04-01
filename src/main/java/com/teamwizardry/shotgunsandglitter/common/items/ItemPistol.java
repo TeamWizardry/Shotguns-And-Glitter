@@ -114,7 +114,7 @@ public class ItemPistol extends ItemMod implements IGun {
 
 	@Override
 	public float getInaccuracy() {
-		return 0.05f;
+		return 4f;
 	}
 
 	@Override

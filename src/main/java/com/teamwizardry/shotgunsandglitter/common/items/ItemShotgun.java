@@ -4,14 +4,18 @@ import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IGun;
+import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -37,9 +41,35 @@ public class ItemShotgun extends ItemMod implements IGun {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
+
+	@Override
+	public void fireGun(World world, EntityPlayer player, ItemStack stack) {
+		NBTTagList list = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
+		if (list == null) list = new NBTTagList();
+		if (list.tagCount() == 0) return;
+
+		String effectID = list.getStringTagAt(list.tagCount() - 1);
+		Effect effect = EffectRegistry.getEffectByID(effectID);
+
+		list.removeTag(list.tagCount() - 1);
+		ItemNBTHelper.setList(stack, "ammo", list);
+
+		if (!world.isRemote) {
+			for (int i = 0; i < 5; i++) {
+				EntityBullet bullet = new EntityBullet(world, player, getBulletType(), effect, getInaccuracy());
+				bullet.setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
+				world.spawnEntity(bullet);
+			}
+		} else if (effect.getFireSound() != null) {
+			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+		}
+
+		setFireCooldown(world, player, stack);
+	}
+
 	@Override
 	public boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
-		if (ammo.getItem() != ModItems.BULLET && BulletType.byOrdinal(ammo.getItemDamage()) != BulletType.MEDIUM)
+		if (ammo.getItem() != ModItems.BULLET || BulletType.byOrdinal(ammo.getItemDamage()) != BulletType.MEDIUM)
 			return false;
 
 		NBTTagList loadedAmmo = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
@@ -79,7 +109,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 
 	@Override
 	public float getInaccuracy() {
-		return 0.4f;
+		return 25f;
 	}
 
 	@Nullable
