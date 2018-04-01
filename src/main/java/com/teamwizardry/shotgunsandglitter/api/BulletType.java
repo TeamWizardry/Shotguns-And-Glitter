@@ -4,8 +4,8 @@ import net.minecraft.util.math.MathHelper;
 
 public enum BulletType {
 	HEAVY(5f, 1f, "heavy"),
-	MEDIUM(1f, 0.25f, "medium"),
-	SMALL(2f, 0.5f, "light");
+	MEDIUM(2f, 0.25f, "medium"),
+	SMALL(1f, 0.5f, "light");
 
 	public final float damage;
 	public final float knockbackStrength;

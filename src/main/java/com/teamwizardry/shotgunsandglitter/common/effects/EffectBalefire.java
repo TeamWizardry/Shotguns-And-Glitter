@@ -58,9 +58,9 @@ public class EffectBalefire implements Effect {
 		if (!world.isRemote) {
 			int expansion = bullet.getBulletType().ordinal();
 			for (BlockPos pos : BlockPos.getAllInBoxMutable(
-					bullet.getPosition().add(-expansion, -1, -expansion),
+					bullet.getPosition().add(-expansion, 0, -expansion),
 					bullet.getPosition().add(expansion, -1, expansion)))
-				if (world.isAirBlock(pos))
+				if (world.isAirBlock(pos) && !world.isAirBlock(pos.down()))
 					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 		}
 	}

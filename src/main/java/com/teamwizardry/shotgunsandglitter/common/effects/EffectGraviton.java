@@ -32,10 +32,6 @@ public class EffectGraviton implements Effect {
 		idSuffix = outwards ? "out" : "in";
 	}
 
-	public String getIdSuffix() {
-		return idSuffix;
-	}
-
 	@Override
 	public String getID() {
 		return "gravity_" + idSuffix;
@@ -45,19 +41,21 @@ public class EffectGraviton implements Effect {
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
+		double range = 10;
+
 		for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
-				new AxisAlignedBB(bullet.posX() - 10, bullet.posY() - 10, bullet.posZ() - 10,
-						bullet.posX() + 10, bullet.posY() + 10, bullet.posZ() + 10),
+				new AxisAlignedBB(bullet.posX() - range, bullet.posY() - range, bullet.posZ() - range,
+						bullet.posX() + range, bullet.posY() + range, bullet.posZ() + range),
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
 					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
-					return differenceVec.lengthSquared() < 7.5 * 7.5 && differenceVec.lengthSquared() != 0;
+					return differenceVec.lengthSquared() < range * range && differenceVec.lengthSquared() != 0;
 				})) {
 			Vec3d differenceVec = bullet.getPositionVector().subtract(target.getPositionVector());
 			differenceVec = differenceVec.scale(direction / differenceVec.lengthSquared());
-			target.motionX = differenceVec.x * bullet.getBulletType().damage / 2;
-			target.motionY = Math.min(Math.max(differenceVec.y, 0), 2) * bullet.getBulletType().damage / 2 + 0.25f;
-			target.motionZ = differenceVec.z * bullet.getBulletType().damage / 2;
+			target.motionX = differenceVec.x * bullet.getBulletType().damage;
+			target.motionY = Math.min(Math.max(differenceVec.y, 0), 2) * bullet.getBulletType().damage + 0.25f;
+			target.motionZ = differenceVec.z * bullet.getBulletType().damage;
 			target.velocityChanged = true;
 		}
 	}

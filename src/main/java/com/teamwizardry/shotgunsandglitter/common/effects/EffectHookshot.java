@@ -31,10 +31,10 @@ public class EffectHookshot implements Effect {
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		EntityLivingBase thrower = bullet.getThrower();
 		if (thrower != null) {
-			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector());
-			thrower.motionX = differenceVec.x * bullet.getBulletType().damage;
-			thrower.motionY = Math.max(differenceVec.y, 0) * bullet.getBulletType().damage + 0.5f;
-			thrower.motionZ = differenceVec.z * bullet.getBulletType().damage;
+			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector()).normalize().scale(0.5 * bullet.getBulletType().damage);
+			thrower.motionX = differenceVec.x;
+			thrower.motionY = Math.max(differenceVec.y, 0) + 0.5f;
+			thrower.motionZ = differenceVec.z;
 			thrower.velocityChanged = true;
 		}
 	}

@@ -34,6 +34,17 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 		super("bullet", Arrays.stream(BulletType.values()).map((type) -> "bullet_" + type.serializeName).toArray(String[]::new));
 	}
 
+	public static ItemStack getStackOfEffect(BulletType type, String effect) {
+		return getStackOfEffect(type, effect, 1);
+	}
+
+	public static ItemStack getStackOfEffect(BulletType type, String effect, int count) {
+		ItemStack stack = new ItemStack(ModItems.BULLET, count, type.ordinal());
+		if (!EffectRegistry.getEffectByID(effect).getID().equals("basic"))
+			ItemNBTHelper.setString(stack, "effect", effect);
+		return stack;
+	}
+
 	private List<Effect> allEffects = null;
 
 	private List<Effect> getAllEffects() {
@@ -105,10 +116,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder {
 
 		for (Effect effect : getAllEffects())
 			if (!effect.getID().equals("basic"))
-				for (int damage = 0; damage < getVariants().length; damage++) {
-					ItemStack base = new ItemStack(this, 1, damage);
-					ItemNBTHelper.setString(base, "effect", effect.getID());
-					subItems.add(base);
-				}
+				for (BulletType type : BulletType.values())
+					subItems.add(getStackOfEffect(type, effect.getID()));
 	}
 }

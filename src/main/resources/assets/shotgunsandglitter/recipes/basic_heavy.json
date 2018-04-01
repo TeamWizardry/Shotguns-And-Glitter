@@ -1,0 +1,23 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"IG ",
+		"IIG",
+		"IG "
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 0,
+		"count": 8
+	}
+}

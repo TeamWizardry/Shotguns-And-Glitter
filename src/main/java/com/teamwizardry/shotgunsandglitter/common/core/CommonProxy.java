@@ -1,8 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.common.core;
 
-import com.teamwizardry.librarianlib.core.common.RegistrationHandler;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
-import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
@@ -10,10 +8,9 @@ import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
-import com.teamwizardry.shotgunsandglitter.common.recipes.RecipeMagazine;
+import com.teamwizardry.shotgunsandglitter.common.recipes.ModRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -34,7 +31,7 @@ public class CommonProxy {
 		new ModPotions();
 		ModSounds.init();
 
-		RegistrationHandler.register(new RecipeMagazine(), new ResourceLocation(ShotgunsAndGlitter.MODID, "magazine"));
+		ModRecipes.init();
 	}
 
 	public void init(FMLInitializationEvent event) {

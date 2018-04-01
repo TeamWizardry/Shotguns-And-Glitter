@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 2
+		},
+		{
+			"item": "minecraft:ice"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 2,
+		"nbt": "{effect:\"frost\"}"
+	},
+	"group": "sng:frost"
+}
