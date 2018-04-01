@@ -15,6 +15,8 @@ import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.items.ItemStackHandler;
@@ -39,6 +41,16 @@ public class TileMiniTurret extends TileModTickable {
 	private UUID owner = null;
 
 	@Module
+	public ModuleInventory fuelInv = new ModuleInventory(new ItemStackHandler() {
+		@Override
+		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+			if (TileEntityFurnace.getItemBurnTime(stack) > 0)
+				return super.getStackLimit(slot, stack);
+			else return 0;
+		}
+	});
+
+	@Module
 	public ModuleInventory inventory = new ModuleInventory(new ItemStackHandler() {
 		@Override
 		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
@@ -47,6 +59,13 @@ public class TileMiniTurret extends TileModTickable {
 			else return 0;
 		}
 	});
+
+	public TileMiniTurret() {
+		inventory.getHandler().setSize(1000);
+		inventory.setSides(EnumFacing.UP, EnumFacing.DOWN);
+
+		fuelInv.setSides(EnumFacing.HORIZONTALS);
+	}
 
 	@Override
 	public void tick() {
@@ -57,17 +76,17 @@ public class TileMiniTurret extends TileModTickable {
 
 			if (!world.isBlockPowered(getPos())) return;
 
-			boolean empty = true;
+			boolean emptyAmmo = true;
 			int fullSlot = -1;
 			for (int i = 0; i < inventory.getHandler().getSlots(); i++) {
 				if (!inventory.getHandler().getStackInSlot(i).isEmpty()) {
-					empty = false;
+					emptyAmmo = false;
 					fullSlot = i;
 					break;
 				}
 			}
 
-			if (empty) return;
+			if (emptyAmmo) return;
 
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
@@ -86,6 +105,16 @@ public class TileMiniTurret extends TileModTickable {
 				}
 				return;
 			}
+
+			boolean fueled = false;
+			for (int i = 0; i < fuelInv.getHandler().getSlots(); i++) {
+				if (!fuelInv.getHandler().getStackInSlot(i).isEmpty()) {
+					fuelInv.getHandler().extractItem(i, 1, false);
+					fueled = true;
+					break;
+				}
+			}
+			if (!fueled) return;
 
 			EntityLivingBase target = entities.get(0);
 			if (targetID != target.getEntityId()) {

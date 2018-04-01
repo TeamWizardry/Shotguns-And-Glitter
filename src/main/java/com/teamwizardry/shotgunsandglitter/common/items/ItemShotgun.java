@@ -96,7 +96,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 
 	@Override
 	public int getMaxAmmo() {
-		return 4;
+		return 1;
 	}
 
 	@Override
