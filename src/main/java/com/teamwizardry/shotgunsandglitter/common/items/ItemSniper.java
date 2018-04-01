@@ -69,7 +69,7 @@ public class ItemSniper extends ItemMod implements IGun {
 
 	@Override
 	public int getReloadCooldownTime() {
-		return 100;
+		return 40;
 	}
 
 	@Override
