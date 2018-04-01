@@ -64,9 +64,9 @@ public class EffectFrost implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 4f), 0));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
 			build.setAlphaFunction(new InterpFadeInOut(0, 1f));
 
@@ -88,9 +88,9 @@ public class EffectFrost implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 1f), 0));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), 0));
 			build.setAlphaFunction(new InterpFadeInOut(0, 1f));
 
 			build.setDeceleration(new Vec3d(0.9, 0.9, 0.9));

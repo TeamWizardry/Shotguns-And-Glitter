@@ -75,7 +75,7 @@ public class EffectPsychic implements Effect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		glitter.setColor(new Color(0x730089));
+		glitter.setColor(new Color(0xc919ff));
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 100, 0, (i, build) -> {
 			double radius = RandUtil.nextDouble(0.1, 1);
@@ -106,7 +106,7 @@ public class EffectPsychic implements Effect {
 		builder.setRender(ClientEventHandler.SPARKLE);
 		builder.disableRandom();
 
-		builder.setColor(new Color(0x730089));
+		builder.setColor(new Color(0xc919ff));
 
 		float size = 0.5f;
 		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
@@ -115,7 +115,7 @@ public class EffectPsychic implements Effect {
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
 		});
 		double scatter = 0.1f;
-		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 3, 0, (i, particleBuilder) ->
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
 		{
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
@@ -126,7 +126,7 @@ public class EffectPsychic implements Effect {
 			particleBuilder.setPositionOffset(offset);
 
 		});
-		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 4, 0, (i, particleBuilder) -> {
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) -> {
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
 			Vec3d offset = new Vec3d(

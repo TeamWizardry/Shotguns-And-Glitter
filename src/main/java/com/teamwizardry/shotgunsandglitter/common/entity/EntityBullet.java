@@ -34,6 +34,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	private static final DataParameter<Byte> BULLET_TYPE = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BYTE);
 	private static final DataParameter<String> BULLET_EFFECT = EntityDataManager.createKey(EntityBullet.class, DataSerializers.STRING);
+	private static final DataParameter<Integer> CASTER_ID = EntityDataManager.createKey(EntityBullet.class, DataSerializers.VARINT);
 
 	private EntityLivingBase caster = null;
 
@@ -48,6 +49,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 		setBulletType(bulletType);
 		setEffect(effect);
+		setCasterId(-1);
 
 		shoot(normal.x, normal.y, normal.z, effect.getVelocity(world, bulletType), inaccuracy);
 	}
@@ -58,6 +60,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 		setBulletType(bulletType);
 		setEffect(effect);
+		setCasterId(caster.getEntityId());
 
 		this.caster = caster;
 		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
@@ -77,6 +80,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	@Override
 	protected void entityInit() {
+		dataManager.register(CASTER_ID, -1);
 		dataManager.register(BULLET_TYPE, (byte) 0);
 		dataManager.register(BULLET_EFFECT, "");
 	}
@@ -222,5 +226,15 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	@Override
 	public void setEffect(@NotNull Effect effect) {
 		dataManager.set(BULLET_EFFECT, effect.getID());
+	}
+
+	@Override
+	public int getCasterId() {
+		return dataManager.get(CASTER_ID);
+	}
+
+	@Override
+	public void setCasterId(int casterId) {
+		dataManager.set(CASTER_ID, casterId);
 	}
 }

@@ -5,12 +5,12 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -48,7 +48,7 @@ public class EffectFirework implements Effect {
 					RandUtil.nextDouble(0.8, 1)
 			));
 			//build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
-			build.setLifetime(RandUtil.nextInt(50, 100));
+			build.setLifetime(RandUtil.nextInt(30, 70));
 			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 1f), RandUtil.nextFloat(0, 0.2f)));
 
@@ -73,7 +73,7 @@ public class EffectFirework implements Effect {
 					RandUtil.nextDouble(0.8, 1)
 			));
 			//build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
-			build.setLifetime(RandUtil.nextInt(100, 300));
+			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), 0));
 
@@ -105,7 +105,7 @@ public class EffectFirework implements Effect {
 
 		RandUtilSeed seed = new RandUtilSeed(glitter.hashCode());
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 10, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 10));
 			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.5f), 0));
@@ -122,7 +122,7 @@ public class EffectFirework implements Effect {
 			));
 		});
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 10, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScale(RandUtil.nextFloat(0.5f, 1f));

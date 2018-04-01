@@ -49,4 +49,8 @@ public interface IBulletEntity {
 	Effect getEffect();
 
 	void setEffect(@NotNull Effect effect);
+
+	int getCasterId();
+
+	void setCasterId(int casterId);
 }

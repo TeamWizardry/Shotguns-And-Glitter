@@ -55,6 +55,8 @@ public class TileMiniTurret extends TileModTickable {
 			markDirty();
 		} else {
 
+			if (!world.isBlockPowered(getPos())) return;
+
 			boolean empty = true;
 			int fullSlot = -1;
 			for (int i = 0; i < inventory.getHandler().getSlots(); i++) {
@@ -67,7 +69,14 @@ public class TileMiniTurret extends TileModTickable {
 
 			if (empty) return;
 
-			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSqToCenter(getPos()) > 64 * 64) && input.getDistanceSqToCenter(getPos()) > 5 * 5 && (owner == null || !input.getUniqueID().equals(owner)));
+			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
+				if (input == null) return false;
+				double dist = input.getDistanceSq(getPos());
+				if (dist > 64 * 64) return false;
+				if (dist < 4 * 4) return false;
+				return owner == null || !owner.equals(input.getUniqueID());
+			});
+
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
 
 			if (entities.isEmpty()) {

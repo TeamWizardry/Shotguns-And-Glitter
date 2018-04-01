@@ -5,11 +5,11 @@ import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpCi
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
@@ -41,7 +41,7 @@ public class EffectPiercing implements Effect {
 		glitter.disableMotionCalculation();
 		glitter.setColor(Color.YELLOW);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 30, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.8f, 1.4f), 0));
 
@@ -62,7 +62,7 @@ public class EffectPiercing implements Effect {
 		glitter.disableMotionCalculation();
 		glitter.setColor(Color.YELLOW);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 15, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.1f, 0.5f), 0));
 

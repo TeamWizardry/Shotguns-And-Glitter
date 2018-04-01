@@ -11,14 +11,13 @@ import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
 
 public class EffectHookshot implements Effect {
 
@@ -39,25 +38,28 @@ public class EffectHookshot implements Effect {
 		}
 	}
 
-	// TODO: check effect once thrower nullity is fixed
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		Vec3d position = bullet.getPositionVector();
-		EntityLivingBase thrower = bullet.getThrower();
+
+		int throwerID = bullet.getCasterId();
+		if (throwerID == -1) return;
+
+		Entity thrower = world.getEntityByID(throwerID);
 		if (thrower == null) return;
+
 		Vec3d throwerPos = thrower.getPositionVector().addVector(0, thrower.getEyeHeight(), 0);
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRenderNormalLayer(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
 
-		glitter.setColor(Color.GRAY);
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new InterpLine(throwerPos, position), 20, 0, (i, build) -> {
-			build.setLifetime(RandUtil.nextInt(10, 20));
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 3), 0f));
+		ParticleSpawner.spawn(glitter, world, new InterpLine(throwerPos, position), 50, 0, (i, build) -> {
+			build.setLifetime(RandUtil.nextInt(30, 50));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2), 0f));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.005, -0.001), 0));
 			build.setMotion(new Vec3d(
 					RandUtil.nextDouble(-1, 1),
@@ -72,22 +74,26 @@ public class EffectHookshot implements Effect {
 		Vec3d position = bullet.getPositionVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
-		glitter.setRenderNormalLayer(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
 
-		glitter.setColor(Color.GRAY);
 		glitter.setCollision(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 10, 0, (i, build) -> {
-			build.setMotion(new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ()).scale(-1 / 2.0));
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
+			build.setMotion(new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ()).scale(-1 / 10.0));
 			build.setPositionOffset(new Vec3d(
 					RandUtil.nextDouble(-0.1, 0.1),
 					RandUtil.nextDouble(-0.1, 0.1),
 					RandUtil.nextDouble(-0.1, 0.1)
 			));
 			build.setLifetime(RandUtil.nextInt(30, 60));
-			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 3), 0f));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 1), 0f));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.005, -0.001), 0));
+			build.setJitter(4, new Vec3d(
+					RandUtil.nextDouble(-0.2, 0.2),
+					RandUtil.nextDouble(-0.2, 0.2),
+					RandUtil.nextDouble(-0.2, 0.2)
+			));
 		});
 	}
 

@@ -95,7 +95,7 @@ public class EffectImpact implements Effect {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 3, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 2f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xb342f4), new Color(0x700000)));
