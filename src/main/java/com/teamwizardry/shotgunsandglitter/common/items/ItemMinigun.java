@@ -52,7 +52,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 	@NotNull
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {
-		return BulletType.PISTOL;
+		return BulletType.BASIC;
 	}
 
 	@Override

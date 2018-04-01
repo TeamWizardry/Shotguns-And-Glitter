@@ -1,18 +1,18 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "shotgunsandglitter:bullet",
-      "data": 1
-    },
-    {
-      "item": "minecraft:melon"
-    }
-  ],
-  "result": {
-    "item": "shotgunsandglitter:bullet",
-    "data": 1,
-    "nbt": "{effect:\"biotic\"}"
-  },
-  "group": "sng:biotic"
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		{
+			"item": "minecraft:melon"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"nbt": "{effect:\"biotic\"}"
+	},
+	"group": "sng:biotic"
 }

@@ -1,19 +1,19 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "shotgunsandglitter:bullet",
-      "data": 0
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "gunpowder"
-    }
-  ],
-  "result": {
-    "item": "shotgunsandglitter:bullet",
-    "data": 0,
-    "nbt": "{effect:\"gravity_out\"}"
-  },
-  "group": "sng:gravity_out"
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 0
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 0,
+		"nbt": "{effect:\"gravity_out\"}"
+	},
+	"group": "sng:gravity_out"
 }

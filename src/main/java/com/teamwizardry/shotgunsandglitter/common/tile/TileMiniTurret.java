@@ -55,7 +55,7 @@ public class TileMiniTurret extends TileModTickable {
 	public ModuleInventory inventory = new ModuleInventory(new ItemStackHandler() {
 		@Override
 		protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-			if (stack.getItem() instanceof ItemBullet && BulletType.byOrdinal(stack.getItemDamage()) == BulletType.PISTOL)
+			if (stack.getItem() instanceof ItemBullet && BulletType.byOrdinal(stack.getItemDamage()) == BulletType.BASIC)
 				return super.getStackLimit(slot, stack);
 			else return 0;
 		}
@@ -133,7 +133,7 @@ public class TileMiniTurret extends TileModTickable {
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
 
 			if (!world.isRemote) {
-				EntityBullet bullet = new EntityBullet(world, normal, BulletType.PISTOL, effect, 0f, 1f); // Todo: potency
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.BASIC, effect, 0f, 1f); // Todo: potency
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);

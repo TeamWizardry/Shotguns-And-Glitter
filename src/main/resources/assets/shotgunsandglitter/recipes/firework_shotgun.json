@@ -1,19 +1,19 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "shotgunsandglitter:bullet",
-      "data": 1
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "paper"
-    }
-  ],
-  "result": {
-    "item": "shotgunsandglitter:bullet",
-    "data": 1,
-    "nbt": "{effect:\"firework\"}"
-  },
-  "group": "sng:firework"
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "paper"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"nbt": "{effect:\"firework\"}"
+	},
+	"group": "sng:firework"
 }

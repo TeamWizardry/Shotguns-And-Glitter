@@ -1,19 +1,19 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "shotgunsandglitter:bullet",
-      "data": 1
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "dustGlowstone"
-    }
-  ],
-  "result": {
-    "item": "shotgunsandglitter:bullet",
-    "data": 1,
-    "nbt": "{effect:\"flash\"}"
-  },
-  "group": "sng:flash"
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustGlowstone"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"nbt": "{effect:\"flash\"}"
+	},
+	"group": "sng:flash"
 }

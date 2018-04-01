@@ -1,25 +1,25 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "BBB",
-    "BIB",
-    "BBB"
-  ],
-  "key": {
-    "B": {
-      "item": "shotgunsandglitter:bullet",
-      "data": 0
-    },
-    "I": {
-      "type": "forge:ore_dict",
-      "ore": "paper"
-    }
-  },
-  "result": {
-    "item": "shotgunsandglitter:bullet",
-    "data": 0,
-    "count": 8,
-    "nbt": "{effect:\"firework\"}"
-  },
-  "group": "sng:firework"
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:bullet",
+			"data": 0
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "paper"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 0,
+		"count": 8,
+		"nbt": "{effect:\"firework\"}"
+	},
+	"group": "sng:firework"
 }
