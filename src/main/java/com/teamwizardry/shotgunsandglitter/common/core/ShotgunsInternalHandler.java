@@ -20,8 +20,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ShotgunsInternalHandler extends InternalHandler {
 	@Override
-	public IBulletEntity newBulletEntity(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
-		return new EntityBullet(world, caster, bulletType, effect, inaccuracy);
+	public IBulletEntity newBulletEntity(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
+		return new EntityBullet(world, caster, bulletType, effect, inaccuracy, potency);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -32,6 +33,8 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	private static final DataParameter<Byte> BULLET_TYPE = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BYTE);
 	private static final DataParameter<String> BULLET_EFFECT = EntityDataManager.createKey(EntityBullet.class, DataSerializers.STRING);
 	private static final DataParameter<Integer> CASTER_ID = EntityDataManager.createKey(EntityBullet.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> POTENCY = EntityDataManager.createKey(EntityBullet.class, DataSerializers.FLOAT);
+	private static final DataParameter<BlockPos> ORIGIN = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BLOCK_POS);
 
 	private EntityLivingBase caster = null;
 
@@ -40,27 +43,32 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		setSize(0.1F, 0.1F);
 	}
 
-	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
+	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
 		super(world);
 		setSize(0.1F, 0.1F);
 
 		setBulletType(bulletType);
 		setEffect(effect);
 		setCasterId(-1);
+		setPotency(potency);
 
 		shoot(normal.x, normal.y, normal.z, effect.getVelocity(world, bulletType), inaccuracy);
+		setOrigin(getPosition());
 	}
 
-	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy) {
+	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
 		super(world, caster);
 		setSize(0.1F, 0.1F);
 
 		setBulletType(bulletType);
 		setEffect(effect);
 		setCasterId(caster.getEntityId());
+		setPotency(potency);
 
 		this.caster = caster;
 		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
+
+		setOrigin(getPosition());
 	}
 
 	@NotNull
@@ -71,9 +79,11 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	@Override
 	protected void entityInit() {
-		dataManager.register(CASTER_ID, -1);
 		dataManager.register(BULLET_TYPE, (byte) 0);
 		dataManager.register(BULLET_EFFECT, "");
+		dataManager.register(CASTER_ID, -1);
+		dataManager.register(ORIGIN, BlockPos.ORIGIN);
+		dataManager.register(POTENCY, 0f);
 	}
 
 	@Override
@@ -83,7 +93,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	@Override
 	public void onUpdate() {
-
 		double mX = motionX,
 				mY = motionY,
 				mZ = motionZ;
@@ -156,6 +165,8 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		super.writeEntityToNBT(compound);
 		compound.setByte("bulletType", dataManager.get(BULLET_TYPE));
 		compound.setString("bulletEffect", dataManager.get(BULLET_EFFECT));
+		compound.setFloat("bulletPotency", getPotency());
+		compound.setLong("bulletOrigin", getOrigin().toLong());
 		if (caster != null)
 			compound.setString("caster", caster.getUniqueID().toString());
 	}
@@ -165,6 +176,8 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		super.readEntityFromNBT(compound);
 		dataManager.set(BULLET_TYPE, compound.getByte("bulletType"));
 		dataManager.set(BULLET_EFFECT, compound.getString("bulletEffect"));
+		setPotency(compound.getFloat("bulletPotency"));
+		setOrigin(BlockPos.fromLong(compound.getLong("bulletOrigin")));
 
 		if (compound.hasKey("caster"))
 			caster = world.getPlayerEntityByUUID(UUID.fromString(compound.getString("caster")));
@@ -230,5 +243,25 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	@Override
 	public void setCasterId(int casterId) {
 		dataManager.set(CASTER_ID, casterId);
+	}
+
+	@Override
+	public BlockPos getOrigin() {
+		return dataManager.get(ORIGIN);
+	}
+
+	@Override
+	public void setOrigin(BlockPos pos) {
+		dataManager.set(ORIGIN, pos);
+	}
+
+	@Override
+	public float getPotency() {
+		return dataManager.get(POTENCY);
+	}
+
+	@Override
+	public void setPotency(float potency) {
+		dataManager.set(POTENCY, potency);
 	}
 }

@@ -49,4 +49,12 @@ public interface IBulletEntity {
 	int getCasterId();
 
 	void setCasterId(int casterId);
+
+	BlockPos getOrigin();
+
+	void setOrigin(BlockPos pos);
+
+	float getPotency();
+
+	void setPotency(float potency);
 }

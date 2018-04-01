@@ -133,7 +133,7 @@ public class TileMiniTurret extends TileModTickable {
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
 
 			if (!world.isRemote) {
-				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 0f);
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 0f, 1f); // Todo: potency
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);

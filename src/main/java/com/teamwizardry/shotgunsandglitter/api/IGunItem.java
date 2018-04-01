@@ -64,7 +64,7 @@ public interface IGunItem extends IAmmoItem {
 						break;
 					effect = ammo.get(consumed++);
 				}
-				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack));
+				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack), 1f); // Todo potency
 				bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 				world.spawnEntity(bullet.getAsEntity());
 			}
