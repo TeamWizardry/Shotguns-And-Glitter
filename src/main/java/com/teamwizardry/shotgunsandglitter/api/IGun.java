@@ -47,7 +47,7 @@ public interface IGun {
 			bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 			world.spawnEntity(bullet.getAsEntity());
 		} else if (effect.getFireSound() != null) {
-			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}
 
 		setFireCooldown(world, player, stack);
@@ -58,7 +58,7 @@ public interface IGun {
 
 		if (world.isRemote && getFireSoundEvents() != null)
 			for (SoundEvent sound : getFireSoundEvents())
-				world.playSound(player.posX, player.posY, player.posZ, sound, SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				world.playSound(player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 
 	}
 
@@ -66,6 +66,6 @@ public interface IGun {
 		player.getCooldownTracker().setCooldown(stack.getItem(), getReloadCooldownTime());
 
 		if (world.isRemote && getReloadSoundEvent() != null)
-			world.playSound(player.posX, player.posY, player.posZ, getReloadSoundEvent(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+			world.playSound(player.posX, player.posY, player.posZ, getReloadSoundEvent(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 	}
 }

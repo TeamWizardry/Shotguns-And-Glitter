@@ -97,19 +97,20 @@ public class TileMiniTurret extends TileModTickable {
 
 			Effect effect = EffectRegistry.getEffectByID("firework");//ammo.get(0);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
+					.add(new Vec3d(target.motionX, target.motionY, target.motionZ))
 					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5));
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal.scale(1.0 / 2.0));
 
 			if (!world.isRemote) {
-				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 4f);
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.SMALL, effect, 2f);
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);
 			} else {
 				if (effect.getFireSound() != null)
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 			}
 
 			cooldown = 40;

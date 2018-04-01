@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -106,11 +107,12 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 			world.removeEntity(this);
 		} else {
 			if (world.isRemote) {
-				List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 16 * 16));
+				List<EntityPlayer> entities = world.getEntities(EntityPlayer.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 5 * 5));
 
-				if (!entities.isEmpty()) {
-					world.playSound(posX, posY, posZ, ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.9f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-					world.playSound(posX, posY, posZ, ModSounds.DUST_SPARKLE, SoundCategory.HOSTILE, RandUtil.nextFloat(0.3f, 0.5f), RandUtil.nextFloat(0.95f, 1.1f), false);
+
+				for (EntityPlayer player : entities) {
+					world.playSound(player, getPosition(), ModSounds.BULLET_FLYBY, SoundCategory.PLAYERS, RandUtil.nextFloat(0.9f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f));
+					world.playSound(player, getPosition(), ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.1f, 0.3f), RandUtil.nextFloat(0.95f, 1.1f));
 				}
 			}
 

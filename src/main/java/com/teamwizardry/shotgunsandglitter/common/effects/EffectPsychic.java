@@ -6,11 +6,11 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -61,7 +61,7 @@ public class EffectPsychic implements Effect {
 		bullet.getAsEntity().motionZ += acceleration.z;
 
 		if (RandUtil.nextInt(20) == 0)
-			world.playSound(bullet.posX(), bullet.posY(), bullet.posZ(), ModSounds.BULLET_FLYBY, SoundCategory.HOSTILE, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
+			world.playSound(bullet.posX(), bullet.posY(), bullet.posZ(), ModSounds.BULLET_FLYBY, SoundCategory.PLAYERS, RandUtil.nextFloat(0.8f, 1f), RandUtil.nextFloat(0.8f, 1.2f), false);
 	}
 
 	@SideOnly(Side.CLIENT)

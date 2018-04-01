@@ -62,7 +62,7 @@ public class ItemShotgun extends ItemMod implements IGun {
 				world.spawnEntity(bullet);
 			}
 		} else if (effect.getFireSound() != null) {
-			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.HOSTILE, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}
 
 		setFireCooldown(world, player, stack);
