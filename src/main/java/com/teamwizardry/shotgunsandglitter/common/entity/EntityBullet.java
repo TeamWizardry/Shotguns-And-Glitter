@@ -58,7 +58,9 @@ public class EntityBullet extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 
-		double mX = motionX, mY = motionY, mZ = motionZ;
+		double mX = motionX,
+				mY = motionY,
+				mZ = motionZ;
 
 		super.onUpdate();
 		if (isDead) return;

@@ -4,6 +4,7 @@ import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -140,5 +141,10 @@ public class EffectPsychic implements Effect {
 	@Override
 	public @Nullable SoundEvent getImpactSound() {
 		return ModSounds.SMOKE_BLAST;
+	}
+
+	@Override
+	public float getVelocity(@NotNull World world, @NotNull BulletType bulletType) {
+		return 1f;
 	}
 }

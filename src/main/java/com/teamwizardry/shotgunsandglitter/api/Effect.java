@@ -48,7 +48,7 @@ public interface Effect {
 	// Numerical Methods
 
 	default float getVelocity(@NotNull World world, @NotNull BulletType bulletType) {
-		return 1.0F;
+		return 3.0F;
 	}
 
 	default float damage(@NotNull World world, @NotNull EntityBullet bullet) {
