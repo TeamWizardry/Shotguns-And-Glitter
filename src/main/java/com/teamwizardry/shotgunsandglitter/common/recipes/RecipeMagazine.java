@@ -18,13 +18,17 @@ public class RecipeMagazine extends IForgeRegistryEntry.Impl<IRecipe> implements
 
 	@Override
 	public boolean matches(@NotNull InventoryCrafting inv, @NotNull World worldIn) {
+		int bulletsFound = 0;
+
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
 			ItemStack stack = inv.getStackInSlot(i);
 			if (stack.isEmpty()) continue;
 
-			if (stack.getItem() != ModItems.BULLET || BulletType.byOrdinal(stack.getItemDamage()) != BulletType.SMALL) {
+			if (stack.getItem() != ModItems.BULLET || BulletType.byOrdinal(stack.getItemDamage()) != BulletType.SMALL)
 				return false;
-			}
+
+			if (bulletsFound++ >= 5)
+				return false;
 		}
 		return true;
 	}
@@ -32,7 +36,7 @@ public class RecipeMagazine extends IForgeRegistryEntry.Impl<IRecipe> implements
 	@NotNull
 	@Override
 	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
-		ItemStack magazine = new ItemStack(ModItems.MAGAZINE, 1);
+		ItemStack magazine = new ItemStack(ModItems.MAGAZINE);
 
 		NBTTagList loadedAmmo = new NBTTagList();
 
@@ -54,7 +58,12 @@ public class RecipeMagazine extends IForgeRegistryEntry.Impl<IRecipe> implements
 
 	@Override
 	public boolean canFit(int width, int height) {
-		return false;
+		return true;
+	}
+
+	@Override
+	public boolean isDynamic() {
+		return true;
 	}
 
 	@NotNull

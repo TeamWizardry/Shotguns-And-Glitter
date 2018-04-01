@@ -1,5 +1,22 @@
 item_group.shotgunsandglitter=Shotguns & Glitter
 
+
+shotgunsandglitter.basic.name=&7Basic Round
+shotgunsandglitter.firework.name=&fFirework Round
+shotgunsandglitter.gravity_in.name=&5Graviton Round
+shotgunsandglitter.gravity_out.name=&dRepulsor Round
+shotgunsandglitter.hookshot.name=&7Hookshot Round
+shotgunsandglitter.piercing.name=&7Piercing Round
+shotgunsandglitter.psychic.name=&5Psyker Round
+shotgunsandglitter.biotic.name=&2Biotic Round
+shotgunsandglitter.tranq.name=&aTranquilizer Round
+shotgunsandglitter.frost.name=&bFreezing Round
+shotgunsandglitter.tainted.name=&cTainted Round
+shotgunsandglitter.flash.name=&fFlashbang Round
+shotgunsandglitter.impact.name=&8Impact Round
+shotgunsandglitter.balefire.name=&6Balefire Round
+shotgunsandglitter.draconic.name=&dDragonfire Round
+
 item.shotgunsandglitter:bullet_medium.basic.name=Simple Round
 item.shotgunsandglitter:bullet_medium.firework.name=Firework Round
 item.shotgunsandglitter:bullet_medium.gravity_in.name=Graviton Round

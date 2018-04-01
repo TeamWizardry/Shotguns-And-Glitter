@@ -8,7 +8,6 @@ import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
@@ -16,10 +15,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static com.teamwizardry.shotgunsandglitter.common.items.ItemMagazine.addTooltipContents;
 
 
 public class ItemPistol extends ItemMod implements IGun {
@@ -29,17 +32,10 @@ public class ItemPistol extends ItemMod implements IGun {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-
-
-		NBTTagList loadedAmmo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
-		if (loadedAmmo == null) loadedAmmo = new NBTTagList();
-
-		for (NBTBase base : loadedAmmo) {
-			if (!(base instanceof NBTTagString)) continue;
-			tooltip.add(((NBTTagString) base).getString());
-		}
+		addTooltipContents(stack, tooltip);
 	}
 
 	@Override
@@ -66,37 +62,27 @@ public class ItemPistol extends ItemMod implements IGun {
 
 		if (loadedAmmo.tagCount() >= getMaxAmmo()) return false;
 
-		for (int j = 0; j < newAmmoList.tagCount(); j++) {
+
+		NBTTagList ammoToAdd = newAmmoList.copy();
+
+		int removed = 0;
+
+		for (int index = 0; index < ammoToAdd.tagCount(); index++) {
 			if (loadedAmmo.tagCount() >= getMaxAmmo()) break;
 
-			String effectID = newAmmoList.getStringTagAt(j);
+			String effectID = ammoToAdd.getStringTagAt(index);
 
 			loadedAmmo.appendTag(new NBTTagString(effectID));
-			newAmmoList.removeTag(j);
+			newAmmoList.removeTag(index - removed++);
 		}
 
-		if (newAmmoList.tagCount() <= 0) {
+		if (newAmmoList.tagCount() == 0)
 			ammo.setCount(0);
-		}
 
 		ItemNBTHelper.setList(gun, "ammo", loadedAmmo);
 
 		setReloadCooldown(world, player, gun);
 		return true;
-
-		//if (getBulletType() != BulletType.byOrdinal(ammo.getItemDamage())) return false;
-//
-		//NBTTagList list = ItemNBTHelper.getList(gun, "ammo", Constants.NBT.TAG_STRING);
-		//if (list == null) list = new NBTTagList();
-//
-		//if (list.tagCount() >= maxAmmo()) return false;
-		//Effect effect = ItemBullet.getEffectFromItem(ammo);
-//
-		//list.appendTag(new NBTTagString(effect.getID()));
-		//ItemNBTHelper.setList(ammo, "ammo", list);
-//
-		//reloadCooldown(world, player, gun);
-		//return true;
 	}
 
 	@Override
