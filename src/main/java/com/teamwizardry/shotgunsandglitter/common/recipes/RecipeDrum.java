@@ -28,7 +28,7 @@ public class RecipeDrum extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
 
 			bulletsFound += stack.getCount();
 
-			if (bulletsFound >= 200)
+			if (bulletsFound >= 50 || bulletsFound <= 10)
 				return false;
 		}
 		return true;
@@ -42,11 +42,11 @@ public class RecipeDrum extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
 		NBTTagList loadedAmmo = new NBTTagList();
 
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			if (loadedAmmo.tagCount() >= 200) break;
+			if (loadedAmmo.tagCount() >= 50) break;
 			ItemStack stack = inv.getStackInSlot(i);
 
 			for (int j = 0; j < stack.getCount(); j++) {
-				if (loadedAmmo.tagCount() >= 200) break;
+				if (loadedAmmo.tagCount() >= 50) break;
 				Effect effect = ModItems.BULLET.getEffectFromItem(stack);
 				loadedAmmo.appendTag(new NBTTagString(effect.getID()));
 			}

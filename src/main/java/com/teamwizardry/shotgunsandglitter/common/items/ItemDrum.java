@@ -44,7 +44,7 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 			for (Effect effect : EffectRegistry.getEffects()) {
 				ItemStack stack = new ItemStack(this);
 				NBTTagList list = new NBTTagList();
-				for (int i = 0; i < 200; i++)
+				for (int i = 0; i < 50; i++)
 					list.appendTag(new NBTTagString(effect.getID()));
 				ItemNBTHelper.setList(stack, "ammo", list);
 				subItems.add(stack);

@@ -52,7 +52,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 
 	@Override
 	public int getMaxAmmo(ItemStack stack) {
-		return 200;
+		return 50;
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 
 	@Override
 	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
-		return new SoundEvent[]{ModSounds.SHOT_MINIGUN};
+		return new SoundEvent[]{ModSounds.SHOT_MINIGUN, ModSounds.DUST_SPARKLE};
 	}
 
 	@Override
