@@ -5,6 +5,8 @@ import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
@@ -70,11 +72,12 @@ public interface IGunItem extends IAmmoItem {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void runIfClient() {
-				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(player, "rotationPitch");
+				if (Minecraft.getMinecraft().player == null) return;
+				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(Minecraft.getMinecraft().player, "rotationPitch");
 				anim.setDuration(2);
-				anim.setTo(player.rotationPitch - headKnockStrength(stack));
+				anim.setTo(Minecraft.getMinecraft().player.rotationPitch - headKnockStrength(stack));
 				anim.setEasing(Easing.easeOutCubic);
-				InternalHandler.INTERNAL_HANDLER.addFlashAnimation(anim);
+				ClientEventHandler.HEAD_TILT_ANIMATION_HANDLER.add(anim);
 			}
 		});
 	}

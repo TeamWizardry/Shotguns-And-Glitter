@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientEventHandler {
 
 	public static final Animator FLASH_ANIMATION_HANDLER = new Animator();
+	public static final Animator HEAD_TILT_ANIMATION_HANDLER = new Animator();
 
 	public static ResourceLocation SPARKLE = new ResourceLocation(ShotgunsAndGlitter.MODID, "particles/sparkle_blurred");
 

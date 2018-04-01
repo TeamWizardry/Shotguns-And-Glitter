@@ -5,10 +5,10 @@ import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.IGunItem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,32 +32,16 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 		addTooltipContents(stack, tooltip);
 	}
 
+	@Override
 	@NotNull
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.BOW;
-	}
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+		ItemStack offHand = playerIn.getHeldItemOffhand();
+		ItemStack mainHand = playerIn.getHeldItemMainhand();
 
-	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-		super.onUsingTick(stack, player, count);
-
-		if (!(player instanceof EntityPlayer)) return;
-
-		if (!reloadAmmo(player.world, (EntityPlayer) player, player.getHeldItemMainhand(), player.getHeldItemOffhand())) {
-			fireGun(player.world, (EntityPlayer) player, player.getHeldItemMainhand(), player.getActiveHand());
-		} else {
-			player.swingArm(player.getActiveHand());
+		if (reloadAmmo(worldIn, playerIn, mainHand, offHand)) {
+			fireGun(worldIn, playerIn, playerIn.getHeldItem(handIn), handIn);
 		}
-
-	}
-
-	@NotNull
-	@Override
-	public ItemStack onItemUseFinish(@NotNull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-		if (entityLiving instanceof EntityPlayer)
-			((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(stack.getItem(), 100);
-		return super.onItemUseFinish(stack, worldIn, entityLiving);
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 	@NotNull
