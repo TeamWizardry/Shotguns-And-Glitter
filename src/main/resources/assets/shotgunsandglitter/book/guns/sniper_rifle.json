@@ -1,7 +1,7 @@
 {
   "type": "entry",
   "icon": {
-    "item": "shotgunsandglitter:sniper_rifle"
+    "item": "shotgunsandglitter:sniper"
   },
   "title": "shotgunsandglitter.book.guns.sniper_rifle.title",
   "description": "shotgunsandglitter.book.guns.sniper_rifle.desc",
@@ -10,7 +10,7 @@
     "shotgunsandglitter.book.guns.sniper_rifle.content2",
     {
       "type": "recipe",
-      "recipe": "shotgunsandglitter:sniper_rifle"
+      "recipe": "shotgunsandglitter:sniper"
     }
   ]
 }

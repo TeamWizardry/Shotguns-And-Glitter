@@ -1,7 +1,7 @@
 {
   "type": "entry",
   "icon": {
-    "item": "shotgunsandglitter:turret"
+    "item": "shotgunsandglitter:mini_turret"
   },
   "title": "shotgunsandglitter.book.guns.turret.title",
   "description": "shotgunsandglitter.book.guns.turret.desc",
@@ -13,7 +13,7 @@
     "shotgunsandglitter.book.guns.turret.content5",
     {
       "type": "recipe",
-      "recipe": "shotgunsandglitter:turret"
+      "recipe": "shotgunsandglitter:mini_turret"
     }
   ]
 }

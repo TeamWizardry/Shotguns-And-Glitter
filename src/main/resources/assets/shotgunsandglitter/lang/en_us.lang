@@ -74,7 +74,7 @@ item.shotgunsandglitter:magazine.name=Spark Magazine
 
 tile.shotgunsandglitter:mini_turret.name=Mini Turret
 
-shotgunsandglitter.book.title=Shotguns & Glitter Guide
+shotgunsandglitter.book.title=Shotguns And Glitter
 shotgunsandglitter.book.subtitle=By Team Wizardry
 shotgunsandglitter.book.guns.title=Guns
 shotgunsandglitter.book.bullets.title=Bullets
@@ -88,32 +88,32 @@ shotgunsandglitter.book.guns.getting_started.content4=Third of all, before you b
 shotgunsandglitter.book.guns.getting_started.content5=That's all you need to know! Pick a gun, pick a bullet, and start &mdestroying the world&r having fun!
 
 shotgunsandglitter.book.guns.pistol.title=Pistol
-shotgunsandglitter.book.guns.pistol.desc=Pistol
+shotgunsandglitter.book.guns.pistol.desc=Range: Short/Medium | Ammo: Magazine
 shotgunsandglitter.book.guns.pistol.content1=The Pistol is a type of hand gun that's best used when you want to fire at a fair fire-rate but don't want to hold a ton of bullets on your person.<br> This gun can be reloaded with a Magazine loaded with small bullets.<br>Magazines can hold a maximum of 4 small bullets.
 shotgunsandglitter.book.guns.pistol.content2=The Pistol is best used against short to medium range targets. After that, it's small bullets drop hard in power. <br> This gun deals a decent amount of damage, but nothing crazy; especially because it doesn't aim perfectly.
 
 shotgunsandglitter.book.guns.shotgun.title=Shotgun
-shotgunsandglitter.book.guns.shotgun.desc=Shotgun
+shotgunsandglitter.book.guns.shotgun.desc=Range: Short | Ammo: Shells
 shotgunsandglitter.book.guns.shotgun.content1=The Shotgun is a gun that can unload 5 bullets per shotgun shell. The bullets shoot out in a fairly scattered manner and are generally weak, but if multiple of those bullets hit the same target, it can deal lethal amounts of damage.
 shotgunsandglitter.book.guns.shotgun.content2=The Shotgun bullets are very strictly short-range, they die off fast otherwise. You can only load 1 Shotgun Shell at a time in the shotgun.
 
 shotgunsandglitter.book.guns.sniper_rifle.title=Sniper Rifle
-shotgunsandglitter.book.guns.sniper_rifle.desc=Sniper Rifle
+shotgunsandglitter.book.guns.sniper_rifle.desc=Range: Medium/Long | Ammo: Cartridge
 shotgunsandglitter.book.guns.sniper_rifle.content1=The Sniper Rifle is one of the most powerful guns we've been able to enhance with magic bullets. This gun can fire with perfect accuracy and with extreme power.
 shotgunsandglitter.book.guns.sniper_rifle.content2=This gun uses heavy bullets to only and can only load one at a time. Due to the bulkiness and power required for this gun, it takes a long time to cool down and reload.<br>The Sniper Rifle is best used against long range targets.
 
 shotgunsandglitter.book.guns.minigun.title=Minigun
-shotgunsandglitter.book.guns.minigun.desc=Minigun
+shotgunsandglitter.book.guns.minigun.desc=Range: Short | Ammo: Drum
 shotgunsandglitter.book.guns.minigun.content1=The Minigun, often nicknamed "gattling gun" is an interested weapon. It has a very very high fire rate and consumes Bullet Drums of small bullets. A single Bullet Drum can hold up to a hundred bullets at a time.
 shotgunsandglitter.book.guns.minigun.content2=This gun is best used against short to medium range targets as - despite it's high fire rate - has a very large scatter in it's bullets and each bullet tends to be very weak. When multiple bullets hit the same target, it can deal lethal damage.
 
 shotgunsandglitter.book.guns.grenade.title=Grenade
-shotgunsandglitter.book.guns.grenade.desc=Grenade
+shotgunsandglitter.book.guns.grenade.desc=Range: Short/Medium/Long
 shotgunsandglitter.book.guns.grenade.content1=Grenades are hand-held throwable explosives that can be loaded with effects. Unfortunately, the effects grenades can be loaded with are not compatible with those of the bullet effects we managed to create. As a result, we've created 5 very powerful effects for grenades only so we didn't leave you with something boring.
 shotgunsandglitter.book.guns.grenade.content2=You can read more about grenade specific effects in the Effects category.
 
 shotgunsandglitter.book.guns.turret.title=Turret
-shotgunsandglitter.book.guns.turret.desc=Turret
+shotgunsandglitter.book.guns.turret.desc=Range: Short/Medium | Ammo: Magazine
 shotgunsandglitter.book.guns.turret.content1=Despite our amazing creations to keep our boredom at bay, we got bored anyways with shooting the guns ourselves and having to deal with actually aiming them. So we've created a magic Turret machine that will do the job for us.
 shotgunsandglitter.book.guns.turret.content2=And despite the turrets' magical aiming properties, we couldn't invent one that fuels itself from the air around it, so until we manage to make that, you'll want to fuel your turrets with burnable fuel sources.
 shotgunsandglitter.book.guns.turret.content3=You can insert coal into it from the sides of the machine with a hopper to fuel it, then you can insert your magical bullets from the top of the turret to load it up. For security reasons we had to deal with the hard way, the turret requires redstone power to operate.

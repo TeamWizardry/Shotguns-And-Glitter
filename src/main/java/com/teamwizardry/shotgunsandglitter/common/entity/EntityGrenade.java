@@ -1,6 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.common.entity;
 
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
@@ -103,11 +103,11 @@ public class EntityGrenade extends EntityThrowable {
 	}
 
 	@NotNull
-	public Effect getEffect() {
+	public BulletEffect getEffect() {
 		return EffectRegistry.getEffectByID(dataManager.get(GRENADE_EFFECT));
 	}
 
-	public void setEffect(@NotNull Effect effect) {
+	public void setEffect(@NotNull BulletEffect effect) {
 		dataManager.set(GRENADE_EFFECT, effect.getID());
 	}
 
