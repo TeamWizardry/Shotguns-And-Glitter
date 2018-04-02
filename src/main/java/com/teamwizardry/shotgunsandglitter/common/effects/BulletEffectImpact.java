@@ -42,7 +42,7 @@ public class BulletEffectImpact implements BulletEffect {
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			BulletType type = bullet.getBulletType();
-			float range = 2f * type.knockbackStrength;
+			float range = type.damage * 0.75f;
 
 			for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPositionAsBlockPos().add(-range, -range, -range),
 					bullet.getPositionAsBlockPos().add(range, range / 2, range))) {
