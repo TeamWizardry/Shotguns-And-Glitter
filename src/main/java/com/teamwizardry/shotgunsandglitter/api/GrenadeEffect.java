@@ -33,13 +33,13 @@ public interface GrenadeEffect {
 				Vec3d difference = target.getPositionVector().subtract(grenade.getPositionAsVector());
 				hitEntity(world, grenade, target, intensity(world, grenade, (float) difference.lengthVector()));
 			}
+		}
 
-			if (doExplosionParticles(world, grenade)) {
-				Explosion explosion = new Explosion(world, grenade.getAsEntity(),
-						grenade.posX(), grenade.posY(), grenade.posZ(),
-						3f, false, false);
-				explosion.doExplosionB(true);
-			}
+		if (doExplosionParticles(world, grenade)) {
+			Explosion explosion = new Explosion(world, grenade.getAsEntity(),
+					grenade.posX(), grenade.posY(), grenade.posZ(),
+					6f, false, false);
+			explosion.doExplosionB(true);
 		}
 	}
 
