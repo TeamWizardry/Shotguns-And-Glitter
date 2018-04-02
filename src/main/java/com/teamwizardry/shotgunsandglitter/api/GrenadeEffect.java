@@ -50,7 +50,7 @@ public interface GrenadeEffect {
 			entity.attackEntityFrom(DamageSource.causeThrownDamage(grenade.getAsEntity(), grenade.getEntityThrower()),
 					damage(world, grenade, intensity));
 
-			Vec3d repulsion = entity.getPositionVector().subtract(grenade.getPositionAsVector());
+			Vec3d repulsion = grenade.getPositionAsVector().subtract(entity.getPositionVector());
 			repulsion = repulsion.subtract(0, repulsion.y, 0).normalize();
 
 			if (entity instanceof EntityLivingBase)
