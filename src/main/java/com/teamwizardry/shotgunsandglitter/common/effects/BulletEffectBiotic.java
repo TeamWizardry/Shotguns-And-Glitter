@@ -34,7 +34,7 @@ public class BulletEffectBiotic implements BulletEffect {
 
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
-		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet.getAsEntity(), hitEntity), 0.0f);
+		hitEntity.attackEntityFrom(DamageSource.GENERIC, 0.000001f);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20, bullet.getBulletType().ordinal()));
 		return true;

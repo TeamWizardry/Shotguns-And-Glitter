@@ -72,13 +72,13 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 			IBlockState state = world.getBlockState(result.getBlockPos());
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
 					state.getBlock().canCollideCheck(state, false))
-				die();
+				die(result.hitVec);
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit != null)
-			die();
+			die(result.hitVec);
 	}
 
-	public void die() {
-		ShotgunsAndGlitter.PROXY.grenadeImpact(world, this, getEffect(), getPositionVector());
+	public void die(Vec3d position) {
+		ShotgunsAndGlitter.PROXY.grenadeImpact(world, this, getEffect(), position);
 		setDead();
 	}
 
@@ -89,7 +89,7 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 
 		if (ticksExisted >= 50) {
 			if (!world.isRemote)
-				die();
+				die(getPositionVector());
 		} else {
 			if (world.isRemote)
 				world.playSound(posX, posY, posZ, ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.1f, 0.3f), RandUtil.nextFloat(0.95f, 1.1f), false);
