@@ -44,7 +44,7 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 
 	public static ItemStack getStackOfEffect(String effect, int count) {
 		ItemStack stack = new ItemStack(ModItems.GRENADE, count);
-		if (!EffectRegistry.getBulletEffectByID(effect).getID().equals("basic"))
+		if (!EffectRegistry.getGrenadeEffectByID(effect).getID().equals("basic"))
 			ItemNBTHelper.setString(stack, "effect", effect);
 		return stack;
 	}

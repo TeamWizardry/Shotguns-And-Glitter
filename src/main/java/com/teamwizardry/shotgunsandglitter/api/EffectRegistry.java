@@ -19,6 +19,7 @@ public class EffectRegistry {
 
 	static {
 		addEffect(BASIC_BULLET_EFFECT);
+		addEffect(BASIC_GRENADE_EFFECT);
 	}
 
 	public static void addEffect(BulletEffect... bulletEffects) {
