@@ -81,7 +81,7 @@ item.shotgunsandglitter:drum.name=Capacity Drum
 
 tile.shotgunsandglitter:mini_turret.name=Spark Turret
 
-tile.shotgunsandglitter:book.name=Shotguns And Glitter Guide Book
+item.shotgunsandglitter:book.name=Shotguns And Glitter Guide Book
 
 shotgunsandglitter.potion.tranquilizer=Tranquilized
 shotgunsandglitter.potion.frost=Frost Shock
