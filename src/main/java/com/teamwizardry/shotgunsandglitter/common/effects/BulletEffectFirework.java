@@ -31,7 +31,7 @@ public class BulletEffectFirework implements BulletEffect {
 
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
-		Vec3d position = bullet.getPositionVector();
+		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
 		glitter.setRender(ClientEventHandler.SPARKLE);
@@ -95,7 +95,7 @@ public class BulletEffectFirework implements BulletEffect {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
-		Vec3d position = bullet.getPositionVector();
+		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
 		glitter.setRender(ClientEventHandler.SPARKLE);

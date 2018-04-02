@@ -50,7 +50,7 @@ public class BulletEffectTranq implements BulletEffect {
 		glitter.disableMotionCalculation();
 		glitter.setCollision(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setColorFunction(new InterpColorHSV(Color.GREEN, Color.CYAN));
 			build.setAlphaFunction(new InterpFadeInOut(0f, 1f));
@@ -75,7 +75,7 @@ public class BulletEffectTranq implements BulletEffect {
 		glitter.disableMotionCalculation();
 		glitter.disableRandom();
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 1, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(0.5f, 0));
 			build.setColorFunction(new InterpColorHSV(Color.GREEN, Color.CYAN));
 		});

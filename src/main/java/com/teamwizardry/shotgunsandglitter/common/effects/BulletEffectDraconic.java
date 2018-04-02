@@ -46,8 +46,8 @@ public class BulletEffectDraconic implements BulletEffect {
 					new AxisAlignedBB(bullet.posX() - 4, bullet.posY() - 4, bullet.posZ() - 4,
 							bullet.posX() + 4, bullet.posY() + 4, bullet.posZ() + 4),
 					(entity) -> {
-						if (entity == null || !entity.isEntityAlive() || entity == bullet.getThrower()) return false;
-						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
+						if (entity == null || !entity.isEntityAlive() || entity == bullet.getEntityThrower()) return false;
+						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionAsVector());
 						return differenceVec.lengthSquared() < 4 * 4;
 					})) {
 				target.setFire(10);
@@ -63,7 +63,7 @@ public class BulletEffectDraconic implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 50, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2), 0));
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColorFunction(new InterpColorHSV(RandUtil.nextBoolean() ? Color.RED : Color.ORANGE, RandUtil.nextBoolean() ? Color.RED : Color.WHITE));
@@ -91,13 +91,13 @@ public class BulletEffectDraconic implements BulletEffect {
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), RandUtil.nextInt(1, 5), 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), RandUtil.nextInt(1, 5), 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 1f), 0));
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColorFunction(new InterpColorHSV(Color.WHITE, Color.RED));
 		});
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 5, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.5f), 0));
 			build.setLifetime(RandUtil.nextInt(40, 80));
 			build.setColorFunction(new InterpColorHSV(Color.RED, Color.WHITE));

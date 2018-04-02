@@ -25,6 +25,6 @@ public class BulletEffectBasic implements BulletEffect {
 		glitter.setScale(0.3f);
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1);
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 1);
 	}
 }

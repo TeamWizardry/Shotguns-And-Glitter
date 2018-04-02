@@ -48,10 +48,10 @@ public class BulletEffectGraviton implements BulletEffect {
 						bullet.posX() + range, bullet.posY() + range, bullet.posZ() + range),
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
-					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
+					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionAsVector());
 					return differenceVec.lengthSquared() < range * range && differenceVec.lengthSquared() != 0;
 				})) {
-			Vec3d differenceVec = bullet.getPositionVector().subtract(target.getPositionVector());
+			Vec3d differenceVec = bullet.getPositionAsVector().subtract(target.getPositionVector());
 			differenceVec = differenceVec.scale(direction / differenceVec.lengthSquared());
 			target.motionX = differenceVec.x * bullet.getBulletType().damage;
 			target.motionY = Math.min(Math.max(differenceVec.y, 0), 2) * bullet.getBulletType().damage + 0.25f;
@@ -78,7 +78,7 @@ public class BulletEffectGraviton implements BulletEffect {
 		glitter.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.03, -0.04), 0));
 		glitter.setCanBounce(true);
 		glitter.enableMotionCalculation();
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setMotion(Vec3d.ZERO);
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScale(RandUtil.nextFloat(0.2f, 1));
@@ -123,7 +123,7 @@ public class BulletEffectGraviton implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 		glitter.disableMotionCalculation();
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 10, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 10, 0, (i, build) -> {
 			build.setMotion(Vec3d.ZERO);
 			build.setLifetime(RandUtil.nextInt(10, 20));
 			build.setScale(RandUtil.nextFloat(0.2f, 1));

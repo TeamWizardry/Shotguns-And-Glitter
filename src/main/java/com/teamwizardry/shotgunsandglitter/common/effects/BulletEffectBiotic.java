@@ -47,7 +47,7 @@ public class BulletEffectBiotic implements BulletEffect {
 		glitter.setCanBounce(true);
 		glitter.disableMotionCalculation();
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.4f, 1f), 0));
 			build.setColorFunction(new InterpColorHSV(Color.RED, Color.YELLOW));
@@ -74,7 +74,7 @@ public class BulletEffectBiotic implements BulletEffect {
 		glitter.disableMotionCalculation();
 		glitter.setColor(Color.RED);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 15, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 15, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.5f), 0));
 			build.setColorFunction(new InterpColorHSV(Color.RED, Color.YELLOW));

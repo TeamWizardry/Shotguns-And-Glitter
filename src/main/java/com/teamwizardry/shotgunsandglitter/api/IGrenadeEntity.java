@@ -16,13 +16,13 @@ public interface IGrenadeEntity {
 	Entity getAsEntity();
 
 	@Nullable
-	EntityLivingBase getThrower();
+	EntityLivingBase getEntityThrower();
 
 	@NotNull
-	Vec3d getPositionVector();
+	Vec3d getPositionAsVector();
 
 	@NotNull
-	BlockPos getPosition();
+	BlockPos getPositionAsBlockPos();
 
 	double posX();
 

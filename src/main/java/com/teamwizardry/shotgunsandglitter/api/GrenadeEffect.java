@@ -27,10 +27,10 @@ public interface GrenadeEffect {
 							grenade.posX() + range, grenade.posY() + range, grenade.posZ() + range),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
-						Vec3d differenceVec = entity.getPositionVector().subtract(grenade.getPositionVector());
+						Vec3d differenceVec = entity.getPositionVector().subtract(grenade.getPositionAsVector());
 						return differenceVec.lengthSquared() < range * range;
 					})) {
-				Vec3d difference = target.getPositionVector().subtract(grenade.getPositionVector());
+				Vec3d difference = target.getPositionVector().subtract(grenade.getPositionAsVector());
 				hitEntity(world, grenade, target, intensity(world, grenade, (float) difference.lengthVector()));
 			}
 
@@ -48,7 +48,7 @@ public interface GrenadeEffect {
 	}
 
 	default void hitEntity(@NotNull World world, @NotNull IGrenadeEntity grenade, @NotNull Entity entity, float intensity) {
-		entity.attackEntityFrom(DamageSource.causeThrownDamage(grenade.getAsEntity(), grenade.getThrower()),
+		entity.attackEntityFrom(DamageSource.causeThrownDamage(grenade.getAsEntity(), grenade.getEntityThrower()),
 				damage(world, grenade, intensity));
 	}
 

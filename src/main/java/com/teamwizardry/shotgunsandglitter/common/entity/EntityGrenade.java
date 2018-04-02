@@ -16,10 +16,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 
@@ -136,6 +138,21 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 	@Override
 	public @NotNull Entity getAsEntity() {
 		return this;
+	}
+
+	@Override
+	public @Nullable EntityLivingBase getEntityThrower() {
+		return thrower;
+	}
+
+	@Override
+	public @NotNull Vec3d getPositionAsVector() {
+		return getPositionVector();
+	}
+
+	@Override
+	public @NotNull BlockPos getPositionAsBlockPos() {
+		return getPosition();
 	}
 
 	@Override

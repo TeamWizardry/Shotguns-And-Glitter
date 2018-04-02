@@ -42,14 +42,14 @@ public class BulletEffectFlash implements BulletEffect {
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
 						Vec3d look = entity.getLook(0f);
-						Vec3d differenceVec = bullet.getPositionVector().subtract(entity.getPositionVector());
+						Vec3d differenceVec = bullet.getPositionAsVector().subtract(entity.getPositionVector());
 						double dot = look.dotProduct(differenceVec.normalize());
 
 						return differenceVec.lengthSquared() <= radius * radius && dot >= 0;
 					})) {
 
 				Vec3d look = target.getLook(0f);
-				Vec3d differenceVec = bullet.getPositionVector().subtract(target.getPositionVector());
+				Vec3d differenceVec = bullet.getPositionAsVector().subtract(target.getPositionVector());
 				double dot = look.dotProduct(differenceVec.normalize());
 				double lengthIntensity = Math.min(1 / differenceVec.lengthVector(), 1 / 10.0) * dot;
 				int amp = (int) (100 * lengthIntensity / 3 + 1.0 / 6);
@@ -67,7 +67,7 @@ public class BulletEffectFlash implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xc1ffec), new Color(0xfffac1)));
@@ -91,7 +91,7 @@ public class BulletEffectFlash implements BulletEffect {
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 1, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xc1ffec), new Color(0xfffac1)));

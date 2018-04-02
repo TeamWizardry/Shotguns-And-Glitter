@@ -44,10 +44,10 @@ public class BulletEffectImpact implements BulletEffect {
 			BulletType type = bullet.getBulletType();
 			float range = 2f * type.knockbackStrength;
 
-			for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPosition().add(-range, -range, -range),
-					bullet.getPosition().add(range, range / 2, range))) {
-				if (pos.distanceSq(bullet.getPosition()) <= range * range) {
-					Entity block = EntityDroppingBlock.dropBlock(bullet.getThrower(), world, pos, null, false, true, true);
+			for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPositionAsBlockPos().add(-range, -range, -range),
+					bullet.getPositionAsBlockPos().add(range, range / 2, range))) {
+				if (pos.distanceSq(bullet.getPositionAsBlockPos()) <= range * range) {
+					Entity block = EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, null, false, true, true);
 					if (block != null) {
 						block.motionX = RandUtil.nextDouble(-0.5, 0.5);
 						block.motionY = 0.625;
@@ -66,7 +66,7 @@ public class BulletEffectImpact implements BulletEffect {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(20, 50));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 2f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xb342f4), new Color(0x700000)));
@@ -95,7 +95,7 @@ public class BulletEffectImpact implements BulletEffect {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 3, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 3, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 2f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xb342f4), new Color(0x700000)));

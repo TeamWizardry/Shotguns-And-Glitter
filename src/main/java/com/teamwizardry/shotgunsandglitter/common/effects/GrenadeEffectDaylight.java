@@ -47,14 +47,14 @@ public class GrenadeEffectDaylight implements GrenadeEffect {
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
 						Vec3d look = entity.getLook(0f);
-						Vec3d differenceVec = grenade.getPositionVector().subtract(entity.getPositionVector());
+						Vec3d differenceVec = grenade.getPositionAsVector().subtract(entity.getPositionVector());
 						double dot = look.dotProduct(differenceVec.normalize());
 
 						return differenceVec.lengthSquared() <= radius * radius && dot >= 0;
 					})) {
 
 				Vec3d look = target.getLook(0f);
-				Vec3d differenceVec = grenade.getPositionVector().subtract(target.getPositionVector());
+				Vec3d differenceVec = grenade.getPositionAsVector().subtract(target.getPositionVector());
 				double dot = look.dotProduct(differenceVec.normalize());
 				double lengthIntensity = Math.min(1 / differenceVec.lengthVector(), 1 / 10.0) * dot;
 				int amp = (int) (100 * lengthIntensity / 3 + 1.0 / 6);

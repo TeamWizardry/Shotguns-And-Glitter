@@ -28,9 +28,9 @@ public class BulletEffectHookshot implements BulletEffect {
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
-		EntityLivingBase thrower = bullet.getThrower();
+		EntityLivingBase thrower = bullet.getEntityThrower();
 		if (thrower != null) {
-			Vec3d differenceVec = bullet.getPositionVector().subtract(thrower.getPositionVector()).normalize().scale(0.5 * bullet.getBulletType().damage);
+			Vec3d differenceVec = bullet.getPositionAsVector().subtract(thrower.getPositionVector()).normalize().scale(0.5 * bullet.getBulletType().damage);
 			thrower.motionX = differenceVec.x;
 			thrower.motionY = Math.max(differenceVec.y, 0) + 0.5f;
 			thrower.motionZ = differenceVec.z;
@@ -40,7 +40,7 @@ public class BulletEffectHookshot implements BulletEffect {
 
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
-		Vec3d position = bullet.getPositionVector();
+		Vec3d position = bullet.getPositionAsVector();
 
 		int throwerID = bullet.getCasterId();
 		if (throwerID == -1) return;
@@ -71,7 +71,7 @@ public class BulletEffectHookshot implements BulletEffect {
 
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
-		Vec3d position = bullet.getPositionVector();
+		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
 		glitter.setRender(ClientEventHandler.SPARKLE);

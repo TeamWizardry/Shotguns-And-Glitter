@@ -27,7 +27,7 @@ public interface BulletEffect {
 	}
 
 	default boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
-		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet.getAsEntity(), bullet.getThrower()), damage(world, bullet));
+		hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(bullet.getAsEntity(), bullet.getEntityThrower()), damage(world, bullet));
 		if (hitEntity instanceof EntityLivingBase)
 			((EntityLivingBase) hitEntity).knockBack(bullet.getAsEntity(), knockbackStrength(world, bullet),
 					MathHelper.sin(bullet.getAsEntity().rotationYaw * (float) (Math.PI / 180)),

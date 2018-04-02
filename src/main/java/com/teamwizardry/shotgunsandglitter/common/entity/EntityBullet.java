@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -71,6 +72,21 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	@Override
 	public Entity getAsEntity() {
 		return this;
+	}
+
+	@Override
+	public @Nullable EntityLivingBase getEntityThrower() {
+		return thrower;
+	}
+
+	@Override
+	public @NotNull Vec3d getPositionAsVector() {
+		return getPositionVector();
+	}
+
+	@Override
+	public @NotNull BlockPos getPositionAsBlockPos() {
+		return getPosition();
 	}
 
 	@Override

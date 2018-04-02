@@ -47,7 +47,7 @@ public class BulletEffectTainted implements BulletEffect {
 		if (!world.isRemote) {
 			EntityAreaEffectCloud aEC = new EntityAreaEffectCloud(world, bullet.posX(), bullet.posY(), bullet.posZ());
 
-			aEC.setOwner(bullet.getThrower());
+			aEC.setOwner(bullet.getEntityThrower());
 			aEC.setRadius(3.0F);
 			aEC.setRadiusOnUse(-0.25F);
 			aEC.setWaitTime(10);
@@ -67,7 +67,7 @@ public class BulletEffectTainted implements BulletEffect {
 		glitter.setCanBounce(true);
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 30, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 30, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(0.5f, 1f));
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setColor(RandUtil.nextBoolean() ? Color.GREEN : new Color(0xb2ff00));
@@ -78,7 +78,7 @@ public class BulletEffectTainted implements BulletEffect {
 			));
 		});
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(0.5f, 1f));
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setColor(RandUtil.nextBoolean() ? Color.GREEN : new Color(0xb2ff00));
@@ -100,7 +100,7 @@ public class BulletEffectTainted implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 1, 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(0.5f, 1f));
 			build.setLifetime(RandUtil.nextInt(20, 40));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.01, -0.05), 0));
@@ -108,7 +108,7 @@ public class BulletEffectTainted implements BulletEffect {
 		});
 
 		if (RandUtil.nextInt(5) == 0) {
-			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 10, 0, (i, build) -> {
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 10, 0, (i, build) -> {
 				build.setScaleFunction(new InterpScale(0.5f, 1f));
 				build.setLifetime(RandUtil.nextInt(20, 40));
 				build.setColor(RandUtil.nextBoolean() ? Color.GREEN : new Color(0xb2ff00));

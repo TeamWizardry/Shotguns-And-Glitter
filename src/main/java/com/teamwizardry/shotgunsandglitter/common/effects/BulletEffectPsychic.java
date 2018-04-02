@@ -41,7 +41,7 @@ public class BulletEffectPsychic implements BulletEffect {
 				(entity) -> {
 					if (entity == null || !entity.isEntityAlive()) return false;
 					Vec3d motionVec = new Vec3d(bullet.motionX(), bullet.motionY(), bullet.motionZ());
-					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
+					Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionAsVector());
 					double dot = motionVec.normalize().dotProduct(differenceVec.normalize());
 
 					return differenceVec.lengthSquared() < 7.5 * 7.5 && dot >= 0.75;
@@ -50,7 +50,7 @@ public class BulletEffectPsychic implements BulletEffect {
 		Vec3d acceleration = Vec3d.ZERO;
 
 		for (EntityLivingBase target : targets) {
-			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height, 0).subtract(bullet.getPositionVector());
+			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height, 0).subtract(bullet.getPositionAsVector());
 			acceleration = acceleration.add(differenceVec.scale(Math.pow(differenceVec.lengthVector(), -3)));
 		}
 
@@ -67,7 +67,7 @@ public class BulletEffectPsychic implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
-		Vec3d position = bullet.getPositionVector();
+		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(30);
 		glitter.setRender(ClientEventHandler.SPARKLE);
@@ -90,7 +90,7 @@ public class BulletEffectPsychic implements BulletEffect {
 			build.setTick(particle -> {
 				if (particle.getAge() >= particle.getLifetime() / 30) {
 
-					particle.setVelocity(particle.getVelocity().add(bullet.getPositionVector().subtract(particle.getPos()).normalize().scale(1 / 15.0)));
+					particle.setVelocity(particle.getVelocity().add(bullet.getPositionAsVector().subtract(particle.getPos()).normalize().scale(1 / 15.0)));
 					particle.setAcceleration(Vec3d.ZERO);
 				} else {
 					particle.setAcceleration(new Vec3d(0, -0.05, 0));
@@ -109,13 +109,13 @@ public class BulletEffectPsychic implements BulletEffect {
 		builder.setColor(new Color(0xc919ff));
 
 		float size = 0.5f;
-		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionAsVector()), 2, 0, (i, particleBuilder) ->
 		{
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
 		});
 		double scatter = 0.1f;
-		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) ->
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionAsVector()), 2, 0, (i, particleBuilder) ->
 		{
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
@@ -126,7 +126,7 @@ public class BulletEffectPsychic implements BulletEffect {
 			particleBuilder.setPositionOffset(offset);
 
 		});
-		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionVector()), 2, 0, (i, particleBuilder) -> {
+		ParticleSpawner.spawn(builder, world, new StaticInterp<>(bullet.getPositionAsVector()), 2, 0, (i, particleBuilder) -> {
 			particleBuilder.setAlphaFunction(new InterpScale(1f, 0f));
 			particleBuilder.setScaleFunction(new InterpScale(size, 0.3f));
 			Vec3d offset = new Vec3d(

@@ -47,9 +47,9 @@ public class BulletEffectBalefire implements BulletEffect {
 
 	@Override
 	public boolean onCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		EntityDroppingBlock.dropBlock(bullet.getThrower(), world, pos, false, true, true, true);
+		EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, false, true, true, true);
 		for (EnumFacing facing : EnumFacing.VALUES)
-			EntityDroppingBlock.dropBlock(bullet.getThrower(), world, pos.offset(facing), false, true, true, true);
+			EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos.offset(facing), false, true, true, true);
 		return RandUtil.nextDouble() < 0.8;
 	}
 
@@ -58,8 +58,8 @@ public class BulletEffectBalefire implements BulletEffect {
 		if (!world.isRemote) {
 			int expansion = bullet.getBulletType().ordinal();
 			for (BlockPos pos : BlockPos.getAllInBoxMutable(
-					bullet.getPosition().add(-expansion, 0, -expansion),
-					bullet.getPosition().add(expansion, -1, expansion)))
+					bullet.getPositionAsBlockPos().add(-expansion, 0, -expansion),
+					bullet.getPositionAsBlockPos().add(expansion, -1, expansion)))
 				if (world.isAirBlock(pos) && !world.isAirBlock(pos.down()))
 					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 		}
@@ -73,7 +73,7 @@ public class BulletEffectBalefire implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), RandUtil.nextFloat(0, 0.5f)));
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setColorFunction(new InterpColorHSV(new Color(0x893000), Color.YELLOW));
@@ -102,7 +102,7 @@ public class BulletEffectBalefire implements BulletEffect {
 		glitter.setCollision(true);
 
 		for (int j = 0; j < 5; j++) {
-			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 1, (i, build) -> {
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 5, 1, (i, build) -> {
 				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0));
 				build.setAlphaFunction(new InterpFadeInOut(0.1f, 1f));
 				build.setLifetime(RandUtil.nextInt(40, 80));

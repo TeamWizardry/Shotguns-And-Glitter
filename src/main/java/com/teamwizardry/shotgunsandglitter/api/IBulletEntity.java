@@ -16,13 +16,13 @@ public interface IBulletEntity {
 	Entity getAsEntity();
 
 	@Nullable
-	EntityLivingBase getThrower();
+	EntityLivingBase getEntityThrower();
 
 	@NotNull
-	Vec3d getPositionVector();
+	Vec3d getPositionAsVector();
 
 	@NotNull
-	BlockPos getPosition();
+	BlockPos getPositionAsBlockPos();
 
 	@NotNull
 	BulletType getBulletType();
@@ -60,7 +60,7 @@ public interface IBulletEntity {
 
 	default double getBulletDistanceSq() {
 		BlockPos origin = getOrigin();
-		Vec3d pos = getPositionVector();
+		Vec3d pos = getPositionAsVector();
 		return pos.squareDistanceTo(origin.getX(), origin.getY(), origin.getZ());
 	}
 

@@ -41,7 +41,7 @@ public class BulletEffectPiercing implements BulletEffect {
 		glitter.disableMotionCalculation();
 		glitter.setColor(Color.YELLOW);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 30, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 30, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.8f, 1.4f), 0));
 
@@ -62,7 +62,7 @@ public class BulletEffectPiercing implements BulletEffect {
 		glitter.disableMotionCalculation();
 		glitter.setColor(Color.YELLOW);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(10, 30));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.1f, 0.5f), 0));
 

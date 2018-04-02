@@ -45,10 +45,10 @@ public class BulletEffectFrost implements BulletEffect {
 							bullet.posX() + 10, bullet.posY() + 10, bullet.posZ() + 10),
 					(entity) -> {
 						if (entity == null || !entity.isEntityAlive()) return false;
-						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionVector());
+						Vec3d differenceVec = entity.getPositionVector().subtract(bullet.getPositionAsVector());
 						return differenceVec.lengthSquared() < 7.5 * 7.5 && differenceVec.lengthSquared() != 0;
 					})) {
-				Vec3d difference = target.getPositionVector().subtract(bullet.getPositionVector());
+				Vec3d difference = target.getPositionVector().subtract(bullet.getPositionAsVector());
 				double struckStrength = Math.min(1 / difference.lengthVector(), 1 / 3.0);
 				int duration = (int) (1400 - struckStrength * 1000 / 6);
 				target.addPotionEffect(new PotionEffect(ModPotions.FROST, duration, bullet.getBulletType().ordinal()));
@@ -64,7 +64,7 @@ public class BulletEffectFrost implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 50, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 50, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 4f), 0));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
@@ -88,7 +88,7 @@ public class BulletEffectFrost implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 1, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 1, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), 0));
 			build.setAlphaFunction(new InterpFadeInOut(0, 1f));
