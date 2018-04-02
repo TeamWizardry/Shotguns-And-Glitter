@@ -82,9 +82,9 @@ public interface IGunItem extends IAmmoItem {
 		player.swingArm(hand);
 
 		Vec3d normal = player.getLook(0);
-		player.motionX += -normal.x * getBulletType(stack).knockbackStrength;
+		player.motionX += -normal.x * (getBulletType(stack).knockbackStrength / 2.0);
 		player.motionY += -normal.y * (getBulletType(stack).knockbackStrength / 10.0);
-		player.motionZ += -normal.z * getBulletType(stack).knockbackStrength;
+		player.motionZ += -normal.z * (getBulletType(stack).knockbackStrength / 2.0);
 
 		ClientRunnable.run(new ClientRunnable() {
 			@Override
