@@ -31,7 +31,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 
 	public static ItemStack getStackOfEffect(BulletType type, String effect, int count) {
 		ItemStack stack = new ItemStack(ModItems.BULLET, count, type.ordinal());
-		if (!EffectRegistry.getEffectByID(effect).getID().equals("basic"))
+		if (!EffectRegistry.getBulletEffectByID(effect).getID().equals("basic"))
 			ItemNBTHelper.setString(stack, "effect", effect);
 		return stack;
 	}
@@ -45,7 +45,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 	@NotNull
 	@Override
 	public String[] getExtraVariants() {
-		return EffectRegistry.getEffects().stream()
+		return EffectRegistry.getBulletEffects().stream()
 				.flatMap((effect) -> Arrays.stream(BulletType.values())
 						.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
 				.toArray(String[]::new);
@@ -67,7 +67,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 	@Override
 	public BulletEffect getEffectFromItem(@NotNull ItemStack stack) {
 		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
-		return EffectRegistry.getEffectByID(effectID);
+		return EffectRegistry.getBulletEffectByID(effectID);
 	}
 
 	@NotNull
@@ -78,7 +78,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		for (BulletEffect bulletEffect : EffectRegistry.getEffects())
+		for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
 			for (BulletType type : BulletType.values())
 				subItems.add(getStackOfEffect(type, bulletEffect.getID()));
 	}

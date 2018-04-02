@@ -8,7 +8,8 @@ import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
  */
 public class ModEffects {
 	public static void init() {
-		EffectRegistry.addEffect(new BulletEffectFirework(),
+		EffectRegistry.addEffect(
+				new BulletEffectFirework(),
 				new BulletEffectGraviton(true),
 				new BulletEffectGraviton(false),
 				new BulletEffectHookshot(),
@@ -22,5 +23,11 @@ public class ModEffects {
 				new BulletEffectImpact(),
 				new BulletEffectBalefire(),
 				new BulletEffectDraconic());
+
+		EffectRegistry.addEffect(
+				new GrenadeEffectDisco(),
+				new GrenadeEffectDaylight(),
+				new GrenadeEffectBlizzard(),
+				new GrenadeEffectRepulsion());
 	}
 }

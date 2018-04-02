@@ -2,9 +2,11 @@ package com.teamwizardry.shotgunsandglitter.common.core;
 
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
+import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
@@ -60,5 +62,16 @@ public class CommonProxy {
 			PacketHandler.NETWORK.sendToAllAround(new MessageBulletImpactEntity(entity.getEntityId(), bullet.getEntityId(), position),
 					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
 		return bulletEffect.onCollideEntity(world, bullet, entity);
+	}
+
+	public void grenadeUpdate(World world, EntityGrenade grenade, GrenadeEffect grenadeEffect) {
+		grenadeEffect.onUpdate(world, grenade);
+	}
+
+	public void grenadeImpact(World world, EntityGrenade grenade, GrenadeEffect grenadeEffect, Vec3d position) {
+		grenadeEffect.onUpdate(world, grenade);
+		if (!world.isRemote)
+			PacketHandler.NETWORK.sendToAllAround(new MessageGrenadeExplode(grenade.getEntityId(), position),
+					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
 	}
 }

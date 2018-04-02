@@ -132,7 +132,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
 			IBlockState state = world.getBlockState(result.getBlockPos());
-			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
+			if (!world.isRemote && state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
 					state.getBlock().canCollideCheck(state, false) &&
 					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result.getBlockPos(),
 							state, getEffect(), result.hitVec)) {
@@ -140,8 +140,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 				PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
 						new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 				setDead();
-				world.removeEntity(this);
-
 			}
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
 			if (result.entityHit != null && !world.isRemote)
@@ -151,7 +149,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 					PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
 							new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 					setDead();
-					world.removeEntity(this);
 				}
 		}
 	}
@@ -218,7 +215,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	@NotNull
 	@Override
 	public BulletEffect getEffect() {
-		return EffectRegistry.getEffectByID(dataManager.get(BULLET_EFFECT));
+		return EffectRegistry.getBulletEffectByID(dataManager.get(BULLET_EFFECT));
 	}
 
 	@Override

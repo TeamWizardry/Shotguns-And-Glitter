@@ -46,7 +46,7 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		if (tab == CreativeTabs.SEARCH) for (BulletEffect bulletEffect : EffectRegistry.getEffects())
+		if (tab == CreativeTabs.SEARCH) for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
 			subItems.add(fillEffects(new ItemStack(this), bulletEffect));
 	}
 }

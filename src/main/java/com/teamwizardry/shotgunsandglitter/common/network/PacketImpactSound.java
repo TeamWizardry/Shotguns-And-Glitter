@@ -38,7 +38,7 @@ public class PacketImpactSound extends PacketBase {
 		World world = LibrarianLib.PROXY.getClientPlayer().world;
 		if (world == null) return;
 
-		BulletEffect bulletEffect = EffectRegistry.getEffectByID(effectID);
+		BulletEffect bulletEffect = EffectRegistry.getBulletEffectByID(effectID);
 
 		world.playSound(pos.x, pos.y, pos.z, ModSounds.BULLET_IMPACT, SoundCategory.PLAYERS, RandUtil.nextFloat(3, 4), RandUtil.nextFloat(0.95f, 1.1f), false);
 		world.playSound(pos.x, pos.y, pos.z, ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.7f, 1f), RandUtil.nextFloat(0.95f, 1.1f), false);

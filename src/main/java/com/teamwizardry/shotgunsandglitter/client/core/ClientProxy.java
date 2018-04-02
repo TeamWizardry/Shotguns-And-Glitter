@@ -3,8 +3,10 @@ package com.teamwizardry.shotgunsandglitter.client.core;
 import com.teamwizardry.librarianlib.features.utilities.client.CustomBlockMapSprites;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
+import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
+import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -61,5 +63,19 @@ public class ClientProxy extends CommonProxy {
 		}
 
 		return returnValue;
+	}
+
+	@Override
+	public void grenadeImpact(World world, EntityGrenade grenade, GrenadeEffect grenadeEffect, Vec3d position) {
+		super.grenadeImpact(world, grenade, grenadeEffect, position);
+		if (world.isRemote)
+			grenadeEffect.renderImpact(world, grenade);
+	}
+
+	@Override
+	public void grenadeUpdate(World world, EntityGrenade grenade, GrenadeEffect grenadeEffect) {
+		super.grenadeUpdate(world, grenade, grenadeEffect);
+		if (world.isRemote)
+			grenadeEffect.renderUpdate(world, grenade);
 	}
 }

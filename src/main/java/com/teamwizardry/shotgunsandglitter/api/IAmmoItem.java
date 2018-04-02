@@ -38,7 +38,7 @@ public interface IAmmoItem {
 
 		List<BulletEffect> bulletEffects = Lists.newArrayList();
 		for (int i = 0; i < stack.getCount(); i++) for (NBTBase effect : ammo)
-			bulletEffects.add(EffectRegistry.getEffectByID(((NBTTagString) effect).getString()));
+			bulletEffects.add(EffectRegistry.getBulletEffectByID(((NBTTagString) effect).getString()));
 
 		return bulletEffects;
 	}

@@ -1,44 +1,50 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
+import com.teamwizardry.librarianlib.core.client.ModelHandler;
+import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
+import com.teamwizardry.shotgunsandglitter.api.IGrenadeItem;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
+import kotlin.jvm.functions.Function1;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
 import static net.minecraft.item.ItemBow.getArrowVelocity;
 
 
-public class ItemGrenade extends ItemMod { //TODO: implements IExtraVariantHolder {
+public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenadeItem {
 
 	public ItemGrenade() {
 		super("grenade");
 	}
 
-	// TODO
-	public static ItemStack getStackOfEffect(BulletType type, String effect) {
-		return getStackOfEffect(type, effect, 1);
+	public static ItemStack getStackOfEffect(String effect) {
+		return getStackOfEffect(effect, 1);
 	}
 
-	// TODO
-	public static ItemStack getStackOfEffect(BulletType type, String effect, int count) {
-		ItemStack stack = new ItemStack(ModItems.BULLET, count, type.ordinal());
-		if (!EffectRegistry.getEffectByID(effect).getID().equals("basic"))
+	public static ItemStack getStackOfEffect(String effect, int count) {
+		ItemStack stack = new ItemStack(ModItems.GRENADE, count);
+		if (!EffectRegistry.getBulletEffectByID(effect).getID().equals("basic"))
 			ItemNBTHelper.setString(stack, "effect", effect);
 		return stack;
 	}
@@ -58,7 +64,7 @@ public class ItemGrenade extends ItemMod { //TODO: implements IExtraVariantHolde
 					boolean isCreativeMode = entityplayer.capabilities.isCreativeMode;
 
 					if (!world.isRemote) {
-						EntityGrenade entityGrenade = new EntityGrenade(world, entityplayer);
+						EntityGrenade entityGrenade = new EntityGrenade(world, entityplayer, getEffectFromStack(stack));
 						world.spawnEntity(entityGrenade);
 					}
 
@@ -94,49 +100,33 @@ public class ItemGrenade extends ItemMod { //TODO: implements IExtraVariantHolde
 		return 72000;
 	}
 
-	// TODO
-	//@NotNull
-	//@Override
-	//public String[] getExtraVariants() {
-	//	return EffectRegistry.getEffects().stream()
-	//			.flatMap((effect) -> Arrays.stream(BulletType.values())
-	//					.map((bullet) -> bullet.serializeName + "/" + effect.getID()))
-	//			.toArray(String[]::new);
-	//}
+	@NotNull
+	@Override
+	public String[] getExtraVariants() {
+		return EffectRegistry.getBulletEffects().stream()
+				.map((effect) -> "grenade/" + effect.getID())
+				.toArray(String[]::new);
+	}
 
-	// TODO
-	//@Nullable
-	//@Override
-	//@SideOnly(Side.CLIENT)
-	//public Function1<ItemStack, ModelResourceLocation> getMeshDefinition() {
-	//	return (stack) -> {
-	//		BulletType type = BulletType.byOrdinal(stack.getItemDamage());
-	//		Effect effect = getEffectFromItem(stack);
-	//		return ModelHandler.INSTANCE.getResource(ShotgunsAndGlitter.MODID,
-	//				type.serializeName + "/" + effect.getID());
-	//	};
-	//}
+	@Nullable
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Function1<ItemStack, ModelResourceLocation> getMeshDefinition() {
+		return (stack) -> {
+			GrenadeEffect effect = getEffectFromStack(stack);
+			return ModelHandler.INSTANCE.getResource(ShotgunsAndGlitter.MODID, "grenade/" + effect.getID());
+		};
+	}
 
-	// TODO
-	//@NotNull
-	//@Override
-	//public Effect getEffectFromItem(@NotNull ItemStack stack) {
-	//	String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
-	//	return EffectRegistry.getEffectByID(effectID);
-	//}
+	@NotNull
+	@Override
+	public String getUnlocalizedName(@NotNull ItemStack stack) {
+		return super.getUnlocalizedName(stack) + "." + getEffectFromStack(stack).getID();
+	}
 
-	// TODO
-	//@NotNull
-	//@Override
-	//public String getUnlocalizedName(@NotNull ItemStack stack) {
-	//	return super.getUnlocalizedName(stack) + "." + getEffectFromItem(stack).getID();
-	//}
-
-	// TODO
-	//@Override
-	//public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-	//	for (Effect effect : EffectRegistry.getEffects())
-	//		for (BulletType type : BulletType.values())
-	//			subItems.add(getStackOfEffect(type, effect.getID()));
-	//}
+	@Override
+	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
+		for (GrenadeEffect effect : EffectRegistry.getGrenadeEffects())
+			subItems.add(getStackOfEffect(effect.getID()));
+	}
 }
