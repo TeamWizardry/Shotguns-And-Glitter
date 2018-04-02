@@ -41,6 +41,9 @@ public class TileMiniTurret extends TileModTickable {
 	private boolean rightBarrel = false;
 
 	@Save
+	public boolean firing = false;
+
+	@Save
 	@Nullable
 	private UUID owner = null;
 
@@ -78,7 +81,13 @@ public class TileMiniTurret extends TileModTickable {
 			markDirty();
 		} else {
 
-			if (!world.isBlockPowered(getPos())) return;
+			if (!world.isBlockPowered(getPos())) {
+				if (firing) {
+					firing = false;
+					markDirty();
+				}
+				return;
+			}
 
 			boolean emptyAmmo = true;
 			int fullSlot = -1;
@@ -90,7 +99,13 @@ public class TileMiniTurret extends TileModTickable {
 				}
 			}
 
-			if (emptyAmmo) return;
+			if (emptyAmmo) {
+				if (firing) {
+					firing = false;
+					markDirty();
+				}
+				return;
+			}
 
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
@@ -103,10 +118,16 @@ public class TileMiniTurret extends TileModTickable {
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
 
 			if (entities.isEmpty()) {
+				boolean mark = false;
+				if (firing) {
+					firing = false;
+					mark = true;
+				}
 				if (targetID != -1) {
 					targetID = -1;
-					markDirty();
+					mark = true;
 				}
+				if (mark) markDirty();
 				return;
 			}
 
@@ -118,7 +139,13 @@ public class TileMiniTurret extends TileModTickable {
 					break;
 				}
 			}
-			if (!fueled) return;
+			if (!fueled) {
+				if (firing) {
+					firing = false;
+					markDirty();
+				}
+				return;
+			}
 
 			EntityLivingBase target = entities.get(0);
 			if (targetID != target.getEntityId()) {
@@ -147,10 +174,19 @@ public class TileMiniTurret extends TileModTickable {
 				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 			}
 
+			if (!firing) firing = true;
 			cooldown = 40;
 			rightBarrel = !rightBarrel;
 			markDirty();
 		}
+	}
+
+	public ModuleInventory getFuelInv() {
+		return fuelInv;
+	}
+
+	public ModuleInventory getInventory() {
+		return inventory;
 	}
 
 	public boolean isRightBarrel() {
