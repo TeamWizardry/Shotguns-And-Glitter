@@ -7,6 +7,7 @@ import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -85,6 +86,9 @@ public interface IGunItem extends IAmmoItem {
 		player.motionX += -normal.x * (getBulletType(stack).knockbackStrength / 2.0);
 		player.motionY += -normal.y * (getBulletType(stack).knockbackStrength / 10.0);
 		player.motionZ += -normal.z * (getBulletType(stack).knockbackStrength / 2.0);
+
+		if (player.rotationPitch < (-90 + headKnockStrength(stack)))
+			player.attackEntityFrom(DamageSource.causeMobDamage(player), 2f);
 
 		ClientRunnable.run(new ClientRunnable() {
 			@Override
