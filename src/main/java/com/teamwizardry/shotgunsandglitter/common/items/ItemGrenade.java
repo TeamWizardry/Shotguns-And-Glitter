@@ -103,7 +103,7 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 	@NotNull
 	@Override
 	public String[] getExtraVariants() {
-		return EffectRegistry.getBulletEffects().stream()
+		return EffectRegistry.getGrenadeEffects().stream()
 				.map((effect) -> "grenade/" + effect.getID())
 				.toArray(String[]::new);
 	}
