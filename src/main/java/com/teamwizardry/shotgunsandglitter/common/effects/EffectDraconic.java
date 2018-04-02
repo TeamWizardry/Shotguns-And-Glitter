@@ -36,7 +36,7 @@ public class EffectDraconic implements Effect {
 		if (!world.isRemote)
 			world.newExplosion(bullet.getAsEntity(),
 					bullet.posX(), bullet.posY(), bullet.posZ(),
-					bullet.getBulletType().damage, true, true);
+					bullet.getBulletType().damage, true, !world.getGameRules().getBoolean("mobGriefing"));
 	}
 
 	@Override
