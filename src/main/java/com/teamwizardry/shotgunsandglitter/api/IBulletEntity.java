@@ -42,9 +42,9 @@ public interface IBulletEntity {
 	void setBulletType(@NotNull BulletType type);
 
 	@NotNull
-	Effect getEffect();
+	BulletEffect getEffect();
 
-	void setEffect(@NotNull Effect effect);
+	void setEffect(@NotNull BulletEffect bulletEffect);
 
 	int getCasterId();
 

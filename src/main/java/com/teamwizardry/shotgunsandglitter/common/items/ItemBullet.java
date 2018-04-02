@@ -57,15 +57,15 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 	public Function1<ItemStack, ModelResourceLocation> getMeshDefinition() {
 		return (stack) -> {
 			BulletType type = BulletType.byOrdinal(stack.getItemDamage());
-			Effect effect = getEffectFromItem(stack);
+			BulletEffect bulletEffect = getEffectFromItem(stack);
 			return ModelHandler.INSTANCE.getResource(ShotgunsAndGlitter.MODID,
-					type.serializeName + "/" + effect.getID());
+					type.serializeName + "/" + bulletEffect.getID());
 		};
 	}
 
 	@NotNull
 	@Override
-	public Effect getEffectFromItem(@NotNull ItemStack stack) {
+	public BulletEffect getEffectFromItem(@NotNull ItemStack stack) {
 		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
 		return EffectRegistry.getEffectByID(effectID);
 	}
@@ -78,8 +78,8 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		for (Effect effect : EffectRegistry.getEffects())
+		for (BulletEffect bulletEffect : EffectRegistry.getEffects())
 			for (BulletType type : BulletType.values())
-				subItems.add(getStackOfEffect(type, effect.getID()));
+				subItems.add(getStackOfEffect(type, bulletEffect.getID()));
 	}
 }

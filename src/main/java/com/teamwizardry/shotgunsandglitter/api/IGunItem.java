@@ -53,27 +53,27 @@ public interface IGunItem extends IAmmoItem {
 	}
 
 	default void fireGun(World world, EntityPlayer player, ItemStack stack, EnumHand hand) {
-		List<Effect> ammo = getEffectsFromItem(stack);
+		List<BulletEffect> ammo = getEffectsFromItem(stack);
 
 		if (ammo.isEmpty()) return;
 
 		int consumed = 0;
 
-		Effect effect = ammo.get(0);
+		BulletEffect bulletEffect = ammo.get(0);
 
 		if (!world.isRemote) {
 			for (int i = 0; i < getFireCount(stack); i++) {
 				if (shouldConsumeAmmo(stack, i)) {
 					if (ammo.size() <= consumed)
 						break;
-					effect = ammo.get(consumed++);
+					bulletEffect = ammo.get(consumed++);
 				}
-				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), effect, getInaccuracy(stack), getPotency());
+				IBulletEntity bullet = InternalHandler.INTERNAL_HANDLER.newBulletEntity(world, player, getBulletType(stack), bulletEffect, getInaccuracy(stack), getPotency());
 				bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 				world.spawnEntity(bullet.getAsEntity());
 			}
-		} else if (effect.getFireSound() != null)
-			world.playSound(player.posX, player.posY, player.posZ, effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+		} else if (bulletEffect.getFireSound() != null)
+			world.playSound(player.posX, player.posY, player.posZ, bulletEffect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
 
 		if (!player.isCreative())
 			takeEffectsFromItem(stack, consumed);
@@ -107,16 +107,16 @@ public interface IGunItem extends IAmmoItem {
 		IAmmoItem ammoItem = (IAmmoItem) ammo.getItem();
 		if (ammoItem.getBulletType(ammo) != getBulletType(gun)) return true;
 
-		List<Effect> gunAmmo = getEffectsFromItem(gun);
+		List<BulletEffect> gunAmmo = getEffectsFromItem(gun);
 
 		if (!gunAmmo.isEmpty()) return true;
 
-		List<Effect> ammoEffects = ((IAmmoItem) ammo.getItem()).getEffectsFromItem(ammo);
+		List<BulletEffect> ammoBulletEffects = ((IAmmoItem) ammo.getItem()).getEffectsFromItem(ammo);
 
-		for (int index = 0; index < Math.min(ammoEffects.size(), getMaxAmmo(gun)); index++)
-			gunAmmo.add(ammoEffects.get(index));
+		for (int index = 0; index < Math.min(ammoBulletEffects.size(), getMaxAmmo(gun)); index++)
+			gunAmmo.add(ammoBulletEffects.get(index));
 
-		ammoItem.takeEffectsFromItem(ammo, Math.max(ammoEffects.size(), getMaxAmmo(gun)));
+		ammoItem.takeEffectsFromItem(ammo, Math.max(ammoBulletEffects.size(), getMaxAmmo(gun)));
 		setEffects(gun, gunAmmo);
 
 		setReloadCooldown(world, player, gun);

@@ -8,19 +8,19 @@ import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
  */
 public class ModEffects {
 	public static void init() {
-		EffectRegistry.addEffect(new EffectFirework(),
-				new EffectGraviton(true),
-				new EffectGraviton(false),
-				new EffectHookshot(),
-				new EffectPiercing(),
-				new EffectPsychic(),
-				new EffectBiotic(),
-				new EffectTranq(),
-				new EffectFrost(),
-				new EffectTainted(),
-				new EffectFlash(),
-				new EffectImpact(),
-				new EffectBalefire(),
-				new EffectDraconic());
+		EffectRegistry.addEffect(new BulletEffectFirework(),
+				new BulletEffectGraviton(true),
+				new BulletEffectGraviton(false),
+				new BulletEffectHookshot(),
+				new BulletEffectPiercing(),
+				new BulletEffectPsychic(),
+				new BulletEffectBiotic(),
+				new BulletEffectTranq(),
+				new BulletEffectFrost(),
+				new BulletEffectTainted(),
+				new BulletEffectFlash(),
+				new BulletEffectImpact(),
+				new BulletEffectBalefire(),
+				new BulletEffectDraconic());
 	}
 }

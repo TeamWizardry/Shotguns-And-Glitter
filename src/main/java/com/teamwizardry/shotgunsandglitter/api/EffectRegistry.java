@@ -8,33 +8,33 @@ import java.util.List;
 
 public class EffectRegistry {
 
-	private final static HashMap<String, Effect> effects = new HashMap<>();
+	private final static HashMap<String, BulletEffect> effects = new HashMap<>();
 
-	private final static Effect BASIC_EFFECT = new EffectBasic();
+	private final static BulletEffect BASIC_BULLET_EFFECT = new BulletEffectBasic();
 
-	private final static List<Effect> effectsOrdered = new ArrayList<>();
+	private final static List<BulletEffect> EFFECTS_ORDERED = new ArrayList<>();
 
 	static {
-		addEffect(BASIC_EFFECT);
+		addEffect(BASIC_BULLET_EFFECT);
 	}
 
-	public static void addEffect(Effect... effects) {
-		for (Effect effect : effects)
-			addEffect(effect);
+	public static void addEffect(BulletEffect... bulletEffects) {
+		for (BulletEffect bulletEffect : bulletEffects)
+			addEffect(bulletEffect);
 	}
 
-	public static void addEffect(Effect effect) {
-		assert !effects.containsKey(effect.getID());
-		effects.put(effect.getID(), effect);
-		effectsOrdered.add(effect);
+	public static void addEffect(BulletEffect bulletEffect) {
+		assert !effects.containsKey(bulletEffect.getID());
+		effects.put(bulletEffect.getID(), bulletEffect);
+		EFFECTS_ORDERED.add(bulletEffect);
 	}
 
-	public static List<Effect> getEffects() {
-		return effectsOrdered;
+	public static List<BulletEffect> getEffects() {
+		return EFFECTS_ORDERED;
 	}
 
 	@NotNull
-	public static Effect getEffectByID(String id) {
-		return effects.getOrDefault(id, BASIC_EFFECT);
+	public static BulletEffect getEffectByID(String id) {
+		return effects.getOrDefault(id, BASIC_BULLET_EFFECT);
 	}
 }

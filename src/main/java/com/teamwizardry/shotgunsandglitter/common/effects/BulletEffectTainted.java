@@ -4,7 +4,7 @@ import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class EffectTainted implements Effect {
+public class BulletEffectTainted implements BulletEffect {
 
 	@Override
 	public String getID() {
@@ -36,7 +36,7 @@ public class EffectTainted implements Effect {
 
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
-		Effect.super.onCollideEntity(world, bullet, hitEntity);
+		BulletEffect.super.onCollideEntity(world, bullet, hitEntity);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
 			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(MobEffects.POISON, 300, bullet.getBulletType().ordinal()));
 		return true;
