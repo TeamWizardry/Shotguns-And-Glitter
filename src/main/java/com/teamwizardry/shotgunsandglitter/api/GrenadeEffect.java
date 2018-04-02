@@ -1,8 +1,10 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
@@ -38,6 +40,10 @@ public interface GrenadeEffect {
 					grenade.posX(), grenade.posY(), grenade.posZ(),
 					6f, false, false);
 			explosion.doExplosionB(true);
+
+			if (world.isRemote) {
+				world.playSound(grenade.posX(), grenade.posY(), grenade.posZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.PLAYERS, 2f, 1f, false);
+			}
 		}
 	}
 

@@ -2,9 +2,8 @@ package com.teamwizardry.shotgunsandglitter.client.core;
 
 import com.teamwizardry.librarianlib.features.animator.Animator;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
+import com.teamwizardry.shotgunsandglitter.api.LingerObject;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -13,7 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class ClientEventHandler {
 
@@ -44,20 +42,4 @@ public class ClientEventHandler {
 		});
 	}
 
-	public static class LingerObject {
-
-		public final World world;
-		public final Vec3d pos;
-		public final int ticks;
-		public final Consumer<LingerObject> consumer;
-		public final long lastTime;
-
-		public LingerObject(World world, Vec3d pos, int ticks, Consumer<LingerObject> consumer) {
-			this.world = world;
-			this.pos = pos;
-			this.ticks = ticks;
-			this.consumer = consumer;
-			this.lastTime = world.getTotalWorldTime();
-		}
-	}
 }

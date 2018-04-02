@@ -16,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -34,6 +35,8 @@ public class CommonProxy {
 		ModSounds.init();
 
 		ModRecipes.init();
+
+		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
 	}
 
 	public void init(FMLInitializationEvent event) {
