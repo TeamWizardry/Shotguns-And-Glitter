@@ -66,7 +66,7 @@ item.shotgunsandglitter:bullet_basic.balefire.name=Fireweave Round
 item.shotgunsandglitter:bullet_basic.draconic.name=Dragonfire Round
 
 item.shotgunsandglitter:grenade.basic.name=Shrapnel Grenade
-item.shotgunsandglitter:grenade.disco.name=Compressed Party Grenade
+item.shotgunsandglitter:grenade.disco.name=Compressed Disco Party Grenade
 item.shotgunsandglitter:grenade.daylight.name=Compressed Daylight Grenade
 item.shotgunsandglitter:grenade.blizzard.name=Compressed Blizzard Grenade
 item.shotgunsandglitter:grenade.repulsion.name=Repulsion Grenade
@@ -84,6 +84,7 @@ tile.shotgunsandglitter:mini_turret.name=Spark Turret
 shotgunsandglitter.potion.tranquilizer=Tranquilized
 shotgunsandglitter.potion.frost=Frost Shock
 shotgunsandglitter.potion.flash=Flashbang
+shotgunsandglitter.potion.disco=Dance
 
 shotgunsandglitter.book.title=Shotguns And Glitter
 shotgunsandglitter.book.subtitle=By Team Wizardry
