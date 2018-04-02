@@ -12,7 +12,7 @@ public class EffectRegistry {
 	private final static HashMap<String, GrenadeEffect> GRENADE_EFFECTS = new HashMap<>();
 
 	private final static BulletEffect BASIC_BULLET_EFFECT = new BulletEffectBasic();
-	private final static GrenadeEffect BASIC_GRENADE_EFFECT = () -> "basic"; // todo visuals
+	private final static GrenadeEffect BASIC_GRENADE_EFFECT = new GrenadeEffectBasic();
 
 	private final static List<BulletEffect> BULLET_EFFECTS_ORDERED = new ArrayList<>();
 	private final static List<GrenadeEffect> GRENADE_EFFECTS_ORDERED = new ArrayList<>();
