@@ -29,5 +29,7 @@ public class GrenadeEffectRepulsion implements GrenadeEffect {
 		entity.motionX += repulsion.x;
 		entity.motionY += repulsion.y + 0.25;
 		entity.motionZ += repulsion.z;
+
+		entity.velocityChanged = true;
 	}
 }

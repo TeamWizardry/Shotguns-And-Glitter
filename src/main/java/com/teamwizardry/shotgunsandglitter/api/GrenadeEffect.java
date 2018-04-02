@@ -50,6 +50,12 @@ public interface GrenadeEffect {
 	default void hitEntity(@NotNull World world, @NotNull IGrenadeEntity grenade, @NotNull Entity entity, float intensity) {
 		entity.attackEntityFrom(DamageSource.causeThrownDamage(grenade.getAsEntity(), grenade.getEntityThrower()),
 				damage(world, grenade, intensity));
+
+		Vec3d repulsion = entity.getPositionVector().subtract(grenade.getPositionAsVector());
+		repulsion = repulsion.subtract(0, repulsion.y, 0).normalize();
+
+		if (entity instanceof EntityLivingBase)
+			((EntityLivingBase) entity).knockBack(grenade.getAsEntity(), intensity, repulsion.x, repulsion.z);
 	}
 
 	default void onUpdate(@NotNull World world, @NotNull IGrenadeEntity grenade) {
