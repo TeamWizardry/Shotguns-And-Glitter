@@ -38,6 +38,9 @@ public class TileMiniTurret extends TileModTickable {
 	private int cooldown = 0;
 
 	@Save
+	private boolean rightBarrel = false;
+
+	@Save
 	@Nullable
 	private UUID owner = null;
 
@@ -128,7 +131,7 @@ public class TileMiniTurret extends TileModTickable {
 			Effect effect = ModItems.BULLET.getEffectFromItem(ammo);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
 					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5))
-					.add(new Vec3d(target.motionX, target.motionY, target.motionZ).normalize())
+					.add(new Vec3d(target.motionX, 0, target.motionZ).normalize())
 					.normalize();
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
 
@@ -145,8 +148,21 @@ public class TileMiniTurret extends TileModTickable {
 			}
 
 			cooldown = 40;
+			rightBarrel = !rightBarrel;
 			markDirty();
 		}
+	}
+
+	public boolean isRightBarrel() {
+		return rightBarrel;
+	}
+
+	public int getCooldown() {
+		return cooldown;
+	}
+
+	public int getTargetID() {
+		return targetID;
 	}
 
 	@Nullable

@@ -1,11 +1,14 @@
 package com.teamwizardry.shotgunsandglitter.client.core;
 
+import com.teamwizardry.librarianlib.features.utilities.client.CustomBlockMapSprites;
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.Effect;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -24,6 +27,11 @@ public class ClientProxy extends CommonProxy {
 		ModEntities.initModels();
 
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+
+		CustomBlockMapSprites.INSTANCE.register(new ResourceLocation(ShotgunsAndGlitter.MODID, "blocks/mini_turret_head"));
+		CustomBlockMapSprites.INSTANCE.register(new ResourceLocation(ShotgunsAndGlitter.MODID, "blocks/mini_turret_barrel_left"));
+		CustomBlockMapSprites.INSTANCE.register(new ResourceLocation(ShotgunsAndGlitter.MODID, "blocks/mini_turret_barrel_right"));
+		CustomBlockMapSprites.INSTANCE.register(new ResourceLocation(ShotgunsAndGlitter.MODID, "blocks/mini_turret_barrels"));
 	}
 
 	@Override

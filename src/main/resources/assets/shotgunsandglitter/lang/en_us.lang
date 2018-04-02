@@ -68,6 +68,9 @@ item.shotgunsandglitter:bullet_basic.draconic.name=Dragonfire Round
 item.shotgunsandglitter:pistol.name=Spark Pistol
 item.shotgunsandglitter:shotgun.name=Field-Flux Shotgun
 item.shotgunsandglitter:sniper.name=Gaussian Sniper Rifle
+item.shotgunsandglitter:grenade.name=Grenade
 
 item.shotgunsandglitter:magazine.name=Spark Magazine
+
+tile.shotgunsandglitter:mini_turret.name=Mini Turret
 

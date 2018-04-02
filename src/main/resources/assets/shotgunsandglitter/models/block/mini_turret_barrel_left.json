@@ -1,0 +1,254 @@
+﻿{
+  "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+  "textures": {
+    "3": "shotgunsandglitter:blocks/turret_3"
+  },
+  "elements": [
+    {
+      "name": "cube",
+      "from": [
+        0.5,
+        7.5,
+        8
+      ],
+      "to": [
+        2.5,
+        9.5,
+        17
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "z",
+        "origin": [
+          1.5,
+          8.5,
+          10
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            2,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "east": {
+          "uv": [
+            2,
+            0,
+            0,
+            8
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "south": {
+          "uv": [
+            5,
+            11,
+            1,
+            15
+          ],
+          "texture": "#3"
+        },
+        "west": {
+          "uv": [
+            2,
+            0,
+            0,
+            8
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "up": {
+          "uv": [
+            2,
+            0,
+            0,
+            8
+          ],
+          "texture": "#3",
+          "rotation": 180
+        },
+        "down": {
+          "uv": [
+            2,
+            0,
+            0,
+            8
+          ],
+          "texture": "#3",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "name": "cube",
+      "from": [
+        3.5,
+        8.5,
+        9
+      ],
+      "to": [
+        5.5,
+        10.5,
+        18
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "z",
+        "origin": [
+          4.5,
+          9.5,
+          11
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            2,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            3,
+            9
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "south": {
+          "uv": [
+            10,
+            11,
+            6,
+            15
+          ],
+          "texture": "#3"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            3,
+            9
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "up": {
+          "uv": [
+            5,
+            0,
+            3,
+            9
+          ],
+          "texture": "#3",
+          "rotation": 180
+        },
+        "down": {
+          "uv": [
+            5,
+            0,
+            3,
+            9
+          ],
+          "texture": "#3",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "name": "cube",
+      "from": [
+        3.5,
+        6.5,
+        9
+      ],
+      "to": [
+        5.5,
+        8.5,
+        19
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "z",
+        "origin": [
+          4.5,
+          7.5,
+          11
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            2,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            6,
+            10
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "south": {
+          "uv": [
+            5,
+            11,
+            1,
+            15
+          ],
+          "texture": "#3"
+        },
+        "west": {
+          "uv": [
+            8,
+            0,
+            6,
+            10
+          ],
+          "texture": "#3",
+          "rotation": 270
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            6,
+            10
+          ],
+          "texture": "#3",
+          "rotation": 180
+        },
+        "down": {
+          "uv": [
+            8,
+            0,
+            6,
+            10
+          ],
+          "texture": "#3",
+          "rotation": 180
+        }
+      }
+    }
+  ]
+}
