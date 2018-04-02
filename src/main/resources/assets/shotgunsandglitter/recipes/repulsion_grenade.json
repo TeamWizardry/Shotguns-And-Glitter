@@ -1,0 +1,17 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:grenade"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"nbt": "{effect:\"repulsion\"}"
+	},
+	"group": "sng:grenade_repulsion"
+}

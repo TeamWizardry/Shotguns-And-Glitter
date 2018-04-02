@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 2
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustRedstone"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 2,
+		"nbt": "{effect:\"tranq\"}"
+	},
+	"group": "sng:bullet_tranq"
+}

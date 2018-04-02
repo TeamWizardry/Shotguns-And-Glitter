@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:grenade"
+		},
+		"I": {
+			"item": "minecraft:snowball"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"count": 8,
+		"nbt": "{effect:\"blizzard\"}"
+	},
+	"group": "sng:grenade_blizzard"
+}

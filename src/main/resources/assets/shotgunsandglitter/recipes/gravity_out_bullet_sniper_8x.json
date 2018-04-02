@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:bullet",
+			"data": 0
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 0,
+		"count": 8,
+		"nbt": "{effect:\"gravity_out\"}"
+	},
+	"group": "sng:bullet_gravity_out"
+}

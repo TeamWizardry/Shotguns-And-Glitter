@@ -1,0 +1,28 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" LI",
+		"RBB"
+	],
+	"key": {
+		"L": {
+			"type": "forge:ore_dict",
+			"ore": "gemLapis"
+		},
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "dustRedstone"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"B": {
+			"type": "forge:ore_dict",
+			"ore": "blockIron"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:minigun"
+	}
+}

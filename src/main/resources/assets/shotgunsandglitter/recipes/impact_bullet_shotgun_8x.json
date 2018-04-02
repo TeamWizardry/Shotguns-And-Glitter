@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "obsidian"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"count": 8,
+		"nbt": "{effect:\"impact\"}"
+	},
+	"group": "sng:bullet_impact"
+}

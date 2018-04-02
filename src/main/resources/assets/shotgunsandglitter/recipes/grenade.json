@@ -1,0 +1,30 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"NSN",
+		"IGI",
+		"NIN"
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		},
+		"N": {
+			"type": "forge:ore_dict",
+			"ore": "nuggetIron"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "string"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"count": 4
+	}
+}

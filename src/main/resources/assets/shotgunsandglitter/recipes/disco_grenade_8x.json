@@ -1,0 +1,23 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:grenade"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "dye"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"count": 8,
+		"nbt": "{effect:\"disco\"}"
+	},
+	"group": "sng:grenade_disco"
+}

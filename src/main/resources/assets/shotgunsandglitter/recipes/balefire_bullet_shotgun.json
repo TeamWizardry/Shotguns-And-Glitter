@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 1
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "netherStar"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 1,
+		"nbt": "{effect:\"balefire\"}"
+	},
+	"group": "sng:bullet_balefire"
+}

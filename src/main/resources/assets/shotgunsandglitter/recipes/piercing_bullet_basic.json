@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 2
+		},
+		{
+			"item": "minecraft:arrow"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 2,
+		"nbt": "{effect:\"piercing\"}"
+	},
+	"group": "sng:bullet_piercing"
+}

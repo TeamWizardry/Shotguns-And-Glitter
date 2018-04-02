@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"BBB",
+		"BIB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "shotgunsandglitter:grenade"
+		},
+		"I": {
+			"item": "minecraft:blaze_powder"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"count": 8,
+		"nbt": "{effect:\"daylight\"}"
+	},
+	"group": "sng:grenade_daylight"
+}

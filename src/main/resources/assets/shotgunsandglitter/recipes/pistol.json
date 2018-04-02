@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"RL ",
+		"RII",
+		"  I"
+	],
+	"key": {
+		"L": {
+			"type": "forge:ore_dict",
+			"ore": "gemLapis"
+		},
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "dustRedstone"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+	"result": {
+		"item": "shotgunsandglitter:pistol"
+	}
+}

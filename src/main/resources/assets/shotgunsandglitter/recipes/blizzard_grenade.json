@@ -1,0 +1,16 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:grenade"
+		},
+		{
+			"item": "minecraft:snowball"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"nbt": "{effect:\"blizzard\"}"
+	},
+	"group": "sng:grenade_blizzard"
+}

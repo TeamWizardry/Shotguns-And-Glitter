@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:bullet",
+			"data": 2
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "gunpowder"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:bullet",
+		"data": 2,
+		"nbt": "{effect:\"gravity_out\"}"
+	},
+	"group": "sng:bullet_gravity_out"
+}

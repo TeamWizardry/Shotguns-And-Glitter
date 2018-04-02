@@ -1,0 +1,16 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "shotgunsandglitter:grenade"
+		},
+		{
+			"item": "minecraft:blaze_powder"
+		}
+	],
+	"result": {
+		"item": "shotgunsandglitter:grenade",
+		"nbt": "{effect:\"daylight\"}"
+	},
+	"group": "sng:grenade_daylight"
+}
