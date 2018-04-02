@@ -67,7 +67,7 @@ public class BulletEffectFlash implements BulletEffect {
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), (int) (50 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
 			build.setColorFunction(new InterpColorHSV(new Color(0xc1ffec), new Color(0xfffac1)));

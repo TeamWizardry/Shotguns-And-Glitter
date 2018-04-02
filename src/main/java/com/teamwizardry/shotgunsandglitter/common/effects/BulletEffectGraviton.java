@@ -78,7 +78,7 @@ public class BulletEffectGraviton implements BulletEffect {
 		glitter.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.03, -0.04), 0));
 		glitter.setCanBounce(true);
 		glitter.enableMotionCalculation();
-		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), (int) (100 * bullet.getFalloff()), 0, (i, build) -> {
 			build.setMotion(Vec3d.ZERO);
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScale(RandUtil.nextFloat(0.2f, 1));
