@@ -3,9 +3,9 @@ package com.teamwizardry.shotgunsandglitter.api;
 import net.minecraft.util.math.MathHelper;
 
 public enum BulletType {
-	SNIPER(8f, 0.4f, "sniper"),
-	SHOTGUN(2f, 1f, "shotgun"),
-	BASIC(5f, 0.2f, "basic");
+	SNIPER(8f, 0.3f, "sniper"),
+	SHOTGUN(2f, 0.6f, "shotgun"),
+	BASIC(5f, 0.15f, "basic");
 
 	public final float damage;
 	public final float knockbackStrength;

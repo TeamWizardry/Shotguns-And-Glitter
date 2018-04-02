@@ -44,7 +44,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public int headKnockStrength(ItemStack stack) {
-		return 30;
+		return 20;
 	}
 
 	@NotNull
@@ -70,7 +70,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public float getInaccuracy(ItemStack stack) {
-		return 25f;
+		return 5f;
 	}
 
 	@Nullable

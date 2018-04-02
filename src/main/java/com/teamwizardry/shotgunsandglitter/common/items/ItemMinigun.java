@@ -72,7 +72,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 
 	@Override
 	public float getInaccuracy(ItemStack stack) {
-		return 10f;
+		return 5f;
 	}
 
 	@Override
