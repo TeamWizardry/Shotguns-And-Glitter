@@ -5,7 +5,7 @@ import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpBe
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class EffectDraconic implements Effect {
+public class BulletEffectDraconic implements BulletEffect {
 
 	@Override
 	public String getID() {

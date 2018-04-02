@@ -19,28 +19,28 @@ import java.util.List;
 public interface IAmmoItem {
 	@SideOnly(Side.CLIENT)
 	default void addTooltipContents(ItemStack stack, List<String> tooltip) {
-		List<Effect> effects = getEffectsFromItem(stack);
+		List<BulletEffect> bulletEffects = getEffectsFromItem(stack);
 
-		for (int i = 0; i < effects.size(); i++) {
+		for (int i = 0; i < bulletEffects.size(); i++) {
 			if (i > 5) {
-				tooltip.add(TextFormatting.ITALIC.toString() + "... " + (effects.size() - 5) + "+");
+				tooltip.add(TextFormatting.ITALIC.toString() + "... " + (bulletEffects.size() - 5) + "+");
 				break;
 			}
-			TooltipHelper.addToTooltip(tooltip, "shotgunsandglitter." + effects.get(i).getID() + ".name");
+			TooltipHelper.addToTooltip(tooltip, "shotgunsandglitter." + bulletEffects.get(i).getID() + ".name");
 		}
 
 	}
 
 	@NotNull
-	default List<Effect> getEffectsFromItem(@NotNull ItemStack stack) {
+	default List<BulletEffect> getEffectsFromItem(@NotNull ItemStack stack) {
 		NBTTagList ammo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (ammo == null) return Lists.newArrayList();
 
-		List<Effect> effects = Lists.newArrayList();
+		List<BulletEffect> bulletEffects = Lists.newArrayList();
 		for (int i = 0; i < stack.getCount(); i++) for (NBTBase effect : ammo)
-			effects.add(EffectRegistry.getEffectByID(((NBTTagString) effect).getString()));
+			bulletEffects.add(EffectRegistry.getEffectByID(((NBTTagString) effect).getString()));
 
-		return effects;
+		return bulletEffects;
 	}
 
 	default void takeEffectsFromItem(@NotNull ItemStack stack, int n) {
@@ -77,19 +77,19 @@ public interface IAmmoItem {
 		return true;
 	}
 
-	default ItemStack fillEffects(ItemStack stack, Effect effect) {
-		setEffects(stack, NonNullList.withSize(getMaxAmmo(stack), effect));
+	default ItemStack fillEffects(ItemStack stack, BulletEffect bulletEffect) {
+		setEffects(stack, NonNullList.withSize(getMaxAmmo(stack), bulletEffect));
 		return stack;
 	}
 
-	default ItemStack setEffects(ItemStack stack, List<Effect> effects) {
+	default ItemStack setEffects(ItemStack stack, List<BulletEffect> bulletEffects) {
 		NBTTagList ammo = new NBTTagList();
 		ItemNBTHelper.setList(stack, "ammo", ammo);
 
-		for (Effect effect : effects) {
+		for (BulletEffect bulletEffect : bulletEffects) {
 			if (ammo.tagCount() >= getMaxAmmo(stack))
 				break;
-			ammo.appendTag(new NBTTagString(effect.getID()));
+			ammo.appendTag(new NBTTagString(bulletEffect.getID()));
 		}
 
 		return stack;

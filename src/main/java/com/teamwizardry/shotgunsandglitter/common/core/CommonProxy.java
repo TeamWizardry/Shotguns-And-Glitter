@@ -1,7 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.common.core;
 
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
@@ -42,23 +42,23 @@ public class CommonProxy {
 		// NO-OP
 	}
 
-	public void updateBulletEntity(World world, EntityBullet bullet, Effect effect) {
-		effect.onUpdate(world, bullet);
+	public void updateBulletEntity(World world, EntityBullet bullet, BulletEffect bulletEffect) {
+		bulletEffect.onUpdate(world, bullet);
 	}
 
-	public boolean collideBulletWithBlock(World world, EntityBullet bullet, BlockPos hit, IBlockState state, Effect effect, Vec3d position) {
-		effect.onImpact(world, bullet);
+	public boolean collideBulletWithBlock(World world, EntityBullet bullet, BlockPos hit, IBlockState state, BulletEffect bulletEffect, Vec3d position) {
+		bulletEffect.onImpact(world, bullet);
 		if (!world.isRemote)
 			PacketHandler.NETWORK.sendToAllAround(new MessageBulletImpactBlock(hit, bullet.getEntityId(), position),
 					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
-		return effect.onCollideBlock(world, bullet, hit, state);
+		return bulletEffect.onCollideBlock(world, bullet, hit, state);
 	}
 
-	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, Effect effect, Vec3d position) {
-		effect.onImpact(world, bullet);
+	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, BulletEffect bulletEffect, Vec3d position) {
+		bulletEffect.onImpact(world, bullet);
 		if (!world.isRemote)
 			PacketHandler.NETWORK.sendToAllAround(new MessageBulletImpactEntity(entity.getEntityId(), bullet.getEntityId(), position),
 					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
-		return effect.onCollideEntity(world, bullet, entity);
+		return bulletEffect.onCollideEntity(world, bullet, entity);
 	}
 }

@@ -7,7 +7,7 @@ import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
@@ -110,9 +110,7 @@ public class TileMiniTurret extends TileModTickable {
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
 				double dist = input.getDistanceSq(getPos());
-				if (dist > 64 * 64) return false;
-				if (dist < 4 * 4) return false;
-				return owner == null || !owner.equals(input.getUniqueID());
+				return !(dist > 64 * 64) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID()));
 			});
 
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
@@ -155,7 +153,7 @@ public class TileMiniTurret extends TileModTickable {
 
 			ItemStack ammo = inventory.getHandler().extractItem(fullSlot, 1, false);
 
-			Effect effect = ModItems.BULLET.getEffectFromItem(ammo);
+			BulletEffect bulletEffect = ModItems.BULLET.getEffectFromItem(ammo);
 			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
 					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5))
 					.add(new Vec3d(target.motionX, 0, target.motionZ).normalize())
@@ -163,13 +161,13 @@ public class TileMiniTurret extends TileModTickable {
 			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
 
 			if (!world.isRemote) {
-				EntityBullet bullet = new EntityBullet(world, normal, BulletType.BASIC, effect, 0f, 1f); // Todo: potency
+				EntityBullet bullet = new EntityBullet(world, normal, BulletType.BASIC, bulletEffect, 0f, 1f); // Todo: potency
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);
 			} else {
-				if (effect.getFireSound() != null)
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), effect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
+				if (bulletEffect.getFireSound() != null)
+					world.playSound(pos.getX(), pos.getY(), pos.getZ(), bulletEffect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 			}

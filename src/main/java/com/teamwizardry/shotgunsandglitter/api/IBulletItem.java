@@ -11,12 +11,12 @@ import java.util.List;
  * Created at 1:24 PM on 4/1/18.
  */
 public interface IBulletItem extends IAmmoItem {
-	Effect getEffectFromItem(ItemStack stack);
+	BulletEffect getEffectFromItem(ItemStack stack);
 
 	@NotNull
 	@Override
-	default List<Effect> getEffectsFromItem(@NotNull ItemStack stack) {
-		List<Effect> outList = Lists.newArrayList();
+	default List<BulletEffect> getEffectsFromItem(@NotNull ItemStack stack) {
+		List<BulletEffect> outList = Lists.newArrayList();
 		for (int i = 0; i < stack.getCount(); i++)
 			outList.add(getEffectFromItem(stack));
 		return outList;

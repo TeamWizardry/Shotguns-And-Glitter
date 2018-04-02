@@ -2,7 +2,7 @@ package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IAmmoItem;
 import net.minecraft.client.util.ITooltipFlag;
@@ -46,7 +46,7 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		if (tab == CreativeTabs.SEARCH) for (Effect effect : EffectRegistry.getEffects())
-			subItems.add(fillEffects(new ItemStack(this), effect));
+		if (tab == CreativeTabs.SEARCH) for (BulletEffect bulletEffect : EffectRegistry.getEffects())
+			subItems.add(fillEffects(new ItemStack(this), bulletEffect));
 	}
 }

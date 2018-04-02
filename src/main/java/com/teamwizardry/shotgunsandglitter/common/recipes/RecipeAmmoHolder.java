@@ -1,7 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.common.recipes;
 
 import com.google.common.collect.Lists;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.IAmmoItem;
 import com.teamwizardry.shotgunsandglitter.api.IBulletItem;
 import net.minecraft.inventory.InventoryCrafting;
@@ -52,7 +52,7 @@ public class RecipeAmmoHolder extends IForgeRegistryEntry.Impl<IRecipe> implemen
 	@NotNull
 	@Override
 	public ItemStack getCraftingResult(@NotNull InventoryCrafting inv) {
-		List<Effect> loadedAmmo = Lists.newArrayList();
+		List<BulletEffect> loadedAmmo = Lists.newArrayList();
 
 		for (int i = 0; i < inv.getSizeInventory(); i++) {
 			ItemStack stack = inv.getStackInSlot(i);

@@ -40,29 +40,29 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		setSize(0.1F, 0.1F);
 	}
 
-	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
+	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull BulletEffect bulletEffect, float inaccuracy, float potency) {
 		super(world);
 		setSize(0.1F, 0.1F);
 
 		setBulletType(bulletType);
-		setEffect(effect);
+		setEffect(bulletEffect);
 		setCasterId(-1);
 		setPotency(potency);
 
-		shoot(normal.x, normal.y, normal.z, effect.getVelocity(world, bulletType), inaccuracy);
+		shoot(normal.x, normal.y, normal.z, bulletEffect.getVelocity(world, bulletType), inaccuracy);
 		setOrigin(getPosition());
 	}
 
-	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
+	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull BulletEffect bulletEffect, float inaccuracy, float potency) {
 		super(world, caster);
 		setSize(0.1F, 0.1F);
 
 		setBulletType(bulletType);
-		setEffect(effect);
+		setEffect(bulletEffect);
 		setCasterId(caster.getEntityId());
 		setPotency(potency);
 
-		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
+		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, bulletEffect.getVelocity(world, bulletType), inaccuracy);
 
 		setOrigin(getPosition());
 	}
@@ -217,13 +217,13 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	@NotNull
 	@Override
-	public Effect getEffect() {
+	public BulletEffect getEffect() {
 		return EffectRegistry.getEffectByID(dataManager.get(BULLET_EFFECT));
 	}
 
 	@Override
-	public void setEffect(@NotNull Effect effect) {
-		dataManager.set(BULLET_EFFECT, effect.getID());
+	public void setEffect(@NotNull BulletEffect bulletEffect) {
+		dataManager.set(BULLET_EFFECT, bulletEffect.getID());
 	}
 
 	@Override

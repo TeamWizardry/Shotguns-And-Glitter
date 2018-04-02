@@ -4,7 +4,7 @@ import com.teamwizardry.librarianlib.core.LibrarianLib;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;
 import com.teamwizardry.librarianlib.features.saving.Save;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
@@ -38,12 +38,12 @@ public class PacketImpactSound extends PacketBase {
 		World world = LibrarianLib.PROXY.getClientPlayer().world;
 		if (world == null) return;
 
-		Effect effect = EffectRegistry.getEffectByID(effectID);
+		BulletEffect bulletEffect = EffectRegistry.getEffectByID(effectID);
 
 		world.playSound(pos.x, pos.y, pos.z, ModSounds.BULLET_IMPACT, SoundCategory.PLAYERS, RandUtil.nextFloat(3, 4), RandUtil.nextFloat(0.95f, 1.1f), false);
 		world.playSound(pos.x, pos.y, pos.z, ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.7f, 1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-		if (effect.getImpactSound() != null) {
-			world.playSound(pos.x, pos.y, pos.z, effect.getImpactSound(), SoundCategory.PLAYERS, effect.getVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
+		if (bulletEffect.getImpactSound() != null) {
+			world.playSound(pos.x, pos.y, pos.z, bulletEffect.getImpactSound(), SoundCategory.PLAYERS, bulletEffect.getVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
 		}
 	}
 }

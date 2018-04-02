@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class InternalHandler {
 	public static InternalHandler INTERNAL_HANDLER = new InternalHandler();
 
-	public IBulletEntity newBulletEntity(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull Effect effect, float inaccuracy, float potency) {
+	public IBulletEntity newBulletEntity(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull BulletEffect bulletEffect, float inaccuracy, float potency) {
 		return null;
 	}
 

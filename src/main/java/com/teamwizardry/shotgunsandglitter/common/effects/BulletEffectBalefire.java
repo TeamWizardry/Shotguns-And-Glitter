@@ -5,7 +5,7 @@ import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class EffectBalefire implements Effect {
+public class BulletEffectBalefire implements BulletEffect {
 
 	@Override
 	public String getID() {
@@ -38,7 +38,7 @@ public class EffectBalefire implements Effect {
 
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
-		Effect.super.onCollideEntity(world, bullet, hitEntity);
+		BulletEffect.super.onCollideEntity(world, bullet, hitEntity);
 		hitEntity.setFire(20 + 20 * bullet.getBulletType().ordinal());
 		if (hitEntity instanceof EntityLiving && RandUtil.nextDouble() < 0.25)
 			hitEntity.onKillCommand();

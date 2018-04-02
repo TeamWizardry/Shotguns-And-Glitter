@@ -2,7 +2,7 @@ package com.teamwizardry.shotgunsandglitter.client.core;
 
 import com.teamwizardry.librarianlib.features.utilities.client.CustomBlockMapSprites;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.ModEntities;
@@ -35,29 +35,29 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void updateBulletEntity(World world, EntityBullet bullet, Effect effect) {
-		super.updateBulletEntity(world, bullet, effect);
+	public void updateBulletEntity(World world, EntityBullet bullet, BulletEffect bulletEffect) {
+		super.updateBulletEntity(world, bullet, bulletEffect);
 		if (world.isRemote)
-			effect.renderUpdate(world, bullet);
+			bulletEffect.renderUpdate(world, bullet);
 	}
 
 	@Override
-	public boolean collideBulletWithBlock(World world, EntityBullet bullet, BlockPos hit, IBlockState state, Effect effect, Vec3d position) {
-		boolean returnValue = super.collideBulletWithBlock(world, bullet, hit, state, effect, position);
+	public boolean collideBulletWithBlock(World world, EntityBullet bullet, BlockPos hit, IBlockState state, BulletEffect bulletEffect, Vec3d position) {
+		boolean returnValue = super.collideBulletWithBlock(world, bullet, hit, state, bulletEffect, position);
 		if (world.isRemote) {
-			effect.renderImpact(world, bullet);
-			effect.renderCollideBlock(world, bullet, hit, state);
+			bulletEffect.renderImpact(world, bullet);
+			bulletEffect.renderCollideBlock(world, bullet, hit, state);
 		}
 
 		return returnValue;
 	}
 
 	@Override
-	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, Effect effect, Vec3d position) {
-		boolean returnValue = super.collideBulletWithEntity(world, bullet, entity, effect, position);
+	public boolean collideBulletWithEntity(World world, EntityBullet bullet, Entity entity, BulletEffect bulletEffect, Vec3d position) {
+		boolean returnValue = super.collideBulletWithEntity(world, bullet, entity, bulletEffect, position);
 		if (world.isRemote) {
-			effect.renderImpact(world, bullet);
-			effect.renderCollideEntity(world, bullet, entity);
+			bulletEffect.renderImpact(world, bullet);
+			bulletEffect.renderCollideEntity(world, bullet, entity);
 		}
 
 		return returnValue;

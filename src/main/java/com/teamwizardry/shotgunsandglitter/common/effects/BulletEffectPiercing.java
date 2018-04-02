@@ -4,7 +4,7 @@ import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpCircle;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
-import com.teamwizardry.shotgunsandglitter.api.Effect;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class EffectPiercing implements Effect {
+public class BulletEffectPiercing implements BulletEffect {
 
 	@Override
 	public String getID() {
@@ -28,7 +28,7 @@ public class EffectPiercing implements Effect {
 
 	@Override
 	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
-		Effect.super.onCollideEntity(world, bullet, hitEntity);
+		BulletEffect.super.onCollideEntity(world, bullet, hitEntity);
 		return false; // Piercing
 	}
 

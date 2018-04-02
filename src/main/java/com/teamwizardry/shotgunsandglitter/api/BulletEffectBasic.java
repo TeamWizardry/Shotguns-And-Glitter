@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
-public class EffectBasic implements Effect {
+public class BulletEffectBasic implements BulletEffect {
 
 	@Override
 	public String getID() {
