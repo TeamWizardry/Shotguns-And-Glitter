@@ -13,6 +13,8 @@ public class ModItems {
 
 	public static ItemBullet BULLET;
 
+	public static ItemBook BOOK;
+
 	public static void init() {
 		PISTOL = new ItemPistol();
 		SHOTGUN = new ItemShotgun();
@@ -24,5 +26,6 @@ public class ModItems {
 		DRUM = new ItemDrum();
 
 		BULLET = new ItemBullet();
+		BOOK = new ItemBook();
 	}
 }

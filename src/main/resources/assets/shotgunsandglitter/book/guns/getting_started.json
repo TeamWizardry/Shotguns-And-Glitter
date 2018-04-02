@@ -1,0 +1,12 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:getting_started"
+  },
+  "title": "shotgunsandglitter.book.guns.getting_started.title",
+  "description": "shotgunsandglitter.book.guns.getting_started.desc",
+  "content": [
+    "shotgunsandglitter.book.guns.getting_started.content1",
+    "shotgunsandglitter.book.guns.getting_started.content2"
+  ]
+}

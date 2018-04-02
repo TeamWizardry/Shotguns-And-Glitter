@@ -1,0 +1,16 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:pistol"
+  },
+  "title": "shotgunsandglitter.book.guns.pistol.title",
+  "description": "shotgunsandglitter.book.guns.pistol.desc",
+  "content": [
+    "shotgunsandglitter.book.guns.pistol.content1",
+    "shotgunsandglitter.book.guns.pistol.content2",
+    {
+      "type": "recipe",
+      "recipe": "shotgunsandglitter:pistol"
+    }
+  ]
+}

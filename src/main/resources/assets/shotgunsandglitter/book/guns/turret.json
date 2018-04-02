@@ -1,0 +1,19 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:turret"
+  },
+  "title": "shotgunsandglitter.book.guns.turret.title",
+  "description": "shotgunsandglitter.book.guns.turret.desc",
+  "content": [
+    "shotgunsandglitter.book.guns.turret.content1",
+    "shotgunsandglitter.book.guns.turret.content2",
+    "shotgunsandglitter.book.guns.turret.content3",
+    "shotgunsandglitter.book.guns.turret.content4",
+    "shotgunsandglitter.book.guns.turret.content5",
+    {
+      "type": "recipe",
+      "recipe": "shotgunsandglitter:turret"
+    }
+  ]
+}

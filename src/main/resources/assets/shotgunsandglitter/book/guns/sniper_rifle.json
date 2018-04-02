@@ -1,0 +1,16 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:sniper_rifle"
+  },
+  "title": "shotgunsandglitter.book.guns.sniper_rifle.title",
+  "description": "shotgunsandglitter.book.guns.sniper_rifle.desc",
+  "content": [
+    "shotgunsandglitter.book.guns.sniper_rifle.content1",
+    "shotgunsandglitter.book.guns.sniper_rifle.content2",
+    {
+      "type": "recipe",
+      "recipe": "shotgunsandglitter:sniper_rifle"
+    }
+  ]
+}

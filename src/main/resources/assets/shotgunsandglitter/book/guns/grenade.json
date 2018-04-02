@@ -1,0 +1,16 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:grenade"
+  },
+  "title": "shotgunsandglitter.book.guns.grenade.title",
+  "description": "shotgunsandglitter.book.guns.grenade.desc",
+  "content": [
+    "shotgunsandglitter.book.guns.grenade.content1",
+    "shotgunsandglitter.book.guns.grenade.content2",
+    {
+      "type": "recipe",
+      "recipe": "shotgunsandglitter:grenade"
+    }
+  ]
+}

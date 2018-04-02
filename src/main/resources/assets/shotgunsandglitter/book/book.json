@@ -1,0 +1,44 @@
+{
+  "title": "shotgunsandglitter.book.title",
+  "subtitle": "shotgunsandglitter.book.subtitle",
+  "color": "0x331409",
+  "highlight": "0xFFD700",
+  "categories": [
+    {
+      "title": "shotgunsandglitter.book.guns.title",
+      "icon": "shotgunsandglitter:bookicons/gun",
+      "description": "test",
+      "entries": [
+        "shotgunsandglitter:guns/getting_started",
+        "shotgunsandglitter:guns/pistol",
+        "shotgunsandglitter:guns/shotgun",
+        "shotgunsandglitter:guns/sniper_rifle",
+        "shotgunsandglitter:guns/minigun",
+        "shotgunsandglitter:guns/grenade",
+        "shotgunsandglitter:guns/turret"
+      ]
+    },
+    {
+      "title": "shotgunsandglitter.book.effects.title",
+      "icon": "shotgunsandglitter:bookicons/effects",
+      "description": "test",
+      "entries": [
+        "shotgunsandglitter:effects/gunpowder",
+        "shotgunsandglitter:effects/firework",
+        "shotgunsandglitter:effects/biotic",
+        "shotgunsandglitter:effects/impact",
+        "shotgunsandglitter:effects/piercing",
+        "shotgunsandglitter:effects/psyker",
+        "shotgunsandglitter:effects/hookshot",
+        "shotgunsandglitter:effects/flash",
+        "shotgunsandglitter:effects/graviton",
+        "shotgunsandglitter:effects/repulsion",
+        "shotgunsandglitter:effects/tainted",
+        "shotgunsandglitter:effects/tranq",
+        "shotgunsandglitter:effects/frost",
+        "shotgunsandglitter:effects/balefire",
+        "shotgunsandglitter:effects/draconic"
+      ]
+    }
+  ]
+}
