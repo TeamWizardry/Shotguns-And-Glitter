@@ -69,7 +69,7 @@ public class CommonProxy {
 	}
 
 	public void grenadeImpact(World world, EntityGrenade grenade, GrenadeEffect grenadeEffect, Vec3d position) {
-		grenadeEffect.onUpdate(world, grenade);
+		grenadeEffect.onImpact(world, grenade);
 		if (!world.isRemote)
 			PacketHandler.NETWORK.sendToAllAround(new MessageGrenadeExplode(grenade.getEntityId(), position),
 					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
