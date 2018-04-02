@@ -3,6 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.entity;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.client.render.RenderBullet;
 import com.teamwizardry.shotgunsandglitter.client.render.RenderFalling;
+import com.teamwizardry.shotgunsandglitter.client.render.RenderGrenade;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -17,6 +18,7 @@ public class ModEntities {
 	public static void init() {
 		registerEntity(new ResourceLocation(ShotgunsAndGlitter.MODID, "bullet"), EntityBullet.class, "bullet");
 		registerEntity(new ResourceLocation(ShotgunsAndGlitter.MODID, "dropping"), EntityDroppingBlock.class, "dropping");
+		registerEntity(new ResourceLocation(ShotgunsAndGlitter.MODID, "grenade"), EntityGrenade.class, "grenade");
 	}
 
 	public static void registerEntity(ResourceLocation loc, Class<? extends Entity> entityClass, String entityName) {
@@ -32,5 +34,6 @@ public class ModEntities {
 	public static void initModels() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDroppingBlock.class, RenderFalling::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, RenderGrenade::new);
 	}
 }

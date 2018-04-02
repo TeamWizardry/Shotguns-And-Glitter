@@ -27,7 +27,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.UUID;
 
 public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
@@ -36,8 +35,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 	private static final DataParameter<Integer> CASTER_ID = EntityDataManager.createKey(EntityBullet.class, DataSerializers.VARINT);
 	private static final DataParameter<Float> POTENCY = EntityDataManager.createKey(EntityBullet.class, DataSerializers.FLOAT);
 	private static final DataParameter<BlockPos> ORIGIN = EntityDataManager.createKey(EntityBullet.class, DataSerializers.BLOCK_POS);
-
-	private EntityLivingBase caster = null;
 
 	public EntityBullet(@NotNull World world) {
 		super(world);
@@ -66,7 +63,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		setCasterId(caster.getEntityId());
 		setPotency(potency);
 
-		this.caster = caster;
 		shoot(caster, caster.rotationPitch, caster.rotationYaw, 0f, effect.getVelocity(world, bulletType), inaccuracy);
 
 		setOrigin(getPosition());
@@ -169,8 +165,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		compound.setString("bulletEffect", dataManager.get(BULLET_EFFECT));
 		compound.setFloat("bulletPotency", getPotency());
 		compound.setLong("bulletOrigin", getOrigin().toLong());
-		if (caster != null)
-			compound.setString("caster", caster.getUniqueID().toString());
 	}
 
 	@Override
@@ -180,9 +174,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		dataManager.set(BULLET_EFFECT, compound.getString("bulletEffect"));
 		setPotency(compound.getFloat("bulletPotency"));
 		setOrigin(BlockPos.fromLong(compound.getLong("bulletOrigin")));
-
-		if (compound.hasKey("caster"))
-			caster = world.getPlayerEntityByUUID(UUID.fromString(compound.getString("caster")));
 	}
 
 	@Override
