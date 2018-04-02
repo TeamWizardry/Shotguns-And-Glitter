@@ -54,6 +54,7 @@ public class PotionDisco extends PotionMod {
 	public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
 		super.applyAttributesModifiersToEntity(entityLivingBaseIn, attributeMapIn, amplifier);
 		discoCountdown = 200;
+		animating = false;
 	}
 
 	@SubscribeEvent
@@ -68,8 +69,6 @@ public class PotionDisco extends PotionMod {
 
 			if (RandUtil.nextInt(5) == 0)
 				entity.motionX += RandUtil.nextDouble(-0.3, 0.3);
-			//if (RandUtil.nextInt(40) == 0)
-			//	entity.motionY += RandUtil.nextDouble(-1, 1);
 			if (RandUtil.nextInt(5) == 0)
 				entity.motionZ += RandUtil.nextDouble(-0.3, 0.3);
 
@@ -104,7 +103,7 @@ public class PotionDisco extends PotionMod {
 				BasicAnimation<PotionDisco> discoAnim = new BasicAnimation<>(this, "discoCountdown");
 				discoAnim.setEasing(Easing.easeInOutQuint);
 				discoAnim.setTo(0);
-				discoAnim.setDuration(200);
+				discoAnim.setDuration(400);
 				discoAnim.setCompletion(() -> animating = false);
 				ClientEventHandler.DISCO_ANIMATION_HANDLER.add(discoAnim);
 
@@ -112,14 +111,14 @@ public class PotionDisco extends PotionMod {
 				hue1Anim.setEasing(Easing.easeInOutQuint);
 				hue1Anim.setFrom(fromHue);
 				hue1Anim.setTo(toHue);
-				hue1Anim.setDuration(200);
+				hue1Anim.setDuration(400);
 				ClientEventHandler.DISCO_ANIMATION_HANDLER.add(hue1Anim);
 
 				BasicAnimation<PotionDisco> hue2Anim = new BasicAnimation<>(this, "hue2");
 				hue2Anim.setEasing(Easing.easeInOutQuint);
 				hue2Anim.setFrom(toHue);
 				hue2Anim.setTo(fromHue);
-				hue2Anim.setDuration(200);
+				hue2Anim.setDuration(400);
 				ClientEventHandler.DISCO_ANIMATION_HANDLER.add(hue2Anim);
 			}
 		}
@@ -141,7 +140,8 @@ public class PotionDisco extends PotionMod {
 		else if (e.getType() == RenderGameOverlayEvent.ElementType.ALL) {
 
 			if (discoCountdown > 0) {
-				float o = discoCountdown / 200.0f / 5.0f;
+				float x = 1 - (discoCountdown / 200.0f);
+				float o = 1 - (x * x * x * x * x * x * x * x * x * x);
 
 				ScaledResolution res = e.getResolution();
 				double h = res.getScaledHeight();
@@ -156,7 +156,6 @@ public class PotionDisco extends PotionMod {
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
 				GlStateManager.color(1, 1, 1, 1);
-				GlStateManager.disableCull();
 				GlStateManager.disableTexture2D();
 				GlStateManager.enableColorMaterial();
 				GlStateManager.shadeModel(GL11.GL_SMOOTH);
