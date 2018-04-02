@@ -83,7 +83,7 @@ public interface IGunItem extends IAmmoItem {
 
 		Vec3d normal = player.getLook(0);
 		player.motionX += -normal.x * getBulletType(stack).knockbackStrength;
-		player.motionY += -normal.y * getBulletType(stack).knockbackStrength;
+		player.motionY += -normal.y * (getBulletType(stack).knockbackStrength / 10.0);
 		player.motionZ += -normal.z * getBulletType(stack).knockbackStrength;
 
 		ClientRunnable.run(new ClientRunnable() {

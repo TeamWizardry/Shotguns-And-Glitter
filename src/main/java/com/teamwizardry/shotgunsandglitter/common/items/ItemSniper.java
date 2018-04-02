@@ -72,6 +72,6 @@ public class ItemSniper extends ItemMod implements IGunItem {
 
 	@Override
 	public int headKnockStrength(ItemStack stack) {
-		return 20;
+		return 15;
 	}
 }

@@ -102,7 +102,7 @@ public class EffectBalefire implements Effect {
 		glitter.setCollision(true);
 
 		for (int j = 0; j < 5; j++) {
-			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), (int) (5 * bullet.getFalloff()), 1, (i, build) -> {
+			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionVector()), 5, 1, (i, build) -> {
 				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 1f), 0));
 				build.setAlphaFunction(new InterpFadeInOut(0.1f, 1f));
 				build.setLifetime(RandUtil.nextInt(40, 80));

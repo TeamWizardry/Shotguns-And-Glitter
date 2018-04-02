@@ -88,6 +88,6 @@ public class ItemPistol extends ItemMod implements IGunItem {
 
 	@Override
 	public int headKnockStrength(ItemStack stack) {
-		return 10;
+		return 5;
 	}
 }

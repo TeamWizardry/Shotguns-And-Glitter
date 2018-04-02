@@ -65,9 +65,9 @@ public interface IBulletEntity {
 	}
 
 	default float getFalloff() {
+		//falloff =
 		double dist = getBulletDistanceSq();
-		double decay = dist / (dist + 60);
 		float potency = getPotency();
-		return (float) (decay * ((1 - potency) + 0.5));
+		return dist < potency ? 0 : (float) ((dist - potency * potency) / (64 * 64 - potency * potency));
 	}
 }
