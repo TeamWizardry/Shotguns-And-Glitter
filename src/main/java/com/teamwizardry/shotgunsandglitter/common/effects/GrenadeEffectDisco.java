@@ -59,7 +59,7 @@ public class GrenadeEffectDisco implements GrenadeEffect {
 			glitter.setCollision(true);
 			glitter.setCanBounce(true);
 
-			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 3, 0, (i, build) -> {
+			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 10, 0, (i, build) -> {
 				if (hue >= 1) hue = 0;
 				else hue += 0.1;
 				build.setLifetime(RandUtil.nextInt(20, 50));
@@ -77,7 +77,7 @@ public class GrenadeEffectDisco implements GrenadeEffect {
 				build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, 1), z));
 			});
 
-			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 1, 0, (i, build) -> {
+			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 5, 0, (i, build) -> {
 				if (hue >= 1) hue = 0;
 				else hue += 0.1;
 				build.setLifetime(RandUtil.nextInt(50, 100));

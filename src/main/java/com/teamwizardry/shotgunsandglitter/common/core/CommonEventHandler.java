@@ -13,6 +13,7 @@ public class CommonEventHandler {
 
 	@SubscribeEvent
 	public void onClientTick(TickEvent.WorldTickEvent event) {
+		if (event.phase != TickEvent.Phase.END) return;
 		lingerObjects.removeIf(lingerObject -> {
 			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub >= lingerObject.ticks) {

@@ -46,15 +46,15 @@ public class RandUtil {
 	}
 
 	public static int nextInt(int min, int max) {
-		return (random.nextInt() * (max - min)) + min;
+		return (int) ((random.nextDouble() * (max - min)) + min);
 	}
 
 	public static int nextInt(int bound) {
-		return random.nextInt() * bound;
+		return (int) (random.nextDouble() * bound);
 	}
 
 	public static int nextInt() {
-		return random.nextInt();
+		return (int) random.nextDouble();
 	}
 
 	public static boolean nextBoolean() {

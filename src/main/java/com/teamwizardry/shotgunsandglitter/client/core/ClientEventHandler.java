@@ -31,6 +31,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event) {
+		if (event.phase != TickEvent.Phase.END) return;
 		lingerObjects.removeIf(lingerObject -> {
 			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub >= lingerObject.ticks) {
