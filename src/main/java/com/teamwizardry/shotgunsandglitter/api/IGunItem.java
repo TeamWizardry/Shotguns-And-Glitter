@@ -1,6 +1,11 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.librarianlib.core.LibrarianLib;
+import com.teamwizardry.librarianlib.features.animator.Easing;
+import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
+import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -9,6 +14,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,7 +91,19 @@ public interface IGunItem extends IAmmoItem {
 		if (player.rotationPitch < (-90 + headKnockStrength(stack)))
 			player.attackEntityFrom(DamageSource.causeMobDamage(player), 2f);
 
-		player.rotationPitch = headKnockStrength(stack);
+		ClientRunnable.run(new ClientRunnable() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void runIfClient() {
+				EntityPlayer clientPlayer = Minecraft.getMinecraft().player;
+				if (clientPlayer == null) return;
+				BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(clientPlayer, LibrarianLib.DEV_ENVIRONMENT ? "rotationPitch" : "field_70125_A");
+				anim.setDuration(2);
+				anim.setTo(Minecraft.getMinecraft().player.rotationPitch - headKnockStrength(stack));
+				anim.setEasing(Easing.easeInExpo);
+				InternalHandler.INTERNAL_HANDLER.addTiltAnimation(anim);
+			}
+		});
 	}
 
 	default boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {

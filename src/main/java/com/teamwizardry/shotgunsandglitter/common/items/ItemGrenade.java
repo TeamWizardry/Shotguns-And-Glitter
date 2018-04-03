@@ -126,7 +126,8 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		for (GrenadeEffect effect : EffectRegistry.getGrenadeEffects())
-			subItems.add(getStackOfEffect(effect.getID()));
+		if (isInCreativeTab(tab))
+			for (GrenadeEffect effect : EffectRegistry.getGrenadeEffects())
+				subItems.add(getStackOfEffect(effect.getID()));
 	}
 }
