@@ -51,7 +51,6 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 	public void onImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 		if (!world.isRemote)
 			CommonEventHandler.lingerObjects.add(new LingerObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
-
 				for (int i = 0; i < 3; i++) {
 					EntityFallingBlock droppingBlock = new EntityFallingBlock(lingerObject.world, lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
 					droppingBlock.fallTime = 1;
