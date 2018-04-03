@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"frost\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.frost.title",
+  "description": "shotgunsandglitter.book.bullets.frost.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.frost.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:frost_bullet_basic",
+        "shotgunsandglitter:frost_bullet_shotgun",
+        "shotgunsandglitter:frost_bullet_sniper",
+        "shotgunsandglitter:frost_bullet_basic_8x",
+        "shotgunsandglitter:frost_bullet_shotgun_8x",
+        "shotgunsandglitter:frost_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

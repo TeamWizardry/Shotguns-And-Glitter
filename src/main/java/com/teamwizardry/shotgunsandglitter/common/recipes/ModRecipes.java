@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author WireSegal
@@ -89,7 +90,7 @@ public class ModRecipes {
 				'B', "blockIron");
 
 		RecipeGeneratorHandler.addShapedRecipe("turret",
-				new ItemStack(ModBlocks.MINI_TURRET),
+				new ItemStack(Objects.requireNonNull(ModBlocks.MINI_TURRET.getItemForm())),
 				"RRR",
 				"LIL",
 				"BBB",

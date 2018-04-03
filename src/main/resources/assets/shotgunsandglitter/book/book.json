@@ -1,43 +1,57 @@
 {
   "title": "shotgunsandglitter.book.title",
   "subtitle": "shotgunsandglitter.book.subtitle",
-  "color": "0x331409",
+  "color": "0x752609",
   "highlight": "0xFFD700",
   "categories": [
     {
+      "title": "shotgunsandglitter.book.getting_started.title",
+      "icon": "shotgunsandglitter:bookicons/getting_started",
+      "description": "shotgunsandglitter.book.getting_started.desc",
+      "entries": ["shotgunsandglitter:getting_started"]
+    },
+    {
       "title": "shotgunsandglitter.book.guns.title",
       "icon": "shotgunsandglitter:bookicons/gun",
-      "description": "test",
+      "description": "shotgunsandglitter.book.guns.desc",
       "entries": [
-        "shotgunsandglitter:guns/getting_started",
         "shotgunsandglitter:guns/pistol",
         "shotgunsandglitter:guns/shotgun",
         "shotgunsandglitter:guns/sniper_rifle",
         "shotgunsandglitter:guns/minigun",
-        "shotgunsandglitter:guns/grenade",
         "shotgunsandglitter:guns/turret"
       ]
     },
     {
-      "title": "shotgunsandglitter.book.effects.title",
-      "icon": "shotgunsandglitter:bookicons/effects",
-      "description": "test",
+      "title": "shotgunsandglitter.book.bullets.title",
+      "icon": "shotgunsandglitter:bookicons/bullets",
+      "description": "shotgunsandglitter.book.bullets.desc",
       "entries": [
-        "shotgunsandglitter:effects/gunpowder",
-        "shotgunsandglitter:effects/firework",
-        "shotgunsandglitter:effects/biotic",
-        "shotgunsandglitter:effects/impact",
-        "shotgunsandglitter:effects/piercing",
-        "shotgunsandglitter:effects/psyker",
-        "shotgunsandglitter:effects/hookshot",
-        "shotgunsandglitter:effects/flash",
-        "shotgunsandglitter:effects/graviton",
-        "shotgunsandglitter:effects/repulsion",
-        "shotgunsandglitter:effects/tainted",
-        "shotgunsandglitter:effects/tranq",
-        "shotgunsandglitter:effects/frost",
-        "shotgunsandglitter:effects/balefire",
-        "shotgunsandglitter:effects/draconic"
+        "shotgunsandglitter:bullets/balefire",
+        "shotgunsandglitter:bullets/biotic",
+        "shotgunsandglitter:bullets/draconic",
+        "shotgunsandglitter:bullets/firework",
+        "shotgunsandglitter:bullets/flash",
+        "shotgunsandglitter:bullets/frost",
+        "shotgunsandglitter:bullets/graviton",
+        "shotgunsandglitter:bullets/hookshot",
+        "shotgunsandglitter:bullets/impact",
+        "shotgunsandglitter:bullets/piercing",
+        "shotgunsandglitter:bullets/psychic",
+        "shotgunsandglitter:bullets/repulsion",
+        "shotgunsandglitter:bullets/tainted",
+        "shotgunsandglitter:bullets/tranquilizer"
+      ]
+    },
+    {
+      "title": "shotgunsandglitter.book.grenades.title",
+      "icon": "shotgunsandglitter:bookicons/grenade",
+      "description": "shotgunsandglitter.book.grenades.desc",
+      "entries": [
+        "shotgunsandglitter:grenades/blizzard",
+        "shotgunsandglitter:grenades/daylight",
+        "shotgunsandglitter:grenades/disco",
+        "shotgunsandglitter:grenades/repulsion"
       ]
     }
   ]

@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"balefire\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.balefire.title",
+  "description": "shotgunsandglitter.book.bullets.balefire.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.balefire.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:balefire_bullet_basic",
+        "shotgunsandglitter:balefire_bullet_shotgun",
+        "shotgunsandglitter:balefire_bullet_sniper",
+        "shotgunsandglitter:balefire_bullet_basic_8x",
+        "shotgunsandglitter:balefire_bullet_shotgun_8x",
+        "shotgunsandglitter:balefire_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

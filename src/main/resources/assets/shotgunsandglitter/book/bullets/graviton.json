@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"graviton\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.graviton.title",
+  "description": "shotgunsandglitter.book.bullets.graviton.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.graviton.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:gravity_in_bullet_basic",
+        "shotgunsandglitter:gravity_in_bullet_shotgun",
+        "shotgunsandglitter:gravity_in_bullet_sniper",
+        "shotgunsandglitter:gravity_in_bullet_basic_8x",
+        "shotgunsandglitter:gravity_in_bullet_shotgun_8x",
+        "shotgunsandglitter:gravity_in_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

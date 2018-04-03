@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"$NAME$\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.$NAME$.title",
+  "description": "shotgunsandglitter.book.bullets.$NAME$.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.$NAME$.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:$NAME$_bullet_basic",
+        "shotgunsandglitter:$NAME$_bullet_shotgun",
+        "shotgunsandglitter:$NAME$_bullet_sniper",
+        "shotgunsandglitter:$NAME$_bullet_basic_8x",
+        "shotgunsandglitter:$NAME$_bullet_shotgun_8x",
+        "shotgunsandglitter:$NAME$_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

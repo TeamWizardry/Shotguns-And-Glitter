@@ -1,0 +1,19 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:grenade",
+    "nbt": "{effect:\"repulsion\"}"
+  },
+  "title": "shotgunsandglitter.book.grenade.repulsion.title",
+  "description": "shotgunsandglitter.book.grenade.repulsion.desc",
+  "content": [
+    "shotgunsandglitter.book.grenade.repulsion.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:repulsion_grenade",
+        "shotgunsandglitter:repulsion_grenade_8x"
+      ]
+    }
+  ]
+}

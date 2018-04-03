@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"draconic\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.draconic.title",
+  "description": "shotgunsandglitter.book.bullets.draconic.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.draconic.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:draconic_bullet_basic",
+        "shotgunsandglitter:draconic_bullet_shotgun",
+        "shotgunsandglitter:draconic_bullet_sniper",
+        "shotgunsandglitter:draconic_bullet_basic_8x",
+        "shotgunsandglitter:draconic_bullet_shotgun_8x",
+        "shotgunsandglitter:draconic_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

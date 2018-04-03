@@ -81,30 +81,32 @@ item.shotgunsandglitter:drum.name=Capacity Drum
 
 tile.shotgunsandglitter:mini_turret.name=Spark Turret
 
-item.shotgunsandglitter:book.name=Shotguns And Glitter Guide Book
+item.shotgunsandglitter:book.name=Gun Owner's Manual
 
 shotgunsandglitter.potion.tranquilizer=Tranquilized
 shotgunsandglitter.potion.frost=Frost Shock
 shotgunsandglitter.potion.flash=Flashbang
-shotgunsandglitter.potion.disco=Dance
+shotgunsandglitter.potion.disco=Dance Fever
 
 shotgunsandglitter.book.title=Shotguns And Glitter
-shotgunsandglitter.book.subtitle=By Team Wizardry
+shotgunsandglitter.book.subtitle=By Wizardry Offices
 shotgunsandglitter.book.guns.title=Guns
-shotgunsandglitter.book.bullets.title=Bullets
+shotgunsandglitter.book.guns.desc=Done by Intern John
+shotgunsandglitter.book.bullets.title=Special Bullets
+shotgunsandglitter.book.bullets.desc=How to shoot in style
+shotgunsandglitter.book.grenades.title=Special Grenades
+shotgunsandglitter.book.grenades.desc=Explosions of every kind you ever wanted
 
-shotgunsandglitter.book.guns.getting_started.title=Getting Started
-shotgunsandglitter.book.guns.getting_started.desc=Getting Started
-shotgunsandglitter.book.guns.getting_started.content1=Welcome, fellow future &mAmericans&r gunslingers!<br> Are you bored of lame old boring guns? Because, we Wizards over at Team Wizardry sure where! We've devised a wide array of new toys for our magic loving audience who believe bullets are faster than wand waving.
-shotgunsandglitter.book.guns.getting_started.content2=Let's cut to the chase, you want guns with magic bullets and we got them.<br>First thing you'll want to know is that we've managed to create 6 types of weapons; Pistols, Shotguns, Sniper Rifles, Miniguns, Turrets, and Grenades.<br>You can read about each weapon in the other entries listed in this book.
-shotgunsandglitter.book.guns.getting_started.content3=Second thing you &mneed&r want to know is that we've concocted 13 magical effects (so far) for bullets- ie: you can lace a regular old boring gunpowder bullet with one of 13 types of magic effects that do all kinds of &mcrazy&r useful stuff.
-shotgunsandglitter.book.guns.getting_started.content4=Third of all, before you begin, you should know that all hand-held guns can be reloaded by holding their ammo in your off-hand and right clicking them with the gun in your main-hand. Then you can fire the gun with your heart's desire. Each gun uses a specific type of ammo and each gun amplifies or dampens the bullet effect it's firing.
-shotgunsandglitter.book.guns.getting_started.content5=That's all you need to know! Pick a gun, pick a bullet, and start &mdestroying the world&r having fun!
+shotgunsandglitter.book.getting_started.title=Getting Started
+shotgunsandglitter.book.getting_started.desc=How to get into guns
+shotgunsandglitter.book.getting_started.content1=Welcome, fellow future &mAmericans&r gunslingers!<br>Are you bored of lame old boring guns? Because, we Wizards over at Team Wizardry sure where! We've devised a wide array of new toys for our magic loving audience who believe bullets are faster than wand waving.
+shotgunsandglitter.book.getting_started.content2=Ok, that's the stuff I was required to say out of the way. They're making me write this at 9PM on a Friday night, so don't expect much.<br>We've got lots of guns. Pistols for those of you who want to shoot things. Shotguns for those who want to shoot things &oharder&r. Sniper Rifles... you guessed it. Then we've got miniguns, where you can shoot things a &olot&r. Turrets, if you're too lazy to shoot things yourself. Luckily, someone from another department is in charge of writing that documentation. It'll be elsewhere in this book.<br>We've developed lots of types of bullets and grenades for you to try out... some of them rather nonsensical. Just lace a gunpowder bullet with the correct stuff to make it work. I'll put the recipes in the entries when I get around to writing them.<br>We don't have safeties on our weapons. One of these days, I will find HR and strangle their managers. Until then, just keep your guns out of the way until you need them. You can load them by taking ammo in your other hand and shoving it into an empty gun.
+shotgunsandglitter.book.getting_started.content3=And, of course, Wizardry Offices is not responsible for any damage or loss of life incurred from use of our technology.
 
 shotgunsandglitter.book.guns.pistol.title=Pistol
 shotgunsandglitter.book.guns.pistol.desc=Range: Short/Medium | Ammo: Magazine
-shotgunsandglitter.book.guns.pistol.content1=The Pistol is a type of hand gun that's best used when you want to fire at a fair fire-rate but don't want to hold a ton of bullets on your person.<br> This gun can be reloaded with a Magazine loaded with small bullets.<br>Magazines can hold a maximum of 4 small bullets.
-shotgunsandglitter.book.guns.pistol.content2=The Pistol is best used against short to medium range targets. After that, it's small bullets drop hard in power. <br> This gun deals a decent amount of damage, but nothing crazy; especially because it doesn't aim perfectly.
+shotgunsandglitter.book.guns.pistol.content1=The Pistol is a type of hand gun that's best used when you want to fire at a fair fire-rate but don't want to hold a ton of bullets on your person.<br>This gun can be reloaded with a Magazine loaded with small bullets.<br>Magazines can hold a maximum of 4 small bullets.
+shotgunsandglitter.book.guns.pistol.content2=The Pistol is best used against short to medium range targets. After that, it's small bullets drop hard in power.<br>This gun deals a decent amount of damage, but nothing crazy; especially because it doesn't aim perfectly.
 
 shotgunsandglitter.book.guns.shotgun.title=Shotgun
 shotgunsandglitter.book.guns.shotgun.desc=Range: Short | Ammo: Shells
@@ -118,7 +120,7 @@ shotgunsandglitter.book.guns.sniper_rifle.content2=This gun uses heavy bullets t
 
 shotgunsandglitter.book.guns.minigun.title=Minigun
 shotgunsandglitter.book.guns.minigun.desc=Range: Short | Ammo: Drum
-shotgunsandglitter.book.guns.minigun.content1=The Minigun, often nicknamed "gattling gun" is an interested weapon. It has a very very high fire rate and consumes Bullet Drums of small bullets. A single Bullet Drum can hold up to a hundred bullets at a time.
+shotgunsandglitter.book.guns.minigun.content1=The Minigun, often nicknamed "gatling gun" is an interesting weapon. It has a very very high fire rate and consumes Bullet Drums of small bullets. A single Bullet Drum can hold up to a hundred bullets at a time.
 shotgunsandglitter.book.guns.minigun.content2=This gun is best used against short to medium range targets as - despite it's high fire rate - has a very large scatter in it's bullets and each bullet tends to be very weak. When multiple bullets hit the same target, it can deal lethal damage.
 
 shotgunsandglitter.book.guns.grenade.title=Grenade
@@ -133,17 +135,74 @@ shotgunsandglitter.book.guns.turret.content2=And despite the turrets' magical ai
 shotgunsandglitter.book.guns.turret.content3=You can insert coal into it from the sides of the machine with a hopper to fuel it, then you can insert your magical bullets from the top of the turret to load it up. For security reasons we had to deal with the hard way, the turret requires redstone power to operate.
 shotgunsandglitter.book.guns.turret.content4=Only the placer of the turret will not be attacked by the turret. Otherwise, if you are closer than 4 blocks from the turret, it wont try to murder you.
 
-shotgunsandglitter.book.effects.gunpowder.title=Gun Powder
-shotgunsandglitter.book.effects.gunpowder.desc=Gun Powder
-shotgunsandglitter.book.effects.gunpowder.content1=Gun Powder bullets are literally just your boring bullet. We take these regular bullets and lace them with effects for more fun bullets.
+shotgunsandglitter.book.bullets.balefire.title=Balefire
+shotgunsandglitter.book.bullets.balefire.desc=Reality-destroying fire in bullet form
+shotgunsandglitter.book.bullets.balefire.content=Balefire rounds have a tendency to "unexist" things they hit. Blocks and monsters die or vanish in its path, and it leaves a trail of fire.<br><br>A lady with a strangely ageless face gave us a huge pile of books on how to use it, but none of our scholars could get past the first one.
 
-shotgunsandglitter.book.effects.firework.title=Firework
-shotgunsandglitter.book.effects.firework.desc=Firework
-shotgunsandglitter.book.effects.firework.content1=We were enjoying our magical artillery but
+shotgunsandglitter.book.bullets.biotic.title=Biotic
+shotgunsandglitter.book.bullets.biotic.desc=Shoot to heal
+shotgunsandglitter.book.bullets.biotic.content=These bullets... heal people when they get shot. We're not sure how. This doesn't make any sense, does it?<br><br>We have it on good authority from an old lady and an angel that Biotic tech makes sense and has a perfect scientific explanation. However, their Swedish friend keeps ranting about how "the science doesn't check out." Well, Swedish man, we don't care, so long as it works. Healing bullets! Woo.
 
-shotgunsandglitter.book.effects.biotic.title=Biotic
-shotgunsandglitter.book.effects.biotic.desc=Biotic
-shotgunsandglitter.book.effects.biotic.content1=The Biotic effect heals targets injected with it directly from their blood stream.
-shotgunsandglitter.book.effects.biotic.content2=We managed to create this effect from an elderly woman named Ana from the future who generously gave us her recipe. Although she also mentioned that she took the recipe from her friend Angela. Anyways, who cares. Healing bullets!
+shotgunsandglitter.book.bullets.draconic.title=Draconic
+shotgunsandglitter.book.bullets.draconic.desc=Boom
+shotgunsandglitter.book.bullets.draconic.content=These bullets area really reactive. They explode. Hard.<br><br>Making them is a really bad idea. Well, unless you like fun.
 
+shotgunsandglitter.book.bullets.firework.title=Firework
+shotgunsandglitter.book.bullets.firework.desc=Fancy colors
+shotgunsandglitter.book.bullets.firework.content=One of our interns had some leftovers from the Fourth of July, so we strapped them to bullets. They make fancy splashes of color!
 
+shotgunsandglitter.book.bullets.flash.title=Flash
+shotgunsandglitter.book.bullets.flash.desc=Just the way to kill your eyes
+shotgunsandglitter.book.bullets.flash.content=Do you not like your enemies seeing things? Well, these bullets can solve that. They're so bright that even looking at their explosion can blind you.<br><br>You should probably look away when you fire them. We didn't think this through.
+
+shotgunsandglitter.book.bullets.frost.title=Frost
+shotgunsandglitter.book.bullets.frost.desc=How to get people to chill out
+shotgunsandglitter.book.bullets.frost.content=These rounds freeze people when they hit, leaving them slippery, slow, and smelling vaguely of mint.
+
+shotgunsandglitter.book.bullets.graviton.title=Graviton
+shotgunsandglitter.book.bullets.graviton.desc=Pull things in
+shotgunsandglitter.book.bullets.graviton.content=These bullets are whatever the exact opposite of an explosive is. They pull you in, instead of pushing you away.<br><br>Our interns say they arrived in a package from Russia unannounced, so handle at your own risk.
+
+shotgunsandglitter.book.bullets.repulsion.title=Repulsion
+shotgunsandglitter.book.bullets.repulsion.desc=Push things out
+shotgunsandglitter.book.bullets.repulsion.content=We heard you liked explosives, so we put explosives in your explosives. We didn't put enough in to break anything, but they'll blast away anything unlucky enough to be near where they hit.
+
+shotgunsandglitter.book.bullets.hookshot.title=Hookshot
+shotgunsandglitter.book.bullets.hookshot.desc=Pull yourself
+shotgunsandglitter.book.bullets.hookshot.content=Some guy in cosplay ran into our office, yelled a lot, and then tied a rope to a bullet. We're not sure why. But hey, free bullet design! It pulls you towards it when it lands.<br><br>We sent a few guys to climb a mountain to test them out. Only one returned, but he found a sweet golden triangle!
+
+shotgunsandglitter.book.bullets.impact.title=Impact
+shotgunsandglitter.book.bullets.impact.desc=Hit things hard
+shotgunsandglitter.book.bullets.impact.content=We made our bullets bigger. Now, instead of just killing your enemies, you can kill dirt and stone, too.<br><br>... Who designed these, again? A dwarf? Yeah, that sounds about right.
+
+shotgunsandglitter.book.bullets.piercing.title=Piercing
+shotgunsandglitter.book.bullets.piercing.desc=Bullets but, like, arrows
+shotgunsandglitter.book.bullets.piercing.content=We replaced the heads of our bullets with arrows. Not sure how they don't shatter to pieces, but hey, whatever lets us punch through hordes of zombies.
+
+shotgunsandglitter.book.bullets.psyker.title=Psyker
+shotgunsandglitter.book.bullets.psyker.desc=Homing
+shotgunsandglitter.book.bullets.psyker.content=We contracted a bunch of really armored dudes to make us awesome bullets. They gave us these, told us they're holy. Whatever. They home in on enemies, apparently.
+
+shotgunsandglitter.book.bullets.tainted.title=Tainted
+shotgunsandglitter.book.bullets.tainted.desc=Poisonous
+shotgunsandglitter.book.bullets.tainted.content=Fred spilled his lunch all over one batch of bullets. It turns out that Fred's lunch is the deadliest substance known to mankind. We now use it as a poisoning agent, tipping these bullets in "Fred-toxin."
+
+shotgunsandglitter.book.bullets.tranquilizer.title=Tranquilizer
+shotgunsandglitter.book.bullets.tranquilizer.desc=Liquid sleep
+shotgunsandglitter.book.bullets.tranquilizer.content=We bottled up the brain chemical your body produces when you're in a lecture, and shoved it into cases. Unsurprisingly, it turns out to make humans and monsters alike go to sleep.
+
+shotgunsandglitter.book.grenade.blizzard.title=Blizzard
+shotgunsandglitter.book.grenade.blizzard.desc=Portable winter
+shotgunsandglitter.book.grenade.blizzard.content=Freezing cold, snow, and pain, all in convenient bomb form! Who could ask for more!<br>A lot of people, now that I think about it. What happened to all our QA guys?
+
+shotgunsandglitter.book.grenade.daylight.title=Daylight
+shotgunsandglitter.book.grenade.daylight.desc=Portable luminance
+shotgunsandglitter.book.grenade.daylight.content=Some trolls told us that daylight is dangerous. We thought, why not?<br>Well, it wasn't, until our Engineering team got a hold of it. With some extra explosives, and a pinch of magic, we made a bomb that explodes with light.<br>Don't look at it when it goes off. Or be near it. Give them to your greatest enemy as a decoration.
+
+shotgunsandglitter.book.grenade.disco.title=Disco
+shotgunsandglitter.book.grenade.disco.desc=Your annoying coworker in grenade form
+shotgunsandglitter.book.grenade.disco.content=R&D managed to liquify Bill. Good riddance.<br>But we had to do something with all that seventies-old-dude juice. He makes a pretty good dance bomb.<br><br>Wait, we're using a person in our bombs? How did HR ever agree to this?
+
+shotgunsandglitter.book.grenade.repulsion.title=Repulsion
+shotgunsandglitter.book.grenade.repulsion.desc=Get away... or have it do it for you
+shotgunsandglitter.book.grenade.repulsion.content=We needed a way to clean up the cafeteria after lunch. I threw a bunch of gunpowder in a bomb, added some pillows, and voila: a bomb that blows stuff away without damaging it.<br><br>I'm still banned from the cafeteria until I can pay to replace all the tables.

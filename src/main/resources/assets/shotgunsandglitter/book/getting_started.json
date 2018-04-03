@@ -1,0 +1,22 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 0
+  },
+  "title": "shotgunsandglitter.book.getting_started.title",
+  "description": "shotgunsandglitter.book.getting_started.desc",
+  "content": [
+    "shotgunsandglitter.book.getting_started.content1",
+    "shotgunsandglitter.book.getting_started.content2",
+    "shotgunsandglitter.book.getting_started.content3",
+    {
+      "type": "recipe",
+      "recipes": ["shotgunsandglitter:basic_bullet", "shotgunsandglitter:shotgun_bullet", "shotgunsandglitter:sniper_bullet"]
+    },
+    {
+      "type": "recipe",
+      "recipe": ["shotgunsandglitter:grenade"]
+    }
+  ]
+}

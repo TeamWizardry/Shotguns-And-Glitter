@@ -1,0 +1,19 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:grenade",
+    "nbt": "{effect:\"daylight\"}"
+  },
+  "title": "shotgunsandglitter.book.grenade.daylight.title",
+  "description": "shotgunsandglitter.book.grenade.daylight.desc",
+  "content": [
+    "shotgunsandglitter.book.grenade.daylight.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:daylight_grenade",
+        "shotgunsandglitter:daylight_grenade_8x"
+      ]
+    }
+  ]
+}

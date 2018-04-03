@@ -13,7 +13,7 @@
     "shotgunsandglitter.book.guns.turret.content5",
     {
       "type": "recipe",
-      "recipe": "shotgunsandglitter:mini_turret"
+      "recipe": "shotgunsandglitter:turret"
     }
   ]
 }

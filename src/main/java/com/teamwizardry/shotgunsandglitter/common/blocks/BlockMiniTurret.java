@@ -33,11 +33,13 @@ public class BlockMiniTurret extends BlockModContainer {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isOpaqueCube(IBlockState blockState) {
 		return false;
 	}

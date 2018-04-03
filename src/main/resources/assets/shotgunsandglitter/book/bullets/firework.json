@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"firework\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.firework.title",
+  "description": "shotgunsandglitter.book.bullets.firework.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.firework.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:firework_bullet_basic",
+        "shotgunsandglitter:firework_bullet_shotgun",
+        "shotgunsandglitter:firework_bullet_sniper",
+        "shotgunsandglitter:firework_bullet_basic_8x",
+        "shotgunsandglitter:firework_bullet_shotgun_8x",
+        "shotgunsandglitter:firework_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

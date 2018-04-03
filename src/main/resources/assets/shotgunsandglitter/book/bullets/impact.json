@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"impact\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.impact.title",
+  "description": "shotgunsandglitter.book.bullets.impact.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.impact.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:impact_bullet_basic",
+        "shotgunsandglitter:impact_bullet_shotgun",
+        "shotgunsandglitter:impact_bullet_sniper",
+        "shotgunsandglitter:impact_bullet_basic_8x",
+        "shotgunsandglitter:impact_bullet_shotgun_8x",
+        "shotgunsandglitter:impact_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

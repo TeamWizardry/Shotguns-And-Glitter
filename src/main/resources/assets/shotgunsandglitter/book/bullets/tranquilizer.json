@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"tranquilizer\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.tranquilizer.title",
+  "description": "shotgunsandglitter.book.bullets.tranquilizer.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.tranquilizer.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:tranquilizer_bullet_basic",
+        "shotgunsandglitter:tranquilizer_bullet_shotgun",
+        "shotgunsandglitter:tranquilizer_bullet_sniper",
+        "shotgunsandglitter:tranquilizer_bullet_basic_8x",
+        "shotgunsandglitter:tranquilizer_bullet_shotgun_8x",
+        "shotgunsandglitter:tranquilizer_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

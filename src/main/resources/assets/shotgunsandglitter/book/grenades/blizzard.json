@@ -1,0 +1,19 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:grenade",
+    "nbt": "{effect:\"blizzard\"}"
+  },
+  "title": "shotgunsandglitter.book.grenade.blizzard.title",
+  "description": "shotgunsandglitter.book.grenade.blizzard.desc",
+  "content": [
+    "shotgunsandglitter.book.grenade.blizzard.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:blizzard_grenade",
+        "shotgunsandglitter:blizzard_grenade_8x"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"hookshot\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.hookshot.title",
+  "description": "shotgunsandglitter.book.bullets.hookshot.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.hookshot.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:hookshot_bullet_basic",
+        "shotgunsandglitter:hookshot_bullet_shotgun",
+        "shotgunsandglitter:hookshot_bullet_sniper",
+        "shotgunsandglitter:hookshot_bullet_basic_8x",
+        "shotgunsandglitter:hookshot_bullet_shotgun_8x",
+        "shotgunsandglitter:hookshot_bullet_sniper_8x"
+      ]
+    }
+  ]
+}

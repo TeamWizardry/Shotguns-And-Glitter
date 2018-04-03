@@ -1,0 +1,24 @@
+{
+  "type": "entry",
+  "icon": {
+    "item": "shotgunsandglitter:bullet",
+    "data": 2,
+    "nbt": "{effect:\"piercing\"}"
+  },
+  "title": "shotgunsandglitter.book.bullets.piercing.title",
+  "description": "shotgunsandglitter.book.bullets.piercing.desc",
+  "content": [
+    "shotgunsandglitter.book.bullets.piercing.content",
+    {
+      "type": "recipe",
+      "recipes": [
+        "shotgunsandglitter:piercing_bullet_basic",
+        "shotgunsandglitter:piercing_bullet_shotgun",
+        "shotgunsandglitter:piercing_bullet_sniper",
+        "shotgunsandglitter:piercing_bullet_basic_8x",
+        "shotgunsandglitter:piercing_bullet_shotgun_8x",
+        "shotgunsandglitter:piercing_bullet_sniper_8x"
+      ]
+    }
+  ]
+}
