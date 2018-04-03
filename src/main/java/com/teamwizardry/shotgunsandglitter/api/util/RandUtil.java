@@ -18,11 +18,11 @@ public class RandUtil {
 	}
 
 	public static long nextDouble() {
-		return (long) random.nextDouble();
+		return random.nextLong();
 	}
 
 	public static long nextLong(long min, long max) {
-		return (long) ((random.nextDouble() * (max - min)) + min);
+		return (random.nextLong() * (max - min)) + min;
 	}
 
 	public static long nextLong(long bound) {
@@ -46,15 +46,15 @@ public class RandUtil {
 	}
 
 	public static int nextInt(int min, int max) {
-		return (int) ((random.nextDouble() * (max - min)) + min);
+		return (random.nextInt() * (max - min)) + min;
 	}
 
 	public static int nextInt(int bound) {
-		return (int) (random.nextDouble() * bound);
+		return random.nextInt() * bound;
 	}
 
 	public static int nextInt() {
-		return (int) random.nextDouble();
+		return random.nextInt();
 	}
 
 	public static boolean nextBoolean() {

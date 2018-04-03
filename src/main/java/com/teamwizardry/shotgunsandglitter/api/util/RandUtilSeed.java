@@ -38,15 +38,15 @@ public class RandUtilSeed {
 	}
 
 	public int nextInt(int min, int max) {
-		return (int) ((random.nextDouble() * (max - min)) + min);
+		return (random.nextInt() * (max - min)) + min;
 	}
 
 	public int nextInt(int bound) {
-		return (int) (random.nextDouble() * bound);
+		return random.nextInt() * bound;
 	}
 
 	public int nextInt() {
-		return (int) random.nextDouble();
+		return random.nextInt();
 	}
 
 	public boolean nextBoolean() {
