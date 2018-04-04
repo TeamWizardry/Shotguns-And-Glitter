@@ -4,7 +4,7 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -91,10 +90,8 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 			if (!world.isRemote)
 				die(getPositionVector());
 		} else {
-			if (world.isRemote)
-				world.playSound(posX, posY, posZ, ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.1f, 0.3f), RandUtil.nextFloat(0.95f, 1.1f), false);
-
-			 ShotgunsAndGlitter.PROXY.grenadeUpdate(world, this, getEffect());
+			SoundSystem.playSoundsNormal(world, getPositionAsVector(), ModSounds.DUST_SPARKLE);
+			ShotgunsAndGlitter.PROXY.grenadeUpdate(world, this, getEffect());
 		}
 	}
 

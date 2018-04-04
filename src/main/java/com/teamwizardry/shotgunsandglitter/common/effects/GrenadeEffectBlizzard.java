@@ -4,13 +4,14 @@ import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
+import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
 import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
+import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
-import com.teamwizardry.shotgunsandglitter.common.core.CommonEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.block.BlockSnow;
@@ -19,7 +20,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -50,7 +50,7 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 		if (!world.isRemote)
-			CommonEventHandler.lingeringObjects.add(new LingeringObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
+			ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
 				for (int i = 0; i < 3; i++) {
 					EntityFallingBlock droppingBlock = new EntityFallingBlock(lingerObject.world, lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
 					droppingBlock.fallTime = 1;
@@ -93,9 +93,9 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 
-		ClientEventHandler.lingeringObjects.add(new LingeringObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
+		ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
 			if (lingerObject.world.getTotalWorldTime() % 4 == 0)
-				lingerObject.world.playSound(lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, ModSounds.COLD_WIND, SoundCategory.PLAYERS, 2f, 1f, false);
+				SoundSystem.playSoundsLoud(lingerObject.world, lingerObject.pos, ModSounds.COLD_WIND);
 
 			ParticleBuilder glitter = new ParticleBuilder(10);
 			glitter.setRender(ClientEventHandler.SPARKLE);

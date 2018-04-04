@@ -24,7 +24,8 @@ public class SoundSystem {
 		SoundCategory category = SoundCategory.getByName(soundCategory);
 
 		for (SoundEvent sound : sounds)
-			world.playSound(x, y, z, sound, category, volume * masterVolume, RandUtil.nextFloat(0.9f, 1.1f), false);
+			if (sound != null)
+				world.playSound(x, y, z, sound, category, volume * masterVolume, RandUtil.nextFloat(0.9f, 1.1f), false);
 	}
 
 	public static void playSounds(@Nonnull World world, @Nonnull Vec3d pos, float volume, SoundEvent... sounds) {
@@ -45,5 +46,13 @@ public class SoundSystem {
 
 	public static void playSoundsQuiet(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
 		playSounds(world, x, y, z, 0.5f, sounds);
+	}
+
+	public static void playSoundsNormal(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
+		playSounds(world, pos.x, pos.y, pos.z, 1f, sounds);
+	}
+
+	public static void playSoundsNormal(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
+		playSounds(world, x, y, z, 1f, sounds);
 	}
 }

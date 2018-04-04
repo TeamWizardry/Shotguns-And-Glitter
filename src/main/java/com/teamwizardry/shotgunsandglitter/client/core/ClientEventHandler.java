@@ -21,7 +21,7 @@ public class ClientEventHandler {
 
 	public static ResourceLocation SPARKLE = new ResourceLocation(ShotgunsAndGlitter.MODID, "particles/sparkle_blurred");
 
-	public static Set<LingeringObject> lingeringObjects = new HashSet<>();
+	private static Set<LingeringObject> lingeringObjects = new HashSet<>();
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
