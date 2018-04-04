@@ -1,6 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.common.core;
 
-import com.teamwizardry.shotgunsandglitter.api.LingerObject;
+import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -9,12 +9,17 @@ import java.util.Set;
 
 public class CommonEventHandler {
 
-	public static Set<LingerObject> lingerObjects = new HashSet<>();
+	private static Set<LingeringObject> lingeringObjects = new HashSet<>();
+
+	public static void addLingeringObject(LingeringObject object) {
+		lingeringObjects.add(object);
+	}
 
 	@SubscribeEvent
 	public void onClientTick(TickEvent.WorldTickEvent event) {
 		if (event.phase != TickEvent.Phase.END) return;
-		lingerObjects.removeIf(lingerObject -> {
+
+		lingeringObjects.removeIf(lingerObject -> {
 			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub >= lingerObject.ticks) {
 				return true;

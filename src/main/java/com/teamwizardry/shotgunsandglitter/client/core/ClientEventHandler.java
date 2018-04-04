@@ -2,7 +2,7 @@ package com.teamwizardry.shotgunsandglitter.client.core;
 
 import com.teamwizardry.librarianlib.features.animator.Animator;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.LingerObject;
+import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +21,7 @@ public class ClientEventHandler {
 
 	public static ResourceLocation SPARKLE = new ResourceLocation(ShotgunsAndGlitter.MODID, "particles/sparkle_blurred");
 
-	public static Set<LingerObject> lingerObjects = new HashSet<>();
+	public static Set<LingeringObject> lingeringObjects = new HashSet<>();
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -29,10 +29,15 @@ public class ClientEventHandler {
 		event.getMap().registerSprite(SPARKLE);
 	}
 
+	public static void addLingeringObject(LingeringObject object) {
+		lingeringObjects.add(object);
+	}
+
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event) {
 		if (event.phase != TickEvent.Phase.END) return;
-		lingerObjects.removeIf(lingerObject -> {
+
+		lingeringObjects.removeIf(lingerObject -> {
 			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub >= lingerObject.ticks) {
 				return true;
@@ -42,5 +47,4 @@ public class ClientEventHandler {
 			return false;
 		});
 	}
-
 }
