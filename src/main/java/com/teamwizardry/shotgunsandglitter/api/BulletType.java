@@ -4,7 +4,7 @@ import net.minecraft.util.math.MathHelper;
 
 public enum BulletType {
 	SNIPER(8f, 0.3f, "sniper"),
-	SHOTGUN(2f, 0.6f, "shotgun"),
+	SHOTGUN(4f, 0.6f, "shotgun"),
 	BASIC(5f, 0.15f, "basic");
 
 	public final float damage;
