@@ -74,7 +74,7 @@ public interface IGunItem extends IAmmoItem {
 			}
 		}
 
-		SoundSystem.playSoundsNormal(world, player.getPositionVector(), bulletEffect.getFireSound());
+		SoundSystem.playSounds(world, player.getPositionVector(), bulletEffect.getFireSound());
 
 		if (!player.isCreative())
 			takeEffectsFromItem(stack, consumed);
@@ -131,7 +131,7 @@ public interface IGunItem extends IAmmoItem {
 		if (getFireCooldownTime(stack) > 0)
 			player.getCooldownTracker().setCooldown(stack.getItem(), getFireCooldownTime(stack));
 
-		SoundSystem.playSoundsNormal(world, player.getPositionVector(), getFireSoundEvents(stack));
+		SoundSystem.playSounds(world, player.getPositionVector(), getFireSoundEvents(stack));
 	}
 
 	default void setReloadCooldown(World world, EntityPlayer player, ItemStack stack) {
@@ -139,7 +139,7 @@ public interface IGunItem extends IAmmoItem {
 
 		player.getCooldownTracker().setCooldown(stack.getItem(), getReloadCooldownTime(stack));
 
-		SoundSystem.playSoundsNormal(world, player.getPositionVector(), getReloadSoundEvent(stack));
+		SoundSystem.playSounds(world, player.getPositionVector(), getReloadSoundEvent(stack));
 
 	}
 }

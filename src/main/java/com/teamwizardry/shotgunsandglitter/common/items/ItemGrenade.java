@@ -71,7 +71,7 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 						world.spawnEntity(entityGrenade);
 					}
 
-					SoundSystem.playSoundsNormal(world, entityplayer.getPositionVector(), SoundEvents.ENTITY_ARROW_SHOOT, ModSounds.MAGIC_SPARKLE);
+					SoundSystem.playSoundsQuiet(world, entityplayer.getPositionVector(), SoundEvents.ENTITY_ARROW_SHOOT, ModSounds.MAGIC_SPARKLE);
 
 					if (!isCreativeMode) stack.shrink(1);
 				}
