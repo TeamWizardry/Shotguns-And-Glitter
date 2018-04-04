@@ -50,7 +50,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public int getFireCount(ItemStack stack) {
-		return 5;
+		return 10;
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public float getInaccuracy(ItemStack stack) {
-		return 5f;
+		return 10f;
 	}
 
 	@Nullable
