@@ -155,7 +155,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 				setDead();
 			}
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
-			if (result.entityHit != null && !world.isRemote)
+			if (result.entityHit != null && !world.isRemote && (result.entityHit != thrower || ticksExisted > 10))
 				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
 						result.entityHit, getEffect(), result.hitVec)) {
 
