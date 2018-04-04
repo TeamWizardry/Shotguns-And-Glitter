@@ -35,14 +35,14 @@ public class BulletEffectImpact implements BulletEffect {
 
 	@Override
 	public float knockbackStrength(@NotNull World world, @NotNull IBulletEntity bullet) {
-		return bullet.getBulletType().knockbackStrength * 2;
+		return BulletEffect.super.knockbackStrength(world, bullet) * 2;
 	}
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
 			BulletType type = bullet.getBulletType();
-			float range = type.damage * 0.75f;
+			float range = (float) type.getExplosiveRadius();
 
 			for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPositionAsBlockPos().add(-range, -range, -range),
 					bullet.getPositionAsBlockPos().add(range, range / 2, range))) {

@@ -54,7 +54,7 @@ public class GrenadeEffectDaylight implements GrenadeEffect {
 		GrenadeEffect.super.onImpact(world, grenade);
 
 		if (!world.isRemote) {
-			float radius = range(world, grenade) * 10 / 3;
+			float radius = range(world, grenade) * 5 / 3;
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
 					new AxisAlignedBB(grenade.posX() - radius, grenade.posY() - radius, grenade.posZ() - radius,
 							grenade.posX() + radius, grenade.posY() + radius, grenade.posZ() + radius),

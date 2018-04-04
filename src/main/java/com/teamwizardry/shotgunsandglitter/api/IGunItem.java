@@ -83,9 +83,9 @@ public interface IGunItem extends IAmmoItem {
 		player.swingArm(hand);
 
 		Vec3d normal = player.getLook(0);
-		player.motionX += -normal.x * (getBulletType(stack).knockbackStrength / 2.0);
-		player.motionY += -normal.y * (getBulletType(stack).knockbackStrength / 10.0);
-		player.motionZ += -normal.z * (getBulletType(stack).knockbackStrength / 2.0);
+		player.motionX += -normal.x * (getBulletType(stack).getKnockbackStrength() / 2.0);
+		player.motionY += -normal.y * (getBulletType(stack).getKnockbackStrength() / 10.0);
+		player.motionZ += -normal.z * (getBulletType(stack).getKnockbackStrength() / 2.0);
 
 		if (player.rotationPitch < (-90 + headKnockStrength(stack)))
 			player.attackEntityFrom(DamageSource.causeMobDamage(player), 2f);

@@ -41,7 +41,7 @@ public class BulletEffectGraviton implements BulletEffect {
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
-		double range = 10;
+		double range = bullet.getBulletType().getExplosiveRadius() * 3.5;
 
 		for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
 				new AxisAlignedBB(bullet.posX() - range, bullet.posY() - range, bullet.posZ() - range,
@@ -53,9 +53,9 @@ public class BulletEffectGraviton implements BulletEffect {
 				})) {
 			Vec3d differenceVec = bullet.getPositionAsVector().subtract(target.getPositionVector());
 			differenceVec = differenceVec.scale(direction / differenceVec.lengthSquared());
-			target.motionX = differenceVec.x * bullet.getBulletType().damage;
-			target.motionY = Math.min(Math.max(differenceVec.y, 0), 2) * bullet.getBulletType().damage + 0.25f;
-			target.motionZ = differenceVec.z * bullet.getBulletType().damage;
+			target.motionX = differenceVec.x * bullet.getBulletType().getDamage();
+			target.motionY = Math.min(Math.max(differenceVec.y, 0), 2) * bullet.getBulletType().getDamage() + 0.25f;
+			target.motionZ = differenceVec.z * bullet.getBulletType().getDamage();
 			target.velocityChanged = true;
 		}
 	}

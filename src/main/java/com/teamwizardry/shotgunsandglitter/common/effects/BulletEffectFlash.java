@@ -35,7 +35,7 @@ public class BulletEffectFlash implements BulletEffect {
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		if (!world.isRemote) {
-			int radius = (int) bullet.getBulletType().damage * 50;
+			int radius = (int) bullet.getBulletType().getExplosiveRadius() * 25;
 			for (EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class,
 					new AxisAlignedBB(bullet.posX() - radius, bullet.posY() - radius, bullet.posZ() - radius,
 							bullet.posX() + radius, bullet.posY() + radius, bullet.posZ() + radius),

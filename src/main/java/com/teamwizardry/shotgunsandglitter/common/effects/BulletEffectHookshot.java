@@ -30,7 +30,7 @@ public class BulletEffectHookshot implements BulletEffect {
 	public void onImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		EntityLivingBase thrower = bullet.getEntityThrower();
 		if (thrower != null) {
-			Vec3d differenceVec = bullet.getPositionAsVector().subtract(thrower.getPositionVector()).normalize().scale(0.5 * bullet.getBulletType().damage);
+			Vec3d differenceVec = bullet.getPositionAsVector().subtract(thrower.getPositionVector()).normalize().scale(0.25 * bullet.getBulletType().getDamage());
 			thrower.motionX = differenceVec.x;
 			thrower.motionY = Math.max(differenceVec.y, 0) + 0.5f;
 			thrower.motionZ = differenceVec.z;

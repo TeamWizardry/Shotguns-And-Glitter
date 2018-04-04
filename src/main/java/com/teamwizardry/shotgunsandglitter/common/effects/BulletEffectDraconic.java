@@ -36,7 +36,7 @@ public class BulletEffectDraconic implements BulletEffect {
 		if (!world.isRemote)
 			world.newExplosion(bullet.getAsEntity(),
 					bullet.posX(), bullet.posY(), bullet.posZ(),
-					bullet.getBulletType().damage, true, !world.getGameRules().getBoolean("mobGriefing"));
+					(float) bullet.getBulletType().getExplosiveRadius(), true, !world.getGameRules().getBoolean("mobGriefing"));
 	}
 
 	@Override

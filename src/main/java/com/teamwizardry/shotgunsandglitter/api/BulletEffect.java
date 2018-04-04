@@ -50,11 +50,11 @@ public interface BulletEffect {
 	}
 
 	default float damage(@NotNull World world, @NotNull IBulletEntity bullet) {
-		return bullet.getBulletType().damage;
+		return (float) bullet.getBulletType().getDamage();
 	}
 
 	default float knockbackStrength(@NotNull World world, @NotNull IBulletEntity bullet) {
-		return bullet.getBulletType().knockbackStrength;
+		return (float) bullet.getBulletType().getKnockbackStrength();
 	}
 
 	// Render Methods
