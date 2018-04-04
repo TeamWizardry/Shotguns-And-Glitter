@@ -121,7 +121,7 @@ public interface IGunItem extends IAmmoItem {
 		for (int index = 0; index < Math.min(ammoBulletEffects.size(), getMaxAmmo(gun)); index++)
 			gunAmmo.add(ammoBulletEffects.get(index));
 
-		ammoItem.takeEffectsFromItem(ammo, Math.max(ammoBulletEffects.size(), getMaxAmmo(gun)));
+		ammoItem.takeEffectsFromItem(ammo, Math.min(ammoBulletEffects.size(), getMaxAmmo(gun)));
 		setEffects(gun, gunAmmo);
 
 		setReloadCooldown(world, player, gun);
