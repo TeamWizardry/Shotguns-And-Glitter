@@ -2,6 +2,7 @@ package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.api.IAmmoItem;
 import com.teamwizardry.shotgunsandglitter.api.IGunItem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.client.util.ITooltipFlag;
@@ -53,6 +54,11 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 	@Override
 	public BulletType getBulletType(@NotNull ItemStack stack) {
 		return BulletType.BASIC;
+	}
+
+	@Override
+	public boolean isValidAmmo(IAmmoItem ammoItem, ItemStack gun, ItemStack ammo) {
+		return IGunItem.super.isValidAmmo(ammoItem, gun, ammo) && ammoItem == ModItems.DRUM;
 	}
 
 	@Override

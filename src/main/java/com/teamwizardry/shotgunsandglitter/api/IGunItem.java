@@ -105,11 +105,15 @@ public interface IGunItem extends IAmmoItem {
 		});
 	}
 
+	default boolean isValidAmmo(IAmmoItem ammoItem, ItemStack gun, ItemStack ammo) {
+		return ammoItem.getBulletType(ammo) == getBulletType(gun);
+	}
+
 	default boolean reloadAmmo(World world, EntityPlayer player, ItemStack gun, ItemStack ammo) {
 		if (!(ammo.getItem() instanceof IAmmoItem) || ammo.getItem() instanceof IGunItem) return true;
 
 		IAmmoItem ammoItem = (IAmmoItem) ammo.getItem();
-		if (ammoItem.getBulletType(ammo) != getBulletType(gun)) return true;
+		if (!isValidAmmo(ammoItem, ammo, gun)) return true;
 
 		List<BulletEffect> gunAmmo = getEffectsFromItem(gun);
 
