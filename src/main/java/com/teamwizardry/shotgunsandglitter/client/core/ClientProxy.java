@@ -5,7 +5,6 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
-import com.teamwizardry.shotgunsandglitter.common.core.CommonEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
@@ -83,6 +82,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void addLingeringObject(LingeringObject object) {
-		CommonEventHandler.addLingeringObject(object);
+		ClientEventHandler.addLingeringObject(object);
 	}
 }

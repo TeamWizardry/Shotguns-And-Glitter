@@ -8,7 +8,7 @@ import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeItem;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
 import kotlin.jvm.functions.Function1;
@@ -20,7 +20,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -68,8 +71,7 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 						world.spawnEntity(entityGrenade);
 					}
 
-					world.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-					world.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, ModSounds.MAGIC_SPARKLE, SoundCategory.NEUTRAL, RandUtil.nextFloat(0.9f, 1.1f), RandUtil.nextFloat(0.9f, 1.1f));
+					SoundSystem.playSoundsNormal(world, entityplayer.getPositionVector(), SoundEvents.ENTITY_ARROW_SHOOT, ModSounds.MAGIC_SPARKLE);
 
 					if (!isCreativeMode) stack.shrink(1);
 				}

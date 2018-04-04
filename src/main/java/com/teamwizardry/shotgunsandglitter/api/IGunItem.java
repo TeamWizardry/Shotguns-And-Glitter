@@ -4,13 +4,11 @@ import com.teamwizardry.librarianlib.core.LibrarianLib;
 import com.teamwizardry.librarianlib.features.animator.Easing;
 import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
 import com.teamwizardry.librarianlib.features.utilities.client.ClientRunnable;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -74,8 +72,9 @@ public interface IGunItem extends IAmmoItem {
 				bullet.getAsEntity().setPosition(player.posX, player.posY + player.eyeHeight, player.posZ);
 				world.spawnEntity(bullet.getAsEntity());
 			}
-		} else if (bulletEffect.getFireSound() != null)
-			world.playSound(player.posX, player.posY, player.posZ, bulletEffect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+		}
+
+		SoundSystem.playSoundsNormal(world, player.getPositionVector(), bulletEffect.getFireSound());
 
 		if (!player.isCreative())
 			takeEffectsFromItem(stack, consumed);
@@ -132,11 +131,7 @@ public interface IGunItem extends IAmmoItem {
 		if (getFireCooldownTime(stack) > 0)
 			player.getCooldownTracker().setCooldown(stack.getItem(), getFireCooldownTime(stack));
 
-		if (world.isRemote && getFireSoundEvents(stack) != null) {
-			SoundEvent[] events = getFireSoundEvents(stack);
-			if (events != null) for (SoundEvent sound : events)
-				world.playSound(player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
-		}
+		SoundSystem.playSoundsNormal(world, player.getPositionVector(), getFireSoundEvents(stack));
 	}
 
 	default void setReloadCooldown(World world, EntityPlayer player, ItemStack stack) {
@@ -144,7 +139,7 @@ public interface IGunItem extends IAmmoItem {
 
 		player.getCooldownTracker().setCooldown(stack.getItem(), getReloadCooldownTime(stack));
 
-		if (world.isRemote && getReloadSoundEvent(stack) != null)
-			world.playSound(player.posX, player.posY, player.posZ, getReloadSoundEvent(stack), SoundCategory.PLAYERS, RandUtil.nextFloat(0.95f, 1.1f), RandUtil.nextFloat(0.95f, 1.1f), false);
+		SoundSystem.playSoundsNormal(world, player.getPositionVector(), getReloadSoundEvent(stack));
+
 	}
 }

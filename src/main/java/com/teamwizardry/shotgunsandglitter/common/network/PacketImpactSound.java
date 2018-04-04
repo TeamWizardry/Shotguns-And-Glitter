@@ -6,9 +6,8 @@ import com.teamwizardry.librarianlib.features.network.PacketBase;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -40,10 +39,8 @@ public class PacketImpactSound extends PacketBase {
 
 		BulletEffect bulletEffect = EffectRegistry.getBulletEffectByID(effectID);
 
-		world.playSound(pos.x, pos.y, pos.z, ModSounds.BULLET_IMPACT, SoundCategory.PLAYERS, RandUtil.nextFloat(3, 4), RandUtil.nextFloat(0.95f, 1.1f), false);
-		world.playSound(pos.x, pos.y, pos.z, ModSounds.DUST_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(0.7f, 1f), RandUtil.nextFloat(0.95f, 1.1f), false);
-		if (bulletEffect.getImpactSound() != null) {
-			world.playSound(pos.x, pos.y, pos.z, bulletEffect.getImpactSound(), SoundCategory.PLAYERS, bulletEffect.getVolume(), RandUtil.nextFloat(0.95f, 1.1f), false);
-		}
+		SoundSystem.playSoundsNormal(world, pos, ModSounds.BULLET_IMPACT, ModSounds.DUST_SPARKLE);
+		SoundSystem.playSoundsLoud(world, pos, bulletEffect.getImpactSound());
+
 	}
 }

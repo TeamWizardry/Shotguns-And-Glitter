@@ -6,9 +6,9 @@ import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInven
 import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
@@ -18,7 +18,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -165,12 +164,9 @@ public class TileMiniTurret extends TileModTickable {
 
 				bullet.setPosition(position.x, position.y, position.z);
 				world.spawnEntity(bullet);
-			} else {
-				if (bulletEffect.getFireSound() != null)
-					world.playSound(pos.getX(), pos.getY(), pos.getZ(), bulletEffect.getFireSound(), SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.MAGIC_SPARKLE, SoundCategory.PLAYERS, RandUtil.nextFloat(3f, 4f), RandUtil.nextFloat(0.95f, 1.1f), false);
 			}
+
+			SoundSystem.playSoundsNormal(world, pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, ModSounds.MAGIC_SPARKLE, bulletEffect.getFireSound());
 
 			if (!firing) firing = true;
 			cooldown = 40;
