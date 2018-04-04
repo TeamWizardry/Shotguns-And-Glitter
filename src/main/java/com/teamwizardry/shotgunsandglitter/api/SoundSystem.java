@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 public class SoundSystem {
 
 	@ConfigProperty(category = "sound")
-	public static float masterVolume = 1f;
+	public static float masterVolume = 0.5f;
 
 	@ConfigProperty(category = "sound")
 	public static String soundCategory = "ambient";
@@ -32,11 +32,11 @@ public class SoundSystem {
 		playSounds(world, pos.x, pos.y, pos.z, volume, sounds);
 	}
 
-	public static void playSoundsLoud(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
+	public static void playSounds(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
 		playSounds(world, pos.x, pos.y, pos.z, 1f, sounds);
 	}
 
-	public static void playSoundsLoud(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
+	public static void playSounds(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
 		playSounds(world, x, y, z, 1f, sounds);
 	}
 
@@ -46,13 +46,5 @@ public class SoundSystem {
 
 	public static void playSoundsQuiet(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
 		playSounds(world, x, y, z, 0.5f, sounds);
-	}
-
-	public static void playSoundsNormal(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
-		playSounds(world, pos.x, pos.y, pos.z, 1f, sounds);
-	}
-
-	public static void playSoundsNormal(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
-		playSounds(world, x, y, z, 1f, sounds);
 	}
 }

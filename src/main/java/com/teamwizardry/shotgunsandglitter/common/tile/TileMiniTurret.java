@@ -166,7 +166,7 @@ public class TileMiniTurret extends TileModTickable {
 				world.spawnEntity(bullet);
 			}
 
-			SoundSystem.playSoundsNormal(world, pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, ModSounds.MAGIC_SPARKLE, bulletEffect.getFireSound());
+			SoundSystem.playSounds(world, pos.getX(), pos.getY(), pos.getZ(), ModSounds.SHOT_PISTOL, ModSounds.MAGIC_SPARKLE, bulletEffect.getFireSound());
 
 			if (!firing) firing = true;
 			cooldown = 40;
