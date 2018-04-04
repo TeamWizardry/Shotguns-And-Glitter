@@ -95,7 +95,7 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 
 		ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
 			if (lingerObject.world.getTotalWorldTime() % 4 == 0)
-				SoundSystem.playSounds(lingerObject.world, lingerObject.pos, ModSounds.COLD_WIND);
+				SoundSystem.playSoundsLoud(lingerObject.world, lingerObject.pos, ModSounds.COLD_WIND);
 
 			ParticleBuilder glitter = new ParticleBuilder(10);
 			glitter.setRender(ClientEventHandler.SPARKLE);

@@ -39,8 +39,8 @@ public class PacketImpactSound extends PacketBase {
 
 		BulletEffect bulletEffect = EffectRegistry.getBulletEffectByID(effectID);
 
-		SoundSystem.playSounds(world, pos, ModSounds.BULLET_IMPACT, ModSounds.DUST_SPARKLE);
-		SoundSystem.playSounds(world, pos, bulletEffect.getImpactSound());
+		SoundSystem.playSoundsNormal(world, pos, ModSounds.BULLET_IMPACT, ModSounds.DUST_SPARKLE);
+		SoundSystem.playSoundsLoud(world, pos, bulletEffect.getImpactSound());
 
 	}
 }

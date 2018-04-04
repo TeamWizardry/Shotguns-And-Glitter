@@ -90,7 +90,7 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 			if (!world.isRemote)
 				die(getPositionVector());
 		} else {
-			SoundSystem.playSounds(world, getPositionAsVector(), ModSounds.DUST_SPARKLE);
+			SoundSystem.playSoundsNormal(world, getPositionAsVector(), ModSounds.DUST_SPARKLE);
 			ShotgunsAndGlitter.PROXY.grenadeUpdate(world, this, getEffect());
 		}
 	}
