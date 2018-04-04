@@ -118,7 +118,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 		if (ticksExisted >= 50.0) {
 			setDead();
-			world.removeEntity(this);
 		} else {
 			if (world.isRemote) {
 				List<EntityPlayer> entities = world.getEntities(EntityPlayer.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 5 * 5));
