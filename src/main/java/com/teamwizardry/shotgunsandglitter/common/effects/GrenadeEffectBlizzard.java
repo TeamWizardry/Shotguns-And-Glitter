@@ -6,7 +6,7 @@ import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
-import com.teamwizardry.shotgunsandglitter.api.LingerObject;
+import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
@@ -50,7 +50,7 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 		if (!world.isRemote)
-			CommonEventHandler.lingerObjects.add(new LingerObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
+			CommonEventHandler.lingeringObjects.add(new LingeringObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
 				for (int i = 0; i < 3; i++) {
 					EntityFallingBlock droppingBlock = new EntityFallingBlock(lingerObject.world, lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
 					droppingBlock.fallTime = 1;
@@ -93,7 +93,7 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 
-		ClientEventHandler.lingerObjects.add(new LingerObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
+		ClientEventHandler.lingeringObjects.add(new LingeringObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
 			if (lingerObject.world.getTotalWorldTime() % 4 == 0)
 				lingerObject.world.playSound(lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, ModSounds.COLD_WIND, SoundCategory.PLAYERS, 2f, 1f, false);
 

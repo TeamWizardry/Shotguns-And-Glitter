@@ -8,7 +8,7 @@ import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
-import com.teamwizardry.shotgunsandglitter.api.LingerObject;
+import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
@@ -52,7 +52,7 @@ public class GrenadeEffectDisco implements GrenadeEffect {
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 
-		ClientEventHandler.lingerObjects.add(new LingerObject(world, grenade.getPositionAsVector(), 200, lingering -> {
+		ClientEventHandler.lingeringObjects.add(new LingeringObject(world, grenade.getPositionAsVector(), 200, lingering -> {
 
 			ParticleBuilder glitter = new ParticleBuilder(10);
 			glitter.setRender(ClientEventHandler.SPARKLE);
