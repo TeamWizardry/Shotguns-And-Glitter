@@ -44,6 +44,8 @@ public class PotionFlash extends PotionMod {
 
 		MinecraftForge.EVENT_BUS.register(this);
 		registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F182890", -0.15, 2);
+		registerPotionAttributeModifier(SharedMonsterAttributes.FOLLOW_RANGE, "7107DE5E-7CE8-4030-940E-514C5C182890", -1, 1);
+
 	}
 
 	@SideOnly(Side.CLIENT)

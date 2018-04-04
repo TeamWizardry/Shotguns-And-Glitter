@@ -72,7 +72,7 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 			if (state.getCollisionBoundingBox(world, result.getBlockPos()) != Block.NULL_AABB &&
 					state.getBlock().canCollideCheck(state, false))
 				die(result.hitVec);
-		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit != null)
+		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit != null && (result.entityHit != thrower || ticksExisted > 10))
 			die(result.hitVec);
 	}
 
