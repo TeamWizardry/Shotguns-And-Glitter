@@ -60,7 +60,7 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 
 	@Override
 	protected float getGravityVelocity() {
-		return 0.03f;
+		return 0.015f;
 	}
 
 	@Override

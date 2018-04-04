@@ -156,13 +156,8 @@
   },
   "disco": {
     "sounds": [
-      "shotgunsandglitter:boogie_wonderland",
-      "shotgunsandglitter:freak_out",
-      "shotgunsandglitter:funkytown",
-      "shotgunsandglitter:i_will_survive",
-      "shotgunsandglitter:dancing_queen",
-      "shotgunsandglitter:thats_the_way_i_like_it",
-      "shotgunsandglitter:ymca"
+      "shotgunsandglitter:party_1",
+      "shotgunsandglitter:party_2"
     ]
   }
 }
