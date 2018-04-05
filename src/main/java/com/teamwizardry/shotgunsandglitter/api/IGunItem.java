@@ -113,7 +113,7 @@ public interface IGunItem extends IAmmoItem {
 		if (!(ammo.getItem() instanceof IAmmoItem) || ammo.getItem() instanceof IGunItem) return true;
 
 		IAmmoItem ammoItem = (IAmmoItem) ammo.getItem();
-		if (!isValidAmmo(ammoItem, ammo, gun)) return true;
+		if (!isValidAmmo(ammoItem, gun, ammo)) return true;
 
 		List<BulletEffect> gunAmmo = getEffectsFromItem(gun);
 

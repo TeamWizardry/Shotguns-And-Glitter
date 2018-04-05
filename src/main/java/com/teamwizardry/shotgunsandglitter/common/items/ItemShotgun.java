@@ -50,7 +50,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 	}
 
 	@ConfigProperty(category = "shotgun", comment = "How many bullets a shotgun will fire per charge.")
-	public static int shotgunFireCount = 10;
+	public static int shotgunFireCount = 5;
 
 	@Override
 	public int getFireCount(ItemStack stack) {

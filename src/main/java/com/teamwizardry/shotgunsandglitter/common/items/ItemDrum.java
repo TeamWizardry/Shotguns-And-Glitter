@@ -35,7 +35,7 @@ public class ItemDrum extends ItemMod implements IAmmoItem {
 
 	@Override
 	public int getMinAmmo(@NotNull ItemStack stack) {
-		return 10;
+		return 6;
 	}
 
 	@Override

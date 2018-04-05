@@ -4,14 +4,19 @@ import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.IGunItem;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public class ItemSniper extends ItemMod implements IGunItem {
@@ -19,6 +24,12 @@ public class ItemSniper extends ItemMod implements IGunItem {
 	public ItemSniper() {
 		super("sniper");
 		setMaxStackSize(1);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		addTooltipContents(stack, tooltip);
 	}
 
 	@Override

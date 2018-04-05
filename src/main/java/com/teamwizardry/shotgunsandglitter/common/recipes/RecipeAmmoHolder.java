@@ -41,12 +41,12 @@ public class RecipeAmmoHolder extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
 			if ((stack.getItem() instanceof IBulletItem || stack.getItem() == ammoItem) &&
 					((IAmmoItem) stack.getItem()).getBulletType(stack) == ammoItem.getBulletType(testStack))
-				bulletsFound += ammoItem.getEffectsFromItem(stack).size();
+				bulletsFound += ((IAmmoItem) stack.getItem()).getEffectsFromItem(stack).size();
 			else
 				return false;
 		}
 
-		return bulletsFound > ammoItem.getMaxAmmo(testStack) && bulletsFound > ammoItem.getMinAmmo(testStack);
+		return bulletsFound > 0 && bulletsFound <= ammoItem.getMaxAmmo(testStack) && bulletsFound >= ammoItem.getMinAmmo(testStack);
 	}
 
 	@NotNull

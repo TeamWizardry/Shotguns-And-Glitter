@@ -98,7 +98,7 @@ public interface IAmmoItem {
 	int getMaxAmmo(@NotNull ItemStack stack);
 
 	default int getMinAmmo(@NotNull ItemStack stack) {
-		return 0;
+		return 2;
 	}
 
 	@NotNull
