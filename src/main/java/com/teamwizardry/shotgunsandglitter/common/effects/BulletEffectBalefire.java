@@ -123,8 +123,4 @@ public class BulletEffectBalefire implements BulletEffect {
 		return ModSounds.FIRE;
 	}
 
-	@Override
-	public float getVolume() {
-		return RandUtil.nextFloat(4, 4.5f);
-	}
 }

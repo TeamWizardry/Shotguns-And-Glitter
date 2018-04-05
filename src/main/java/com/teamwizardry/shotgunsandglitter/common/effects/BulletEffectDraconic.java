@@ -125,8 +125,4 @@ public class BulletEffectDraconic implements BulletEffect {
 		return ModSounds.FIREBALL;
 	}
 
-	@Override
-	public float getVolume() {
-		return RandUtil.nextFloat(3, 3.5f);
-	}
 }

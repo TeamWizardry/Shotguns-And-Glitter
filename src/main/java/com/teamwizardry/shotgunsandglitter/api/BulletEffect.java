@@ -1,6 +1,5 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -89,7 +88,4 @@ public interface BulletEffect {
 		return null;
 	}
 
-	default float getVolume() {
-		return RandUtil.nextFloat(3f, 4f);
-	}
 }

@@ -165,8 +165,4 @@ public class BulletEffectFirework implements BulletEffect {
 		return ModSounds.POP;
 	}
 
-	@Override
-	public float getVolume() {
-		return RandUtil.nextFloat(4, 4.5f);
-	}
 }
