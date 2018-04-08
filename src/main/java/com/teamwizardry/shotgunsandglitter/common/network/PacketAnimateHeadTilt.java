@@ -1,5 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.common.network;
 
+import com.teamwizardry.librarianlib.core.LibrarianLib;
 import com.teamwizardry.librarianlib.features.animator.Easing;
 import com.teamwizardry.librarianlib.features.animator.animations.BasicAnimation;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
@@ -28,10 +29,7 @@ public class PacketAnimateHeadTilt extends PacketBase {
 
 	@Override
 	public void handle(@NotNull MessageContext ctx) {
-		if (ctx.side.isServer()) return;
-
-		EntityPlayer clientPlayer = Minecraft.getMinecraft().player;
-		if (clientPlayer == null) return;
+		EntityPlayer clientPlayer = LibrarianLib.PROXY.getClientPlayer();
 		BasicAnimation<EntityPlayer> anim = new BasicAnimation<>(clientPlayer, "rotationPitch");
 		anim.setDuration(2);
 		anim.setTo(Minecraft.getMinecraft().player.rotationPitch - amount);
