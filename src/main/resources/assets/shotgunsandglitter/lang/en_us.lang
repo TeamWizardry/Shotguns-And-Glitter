@@ -105,7 +105,7 @@ shotgunsandglitter.book.getting_started.content3=And, of course, Wizardry Office
 
 shotgunsandglitter.book.guns.pistol.title=Pistol
 shotgunsandglitter.book.guns.pistol.desc=Range: Short/Medium | Ammo: Magazine
-shotgunsandglitter.book.guns.pistol.content1=The Pistol is a type of hand gun that's best used when you want to fire at a fair fire-rate but don't want to hold a ton of bullets on your person.<br>This gun can be reloaded with a Magazine loaded with small bullets.<br>Magazines can hold a maximum of 4 small bullets.
+shotgunsandglitter.book.guns.pistol.content1=The Pistol is a type of hand gun that's best used when you want to fire at a fair fire-rate but don't want to hold a ton of bullets on your person.<br>This gun can be reloaded with a Magazine loaded with small bullets.<br>Magazines can hold a maximum of 10 small bullets.
 shotgunsandglitter.book.guns.pistol.content2=The Pistol is best used against short to medium range targets. After that, it's small bullets drop hard in power.<br>This gun deals a decent amount of damage, but nothing crazy; especially because it doesn't aim perfectly.
 
 shotgunsandglitter.book.guns.shotgun.title=Shotgun
@@ -201,7 +201,7 @@ shotgunsandglitter.book.grenade.daylight.content=Some trolls told us that daylig
 
 shotgunsandglitter.book.grenade.disco.title=Disco
 shotgunsandglitter.book.grenade.disco.desc=Your annoying coworker in grenade form
-shotgunsandglitter.book.grenade.disco.content=R&D managed to liquify Bill. Good riddance.<br>But we had to do something with all that seventies-old-dude juice. He makes a pretty good dance bomb.<br><br>Wait, we're using a person in our bombs? How did HR ever agree to this?
+shotgunsandglitter.book.grenade.disco.content=R and D managed to liquify Bill. Good riddance.<br>But we had to do something with all that seventies-old-dude juice. He makes a pretty good dance bomb.<br><br>Wait, we're using a person in our bombs? How did HR ever agree to this?
 
 shotgunsandglitter.book.grenade.repulsion.title=Repulsion
 shotgunsandglitter.book.grenade.repulsion.desc=Get away... or have it do it for you

@@ -1,8 +1,8 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IAmmoItem;
 import net.minecraft.client.util.ITooltipFlag;
@@ -37,7 +37,7 @@ public class ItemMagazine extends ItemMod implements IAmmoItem {
 
 	@Override
 	public int getMaxAmmo(@NotNull ItemStack stack) {
-		return 5;
+		return 10;
 	}
 
 	@Override

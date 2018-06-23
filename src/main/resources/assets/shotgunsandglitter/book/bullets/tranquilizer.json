@@ -12,12 +12,12 @@
     {
       "type": "recipe",
       "recipes": [
-        "shotgunsandglitter:tranquilizer_bullet_basic",
-        "shotgunsandglitter:tranquilizer_bullet_shotgun",
-        "shotgunsandglitter:tranquilizer_bullet_sniper",
-        "shotgunsandglitter:tranquilizer_bullet_basic_8x",
-        "shotgunsandglitter:tranquilizer_bullet_shotgun_8x",
-        "shotgunsandglitter:tranquilizer_bullet_sniper_8x"
+        "shotgunsandglitter:tranq_bullet_basic",
+        "shotgunsandglitter:tranq_bullet_shotgun",
+        "shotgunsandglitter:tranq_bullet_sniper",
+        "shotgunsandglitter:tranq_bullet_basic_8x",
+        "shotgunsandglitter:tranq_bullet_shotgun_8x",
+        "shotgunsandglitter:tranq_bullet_sniper_8x"
       ]
     }
   ]

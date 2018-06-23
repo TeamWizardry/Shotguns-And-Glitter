@@ -1,18 +1,18 @@
 package com.teamwizardry.shotgunsandglitter.common.effects;
 
 import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
-import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
-import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
-import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
-import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
+import com.teamwizardry.shotgunsandglitter.api.*;
+import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorld;
+import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorldCapability;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import com.teamwizardry.shotgunsandglitter.common.network.PacketSyncSAGWorld;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.entity.Entity;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
  * @author WireSegal
  * Created at 9:41 AM on 4/2/18.
  */
-public class GrenadeEffectBlizzard implements GrenadeEffect {
+public class GrenadeEffectBlizzard implements GrenadeEffect, ILingeringEffect {
 	@Override
 	public String getID() {
 		return "blizzard";
@@ -49,20 +49,28 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 
 	@Override
 	public void onImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
-		if (!world.isRemote)
-			ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 10, lingerObject -> {
-				for (int i = 0; i < 3; i++) {
-					EntityFallingBlock droppingBlock = new EntityFallingBlock(lingerObject.world, lingerObject.pos.x, lingerObject.pos.y, lingerObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
-					droppingBlock.fallTime = 1;
-					droppingBlock.motionX = RandUtil.nextDouble(-1, 1);
-					droppingBlock.motionY = RandUtil.nextDouble(0.3, 1);
-					droppingBlock.motionZ = RandUtil.nextDouble(-1, 1);
-					droppingBlock.velocityChanged = true;
-					lingerObject.world.spawnEntity(droppingBlock);
+		GrenadeEffect.super.onImpact(world, grenade);
 
-				}
+		if (!world.isRemote) {
+			SAGWorld worldCap = SAGWorldCapability.get(world);
+			if (worldCap != null) {
+				worldCap.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 50, this));
+				PacketHandler.NETWORK.sendToDimension(new PacketSyncSAGWorld(worldCap.serializeNBT()), world.provider.getDimension());
+			}
+		}
+	}
 
-			}));
+	@Override
+	public void runLingeringEffect(@NotNull LingeringObject lingeringObject) {
+		for (int i = 0; i < 3; i++) {
+			EntityFallingBlock droppingBlock = new EntityFallingBlock(lingeringObject.world, lingeringObject.pos.x, lingeringObject.pos.y, lingeringObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
+			droppingBlock.fallTime = 1;
+			droppingBlock.motionX = RandUtil.nextDouble(-1, 1);
+			droppingBlock.motionY = RandUtil.nextDouble(0.3, 1);
+			droppingBlock.motionZ = RandUtil.nextDouble(-1, 1);
+			droppingBlock.velocityChanged = true;
+			lingeringObject.world.spawnEntity(droppingBlock);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -89,35 +97,33 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 		});
 	}
 
+
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
+	public void renderLingeringEffect(@NotNull LingeringObject lingeringObject) {
+		if (lingeringObject.world.getTotalWorldTime() % 4 == 0)
+			SoundSystem.playSounds(lingeringObject.world, lingeringObject.pos, ModSounds.COLD_WIND);
 
-		ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 20, lingerObject -> {
-			if (lingerObject.world.getTotalWorldTime() % 4 == 0)
-				SoundSystem.playSounds(lingerObject.world, lingerObject.pos, ModSounds.COLD_WIND);
+		ParticleBuilder glitter = new ParticleBuilder(10);
+		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setCollision(true);
+		glitter.setCanBounce(true);
 
-			ParticleBuilder glitter = new ParticleBuilder(10);
-			glitter.setRender(ClientEventHandler.SPARKLE);
-			glitter.setCollision(true);
-			glitter.setCanBounce(true);
+		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 10, 0, (i, build) -> {
+			build.setLifetime(RandUtil.nextInt(50, 100));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 4f), 0));
+			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
+			build.setAlphaFunction(new InterpFadeInOut(0, 1f));
 
-			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(grenade.getPositionAsVector()), 10, 0, (i, build) -> {
-				build.setLifetime(RandUtil.nextInt(50, 100));
-				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 4f), 0));
-				build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
-				build.setAlphaFunction(new InterpFadeInOut(0, 1f));
+			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.01, -0.05), 0));
 
-				build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.01, -0.05), 0));
-
-				double radius = RandUtil.nextDouble(1, 4);
-				double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
-				double r = radius * RandUtil.nextFloat();
-				double x = r * MathHelper.cos((float) theta);
-				double z = r * MathHelper.sin((float) theta);
-				build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, radius), z));
-			});
-		}));
+			double radius = RandUtil.nextDouble(1, 4);
+			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
+			double r = radius * RandUtil.nextFloat();
+			double x = r * MathHelper.cos((float) theta);
+			double z = r * MathHelper.sin((float) theta);
+			build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, radius), z));
+		});
 	}
 
 	@Override
@@ -129,5 +135,4 @@ public class GrenadeEffectBlizzard implements GrenadeEffect {
 					(int) (300 * intensity), (int) (3 * intensity)));
 
 	}
-
 }

@@ -3,7 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.core;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
-import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
+import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorldCapability;
 import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
@@ -36,6 +36,8 @@ public class CommonProxy {
 		ModSounds.init();
 
 		ModRecipes.init();
+
+		SAGWorldCapability.init();
 
 		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
 	}
@@ -77,9 +79,5 @@ public class CommonProxy {
 		if (!world.isRemote)
 			PacketHandler.NETWORK.sendToAllAround(new MessageGrenadeExplode(grenade.getEntityId(), position),
 					new NetworkRegistry.TargetPoint(world.provider.getDimension(), position.x, position.y, position.z, 64));
-	}
-
-	public void addLingeringObject(LingeringObject object) {
-		CommonEventHandler.addLingeringObject(object);
 	}
 }

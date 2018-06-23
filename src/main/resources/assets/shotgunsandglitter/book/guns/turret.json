@@ -10,7 +10,6 @@
     "shotgunsandglitter.book.guns.turret.content2",
     "shotgunsandglitter.book.guns.turret.content3",
     "shotgunsandglitter.book.guns.turret.content4",
-    "shotgunsandglitter.book.guns.turret.content5",
     {
       "type": "recipe",
       "recipe": "shotgunsandglitter:turret"

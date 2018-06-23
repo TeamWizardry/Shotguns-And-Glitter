@@ -2,18 +2,22 @@ package com.teamwizardry.shotgunsandglitter.common.effects;
 
 import com.teamwizardry.librarianlib.features.math.interpolate.StaticInterp;
 import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpBezier3D;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpFadeInOut;
-import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.IGrenadeEntity;
+import com.teamwizardry.shotgunsandglitter.api.ILingeringEffect;
 import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
+import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorld;
+import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorldCapability;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import com.teamwizardry.shotgunsandglitter.common.network.PacketSyncSAGWorld;
 import com.teamwizardry.shotgunsandglitter.common.potions.ModPotions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,7 +36,7 @@ import java.awt.*;
  * @author WireSegal
  * Created at 9:41 AM on 4/2/18.
  */
-public class GrenadeEffectDisco implements GrenadeEffect {
+public class GrenadeEffectDisco implements GrenadeEffect, ILingeringEffect {
 
 	private float hue = 0;
 
@@ -47,55 +51,64 @@ public class GrenadeEffectDisco implements GrenadeEffect {
 
 		if (world.isRemote)
 			world.playSound(grenade.posX(), grenade.posY(), grenade.posZ(), ModSounds.DISCO, SoundCategory.PLAYERS, 4f, 1f, false);
+
+		if (!world.isRemote) {
+			SAGWorld worldCap = SAGWorldCapability.get(world);
+			if (worldCap != null) {
+				worldCap.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 200, this));
+				PacketHandler.NETWORK.sendToDimension(new PacketSyncSAGWorld(worldCap.serializeNBT()), world.provider.getDimension());
+			}
+		}
+	}
+
+	@Override
+	public void runLingeringEffect(@NotNull LingeringObject lingeringObject) {
+
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
+	public void renderLingeringEffect(@NotNull LingeringObject lingeringObject) {
+		ParticleBuilder glitter = new ParticleBuilder(10);
+		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setCollision(true);
+		glitter.setCanBounce(true);
 
-		ShotgunsAndGlitter.PROXY.addLingeringObject(new LingeringObject(world, grenade.getPositionAsVector(), 200, lingering -> {
+		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 30, 0, (i, build) -> {
+			if (hue >= 1) hue = 0;
+			else hue += 0.1;
+			build.setLifetime(RandUtil.nextInt(20, 50));
+			build.setColorFunction(new InterpColorHSV(Color.getHSBColor(RandUtil.nextFloat(), 1, 1), Color.getHSBColor(hue, 1, 1)));
+			build.setAlphaFunction(new InterpFadeInOut(0f, 1f));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.6f), 0));
+			build.setAcceleration(new Vec3d(0, -0.1, 0));
 
-			ParticleBuilder glitter = new ParticleBuilder(10);
-			glitter.setRender(ClientEventHandler.SPARKLE);
-			glitter.setCollision(true);
-			glitter.setCanBounce(true);
+			double radius = 1 * RandUtil.nextFloat();
+			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
+			double x = radius * MathHelper.cos((float) theta);
+			double z = radius * MathHelper.sin((float) theta);
+			build.setPositionOffset(new Vec3d(x, RandUtil.nextDouble(-1, 1), z));
 
-			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 10, 0, (i, build) -> {
-				if (hue >= 1) hue = 0;
-				else hue += 0.1;
-				build.setLifetime(RandUtil.nextInt(20, 50));
-				build.setColorFunction(new InterpColorHSV(Color.getHSBColor(RandUtil.nextFloat(), 1, 1), Color.getHSBColor(hue, 1, 1)));
-				build.setAlphaFunction(new InterpFadeInOut(0f, 1f));
-				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.6f), 0));
-				build.setAcceleration(new Vec3d(0, -0.1, 0));
+			build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, 1), z));
+		});
 
-				double radius = 1 * RandUtil.nextFloat();
-				double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
-				double x = radius * MathHelper.cos((float) theta);
-				double z = radius * MathHelper.sin((float) theta);
-				build.setPositionOffset(new Vec3d(x, RandUtil.nextDouble(-1, 1), z));
+		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 15, 0, (i, build) -> {
+			if (hue >= 1) hue = 0;
+			else hue += 0.1;
+			build.setLifetime(RandUtil.nextInt(50, 100));
+			build.setColorFunction(new InterpColorHSV(Color.getHSBColor(RandUtil.nextFloat(), 1, 1), Color.getHSBColor(hue, 1, 1)));
+			build.setAlphaFunction(new InterpFadeInOut(1f, 1f));
+			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
+			build.setAcceleration(new Vec3d(0, -0.1, 0));
 
-				build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, 1), z));
-			});
+			double radius = 8 * RandUtil.nextFloat();
+			double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
+			double x = radius * MathHelper.cos((float) theta);
+			double z = radius * MathHelper.sin((float) theta);
+			build.setPositionOffset(new Vec3d(x, RandUtil.nextDouble(3, 20), z));
 
-			ParticleSpawner.spawn(glitter, lingering.world, new StaticInterp<>(lingering.pos), 5, 0, (i, build) -> {
-				if (hue >= 1) hue = 0;
-				else hue += 0.1;
-				build.setLifetime(RandUtil.nextInt(50, 100));
-				build.setColorFunction(new InterpColorHSV(Color.getHSBColor(RandUtil.nextFloat(), 1, 1), Color.getHSBColor(hue, 1, 1)));
-				build.setAlphaFunction(new InterpFadeInOut(1f, 1f));
-				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1f, 3f), 0));
-				build.setAcceleration(new Vec3d(0, -0.1, 0));
-
-				double radius = 8 * RandUtil.nextFloat();
-				double theta = 2.0f * (float) Math.PI * RandUtil.nextFloat();
-				double x = radius * MathHelper.cos((float) theta);
-				double z = radius * MathHelper.sin((float) theta);
-				build.setPositionOffset(new Vec3d(x, RandUtil.nextDouble(3, 20), z));
-
-				build.setMotion(new Vec3d(x / 6.0, 0, z / 6.0));
-			});
-		}));
+			build.setMotion(new Vec3d(x / 6.0, 0, z / 6.0));
+		});
 	}
 
 	@SideOnly(Side.CLIENT)

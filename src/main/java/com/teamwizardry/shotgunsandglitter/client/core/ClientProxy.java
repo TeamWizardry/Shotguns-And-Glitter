@@ -4,7 +4,6 @@ import com.teamwizardry.librarianlib.features.utilities.client.CustomBlockMapSpr
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
-import com.teamwizardry.shotgunsandglitter.api.LingeringObject;
 import com.teamwizardry.shotgunsandglitter.common.core.CommonProxy;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
@@ -78,10 +77,5 @@ public class ClientProxy extends CommonProxy {
 		super.grenadeUpdate(world, grenade, grenadeEffect);
 		if (world.isRemote)
 			grenadeEffect.renderUpdate(world, grenade);
-	}
-
-	@Override
-	public void addLingeringObject(LingeringObject object) {
-		ClientEventHandler.addLingeringObject(object);
 	}
 }

@@ -76,6 +76,19 @@ public class PotionDisco extends PotionMod {
 		}
 	}
 
+	@SubscribeEvent
+	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+		EntityPlayer player = event.player;
+		if (hasEffect(player)) {
+			if (!player.getEntityData().hasKey("sng:smooth"))
+				player.getEntityData().setBoolean("sng:smooth", true);
+		} else {
+			if (player.getEntityData().hasKey("sng:smooth")) {
+				player.getEntityData().setBoolean("sng:smooth", false);
+			}
+		}
+	}
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent e) {
@@ -83,17 +96,15 @@ public class PotionDisco extends PotionMod {
 		EntityPlayer player = minecraft.player;
 		if (player != null) {
 			PotionEffect effect = getEffect(player);
-			int amp = effect == null ? -1 : effect.getAmplifier();
-			if (amp != -1) {
-				if (!player.getEntityData().hasKey("sng:smooth"))
-					player.getEntityData().setBoolean("sng:smooth", minecraft.gameSettings.smoothCamera);
+			if (hasEffect(player)) {
 				minecraft.gameSettings.smoothCamera = true;
+				if (!player.getEntityData().hasKey("sng:smooth"))
+					player.getEntityData().setBoolean("sng:smooth", true);
 			} else {
+				minecraft.gameSettings.smoothCamera = false;
 				if (player.getEntityData().hasKey("sng:smooth")) {
-					minecraft.gameSettings.smoothCamera = player.getEntityData().getBoolean("sng:smooth");
-					player.getEntityData().removeTag("sng:smooth");
+					player.getEntityData().setBoolean("sng:smooth", false);
 				}
-
 			}
 
 			if (hasEffect(player) && !animating) {
@@ -134,6 +145,7 @@ public class PotionDisco extends PotionMod {
 	public void renderOverlayAndCancelSubtitles(RenderGameOverlayEvent.Pre e) {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if (player == null) return;
+		if (!hasEffect(player)) return;
 
 		if (e.getType() == RenderGameOverlayEvent.ElementType.SUBTITLES)
 			e.setCanceled(true);
