@@ -36,10 +36,12 @@ public class ClientEventHandler {
 		if (worldCap == null) return;
 
 		worldCap.getLingeringObjects().forEach(lingerObject -> {
-			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
+			if (lingerObject.world != Minecraft.getMinecraft().world.provider.getDimension()) return;
+
+			long sub = Minecraft.getMinecraft().world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub < lingerObject.ticks) {
 				if (lingerObject.effect instanceof ILingeringEffect)
-					((ILingeringEffect) lingerObject.effect).renderLingeringEffect(lingerObject);
+					((ILingeringEffect) lingerObject.effect).renderLingeringEffect(Minecraft.getMinecraft().world, lingerObject);
 			}
 		});
 	}

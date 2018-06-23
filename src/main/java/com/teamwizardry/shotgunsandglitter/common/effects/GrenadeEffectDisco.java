@@ -62,19 +62,19 @@ public class GrenadeEffectDisco implements GrenadeEffect, ILingeringEffect {
 	}
 
 	@Override
-	public void runLingeringEffect(@NotNull LingeringObject lingeringObject) {
+	public void runLingeringEffect(@NotNull World world, @NotNull LingeringObject lingeringObject) {
 
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderLingeringEffect(@NotNull LingeringObject lingeringObject) {
+	public void renderLingeringEffect(@NotNull World world, @NotNull LingeringObject lingeringObject) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 30, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(lingeringObject.pos), 30, 0, (i, build) -> {
 			if (hue >= 1) hue = 0;
 			else hue += 0.1;
 			build.setLifetime(RandUtil.nextInt(20, 50));
@@ -92,7 +92,7 @@ public class GrenadeEffectDisco implements GrenadeEffect, ILingeringEffect {
 			build.setMotion(new Vec3d(x, RandUtil.nextDouble(0, 1), z));
 		});
 
-		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 15, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(lingeringObject.pos), 15, 0, (i, build) -> {
 			if (hue >= 1) hue = 0;
 			else hue += 0.1;
 			build.setLifetime(RandUtil.nextInt(50, 100));

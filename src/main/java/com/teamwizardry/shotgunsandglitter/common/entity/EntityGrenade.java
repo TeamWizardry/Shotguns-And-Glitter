@@ -86,7 +86,7 @@ public class EntityGrenade extends EntityThrowable implements IGrenadeEntity {
 		super.onUpdate();
 		if (isDead) return;
 
-		if (ticksExisted >= 50) {
+		if (ticksExisted >= 200) {
 			if (!world.isRemote)
 				die(getPositionVector());
 		} else {

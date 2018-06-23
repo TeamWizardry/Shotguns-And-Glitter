@@ -4,22 +4,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class LingeringObject implements INBTSerializable<NBTTagCompound> {
 
-	public World world;
+	public int world;
 	public Vec3d pos;
 	public int ticks;
 	public GrenadeEffect effect;
 	public long lastTime;
 
 	public LingeringObject(World world, Vec3d pos, int ticks, GrenadeEffect effect) {
-		this.world = world;
 		this.pos = pos;
 		this.ticks = ticks;
 		this.effect = effect;
 		this.lastTime = world.getTotalWorldTime();
+		this.world = world.provider.getDimension();
 	}
 
 	private LingeringObject() {
@@ -34,8 +33,7 @@ public class LingeringObject implements INBTSerializable<NBTTagCompound> {
 	@Override
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound compound = new NBTTagCompound();
-		if (world != null)
-			compound.setInteger("world", world.provider.getDimension());
+
 		if (pos != null) {
 			compound.setDouble("pos_x", pos.x);
 			compound.setDouble("pos_y", pos.y);
@@ -46,13 +44,14 @@ public class LingeringObject implements INBTSerializable<NBTTagCompound> {
 
 		compound.setInteger("ticks", ticks);
 		compound.setLong("last_time", lastTime);
+		compound.setInteger("world", world);
 		return compound;
 	}
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
 		if (nbt.hasKey("world"))
-			world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(nbt.getInteger("world"));
+			world = nbt.getInteger("world");
 
 		if (nbt.hasKey("pos_x") && nbt.hasKey("pos_y") && nbt.hasKey("pos_z")) {
 			pos = new Vec3d(nbt.getDouble("pos_x"), nbt.getDouble("pos_y"), nbt.getDouble("pos_z"));

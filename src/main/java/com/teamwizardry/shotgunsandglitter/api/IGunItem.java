@@ -82,6 +82,7 @@ public interface IGunItem extends IAmmoItem {
 
 		setFireCooldown(world, player, stack);
 		player.swingArm(hand);
+		player.stopActiveHand();
 
 		Vec3d normal = player.getLook(0);
 		player.motionX += -normal.x * (getBulletType(stack).getKnockbackStrength() / 2.0);

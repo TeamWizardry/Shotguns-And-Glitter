@@ -61,15 +61,15 @@ public class GrenadeEffectBlizzard implements GrenadeEffect, ILingeringEffect {
 	}
 
 	@Override
-	public void runLingeringEffect(@NotNull LingeringObject lingeringObject) {
+	public void runLingeringEffect(@NotNull World world, @NotNull LingeringObject lingeringObject) {
 		for (int i = 0; i < 3; i++) {
-			EntityFallingBlock droppingBlock = new EntityFallingBlock(lingeringObject.world, lingeringObject.pos.x, lingeringObject.pos.y, lingeringObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
+			EntityFallingBlock droppingBlock = new EntityFallingBlock(world, lingeringObject.pos.x, lingeringObject.pos.y, lingeringObject.pos.z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, RandUtil.nextInt(1, 6)));
 			droppingBlock.fallTime = 1;
 			droppingBlock.motionX = RandUtil.nextDouble(-1, 1);
 			droppingBlock.motionY = RandUtil.nextDouble(0.3, 1);
 			droppingBlock.motionZ = RandUtil.nextDouble(-1, 1);
 			droppingBlock.velocityChanged = true;
-			lingeringObject.world.spawnEntity(droppingBlock);
+			world.spawnEntity(droppingBlock);
 		}
 	}
 
@@ -100,16 +100,16 @@ public class GrenadeEffectBlizzard implements GrenadeEffect, ILingeringEffect {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void renderLingeringEffect(@NotNull LingeringObject lingeringObject) {
-		if (lingeringObject.world.getTotalWorldTime() % 4 == 0)
-			SoundSystem.playSounds(lingeringObject.world, lingeringObject.pos, ModSounds.COLD_WIND);
+	public void renderLingeringEffect(@NotNull World world, @NotNull LingeringObject lingeringObject) {
+		if (world.getTotalWorldTime() % 4 == 0)
+			SoundSystem.playSounds(world, lingeringObject.pos, ModSounds.COLD_WIND);
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
-		ParticleSpawner.spawn(glitter, lingeringObject.world, new StaticInterp<>(lingeringObject.pos), 10, 0, (i, build) -> {
+		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(lingeringObject.pos), 10, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(50, 100));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 4f), 0));
 			build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));

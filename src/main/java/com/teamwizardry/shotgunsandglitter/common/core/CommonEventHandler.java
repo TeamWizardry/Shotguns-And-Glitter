@@ -38,13 +38,15 @@ public class CommonEventHandler {
 
 		boolean changed = false;
 		for (LingeringObject lingerObject : tmp) {
-			long sub = lingerObject.world.getTotalWorldTime() - lingerObject.lastTime;
+			if (lingerObject.world != event.world.provider.getDimension()) continue;
+
+			long sub = event.world.getTotalWorldTime() - lingerObject.lastTime;
 			if (sub > lingerObject.ticks) {
 				worldCap.getLingeringObjects().remove(lingerObject);
 				changed = true;
 			} else {
 				if (lingerObject.effect instanceof ILingeringEffect)
-					((ILingeringEffect) lingerObject.effect).runLingeringEffect(lingerObject);
+					((ILingeringEffect) lingerObject.effect).runLingeringEffect(event.world, lingerObject);
 			}
 		}
 		if (changed) {
