@@ -50,6 +50,11 @@ public class ItemSniper extends ItemMod implements IGunItem {
 	}
 
 	@Override
+	public float getPotency() {
+		return 1;
+	}
+
+	@Override
 	public int getMaxAmmo(@NotNull ItemStack stack) {
 		return 1;
 	}

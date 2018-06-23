@@ -19,15 +19,15 @@ public enum BulletType {
 		return BulletType.values()[MathHelper.clamp(ord, 0, BulletType.values().length - 1)];
 	}
 
-	@ConfigDoubleRange(min = 5, max = 20)
+	@ConfigDoubleRange(min = 1, max = 50)
 	@ConfigProperty(category = "sniper", comment = "The damage a sniper round will do.")
-	public static double sniperDamage = 12;
-	@ConfigDoubleRange(min = 5, max = 20)
+	public static double sniperDamage = 20;
+	@ConfigDoubleRange(min = 1, max = 50)
 	@ConfigProperty(category = "shotgun", comment = "The damage a shotgun round will do.")
-	public static double shotgunDamage = 5;
-	@ConfigDoubleRange(min = 5, max = 20)
+	public static double shotgunDamage = 10;
+	@ConfigDoubleRange(min = 1, max = 50)
 	@ConfigProperty(category = "regular", comment = "The damage a regular round will do.")
-	public static double basicDamage = 6;
+	public static double basicDamage = 5;
 
 	@ConfigDoubleRange(min = 0.0, max = 2.0)
 	@ConfigProperty(category = "sniper", comment = "The knockback an entity will take from a sniper round.")

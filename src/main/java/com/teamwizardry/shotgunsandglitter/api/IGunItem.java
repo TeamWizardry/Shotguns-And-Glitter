@@ -11,6 +11,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -89,6 +90,9 @@ public interface IGunItem extends IAmmoItem {
 
 		if (player.rotationPitch < (-90 + headKnockStrength(stack)))
 			player.attackEntityFrom(DamageSource.causeMobDamage(player), 2f);
+
+		List<BulletEffect> gunAmmo = getEffectsFromItem(stack);
+		player.sendStatusMessage(new TextComponentTranslation(gunAmmo.size() + " / " + getMaxAmmo(stack)), true);
 
 		ClientRunnable.run(new ClientRunnable() {
 			@Override

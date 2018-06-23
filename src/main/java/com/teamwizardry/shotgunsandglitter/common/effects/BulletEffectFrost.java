@@ -33,7 +33,7 @@ public class BulletEffectFrost implements BulletEffect {
 	public boolean onCollideEntity(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull Entity hitEntity) {
 		BulletEffect.super.onCollideEntity(world, bullet, hitEntity);
 		if (hitEntity instanceof EntityLivingBase && !world.isRemote)
-			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.FROST, 300, bullet.getBulletType().ordinal() + 1));
+			((EntityLivingBase) hitEntity).addPotionEffect(new PotionEffect(ModPotions.FROST, 100, bullet.getBulletType().ordinal() + 1));
 		return true;
 	}
 

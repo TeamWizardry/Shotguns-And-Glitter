@@ -48,7 +48,7 @@ public class ItemPistol extends ItemMod implements IGunItem {
 
 	@Override
 	public float getPotency() {
-		return 0.5f;
+		return 1f;
 	}
 
 	@NotNull
@@ -64,7 +64,7 @@ public class ItemPistol extends ItemMod implements IGunItem {
 
 	@Override
 	public int getMaxAmmo(@NotNull ItemStack stack) {
-		return 5;
+		return 10;
 	}
 
 	@Override

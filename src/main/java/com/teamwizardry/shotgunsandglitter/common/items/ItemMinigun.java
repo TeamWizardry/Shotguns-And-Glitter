@@ -78,7 +78,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 
 	@Override
 	public float getInaccuracy(ItemStack stack) {
-		return 5f;
+		return 8f;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class ItemMinigun extends ItemMod implements IGunItem {
 
 	@Override
 	public SoundEvent getReloadSoundEvent(ItemStack stack) {
-		return ModSounds.RELOAD_PISTOL;
+		return ModSounds.RELOAD_MINIGUN;
 	}
 
 	@Override

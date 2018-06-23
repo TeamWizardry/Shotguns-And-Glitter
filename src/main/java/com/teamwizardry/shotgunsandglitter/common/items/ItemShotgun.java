@@ -46,7 +46,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public float getPotency() {
-		return 0.6f;
+		return 1f;
 	}
 
 	@ConfigProperty(category = "shotgun", comment = "How many bullets a shotgun will fire per charge.")

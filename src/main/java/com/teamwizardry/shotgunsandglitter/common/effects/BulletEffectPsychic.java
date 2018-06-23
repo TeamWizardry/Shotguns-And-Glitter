@@ -49,7 +49,7 @@ public class BulletEffectPsychic implements BulletEffect {
 		Vec3d acceleration = Vec3d.ZERO;
 
 		for (EntityLivingBase target : targets) {
-			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height, 0).subtract(bullet.getPositionAsVector());
+			Vec3d differenceVec = target.getPositionVector().addVector(0, target.height / 2.0, 0).subtract(bullet.getPositionAsVector());
 			acceleration = acceleration.add(differenceVec.scale(Math.pow(differenceVec.lengthVector(), -3)));
 		}
 

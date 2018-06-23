@@ -11,6 +11,7 @@ public class ModSounds {
 	public static ModSoundEvent RELOAD_PISTOL;
 	public static ModSoundEvent RELOAD_SHOTGUN;
 	public static ModSoundEvent RELOAD_SNIPER;
+	public static ModSoundEvent RELOAD_MINIGUN;
 	public static ModSoundEvent BULLET_IMPACT;
 	public static ModSoundEvent BULLET_FLYBY;
 	public static ModSoundEvent SHOTGUN_COCK;
@@ -41,6 +42,7 @@ public class ModSounds {
 		RELOAD_PISTOL = new ModSoundEvent("reload_pistol");
 		RELOAD_SHOTGUN = new ModSoundEvent("reload_shotgun");
 		RELOAD_SNIPER = new ModSoundEvent("reload_sniper");
+		RELOAD_MINIGUN = new ModSoundEvent("reload_minigun");
 		BULLET_IMPACT = new ModSoundEvent("bullet_impact");
 		BULLET_FLYBY = new ModSoundEvent("bullet_flyby");
 		SHOTGUN_COCK = new ModSoundEvent("shotgun_cock");
