@@ -65,9 +65,8 @@ public class PacketPlaySound extends PacketBase {
 
 				double dist = mc.player.getDistance(x, y, z);
 				if (dist > distance) return;
-				//		mc.player.sendChatMessage(volume + " - " + MathHelper.clamp((dist / 40.0), 0.1f, 1f) + " - " + (volume * MathHelper.clamp((dist / 40.0), 0.1f, 1f)) + "");
 
-				PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(event, cat, (float) (volume * MathHelper.clamp((dist / 40.0), 0.1f, 1f)), pitch, (float) x, (float) y, (float) z);
+				PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(event, cat, (float) (volume * MathHelper.clamp((dist / 40.0), 0.05f, 0.7f)), pitch, (float) x, (float) y, (float) z);
 
 				mc.getSoundHandler().playSound(positionedsoundrecord);
 			}

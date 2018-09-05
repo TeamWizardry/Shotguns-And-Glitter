@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -20,8 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
@@ -116,16 +113,6 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 		if (ticksExisted >= 50.0) {
 			setDead();
 		} else {
-			if (world.isRemote) {
-				List<EntityPlayer> entities = world.getEntities(EntityPlayer.class, input -> input != null && !(input.getDistanceSq(posX, posY, posZ) > 5 * 5));
-
-				for (EntityPlayer player : entities) {
-					if (player.getEntityId() == getCasterId()) continue;
-
-					SoundSystem.playSoundsQuiet(world, getPositionVector(), ModSounds.BULLET_FLYBY, ModSounds.DUST_SPARKLE);
-				}
-			}
-
 			ShotgunsAndGlitter.PROXY.updateBulletEntity(world, this, getEffect());
 		}
 	}
