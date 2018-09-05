@@ -37,7 +37,7 @@ public class GrenadeEffectRepulsion implements GrenadeEffect {
 	@Override
 	public void hitEntity(@NotNull World world, @NotNull IGrenadeEntity grenade, @NotNull Entity entity, float intensity) {
 		if (!world.isRemote) {
-			Vec3d repulsion = entity.getPositionVector().addVector(0.0, entity.height / 2, 0.0).subtract(grenade.getPositionAsVector()).normalize().scale(intensity * 3);
+			Vec3d repulsion = entity.getPositionVector().add(0.0, entity.height / 2, 0.0).subtract(grenade.getPositionAsVector()).normalize().scale(intensity * 3);
 
 			entity.motionX += repulsion.x;
 			entity.motionY += repulsion.y + 0.5;

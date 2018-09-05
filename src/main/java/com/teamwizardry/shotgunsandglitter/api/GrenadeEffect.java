@@ -32,7 +32,7 @@ public interface GrenadeEffect {
 					return differenceVec.lengthSquared() < range * range;
 				})) {
 			Vec3d difference = target.getPositionVector().subtract(grenade.getPositionAsVector());
-			hitEntity(world, grenade, target, intensity(world, grenade, (float) difference.lengthVector()));
+			hitEntity(world, grenade, target, intensity(world, grenade, (float) difference.length()));
 		}
 
 		if (doExplosionParticles(world, grenade)) {

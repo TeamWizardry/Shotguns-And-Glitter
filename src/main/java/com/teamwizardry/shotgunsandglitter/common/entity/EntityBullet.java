@@ -1,10 +1,8 @@
 package com.teamwizardry.shotgunsandglitter.common.entity;
 
-import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.*;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
-import com.teamwizardry.shotgunsandglitter.common.network.PacketImpactSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -20,7 +18,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,12 +33,12 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	public EntityBullet(@NotNull World world) {
 		super(world);
-		setSize(0.1F, 0.1F);
+		setSize(0.3F, 0.3F);
 	}
 
 	public EntityBullet(@NotNull World world, Vec3d normal, @NotNull BulletType bulletType, @NotNull BulletEffect bulletEffect, float inaccuracy, float potency) {
 		super(world);
-		setSize(0.1F, 0.1F);
+		setSize(0.3F, 0.3F);
 
 		setBulletType(bulletType);
 		setEffect(bulletEffect);
@@ -54,7 +51,7 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 
 	public EntityBullet(@NotNull World world, @NotNull EntityLivingBase caster, @NotNull BulletType bulletType, @NotNull BulletEffect bulletEffect, float inaccuracy, float potency) {
 		super(world, caster);
-		setSize(0.1F, 0.1F);
+		setSize(0.3F, 0.3F);
 
 		setBulletType(bulletType);
 		setEffect(bulletEffect);
@@ -150,8 +147,11 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 					ShotgunsAndGlitter.PROXY.collideBulletWithBlock(world, this, result.getBlockPos(),
 							state, getEffect(), result.hitVec)) {
 
-				PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
-						new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
+				SoundSystem.playSoundsQuiet(world, posX, posY, posZ, ModSounds.DUST_SPARKLE);
+				SoundSystem.playSounds(world, posX, posY, posZ, getEffect().getImpactSound());
+				//PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
+				//		new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
+
 				setDead();
 			}
 		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
@@ -159,8 +159,11 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 				if (ShotgunsAndGlitter.PROXY.collideBulletWithEntity(world, this,
 						result.entityHit, getEffect(), result.hitVec)) {
 
-					PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
-							new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
+					SoundSystem.playSoundsQuiet(world, posX, posY, posZ, ModSounds.DUST_SPARKLE);
+					SoundSystem.playSounds(world, posX, posY, posZ, getEffect().getImpactSound());
+
+					//	PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
+					//			new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 					setDead();
 				}
 		}

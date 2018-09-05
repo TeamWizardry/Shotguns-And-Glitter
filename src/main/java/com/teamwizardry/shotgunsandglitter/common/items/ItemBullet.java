@@ -5,7 +5,10 @@ import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
-import com.teamwizardry.shotgunsandglitter.api.*;
+import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
+import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
+import com.teamwizardry.shotgunsandglitter.api.IBulletItem;
 import kotlin.jvm.functions.Function1;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -72,8 +75,8 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 
 	@NotNull
 	@Override
-	public String getUnlocalizedName(@NotNull ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + getEffectFromItem(stack).getID();
+	public String getTranslationKey(@NotNull ItemStack stack) {
+		return super.getTranslationKey(stack) + "." + getEffectFromItem(stack).getID();
 	}
 
 	@Override

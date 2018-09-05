@@ -49,7 +49,7 @@ public class BulletEffectFrost implements BulletEffect {
 						return differenceVec.lengthSquared() < 7.5 * 7.5 && differenceVec.lengthSquared() != 0;
 					})) {
 				Vec3d difference = target.getPositionVector().subtract(bullet.getPositionAsVector());
-				double struckStrength = Math.min(1 / difference.lengthVector(), 1 / 3.0);
+				double struckStrength = Math.min(1 / difference.length(), 1 / 3.0);
 				int duration = (int) (1400 - struckStrength * 1000 / 6);
 				target.addPotionEffect(new PotionEffect(ModPotions.FROST, duration, bullet.getBulletType().ordinal()));
 			}

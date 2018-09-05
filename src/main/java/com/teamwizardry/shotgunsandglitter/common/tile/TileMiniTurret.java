@@ -153,11 +153,11 @@ public class TileMiniTurret extends TileModTickable {
 			ItemStack ammo = inventory.getHandler().extractItem(fullSlot, 1, false);
 
 			BulletEffect bulletEffect = ModItems.BULLET.getEffectFromItem(ammo);
-			Vec3d normal = target.getPositionVector().addVector(0, target.getEyeHeight(), 0)
-					.subtract(new Vec3d(getPos()).addVector(0.5, 0.5, 0.5))
+			Vec3d normal = target.getPositionVector().add(0, target.getEyeHeight(), 0)
+					.subtract(new Vec3d(getPos()).add(0.5, 0.5, 0.5))
 					.add(new Vec3d(target.motionX, 0, target.motionZ).normalize())
 					.normalize();
-			Vec3d position = new Vec3d(getPos()).addVector(0.5, 0.5, 0.5).add(normal);
+			Vec3d position = new Vec3d(getPos()).add(0.5, 0.5, 0.5).add(normal);
 
 			if (!world.isRemote) {
 				EntityBullet bullet = new EntityBullet(world, normal, BulletType.BASIC, bulletEffect, 0f, 1f); // Todo: potency

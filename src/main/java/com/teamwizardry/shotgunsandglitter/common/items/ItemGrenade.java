@@ -122,8 +122,8 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 
 	@NotNull
 	@Override
-	public String getUnlocalizedName(@NotNull ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + getEffectFromStack(stack).getID();
+	public String getTranslationKey(@NotNull ItemStack stack) {
+		return super.getTranslationKey(stack) + "." + getEffectFromStack(stack).getID();
 	}
 
 	@Override

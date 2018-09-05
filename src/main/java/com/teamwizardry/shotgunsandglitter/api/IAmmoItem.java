@@ -60,10 +60,10 @@ public interface IAmmoItem {
 			}
 
 			if (!canDestroy || stack.getCount() == 1) {
-				for (int i = 0; i < toTake && !ammo.hasNoTags(); i++)
+				for (int i = 0; i < toTake && !ammo.isEmpty(); i++)
 					ammo.removeTag(0);
 
-				if (ammo.hasNoTags()) {
+				if (ammo.isEmpty()) {
 					if (destroyable(stack))
 						stack.setCount(0);
 					else

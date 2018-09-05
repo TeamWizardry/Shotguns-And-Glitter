@@ -48,7 +48,7 @@ public class BulletEffectHookshot implements BulletEffect {
 		Entity thrower = world.getEntityByID(throwerID);
 		if (thrower == null) return;
 
-		Vec3d throwerPos = thrower.getPositionVector().addVector(0, thrower.getEyeHeight(), 0);
+		Vec3d throwerPos = thrower.getPositionVector().add(0, thrower.getEyeHeight(), 0);
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
 		glitter.setRender(ClientEventHandler.SPARKLE);

@@ -18,9 +18,9 @@ import org.jetbrains.annotations.NotNull;
 public class PacketImpactSound extends PacketBase {
 
 	@Save
-	private Vec3d pos;
+	public Vec3d pos;
 	@Save
-	private String effectID;
+	public String effectID;
 
 	public PacketImpactSound() {
 		// NO-OP
@@ -39,7 +39,7 @@ public class PacketImpactSound extends PacketBase {
 
 		BulletEffect bulletEffect = EffectRegistry.getBulletEffectByID(effectID);
 
-		SoundSystem.playSoundsQuiet(world, pos, ModSounds.BULLET_IMPACT, ModSounds.DUST_SPARKLE);
+		SoundSystem.playSounds(world, pos, ModSounds.BULLET_IMPACT, ModSounds.DUST_SPARKLE);
 		SoundSystem.playSounds(world, pos, bulletEffect.getImpactSound());
 
 	}

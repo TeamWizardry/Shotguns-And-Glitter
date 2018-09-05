@@ -109,7 +109,7 @@ public class BulletEffectBalefire implements BulletEffect {
 				build.setColorFunction(new InterpColorHSV(new Color(0xffc300), Color.YELLOW));
 				Vec3d bulletMotion = new Vec3d(bullet.getAsEntity().motionX, bullet.getAsEntity().motionY, bullet.getAsEntity().motionZ);
 				Vec3d norm = bulletMotion.normalize();
-				build.setMotion(norm.scale(1.0 / 10.0).addVector(
+				build.setMotion(norm.scale(1.0 / 10.0).add(
 						norm.x * RandUtil.nextDouble(0, 0.3),
 						norm.y * RandUtil.nextDouble(0, 0.3),
 						norm.z * RandUtil.nextDouble(0, 0.3)

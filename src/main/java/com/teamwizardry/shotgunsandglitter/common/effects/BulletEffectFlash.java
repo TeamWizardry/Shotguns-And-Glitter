@@ -51,7 +51,7 @@ public class BulletEffectFlash implements BulletEffect {
 				Vec3d look = target.getLook(0f);
 				Vec3d differenceVec = bullet.getPositionAsVector().subtract(target.getPositionVector());
 				double dot = look.dotProduct(differenceVec.normalize());
-				double lengthIntensity = Math.min(1 / differenceVec.lengthVector(), 1 / 10.0) * dot;
+				double lengthIntensity = Math.min(1 / differenceVec.length(), 1 / 10.0) * dot;
 				int amp = (int) (100 * lengthIntensity / 3 + 1.0 / 6);
 				int duration = (int) (400.0 / 9 + lengthIntensity * 50000 / 9);
 

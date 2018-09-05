@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class PacketAnimateHeadTilt extends PacketBase {
 
 	@Save
-	private int amount = 0;
+	public int amount = 0;
 
 	public PacketAnimateHeadTilt() {
 		// NO-OP
