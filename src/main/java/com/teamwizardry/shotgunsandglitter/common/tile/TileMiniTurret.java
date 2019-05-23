@@ -20,6 +20,7 @@ import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -40,6 +41,10 @@ public class TileMiniTurret extends TileModTickable {
 	@ConfigDoubleRange(min =  1.0, max = 64.0)
 	@ConfigProperty(category = "turret", comment = "Enter the max radius a turret can cover")
 	public static double radius = 64;
+
+	@ConfigProperty(category = "turret", comment = "Disables the ability for the turret to target passive mobs")
+	public static boolean targetPassives = true;
+
 
 	@Save
 	private int fueledTime = 0;
@@ -127,7 +132,7 @@ public class TileMiniTurret extends TileModTickable {
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
 				double dist = input.getDistanceSq(getPos());
-				return !(dist > radius * radius) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID()) && !MiniTurretHelper.isEntityBlacklisted(input));
+				return !(dist > radius * radius) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID())) && !MiniTurretHelper.isEntityBlacklisted(input) && !(targetPassives && input.isCreatureType(EnumCreatureType.CREATURE, false)) ;
 			});
 
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));

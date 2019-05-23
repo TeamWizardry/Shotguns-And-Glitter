@@ -8,8 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import java.util.HashSet;
 
 public class MiniTurretHelper {
-    @ConfigProperty(category = "turret", comment = "Add the mobs below which are exempt from being killed by the turret")
-    public static String[] blacklistedEntityName = {"cow", "sheep", "pig", "chicken", "rabbit"};
+    @ConfigProperty(category = "turret", comment = "Add the mobs below which are exempt from being killed by the turret" + "\n" +
+    "Naming format: cow; zombie; modid:entityname.")
+    public static String[] blacklistedEntityName = {""};
 
     public static HashSet<Class<? extends Entity>> blacklistedEntities = new HashSet<>();
 
