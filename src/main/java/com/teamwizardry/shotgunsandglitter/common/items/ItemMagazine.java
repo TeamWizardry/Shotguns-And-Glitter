@@ -5,6 +5,7 @@ import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.IAmmoItem;
+import com.teamwizardry.shotgunsandglitter.common.core.ModTab;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,7 @@ public class ItemMagazine extends ItemMod implements IAmmoItem {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		if (tab == CreativeTabs.SEARCH) for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
+		if (tab == CreativeTabs.SEARCH || tab instanceof ModTab) for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
 			subItems.add(fillEffects(new ItemStack(this), bulletEffect));
 	}
 }

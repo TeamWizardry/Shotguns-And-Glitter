@@ -3,6 +3,9 @@ package com.teamwizardry.shotgunsandglitter.common.tile;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
 import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory;
+import com.teamwizardry.librarianlib.features.config.ConfigDoubleRange;
+import com.teamwizardry.librarianlib.features.config.ConfigIntRange;
+import com.teamwizardry.librarianlib.features.config.ConfigProperty;
 import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
@@ -10,11 +13,14 @@ import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.SoundSystem;
 import com.teamwizardry.shotgunsandglitter.client.render.TESRMiniTurret;
+import com.teamwizardry.shotgunsandglitter.common.core.MiniTurretHelper;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ItemBullet;
 import com.teamwizardry.shotgunsandglitter.common.items.ModItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
@@ -30,6 +36,13 @@ import java.util.UUID;
 @TileRegister(value = "mini_turret")
 @TileRenderer(TESRMiniTurret.class)
 public class TileMiniTurret extends TileModTickable {
+
+	@ConfigDoubleRange(min =  1.0, max = 64.0)
+	@ConfigProperty(category = "turret", comment = "Enter the max radius a turret can cover")
+	public static double radius = 64;
+
+	@Save
+	private int fueledTime = 0;
 
 	@Save
 	private int targetID = -1;
@@ -79,6 +92,11 @@ public class TileMiniTurret extends TileModTickable {
 			cooldown--;
 			markDirty();
 		} else {
+			if(fueledTime > 0){
+				fueledTime--;
+				markDirty();
+			}
+
 
 			if (!world.isBlockPowered(getPos())) {
 				if (firing) {
@@ -109,7 +127,7 @@ public class TileMiniTurret extends TileModTickable {
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
 				double dist = input.getDistanceSq(getPos());
-				return !(dist > 64 * 64) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID()));
+				return !(dist > radius * radius) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID()) && !MiniTurretHelper.isEntityBlacklisted(input));
 			});
 
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));
@@ -128,15 +146,14 @@ public class TileMiniTurret extends TileModTickable {
 				return;
 			}
 
-			boolean fueled = false;
 			for (int i = 0; i < fuelInv.getHandler().getSlots(); i++) {
 				if (!fuelInv.getHandler().getStackInSlot(i).isEmpty()) {
-					fuelInv.getHandler().extractItem(i, 1, false);
-					fueled = true;
+					fueledTime = TileEntityFurnace.getItemBurnTime(fuelInv.getHandler().extractItem(i, 1, false));
+					markDirty();
 					break;
 				}
 			}
-			if (!fueled) {
+			if (fueledTime == 0) {
 				if (firing) {
 					firing = false;
 					markDirty();
@@ -193,6 +210,10 @@ public class TileMiniTurret extends TileModTickable {
 
 	public int getTargetID() {
 		return targetID;
+	}
+
+	public int getFueledTime() {
+		return  fueledTime;
 	}
 
 	@Nullable

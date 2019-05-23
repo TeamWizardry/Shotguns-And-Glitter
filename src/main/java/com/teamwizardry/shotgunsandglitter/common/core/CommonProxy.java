@@ -34,7 +34,7 @@ public class CommonProxy {
 		new ModTab();
 		new ModPotions();
 		ModSounds.init();
-
+		MiniTurretHelper.init();
 		ModRecipes.init();
 
 		SAGWorldCapability.init();
