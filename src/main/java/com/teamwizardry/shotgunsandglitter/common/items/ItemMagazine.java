@@ -43,7 +43,7 @@ public class ItemMagazine extends ItemMod implements IAmmoItem {
 
 	@Override
 	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> subItems) {
-		if (tab == CreativeTabs.SEARCH || isInCreativeTab(tab)) for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
+		if (isInCreativeTab(tab)) for (BulletEffect bulletEffect : EffectRegistry.getBulletEffects())
 			subItems.add(fillEffects(new ItemStack(this), bulletEffect));
 	}
 }
