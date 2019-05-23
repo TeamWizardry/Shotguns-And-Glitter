@@ -3,7 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.items;
 import com.teamwizardry.librarianlib.core.client.ModelHandler;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
@@ -48,7 +48,7 @@ public class ItemGrenade extends ItemMod implements IExtraVariantHolder, IGrenad
 	public static ItemStack getStackOfEffect(String effect, int count) {
 		ItemStack stack = new ItemStack(ModItems.GRENADE, count);
 		if (!EffectRegistry.getGrenadeEffectByID(effect).getID().equals("basic"))
-			ItemNBTHelper.setString(stack, "effect", effect);
+			NBTHelper.setString(stack, "effect", effect);
 		return stack;
 	}
 

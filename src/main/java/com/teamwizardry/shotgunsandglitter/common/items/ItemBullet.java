@@ -3,7 +3,7 @@ package com.teamwizardry.shotgunsandglitter.common.items;
 import com.teamwizardry.librarianlib.core.client.ModelHandler;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.shotgunsandglitter.ShotgunsAndGlitter;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
@@ -35,7 +35,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 	public static ItemStack getStackOfEffect(BulletType type, String effect, int count) {
 		ItemStack stack = new ItemStack(ModItems.BULLET, count, type.ordinal());
 		if (!EffectRegistry.getBulletEffectByID(effect).getID().equals("basic"))
-			ItemNBTHelper.setString(stack, "effect", effect);
+			NBTHelper.setString(stack, "effect", effect);
 		return stack;
 	}
 
@@ -69,7 +69,7 @@ public class ItemBullet extends ItemMod implements IExtraVariantHolder, IBulletI
 	@NotNull
 	@Override
 	public BulletEffect getEffectFromItem(@NotNull ItemStack stack) {
-		String effectID = ItemNBTHelper.getString(stack, "effect", "basic");
+		String effectID = NBTHelper.hasNBTEntry(stack, "effect") ? NBTHelper.getString(stack, "effect") : "basic";
 		return EffectRegistry.getBulletEffectByID(effectID);
 	}
 
