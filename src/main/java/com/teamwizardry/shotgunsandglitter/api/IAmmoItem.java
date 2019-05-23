@@ -1,7 +1,7 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
 import com.google.common.collect.Lists;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -33,7 +33,7 @@ public interface IAmmoItem {
 
 	@NotNull
 	default List<BulletEffect> getEffectsFromItem(@NotNull ItemStack stack) {
-		NBTTagList ammo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
+		NBTTagList ammo = NBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (ammo == null) return Lists.newArrayList();
 
 		List<BulletEffect> bulletEffects = Lists.newArrayList();
@@ -46,7 +46,7 @@ public interface IAmmoItem {
 	default void takeEffectsFromItem(@NotNull ItemStack stack, int n) {
 		boolean canDestroy = destroyable(stack);
 
-		NBTTagList ammo = ItemNBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
+		NBTTagList ammo = NBTHelper.getList(stack, "ammo", Constants.NBT.TAG_STRING);
 		if (ammo == null) {
 			if (canDestroy) stack.setCount(0);
 		} else {
@@ -67,7 +67,7 @@ public interface IAmmoItem {
 					if (destroyable(stack))
 						stack.setCount(0);
 					else
-						ItemNBTHelper.removeEntry(stack, "ammo");
+						NBTHelper.removeNBTEntry(stack, "ammo");
 				}
 			} else stack.shrink(1);
 		}
@@ -84,7 +84,7 @@ public interface IAmmoItem {
 
 	default ItemStack setEffects(ItemStack stack, List<BulletEffect> bulletEffects) {
 		NBTTagList ammo = new NBTTagList();
-		ItemNBTHelper.setList(stack, "ammo", ammo);
+		NBTHelper.setList(stack, "ammo", ammo);
 
 		for (BulletEffect bulletEffect : bulletEffects) {
 			if (ammo.tagCount() >= getMaxAmmo(stack))
