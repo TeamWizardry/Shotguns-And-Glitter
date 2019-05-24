@@ -47,9 +47,12 @@ public class BulletEffectBalefire implements BulletEffect {
 
 	@Override
 	public boolean onCollideBlock(@NotNull World world, @NotNull IBulletEntity bullet, @NotNull BlockPos pos, @NotNull IBlockState state) {
-		EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, false, true, true, true);
-		for (EnumFacing facing : EnumFacing.VALUES)
-			EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos.offset(facing), false, true, true, true);
+		if (world.getGameRules().getBoolean("mobGriefing")) {
+			EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, false, true, true, true);
+			for (EnumFacing facing : EnumFacing.VALUES)
+				EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos.offset(facing), false, true, true, true);
+		}
+
 		return RandUtil.nextDouble() < 0.8;
 	}
 

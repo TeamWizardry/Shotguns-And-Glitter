@@ -1,5 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
+import com.teamwizardry.shotgunsandglitter.common.config.ModConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class EffectRegistry {
 
 	public static void addEffect(BulletEffect bulletEffect) {
 		assert !BULLET_EFFECTS.containsKey(bulletEffect.getID());
+		if (ModConfig.isBulletEffectBlacklisted(bulletEffect.getID())) return;
 		BULLET_EFFECTS.put(bulletEffect.getID(), bulletEffect);
 		BULLET_EFFECTS_ORDERED.add(bulletEffect);
 	}
@@ -40,6 +42,7 @@ public class EffectRegistry {
 
 	public static void addEffect(GrenadeEffect grenadeEffect) {
 		assert !GRENADE_EFFECTS.containsKey(grenadeEffect.getID());
+		if (ModConfig.isGrenadeEffectBlacklisted(grenadeEffect.getID())) return;
 		GRENADE_EFFECTS.put(grenadeEffect.getID(), grenadeEffect);
 		GRENADE_EFFECTS_ORDERED.add(grenadeEffect);
 	}
@@ -61,4 +64,6 @@ public class EffectRegistry {
 	public static GrenadeEffect getGrenadeEffectByID(String id) {
 		return GRENADE_EFFECTS.getOrDefault(id, BASIC_GRENADE_EFFECT);
 	}
+
+
 }

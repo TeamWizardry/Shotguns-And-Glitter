@@ -5,6 +5,7 @@ import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
 import com.teamwizardry.shotgunsandglitter.api.GrenadeEffect;
 import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorldCapability;
 import com.teamwizardry.shotgunsandglitter.common.blocks.ModBlocks;
+import com.teamwizardry.shotgunsandglitter.common.config.ModConfig;
 import com.teamwizardry.shotgunsandglitter.common.effects.ModEffects;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityBullet;
 import com.teamwizardry.shotgunsandglitter.common.entity.EntityGrenade;
@@ -34,7 +35,7 @@ public class CommonProxy {
 		new ModTab();
 		new ModPotions();
 		ModSounds.init();
-		MiniTurretHelper.init();
+		ModConfig.init();
 		ModRecipes.init();
 
 		SAGWorldCapability.init();

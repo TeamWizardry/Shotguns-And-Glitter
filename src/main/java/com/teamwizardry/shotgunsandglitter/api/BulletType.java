@@ -1,7 +1,6 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-import com.teamwizardry.librarianlib.features.config.ConfigDoubleRange;
-import com.teamwizardry.librarianlib.features.config.ConfigProperty;
+import com.teamwizardry.shotgunsandglitter.common.config.ModConfig;
 import net.minecraft.util.math.MathHelper;
 
 public enum BulletType {
@@ -19,66 +18,38 @@ public enum BulletType {
 		return BulletType.values()[MathHelper.clamp(ord, 0, BulletType.values().length - 1)];
 	}
 
-	@ConfigDoubleRange(min = 1, max = 50)
-	@ConfigProperty(category = "sniper", comment = "The damage a sniper round will do.")
-	public static double sniperDamage = 20;
-	@ConfigDoubleRange(min = 1, max = 50)
-	@ConfigProperty(category = "shotgun", comment = "The damage a shotgun round will do.")
-	public static double shotgunDamage = 10;
-	@ConfigDoubleRange(min = 1, max = 50)
-	@ConfigProperty(category = "regular", comment = "The damage a regular round will do.")
-	public static double basicDamage = 5;
 
-	@ConfigDoubleRange(min = 0.0, max = 2.0)
-	@ConfigProperty(category = "sniper", comment = "The knockback an entity will take from a sniper round.")
-	public static double sniperKnockback = 0.3;
-	@ConfigDoubleRange(min = 0.0, max = 2.0)
-	@ConfigProperty(category = "shotgun", comment = "The knockback an entity will take from a shotgun round.")
-	public static double shotgunKnockback = 0.6;
-	@ConfigDoubleRange(min = 0.0, max = 2.0)
-	@ConfigProperty(category = "regular", comment = "The knockback an entity will take from a regular round.")
-	public static double basicKnockback = 0.15;
-
-	@ConfigDoubleRange(min = 1.0, max = 10.0)
-	@ConfigProperty(category = "sniper", comment = "The explosive radius of a sniper round.")
-	public static double sniperExplosiveRadius = 2;
-	@ConfigDoubleRange(min = 1.0, max = 10.0)
-	@ConfigProperty(category = "shotgun", comment = "The explosive radius of a shotgun round.")
-	public static double shotgunExplosiveRadius = 4;
-	@ConfigDoubleRange(min = 1.0, max = 10.0)
-	@ConfigProperty(category = "regular", comment = "The explosive radius of a regular round.")
-	public static double basicExplosiveRadius = 3;
 
 	public double getDamage() {
 		switch (this) {
 			case SNIPER:
-				return sniperDamage;
+				return ModConfig.sniperDamage;
 			case SHOTGUN:
-				return shotgunDamage;
+				return ModConfig.shotgunDamage;
 			default:
-				return basicDamage;
+				return ModConfig.basicDamage;
 		}
 	}
 
 	public double getKnockbackStrength() {
 		switch (this) {
 			case SNIPER:
-				return sniperKnockback;
+				return ModConfig.sniperKnockback;
 			case SHOTGUN:
-				return shotgunKnockback;
+				return ModConfig.shotgunKnockback;
 			default:
-				return basicKnockback;
+				return ModConfig.basicKnockback;
 		}
 	}
 
 	public double getExplosiveRadius() {
 		switch (this) {
 			case SNIPER:
-				return sniperExplosiveRadius;
+				return ModConfig.sniperExplosiveRadius;
 			case SHOTGUN:
-				return shotgunExplosiveRadius;
+				return ModConfig.shotgunExplosiveRadius;
 			default:
-				return basicExplosiveRadius;
+				return ModConfig.basicExplosiveRadius;
 		}
 	}
 }

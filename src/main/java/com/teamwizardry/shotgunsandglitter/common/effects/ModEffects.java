@@ -7,6 +7,7 @@ import com.teamwizardry.shotgunsandglitter.api.EffectRegistry;
  * Created at 11:51 PM on 3/30/18.
  */
 public class ModEffects {
+
 	public static void init() {
 		EffectRegistry.addEffect(
 				new BulletEffectFirework(),
