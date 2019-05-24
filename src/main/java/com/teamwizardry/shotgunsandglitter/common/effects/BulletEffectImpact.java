@@ -5,8 +5,8 @@ import com.teamwizardry.librarianlib.features.math.interpolate.position.InterpBe
 import com.teamwizardry.librarianlib.features.particle.ParticleBuilder;
 import com.teamwizardry.librarianlib.features.particle.ParticleSpawner;
 import com.teamwizardry.librarianlib.features.particle.functions.InterpColorHSV;
-import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.BulletEffect;
+import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.IBulletEntity;
 import com.teamwizardry.shotgunsandglitter.api.util.InterpScale;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
@@ -44,19 +44,22 @@ public class BulletEffectImpact implements BulletEffect {
 			BulletType type = bullet.getBulletType();
 			float range = (float) type.getExplosiveRadius();
 
-			for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPositionAsBlockPos().add(-range, -range, -range),
-					bullet.getPositionAsBlockPos().add(range, range / 2, range))) {
-				if (pos.distanceSq(bullet.getPositionAsBlockPos()) <= range * range) {
-					Entity block = EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, null, false, true, true);
-					if (block != null) {
-						block.motionX = RandUtil.nextDouble(-0.5, 0.5);
-						block.motionY = 0.625;
-						block.motionZ = RandUtil.nextDouble(-0.5, 0.5);
-						block.velocityChanged = true;
-						world.spawnEntity(block);
-					}
-				}
-			}
+            if (world.getGameRules().getBoolean("mobGriefing")) {
+                for (BlockPos pos : BlockPos.getAllInBoxMutable(bullet.getPositionAsBlockPos().add(-range, -range, -range),
+                        bullet.getPositionAsBlockPos().add(range, range / 2, range))) {
+                    if (pos.distanceSq(bullet.getPositionAsBlockPos()) <= range * range) {
+                        Entity block = EntityDroppingBlock.dropBlock(bullet.getEntityThrower(), world, pos, null, false, true, true);
+                        if (block != null) {
+                            block.motionX = RandUtil.nextDouble(-0.5, 0.5);
+                            block.motionY = 0.625;
+                            block.motionZ = RandUtil.nextDouble(-0.5, 0.5);
+                            block.velocityChanged = true;
+                            world.spawnEntity(block);
+                        }
+                    }
+                }
+            }
+
 		}
 	}
 

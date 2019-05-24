@@ -31,7 +31,6 @@ public class ShotgunsAndGlitter {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		LOG = event.getModLog();
-		LOG.info("Did someone say glitter? OwO");
 
 		InternalHandler.INTERNAL_HANDLER = new ShotgunsInternalHandler();
 

@@ -1,9 +1,9 @@
 package com.teamwizardry.shotgunsandglitter.common.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.config.ConfigProperty;
 import com.teamwizardry.shotgunsandglitter.api.BulletType;
 import com.teamwizardry.shotgunsandglitter.api.IGunItem;
+import com.teamwizardry.shotgunsandglitter.common.config.ModConfig;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,12 +49,11 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 		return 1f;
 	}
 
-	@ConfigProperty(category = "shotgun", comment = "How many bullets a shotgun will fire per charge.")
-	public static int shotgunFireCount = 5;
+
 
 	@Override
 	public int getFireCount(ItemStack stack) {
-		return shotgunFireCount;
+		return ModConfig.shotgunFireCount;
 	}
 
 	@Override

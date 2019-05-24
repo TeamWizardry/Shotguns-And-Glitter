@@ -1,8 +1,8 @@
 package com.teamwizardry.shotgunsandglitter.api;
 
-import com.teamwizardry.librarianlib.features.config.ConfigProperty;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
+import com.teamwizardry.shotgunsandglitter.common.config.ModConfig;
 import com.teamwizardry.shotgunsandglitter.common.network.PacketPlaySound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -14,21 +14,16 @@ import javax.annotation.Nonnull;
 
 public class SoundSystem {
 
-	@ConfigProperty(category = "sound")
-	public static float masterVolume = 1f;
-
-	@ConfigProperty(category = "sound")
-	public static String soundCategory = "ambient";
 
 	public static void playSounds(@Nonnull World world, double x, double y, double z, float volume, SoundEvent... sounds) {
 		if (world.isRemote) return;
 		if (sounds == null) return;
 
-		SoundCategory category = SoundCategory.getByName(soundCategory);
+        SoundCategory category = SoundCategory.getByName(ModConfig.soundCategory);
 
 		for (SoundEvent sound : sounds) {
 			if (sound != null) {
-				PacketHandler.NETWORK.sendToAllAround(new PacketPlaySound(sound, category, x, y, z, 256, volume * masterVolume, RandUtil.nextFloat(0.9f, 1.1f)), new NetworkRegistry.TargetPoint(world.provider.getDimension(), x, y, z, 256));
+                PacketHandler.NETWORK.sendToAllAround(new PacketPlaySound(sound, category, x, y, z, 256, volume * ModConfig.masterVolume, RandUtil.nextFloat(0.9f, 1.1f)), new NetworkRegistry.TargetPoint(world.provider.getDimension(), x, y, z, 256));
 			}
 		}
 	}
