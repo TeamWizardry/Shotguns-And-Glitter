@@ -11,9 +11,7 @@ import java.util.HashSet;
 public class ModConfig {
 
 
-    /*
-    Sound
-     */
+    //Sound
 
     @ConfigProperty(category = "sound")
     public static float masterVolume = 1f;
@@ -21,9 +19,9 @@ public class ModConfig {
     @ConfigProperty(category = "sound")
     public static String soundCategory = "ambient";
 
-    /*
-    Sniper
-     */
+
+    //Sniper
+
 
     @ConfigDoubleRange(min = 1, max = 50)
     @ConfigProperty(category = "sniper", comment = "The damage a sniper round will do.")
@@ -37,9 +35,8 @@ public class ModConfig {
     @ConfigProperty(category = "sniper", comment = "The explosive radius of a sniper round.")
     public static double sniperExplosiveRadius = 2;
 
-    /*
-    Pistol
-     */
+
+    //Pistol
 
     @ConfigDoubleRange(min = 1.0, max = 10.0)
     @ConfigProperty(category = "regular", comment = "The explosive radius of a regular round.")
@@ -53,9 +50,7 @@ public class ModConfig {
     @ConfigProperty(category = "regular", comment = "The damage a regular round will do.")
     public static double basicDamage = 5;
 
-    /*
-    Shotgun
-     */
+    //Shotgun
 
     @ConfigProperty(category = "shotgun", comment = "How many bullets a shotgun will fire per charge.")
     public static int shotgunFireCount = 5;
@@ -72,9 +67,8 @@ public class ModConfig {
     @ConfigProperty(category = "shotgun", comment = "The explosive radius of a shotgun round.")
     public static double shotgunExplosiveRadius = 4;
 
-    /*
-    Bullet & Grenade Effects
-     */
+
+    //Bullet & Grenade Effects
 
     @ConfigProperty(category = "effects", comment = "Bullet effects added here will be blacklisted and will not show up in game" + "\n" +
             "Effect names: balefire; biotic; draconic; firework; flash; frost; gravity_in; gravity_out; hookshot; impact; piercing; psychic; tainted; tranq")
@@ -85,9 +79,7 @@ public class ModConfig {
     public static String[] grenadeEffectBlacklist = {};
 
 
-    /*
-    Turret
-     */
+    //Turret
 
     @ConfigProperty(category = "turret", comment = "Add the mobs below which are exempt from being killed by the turret" + "\n" +
             "Naming format: cow; zombie; modid:entityname.")

@@ -119,7 +119,7 @@ public class TileMiniTurret extends TileModTickable {
 			List<EntityLivingBase> entities = world.getEntities(EntityLivingBase.class, input -> {
 				if (input == null) return false;
 				double dist = input.getDistanceSq(getPos());
-                return !(dist > ModConfig.turretRadius * ModConfig.turretRadius) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID())) && !ModConfig.isEntityBlacklisted(input) && !(ModConfig.turretTargetPassives && input.isCreatureType(EnumCreatureType.CREATURE, false));
+				return !(dist > ModConfig.turretRadius * ModConfig.turretRadius) && !(dist < 4 * 4) && (owner == null || !owner.equals(input.getUniqueID())) && !ModConfig.isEntityBlacklisted(input) && !(ModConfig.turretTargetPassives && input.isCreatureType(EnumCreatureType.CREATURE, false));
 			});
 
 			entities.sort(Comparator.comparingDouble(o -> o.getDistanceSq(getPos())));

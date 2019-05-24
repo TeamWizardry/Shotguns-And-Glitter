@@ -53,7 +53,7 @@ public class ItemShotgun extends ItemMod implements IGunItem {
 
 	@Override
 	public int getFireCount(ItemStack stack) {
-        return ModConfig.shotgunFireCount;
+		return ModConfig.shotgunFireCount;
 	}
 
 	@Override
