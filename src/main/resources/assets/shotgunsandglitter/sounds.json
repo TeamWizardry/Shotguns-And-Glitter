@@ -164,5 +164,10 @@
 			"shotgunsandglitter:party_1",
 			"shotgunsandglitter:party_2"
 		]
+	},
+	"harp": {
+		"sounds": [
+			"shotgunsandglitter:harp"
+		]
 	}
 }
