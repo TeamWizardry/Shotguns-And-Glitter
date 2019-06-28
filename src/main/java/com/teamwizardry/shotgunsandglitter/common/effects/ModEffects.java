@@ -21,7 +21,7 @@ public class ModEffects {
 				new BulletEffectFrost(),
 				new BulletEffectTainted(),
 				new BulletEffectFlash(),
-				new BulletEffectLove(),
+				new BulletEffectAttractive(),
 				new BulletEffectImpact(),
 				new BulletEffectBalefire(),
 				new BulletEffectDraconic());

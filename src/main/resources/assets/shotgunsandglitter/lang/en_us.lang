@@ -16,7 +16,7 @@ shotgunsandglitter.flash.name=&7 - &f&oFlashbang Charge
 shotgunsandglitter.impact.name=&7 - &8&oImpact Charge
 shotgunsandglitter.balefire.name=&7 - &6&oBalefire Charge
 shotgunsandglitter.draconic.name=&7 - &c&oDragonfire Charge
-shotgunsandglitter.love.name=&7 - &4&o Love Charge
+shotgunsandglitter.attractive.name=&7 - &4&o Attractive Charge
 
 item.shotgunsandglitter:bullet_shotgun.basic.name=Scatter Shell
 item.shotgunsandglitter:bullet_shotgun.firework.name=Firework Scatter Shell
@@ -33,7 +33,7 @@ item.shotgunsandglitter:bullet_shotgun.flash.name=Flashbang Scatter Shell
 item.shotgunsandglitter:bullet_shotgun.impact.name=Impact Scatter Shell
 item.shotgunsandglitter:bullet_shotgun.balefire.name=Balefire Scatter Shell
 item.shotgunsandglitter:bullet_shotgun.draconic.name=Dragonfire Scatter Shell
-item.shotgunsandglitter:bullet_shotgun.love.name=Love Scatter Shell
+item.shotgunsandglitter:bullet_shotgun.attractive.name=Attractive Scatter Shell
 
 item.shotgunsandglitter:bullet_sniper.basic.name=Sniper Cartridge
 item.shotgunsandglitter:bullet_sniper.firework.name=Firework Sniper Cartridge
@@ -50,7 +50,7 @@ item.shotgunsandglitter:bullet_sniper.flash.name=Flashbang Sniper Cartridge
 item.shotgunsandglitter:bullet_sniper.impact.name=Impact Sniper Cartridge
 item.shotgunsandglitter:bullet_sniper.balefire.name=Balescream Sniper Cartridge
 item.shotgunsandglitter:bullet_sniper.draconic.name=Dragonfire Sniper Cartridge
-item.shotgunsandglitter:bullet_sniper.love.name=Love Sniper Cartridge
+item.shotgunsandglitter:bullet_sniper.attractive.name=Attractive Sniper Cartridge
 
 item.shotgunsandglitter:bullet_basic.basic.name=Metal-Jacket Round
 item.shotgunsandglitter:bullet_basic.firework.name=Firework Round
@@ -67,7 +67,7 @@ item.shotgunsandglitter:bullet_basic.flash.name=Flashbang Round
 item.shotgunsandglitter:bullet_basic.impact.name=Impact Round
 item.shotgunsandglitter:bullet_basic.balefire.name=Fireweave Round
 item.shotgunsandglitter:bullet_basic.draconic.name=Dragonfire Round
-item.shotgunsandglitter:bullet_basic.love.name=Love Round
+item.shotgunsandglitter:bullet_basic.attractive.name=Attractive Round
 
 item.shotgunsandglitter:grenade.basic.name=Shrapnel Grenade
 item.shotgunsandglitter:grenade.disco.name=Compressed Disco Party Grenade
@@ -138,6 +138,12 @@ shotgunsandglitter.book.guns.turret.content1=Despite our amazing creations to ke
 shotgunsandglitter.book.guns.turret.content2=And despite the turrets' magical aiming properties, we couldn't invent one that fuels itself from the air around it, so until we manage to make that, you'll want to fuel your turrets with burnable fuel sources.
 shotgunsandglitter.book.guns.turret.content3=You can insert coal into it from the sides of the machine with a hopper to fuel it, then you can insert your magical bullets from the top of the turret to load it up. For security reasons we had to deal with the hard way, the turret requires redstone power to operate.
 shotgunsandglitter.book.guns.turret.content4=Only the placer of the turret will not be attacked by the turret. Otherwise, if you are closer than 4 blocks from the turret, it wont try to murder you.
+
+
+shotgunsandglitter.book.bullets.attractive.title=Attractive
+shotgunsandglitter.book.bullets.attractive.desc=Baby don't hurt me, no more
+shotgunsandglitter.book.bullets.attractive.content=This round makes animals breed, as if you had fed them. It's generally useless otherwise.<br>R&D says that this round contains "compressed animal love"... I am *not* touching whatever's inside.
+
 
 shotgunsandglitter.book.bullets.balefire.title=Balefire
 shotgunsandglitter.book.bullets.balefire.desc=Reality-destroying fire in bullet form

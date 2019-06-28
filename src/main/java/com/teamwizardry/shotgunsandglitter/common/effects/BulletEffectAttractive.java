@@ -25,10 +25,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.awt.*;
 
-public class BulletEffectLove implements BulletEffect {
+public class BulletEffectAttractive implements BulletEffect {
     @Override
     public String getID() {
-        return "love";
+        return "attractive";
     }
 
     @Override
