@@ -169,5 +169,20 @@
 		"sounds": [
 			"shotgunsandglitter:harp"
 		]
+	},
+	"heal_twinkle": {
+		"sounds": [
+			"shotgunsandglitter:heal_twinkle"
+		]
+	},
+	"bruh": {
+		"sounds": [
+			"shotgunsandglitter:bruh"
+		]
+	},
+	"bone": {
+		"sounds": [
+			"shotgunsandglitter:bone"
+		]
 	}
 }

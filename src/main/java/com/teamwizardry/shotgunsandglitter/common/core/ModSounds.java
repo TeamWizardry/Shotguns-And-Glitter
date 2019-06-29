@@ -34,6 +34,9 @@ public class ModSounds {
 	public static ModSoundEvent ETHEREAL;
 	public static ModSoundEvent DISCO;
 	public static ModSoundEvent HARP;
+	public static ModSoundEvent HEAL_TWINKLE;
+	public static ModSoundEvent BONE;
+	public static ModSoundEvent BRUH;
 
 	public static void init() {
 		SHOT_PISTOL = new ModSoundEvent("shot_pistol");
@@ -66,5 +69,8 @@ public class ModSounds {
 		HARP = new ModSoundEvent("harp");
 		SHOT_SHOTGUN_COCK = new ModSoundEvent("shot_shotgun_cock");
 		DISCO = new ModSoundEvent("disco");
+		HEAL_TWINKLE = new ModSoundEvent("heal_twinkle");
+		BONE = new ModSoundEvent("bone");
+		BRUH = new ModSoundEvent("bruh");
 	}
 }

@@ -11,6 +11,9 @@ import com.teamwizardry.shotgunsandglitter.api.util.RandUtil;
 import com.teamwizardry.shotgunsandglitter.api.util.RandUtilSeed;
 import com.teamwizardry.shotgunsandglitter.client.core.ClientEventHandler;
 import com.teamwizardry.shotgunsandglitter.common.core.ModSounds;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -31,6 +34,16 @@ public class BulletEffectFirework implements BulletEffect {
 
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
+		boolean isFab = false;
+		Entity entity = world.getEntityByID(bullet.getCasterId());
+		if (entity instanceof EntityLivingBase) {
+			ItemStack heldItem = ((EntityLivingBase) entity).getHeldItemMainhand();
+			if (heldItem.getDisplayName().equals("fabulous")) {
+				isFab = true;
+			}
+		}
+		boolean finalIsFab = isFab;
+
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
@@ -49,7 +62,7 @@ public class BulletEffectFirework implements BulletEffect {
 			));
 			//build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
 			build.setLifetime(RandUtil.nextInt(30, 70));
-			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+			build.setColor(finalIsFab ? (RandUtil.nextBoolean() ? Color.RED : Color.PINK) : Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 1f), RandUtil.nextFloat(0, 0.2f)));
 
 			double radius = 1;
@@ -74,7 +87,7 @@ public class BulletEffectFirework implements BulletEffect {
 			));
 			//build.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.05, -0.1), 0));
 			build.setLifetime(RandUtil.nextInt(50, 100));
-			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+			build.setColor(finalIsFab ? (RandUtil.nextBoolean() ? Color.RED : Color.PINK) : Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.5f, 2f), 0));
 
 			double radius = 2;
@@ -95,6 +108,16 @@ public class BulletEffectFirework implements BulletEffect {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
+		boolean isFab = false;
+		Entity entity = world.getEntityByID(bullet.getCasterId());
+		if (entity instanceof EntityLivingBase) {
+			ItemStack heldItem = ((EntityLivingBase) entity).getHeldItemMainhand();
+			if (heldItem.getDisplayName().equals("fabulous")) {
+				isFab = true;
+			}
+		}
+		boolean finalIsFab = isFab;
+
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
@@ -107,7 +130,7 @@ public class BulletEffectFirework implements BulletEffect {
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 10));
-			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+			build.setColor(finalIsFab ? (RandUtil.nextBoolean() ? Color.RED : Color.PINK) : Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScaleFunction(new InterpScale(RandUtil.nextFloat(0.2f, 0.5f), 0));
 
 			Vec3d motion = new Vec3d(
@@ -124,7 +147,7 @@ public class BulletEffectFirework implements BulletEffect {
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));
-			build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+			build.setColor(finalIsFab ? (RandUtil.nextBoolean() ? Color.RED : Color.PINK) : Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 			build.setScale(RandUtil.nextFloat(0.5f, 1f));
 
 			Vec3d motion = new Vec3d(
@@ -143,7 +166,7 @@ public class BulletEffectFirework implements BulletEffect {
 		if (RandUtil.nextInt(4) == 0)
 			ParticleSpawner.spawn(glitter, world, new StaticInterp<>(position), 5, 0, (i, build) -> {
 				build.setLifetime(RandUtil.nextInt(50, 80));
-				build.setColor(Color.getHSBColor(seed.nextFloat(), 1f, 1f));
+				build.setColor(finalIsFab ? (RandUtil.nextBoolean() ? Color.RED : Color.PINK) : Color.getHSBColor(seed.nextFloat(), 1f, 1f));
 				build.setScaleFunction(new InterpScale(RandUtil.nextFloat(1, 2), 0));
 
 				Vec3d motion = new Vec3d(

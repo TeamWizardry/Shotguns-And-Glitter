@@ -50,7 +50,7 @@ public class RandUtil {
 	}
 
 	public static int nextInt(int bound) {
-		return (int) random.nextDouble() * bound;
+		return (int) nextDouble((double) bound);
 	}
 
 	public static int nextInt() {

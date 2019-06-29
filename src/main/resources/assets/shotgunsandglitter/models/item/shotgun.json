@@ -3,6 +3,20 @@
   "textures": {
     "layer0": "shotgunsandglitter:items/shotgun"
   },
+  "overrides": [
+    {
+      "predicate": {
+        "state": 0.0
+      },
+      "model": "shotgunsandglitter:item/staff_pearl"
+    },
+    {
+      "predicate": {
+        "state": 1.0
+      },
+      "model": "shotgunsandglitter:item/shotgun"
+    }
+  ],
   "display": {
     "thirdperson_righthand": {
       "rotation": [ 0, -90, 55 ],
