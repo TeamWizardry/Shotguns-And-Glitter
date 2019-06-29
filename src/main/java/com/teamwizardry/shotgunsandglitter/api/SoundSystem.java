@@ -33,18 +33,18 @@ public class SoundSystem {
 	}
 
 	public static void playSounds(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
-		playSounds(world, pos.x, pos.y, pos.z, 6f, sounds);
+		playSounds(world, pos.x, pos.y, pos.z, 2f, sounds);
 	}
 
 	public static void playSounds(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
-		playSounds(world, x, y, z, 6f, sounds);
+		playSounds(world, x, y, z, 2f, sounds);
 	}
 
 	public static void playSoundsQuiet(@Nonnull World world, @Nonnull Vec3d pos, SoundEvent... sounds) {
-		playSounds(world, pos.x, pos.y, pos.z, 3f, sounds);
+		playSounds(world, pos.x, pos.y, pos.z, 0.5f, sounds);
 	}
 
 	public static void playSoundsQuiet(@Nonnull World world, double x, double y, double z, SoundEvent... sounds) {
-		playSounds(world, x, y, z, 3f, sounds);
+		playSounds(world, x, y, z, 0.5f, sounds);
 	}
 }

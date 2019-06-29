@@ -48,7 +48,7 @@ public class ItemSniper extends ItemArtillery {
 	@Nullable
 	@Override
 	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
-		return new SoundEvent[]{stack.getDisplayName().equals("bruh") ? ModSounds.BRUH : ModSounds.SHOT_SNIPER, ModSounds.DUST_SPARKLE};
+		return new SoundEvent[]{ModSounds.SHOT_SNIPER, ModSounds.DUST_SPARKLE};
 	}
 
 	@Nullable

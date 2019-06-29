@@ -53,7 +53,7 @@ public class ItemMinigun extends ItemArtillery {
 
 	@Override
 	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
-		return new SoundEvent[]{stack.getDisplayName().equals("bruh") ? ModSounds.BRUH : ModSounds.SHOT_MINIGUN, ModSounds.DUST_SPARKLE};
+		return new SoundEvent[]{ModSounds.SHOT_MINIGUN, ModSounds.DUST_SPARKLE};
 	}
 
 	@Override

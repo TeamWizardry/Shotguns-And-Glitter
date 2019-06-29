@@ -59,7 +59,7 @@ public class ItemShotgun extends ItemArtillery {
 	@Nullable
 	@Override
 	public SoundEvent[] getFireSoundEvents(ItemStack stack) {
-		return new SoundEvent[]{stack.getDisplayName().equals("bruh") ? ModSounds.BRUH : ModSounds.SHOT_SHOTGUN_COCK, ModSounds.MAGIC_SPARKLE};
+		return new SoundEvent[]{ModSounds.SHOT_SHOTGUN_COCK, ModSounds.MAGIC_SPARKLE};
 	}
 
 	@Nullable

@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -135,7 +136,9 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 							state, getEffect(), result.hitVec)) {
 
 				SoundSystem.playSoundsQuiet(world, posX, posY, posZ, ModSounds.DUST_SPARKLE);
-				SoundSystem.playSounds(world, posX, posY, posZ, getEffect().getImpactSound());
+
+				Entity entity = world.getEntityByID(getCasterId());
+				playImpactSound(entity);
 				//PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
 				//		new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 
@@ -147,12 +150,25 @@ public class EntityBullet extends EntityThrowable implements IBulletEntity {
 						result.entityHit, getEffect(), result.hitVec)) {
 
 					SoundSystem.playSoundsQuiet(world, posX, posY, posZ, ModSounds.DUST_SPARKLE);
-					SoundSystem.playSounds(world, posX, posY, posZ, getEffect().getImpactSound());
+
+					Entity entity = world.getEntityByID(getCasterId());
+					playImpactSound(entity);
 
 					//	PacketHandler.NETWORK.sendToAllAround(new PacketImpactSound(getPositionVector(), getEffect().getID()),
 					//			new NetworkRegistry.TargetPoint(world.provider.getDimension(), posX, posY, posZ, 512));
 					setDead();
 				}
+		}
+	}
+
+	private void playImpactSound(Entity entity) {
+		if (entity instanceof EntityLivingBase) {
+			ItemStack heldItem = ((EntityLivingBase) entity).getHeldItemMainhand();
+			if (heldItem.getDisplayName().equals("bruh")) {
+				SoundSystem.playSounds(world, posX, posY, posZ, ModSounds.BRUH);
+			} else {
+				SoundSystem.playSounds(world, posX, posY, posZ, getEffect().getImpactSound());
+			}
 		}
 	}
 

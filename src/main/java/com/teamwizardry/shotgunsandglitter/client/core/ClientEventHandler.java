@@ -6,6 +6,7 @@ import com.teamwizardry.shotgunsandglitter.api.ILingeringEffect;
 import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorld;
 import com.teamwizardry.shotgunsandglitter.api.capability.SAGWorldCapability;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,6 +22,14 @@ public class ClientEventHandler {
 
 	public static ResourceLocation SPARKLE = new ResourceLocation(ShotgunsAndGlitter.MODID, "particles/sparkle_blurred");
 	public static ResourceLocation HEART = new ResourceLocation(ShotgunsAndGlitter.MODID, "particles/heart");
+
+	public static ResourceLocation getResource(ItemStack stack, ResourceLocation loc) {
+		if (stack.getDisplayName().equals("item.gun")) {
+			return new ResourceLocation("");
+		}
+
+		return loc;
+	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
