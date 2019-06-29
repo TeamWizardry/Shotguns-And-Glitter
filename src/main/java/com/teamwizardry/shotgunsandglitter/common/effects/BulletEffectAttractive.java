@@ -82,6 +82,6 @@ public class BulletEffectAttractive implements BulletEffect {
 	@Override
 	public @Nullable
 	SoundEvent getImpactSound() {
-		return RandUtil.nextInt(1000) == 0 ? ModSounds.BONE : ModSounds.HEAL_TWINKLE;
+		return RandUtil.nextInt(100000) == 0 ? ModSounds.BONE : ModSounds.HEAL_TWINKLE;
 	}
 }
