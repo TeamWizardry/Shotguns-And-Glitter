@@ -51,7 +51,7 @@ public class BulletEffectHookshot implements BulletEffect {
 		Vec3d throwerPos = thrower.getPositionVector().add(0, thrower.getEyeHeight(), 0);
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
 
 		glitter.setCollision(true);
@@ -74,7 +74,7 @@ public class BulletEffectHookshot implements BulletEffect {
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
 
 		glitter.setCollision(true);

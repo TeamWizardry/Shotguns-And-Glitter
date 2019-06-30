@@ -67,7 +67,7 @@ public class BulletEffectPsychic implements BulletEffect {
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(30);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 1f));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
@@ -100,7 +100,7 @@ public class BulletEffectPsychic implements BulletEffect {
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder builder = new ParticleBuilder(50);
-		builder.setRender(ClientEventHandler.SPARKLE);
+		builder.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		builder.disableRandom();
 
 		builder.setColor(new Color(0xc919ff));

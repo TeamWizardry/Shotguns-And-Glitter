@@ -77,7 +77,7 @@ public class GrenadeEffectBlizzard implements GrenadeEffect, ILingeringEffect {
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 

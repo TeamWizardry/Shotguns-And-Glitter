@@ -12,6 +12,18 @@
     },
     {
       "predicate": {
+        "state": 0.1
+      },
+      "model": "shotgunsandglitter:item/portal_gun"
+    },
+    {
+      "predicate": {
+        "state": 0.2
+      },
+      "model": "shotgunsandglitter:item/null"
+    },
+    {
+      "predicate": {
         "state": 1.0
       },
       "model": "shotgunsandglitter:item/minigun"

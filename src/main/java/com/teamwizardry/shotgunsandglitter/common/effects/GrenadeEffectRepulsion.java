@@ -55,7 +55,7 @@ public class GrenadeEffectRepulsion implements GrenadeEffect {
 		Color color = Color.RED, color2 = Color.ORANGE;
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 		glitter.disableMotionCalculation();
@@ -83,7 +83,7 @@ public class GrenadeEffectRepulsion implements GrenadeEffect {
 		Color color = Color.RED, color2 = Color.ORANGE;
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setAcceleration(new Vec3d(0, RandUtil.nextDouble(-0.03, -0.04), 0));
 		glitter.setCanBounce(true);

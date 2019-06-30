@@ -60,7 +60,7 @@ public class BulletEffectFrost implements BulletEffect {
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
@@ -84,7 +84,7 @@ public class BulletEffectFrost implements BulletEffect {
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 

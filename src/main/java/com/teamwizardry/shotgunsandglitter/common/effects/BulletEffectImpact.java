@@ -67,7 +67,7 @@ public class BulletEffectImpact implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 100, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(20, 50));
@@ -96,7 +96,7 @@ public class BulletEffectImpact implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), 3, 0, (i, build) -> {
 			build.setLifetime(RandUtil.nextInt(5, 20));

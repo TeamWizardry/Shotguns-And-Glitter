@@ -44,7 +44,7 @@ public class BulletEffectAttractive implements BulletEffect {
 	@Override
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.HEART);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.HEART));
 		glitter.disableMotionCalculation();
 		glitter.setCollision(true);
 
@@ -68,7 +68,7 @@ public class BulletEffectAttractive implements BulletEffect {
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.HEART);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.HEART));
 		glitter.setCollision(true);
 		glitter.disableMotionCalculation();
 		glitter.disableRandom();

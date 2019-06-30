@@ -72,7 +72,7 @@ public class BulletEffectBalefire implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
@@ -101,7 +101,7 @@ public class BulletEffectBalefire implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 
 		for (int j = 0; j < 5; j++) {

@@ -33,7 +33,7 @@ public class GrenadeEffectBasic implements GrenadeEffect {
 	public void renderUpdate(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(InternalHandler.INTERNAL_HANDLER.getSparkle());
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setScale(0.3f);
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));
@@ -47,7 +47,7 @@ public class GrenadeEffectBasic implements GrenadeEffect {
 	public void renderImpact(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 

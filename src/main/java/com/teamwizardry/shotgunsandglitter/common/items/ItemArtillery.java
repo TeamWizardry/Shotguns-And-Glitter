@@ -29,6 +29,8 @@ public abstract class ItemArtillery extends ItemMod implements IGunItem {
 			@SideOnly(Side.CLIENT)
 			public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				if (stack.getDisplayName().equals("wizardry")) return 0f;
+				if (stack.getDisplayName().equals("lemons")) return 0.1f;
+				if (stack.getDisplayName().equals("item.gun")) return 0.2f;
 				return 1f;
 			}
 		});

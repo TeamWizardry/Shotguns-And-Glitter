@@ -115,7 +115,7 @@ public class GrenadeEffectDisco implements GrenadeEffect, ILingeringEffect {
 	@Override
 	public void renderUpdate(@NotNull World world, @NotNull IGrenadeEntity grenade) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, grenade, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(grenade.getPositionAsVector()), RandUtil.nextInt(1, 5), 0, (i, build) -> {

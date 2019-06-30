@@ -59,7 +59,7 @@ public class BulletEffectDraconic implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderImpact(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
 
@@ -88,7 +88,7 @@ public class BulletEffectDraconic implements BulletEffect {
 	@SideOnly(Side.CLIENT)
 	public void renderUpdate(@NotNull World world, @NotNull IBulletEntity bullet) {
 		ParticleBuilder glitter = new ParticleBuilder(10);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setCollision(true);
 
 		ParticleSpawner.spawn(glitter, world, new StaticInterp<>(bullet.getPositionAsVector()), RandUtil.nextInt(1, 5), 0, (i, build) -> {

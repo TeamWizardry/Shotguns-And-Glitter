@@ -47,7 +47,7 @@ public class BulletEffectFirework implements BulletEffect {
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setAlphaFunction(new InterpFadeInOut(0f, 1f));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
@@ -121,7 +121,7 @@ public class BulletEffectFirework implements BulletEffect {
 		Vec3d position = bullet.getPositionAsVector();
 
 		ParticleBuilder glitter = new ParticleBuilder(50);
-		glitter.setRender(ClientEventHandler.SPARKLE);
+		glitter.setRender(ClientEventHandler.getResource(world, bullet, ClientEventHandler.SPARKLE));
 		glitter.setAlphaFunction(new InterpFadeInOut(0.0f, 0.3f));
 		glitter.setCollision(true);
 		glitter.setCanBounce(true);
